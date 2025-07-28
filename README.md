@@ -162,7 +162,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 
 ## Modelo de Dominio
 
-![Diagrama del Modelo de Dominio](./out/docs/DomainModel/index/DomainModel.svg)
+![Diagrama del Modelo de Dominio](./out/docs/DomainModel/index/DomainModel.png)
 
 _El diagrama del modelo de dominio muestra las entidades principales del sistema de rifas y sus relaciones._
 
@@ -170,7 +170,7 @@ _El diagrama del modelo de dominio muestra las entidades principales del sistema
 
 ### Diagrama General de Casos de Uso
 
-![Diagrama General de Casos de Uso](./out/docs/UseCases/index/UseCase.svg)
+![Diagrama General de Casos de Uso](./out/docs/UseCases/index/UseCases.png)
 
 _Diagrama general que muestra todos los casos de uso del sistema y los actores involucrados._
 
@@ -192,7 +192,7 @@ _Diagrama general que muestra todos los casos de uso del sistema y los actores i
 
 #### Gestión de Números
 
-**Declinar Pago (Decline)**
+**Declinar Pago**
 
 ![Declinar Pago](./out/docs/UseCases/Specifications/admin/number/decline/DeclinePaymentUseCase.png)
 
