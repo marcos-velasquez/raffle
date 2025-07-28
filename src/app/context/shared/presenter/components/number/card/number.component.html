@@ -1,0 +1,11 @@
+<article class="card bg-base-200 w-64 shadow-xl">
+  <div class="card-body text-center p-0">
+    <h2 class="card-title justify-center text-6xl my-3">{{ number().get.value }}</h2>
+
+    <footer class="card-actions justify-end">
+      <button class="btn btn-block rounded-t-none no-animation" [class]="number().get.state | color">
+        {{ number().get.state | text }}
+      </button>
+    </footer>
+  </div>
+</article>

@@ -1,0 +1,54 @@
+@startuml UpdateRaffleUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_RAFFLES"
+state END as "OPENED_RAFFLES"
+state C <<choice>>
+state 1 as " "
+state 2 as " "
+
+INITIAL --> 1 
+note on link
+Administrador solicita actualizar una rifa
+end note
+
+1 --> 2 
+note on link
+ <b>Sistema permite actualizar</b>
+ * titulo 
+ * descripción
+ * imágenes <b>1..n</b>
+ * precio   <b>1..n</b>
+ 
+ <b>Sistema permite</b>
+ * confirmar
+ * cancelar
+end note
+
+2 -down[#red]-> END
+note on link 
+cancelar
+end note
+
+2 --> C  
+note on link
+confirmar
+end note
+
+C --> END
+note on link 
+<b>Sistema</b> 
+* actualiza la rifa. 
+* persiste la rifa.
+end note
+
+C -[#red]-> 1 : [Actualizar el precio con numeros comprados || son datos incorrectos]
+note on link
+- Sistema muestra el error
+end note
+
+
+@enduml
+

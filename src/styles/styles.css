@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+@import './dropzone';
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/container-queries";
+@plugin "@midudev/tailwind-animations";
+@plugin "@iconify/tailwind4";
+@plugin "daisyui" {
+  themes: 'light', 'night';
+  exclude: rootscrollgutter;
+}
+
+@layer base {
+  [class^='icon-'] {
+    @apply text-2xl;
+  }
+
+  [expandImage] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .form-container {
+    @apply flex flex-col gap-5;
+  }
+}

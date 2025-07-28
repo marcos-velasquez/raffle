@@ -1,0 +1,46 @@
+@startuml DeclinePaymentUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_NUMBER"
+state END as "OPENED_NUMBER"
+state C <<choice>>
+state 1 as " "
+state 2 as " "
+
+
+INITIAL --> 1 
+note on link
+Administrador solicita verificar el pago de un numero 
+que tenga su actual estado en <b>(inVerification)</b>
+end note
+
+1 --> C 
+note on link
+ <b>Sistema permite</b>
+ * confirmar
+ * cancelar
+
+end note
+
+C -down[#red]-> END
+note on link
+cancelar
+end note 
+
+C -down-> 2 
+note on link
+confirmar
+end note 
+
+2 -down-> END
+note on link
+<b>Sistema</b>
+* el numero pasa a estado <b>purchased</b>
+* notifica al pagador que el pago fue verificado.
+end note 
+
+@enduml
+
+

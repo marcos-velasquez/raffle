@@ -1,0 +1,37 @@
+@startuml FilterNumbersUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_NUMBERS"
+state END as "OPENED_NUMBERS"
+state 1 as " "
+state 2 as " "
+state 3 as " "
+
+INITIAL --> 1 
+note on link
+Administrador solicita filtrar numeros
+end note
+
+1 --> 2 
+note on link
+ <b>Sistema permite filtrar por:</b>
+ * valor
+ * estado
+
+end note
+
+2 -down-> 3
+note on link 
+Administrador aplica un filtro
+end note
+
+3 --> END  
+note on link
+Sistema muestra los numeros que coincidan
+end note
+
+@enduml
+
+

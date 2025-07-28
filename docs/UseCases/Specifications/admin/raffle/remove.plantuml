@@ -1,0 +1,48 @@
+@startuml RemoveRaffleUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_RAFFLES"
+state END as "OPENED_RAFFLES"
+state C <<choice>>
+state 1 as " "
+state 2 as " "
+
+INITIAL --> 1 
+note on link
+Administrador solicita eliminar una rifa
+end note
+
+1 --> 2 
+note on link 
+ <b>Sistema permite</b>
+ * confirmar
+ * cancelar
+end note
+
+2 -down[#red]-> END
+note on link
+cancelar
+end note 
+
+2 -down-> C 
+note on link
+confirmar
+end note 
+
+C -down-> END
+note on link
+<b>Sistema</b> 
+* elimina la rifa
+end note 
+
+C -down[#red]-> 2 : [tiene números comprados]
+note on link
+* se muestra el error
+* la operación se cancela.
+end note 
+
+
+@enduml
+

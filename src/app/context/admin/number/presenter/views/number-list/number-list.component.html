@@ -1,0 +1,20 @@
+<section class="w-full flex flex-col gap-5">
+  <header>
+    <app-raffle-details [raffle]="raffle()" />
+    @if (raffle().is.purchased) {
+    <button [routerLink]="['roulette']" class="btn btn-primary btn-wide block mx-auto mt-4">Seleccionar ganador</button>
+    }
+  </header>
+
+  <app-filters [numbers]="raffle().numbers" class="w-full">
+    <ng-template let-numbers>
+      <ul class="w-full flex flex-wrap justify-center gap-y-12 gap-x-4">
+        @for (number of numbers; track number.value) {
+        <li [routerLink]="['numbers', number.value]" class="relative animate-bounce-fade-in cursor-pointer">
+          <app-number [number]="number" />
+        </li>
+        }
+      </ul>
+    </ng-template>
+  </app-filters>
+</section>

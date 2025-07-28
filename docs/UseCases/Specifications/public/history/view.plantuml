@@ -1,0 +1,36 @@
+@startuml ViewHistoryUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_RAFFLES"
+state END as "OPENED_NUMBER"
+state 1 as " "
+state 2 as "OPENED_HISTORY"
+state 3 as " "
+
+INITIAL --> 1 
+note on link
+El usuario solicita ver el historial de rifas
+end note
+
+1 --> 2 
+note on link
+El sistema muestra una lista de rifas completadas
+end note
+
+2 --> 3 
+note on link
+El usuario puede seleccionar una rifa específica para ver más detalles
+end note 
+
+3 --> END
+note on link
+<b>El sistema muestra la información detallada de la rifa seleccionada</b>
+* Numero ganador con el nombre del comprador
+* Video del sorteo
+end note 
+
+@enduml
+
+

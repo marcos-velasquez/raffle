@@ -1,0 +1,44 @@
+@startuml BuyNumberUseCase
+
+
+!include ../../../../config/config.puml
+
+state INITIAL as "OPENED_NUMBERS"
+state END as "OPENED_NUMBERS"
+
+
+INITIAL -down-> OPENED_NUMBER
+note on link
+El usuario solicita comprar un número <b>available</b>.
+end note
+
+state OPENED_NUMBER {
+    state A <<choice>>
+
+    [*] -down-> IN_PAYMENT
+    note on link
+    sistema cambia el estado del número a <b>inPayment</b>
+    end note
+
+    IN_PAYMENT -down-> A 
+    note on link
+    <b>Sistema requiere</b>
+    * nombre completo
+    * número de teléfono
+    * comprobante de pago 
+    
+    <b>Sistema permite</b>
+    * confirmar
+    * cancelar
+    end note
+
+    A -down-> IN_VERIFICATION : confirmar
+    IN_VERIFICATION -down-> [*] 
+
+    A -down-> AVAILABLE : timeout 2m || cancelar || exit
+    AVAILABLE -down-> [*]
+}
+
+OPENED_NUMBER -down-> END
+
+@enduml

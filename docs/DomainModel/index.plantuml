@@ -1,0 +1,48 @@
+@startuml DomainModel
+
+class User {}
+User <|-down- Admin
+User <|-down- Public
+
+class Admin {}
+Admin -down-> Raffle : "(create, delete, update) >"
+Admin -down- Number: "(verify, decline) >"
+Admin ..> Wheel 
+
+class Public {}
+Public o-down-> "*" Number : "buy >"
+Public ... History : "view >"
+
+class Raffle {
+    title
+    description
+    images
+    price
+}
+Raffle o-down-> "2..n" Number
+
+class Number {
+    value
+}
+class Payer {
+    name
+    phone 
+    voucher
+}
+enum State {
+    Available
+    InPayment
+    InVerification
+    Purchased
+}
+Number *-down-> State 
+Number *-down-> Payer 
+
+class History {}
+History o-down-> "*" Raffle
+
+class Wheel {}
+Wheel -down-> Raffle
+Wheel -down-  Number : "select >" 
+
+@enduml

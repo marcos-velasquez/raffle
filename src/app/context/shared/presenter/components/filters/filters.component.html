@@ -1,0 +1,27 @@
+<section class="flex justify-center gap-4 mb-5 animate-fade-in">
+  <header>
+    <div class="label">
+      <span class="label-text">Buscar por número</span>
+    </div>
+    <input [formControl]="value" type="number" class="w-full input input-bordered input-primary" />
+  </header>
+
+  <footer>
+    <div class="label">
+      <span class="label-text">Buscar por estado</span>
+    </div>
+    <select [formControl]="state" class="select select-primary w-full max-w-xs">
+      <option value="all">Todos</option>
+      <option value="available">Disponibles</option>
+      <option value="inPayment">En proceso de pago</option>
+      <option value="inVerification">En proceso de verificación</option>
+      <option value="purchased">Apartados</option>
+    </select>
+  </footer>
+</section>
+
+<ng-template
+  [ngTemplateOutlet]="numberListTemplate"
+  [ngTemplateOutletContext]="{ $implicit: numbers() | withValue : value.value | withState : state.value! }"
+>
+</ng-template>

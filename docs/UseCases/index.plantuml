@@ -1,0 +1,32 @@
+@startuml UseCases
+
+left to right direction
+Public --> (Buy number)
+Public --> (View history)
+
+
+Admin --> (Create raffle)
+Admin --> (Remove raffle)
+Admin --> (Update raffle)
+Admin --> (Login)
+Admin --> (Logout)
+Admin --> (Verify payment)
+Admin --> (Decline payment)
+Admin --> (Select winner number)
+
+Admin --> (Filter numbers)
+Public --> (Filter numbers)
+
+
+(Create raffle) ..> (Show raffles)
+(Update raffle) ..> (Show raffles)
+(Remove raffle) ..> (Show raffles)
+(Login) ..> (Show raffles)
+(View history) ..> (Show raffles)
+
+
+(Buy number) ..> (Show numbers)
+(Filter numbers) ..> (Show numbers)
+(Verify payment) ..> (Show numbers)
+
+@enduml

@@ -1,0 +1,11 @@
+<nav class="navbar bg-base-100 container mx-auto">
+  <div class="flex-1">
+    <button [routerLink]="['']" class="btn btn-ghost">Rifas</button>
+    <button [routerLink]="['/history']" class="btn btn-ghost">Historial</button>
+  </div>
+
+  <div class="flex-none">
+    <app-scheme />
+    <app-account />
+  </div>
+</nav>

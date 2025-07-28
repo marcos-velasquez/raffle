@@ -1,0 +1,32 @@
+@let number = raffle().get.number(+value());
+
+<section class="w-full flex flex-col gap-5">
+  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4">
+    <app-raffle-details [raffle]="raffle()" class="w-full" />
+    <app-number [number]="number" />
+  </header>
+
+  <article class="w-full flex justify-center gap-2">
+    @if (number.is.inPayment || number.is.inVerification) {
+    <button (click)="declinePayment()" class="btn lg:btn-wide btn-error">Declinar</button>
+    } @if (number.is.inVerification) {
+    <button (click)="verifyPayment()" class="btn lg:btn-wide btn-primary">Verificar</button>
+    }
+  </article>
+
+  @if (number.has.payer) { @let payer = number.get.payer;
+
+  <article class="w-full flex flex-col justify-center items-center gap-2">
+    <div class="flex flex-col justify-center items-center">
+      <h3 class="text-lg font-semibold">{{ payer.name }}</h3>
+      <h4 class="font-semibold">{{ payer.phone }}</h4>
+    </div>
+
+    <div>
+      <img expandImage [src]="payer.voucher" alt="voucher" class="max-w-screen-sm" />
+    </div>
+  </article>
+
+  }
+</section>
+`

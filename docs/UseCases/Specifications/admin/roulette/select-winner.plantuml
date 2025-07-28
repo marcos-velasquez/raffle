@@ -1,0 +1,42 @@
+@startuml SelectWinnerUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_NUMBER"
+state END as "OPENED_NUMBER"
+state 1 as " "
+state 2 as " "
+state 3 as " "
+
+
+
+INITIAL --> 1 
+note on link
+Administrador solicita seleccionar ganador
+de una rifa <b>(purchased)</b>
+end note
+
+1 --> 2
+note on link
+Sistema muestra ruleta con:
+*<b>valor del numero.</b>
+*<b>nombre del pagador.</b>
+end note
+
+2 --> 3
+note on link
+Administrador solicita girar la ruleta
+end note
+
+3 --> END
+note on link
+<b>Sistema</b>
+* muestra los datos ganador
+* notifica a los compradores 
+* persiste el resultado en el historial
+end note
+
+@enduml
+
+

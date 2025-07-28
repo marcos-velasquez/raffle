@@ -1,0 +1,76 @@
+import { Number, NumberState } from '../../number';
+import { Raffle, RafflePrimitives } from '../../raffle';
+
+export class RaffleBuilder {
+  private readonly primitives: RafflePrimitives = {
+    id: 'test',
+    title: 'Test',
+    description: 'Test',
+    images: ['test.png'],
+    price: 1,
+    completed: false,
+    numbers: Number.many(5).map((number) => number.toPrimitives()),
+  };
+
+  public withTitle(title: string): this {
+    this.primitives.title = title;
+    return this;
+  }
+
+  public withDescription(description: string): this {
+    this.primitives.description = description;
+    return this;
+  }
+
+  public withImages(images: string[]): this {
+    this.primitives.images = images;
+    return this;
+  }
+
+  public withPrice(price: number): this {
+    this.primitives.price = price;
+    return this;
+  }
+
+  public withNumber(value: number) {
+    return {
+      payer: {
+        random: () => {
+          this.primitives.numbers.find((n) => n.value === value)!.payer = {
+            name: 'TestPayer',
+            phone: 'TestPhone',
+            voucher: 'TestVoucher',
+          };
+          return this;
+        },
+      },
+      state: (state: NumberState) => {
+        this.primitives.numbers.find((n) => n.value === value)!.state = state;
+        return this;
+      },
+    };
+  }
+
+  public withNumbers() {
+    return {
+      purchased: () => {
+        this.primitives.numbers.forEach((number) => {
+          number.state = 'purchased';
+        });
+        return this;
+      },
+      payer: {
+        random: () => {
+          this.primitives.numbers.forEach((number) => {
+            this.withNumber(number.value).payer.random();
+          });
+          return this;
+        },
+      },
+    };
+  }
+
+  public build() {
+    return Raffle.from(this.primitives);
+  }
+}

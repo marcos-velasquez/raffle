@@ -1,0 +1,13 @@
+@if (isDark()) {
+<button (click)="switchLight()" class="btn btn-ghost">
+  <div class="flex items-center rounded-full">
+    <span class="icon-[heroicons--sun-16-solid]"></span>
+  </div>
+</button>
+} @else {
+<button (click)="switchDark()" class="btn btn-ghost">
+  <div class="flex items-center rounded-full">
+    <span class="icon-[heroicons--moon-16-solid]"></span>
+  </div>
+</button>
+}

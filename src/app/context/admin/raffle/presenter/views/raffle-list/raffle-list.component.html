@@ -1,0 +1,12 @@
+<ul class="w-full grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center gap-y-12 gap-x-4">
+  @for (raffle of raffleStore.raffles(); track raffle.getId()) {
+  <li class="md:w-full relative animate-fade-in">
+    <app-raffle [raffle]="raffle">
+      <app-actions [raffle]="raffle" />
+    </app-raffle>
+
+    <app-raffle-toolbar [raffle]="raffle" />
+  </li>
+  }
+  <app-raffle-creator class="animate-fade-in" />
+</ul>

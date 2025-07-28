@@ -1,0 +1,56 @@
+<section class="w-full h-screen bg-base-200 flex items-center px-4 py-8 sm:p-12 max-w-screen-sm mx-auto">
+  <div class="mx-auto w-full sm:mx-0">
+    <div class="w-12">
+      <img src="images/logo/logo.svg" alt="logo" />
+    </div>
+
+    <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight">Iniciar sesión</div>
+
+    <form [formGroup]="form" class="form-container mt-8">
+      <section>
+        <div class="label">
+          <span class="label-text">Correo electrónico</span>
+        </div>
+        <input [formControlName]="'email'" class="w-full input input-bordered focus:input-primary" />
+        @if (form.get('email')?.touched && form.get('email')?.invalid) {
+          <div class="validator-hint text-error">Por favor, ingrese un correo electrónico válido</div>
+        }
+      </section>
+
+      <section class="relative">
+        <div class="label">
+          <span class="label-text">Contraseña</span>
+        </div>
+
+        <input
+          #field
+          [formControlName]="'password'"
+          type="password"
+          class="w-full input input-bordered focus:input-primary"
+        />
+
+        <button
+          (click)="field.type === 'password' ? (field.type = 'text') : (field.type = 'password')"
+          type="button"
+          class="absolute right-4 top-[2rem]"
+        >
+          <span
+            [class]="field.type === 'text' ? 'icon-[heroicons--eye-slash-20-solid]' : 'icon-[heroicons--eye-20-solid]'"
+          ></span>
+        </button>
+
+        @if (form.get('password')?.touched && form.get('password')?.invalid) {
+          <div class="validator-hint text-error">Por favor, ingrese una contraseña válida</div>
+        }
+      </section>
+
+      <button (click)="login()" [disabled]="loaderStore.isActive()" class="btn btn-soft btn-primary btn-block mt-5">
+        @if (loaderStore.isActive()) {
+          <span class="loading loading-spinner loading-sm"></span>
+        } @else {
+          <span> Aceptar </span>
+        }
+      </button>
+    </form>
+  </div>
+</section>

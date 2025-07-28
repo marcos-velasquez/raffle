@@ -1,0 +1,18 @@
+<article class="card card-side bg-base-100 shadow-lg">
+  <header expandImage class="carousel rounded-box" style="scrollbar-width: auto">
+    @for (url of raffle().images; track $index) {
+    <figure class="carousel-item w-full rounded-b-none">
+      <img [src]="raffle() | fullPath : url" alt="raffle product" class="h-44 object-contain" />
+    </figure>
+    }
+  </header>
+
+  <div class="card-body">
+    <h2 class="card-title">{{ raffle().title }}</h2>
+    <p class="text-balance">{{ raffle().description }}</p>
+    <h3 class="badge badge-neutral font-medium" [class]="{ 'badge-success': raffle().is.purchased }">
+      {{ raffle().get.purchased }}/{{ raffle().get.length }}
+    </h3>
+    <p class="text-2xl font-semibold tracking-tight">{{ raffle().price }} Bs.</p>
+  </div>
+</article>

@@ -1,0 +1,52 @@
+<ui-dialog>
+  <form [formGroup]="form" class="form-container">
+    <header>
+      <h3 class="text-xl font-semibold">Editar Rifa</h3>
+    </header>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Título</span>
+      </div>
+      <input formControlName="title" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('title')?.touched && form.get('title')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un título válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Descripción</span>
+      </div>
+      <input formControlName="description" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('description')?.touched && form.get('description')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese una descripción válida</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Precio</span>
+      </div>
+      <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('price')?.touched && form.get('price')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un precio válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Imágenes</span>
+      </div>
+      <ui-dropzone (change)="form.patchValue({ images: $event })" [defaultUrls]="raffle() | fullPaths" />
+      @if (form.get('images')?.touched && form.get('images')?.invalid) {
+      <div class="validator-hint text-error">Debe ingresar al menos una imagen</div>
+      }
+    </section>
+
+    <footer class="flex gap-2 justify-end">
+      <button (click)="close()" class="btn btn-ghost">Cancelar</button>
+      <button (click)="edit()" class="btn btn-soft btn-primary">Editar</button>
+    </footer>
+  </form>
+</ui-dialog>

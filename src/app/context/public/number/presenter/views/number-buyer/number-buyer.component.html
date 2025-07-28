@@ -1,0 +1,49 @@
+@let number = raffle().get.number(+value());
+
+<section class="w-full flex flex-col gap-5">
+  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4">
+    <app-raffle-details [raffle]="raffle()" class="w-full" />
+    <app-number [number]="number" />
+  </header>
+
+  <form [formGroup]="form" class="form-container mx-auto bg-base-200 rounded-lg p-6 shadow-sm">
+    <header class="text-center">
+      <h3 class="text-2xl font-semibold">Comprar Número</h3>
+    </header>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Nombre completo</span>
+      </div>
+      <input formControlName="name" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('name')?.touched && form.get('name')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un nombre válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Teléfono</span>
+      </div>
+      <input formControlName="phone" onlyNumber class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un número de teléfono válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Comprobante</span>
+      </div>
+      <ui-dropzone (change)="form.patchValue({ voucher: $event })" />
+      @if (form.get('voucher')?.touched && form.get('voucher')?.invalid) {
+      <div class="validator-hint text-error">Debe ingresar un comprobante válido</div>
+      }
+    </section>
+
+    <footer class="flex gap-2 justify-end">
+      <button (click)="cancel()" class="btn btn-ghost">Cancelar</button>
+      <button (click)="create()" class="btn btn-soft btn-primary">Comprar</button>
+    </footer>
+  </form>
+</section>

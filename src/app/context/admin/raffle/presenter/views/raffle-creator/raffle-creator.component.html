@@ -1,0 +1,68 @@
+<article class="flex items-center justify-center card card-compact bg-base-200 w-96 h-96 shadow-xl">
+  <button (click)="open()" class="btn btn-soft btn-primary">
+    <span class="icon-[heroicons--plus-circle-16-solid]"></span>
+  </button>
+</article>
+
+<ui-dialog>
+  <form [formGroup]="form" class="form-container">
+    <header>
+      <h3 class="text-xl font-semibold">Crear Rifa</h3>
+    </header>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Título</span>
+      </div>
+      <input formControlName="title" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('title')?.touched && form.get('title')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un título válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Descripción</span>
+      </div>
+      <input formControlName="description" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('description')?.touched && form.get('description')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese una descripción válida</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Precio</span>
+      </div>
+      <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('price')?.touched && form.get('price')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese un precio válido</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Cantidad de números</span>
+      </div>
+      <input formControlName="quantityNumbers" type="number" class="w-full input input-bordered focus:input-primary" />
+      @if (form.get('quantityNumbers')?.touched && form.get('quantityNumbers')?.invalid) {
+      <div class="validator-hint text-error">Por favor, ingrese una cantidad de números válida</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">Imágenes</span>
+      </div>
+      <ui-dropzone (change)="form.patchValue({ images: $event })" />
+      @if (form.get('images')?.touched && form.get('images')?.invalid) {
+      <div class="validator-hint text-error">Debe ingresar al menos una imagen</div>
+      }
+    </section>
+
+    <footer class="flex gap-2 justify-end">
+      <button (click)="close()" class="btn btn-ghost">Cancelar</button>
+      <button (click)="create()" class="btn btn-soft btn-primary">Crear</button>
+    </footer>
+  </form>
+</ui-dialog>
