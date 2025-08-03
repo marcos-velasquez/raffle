@@ -11,9 +11,9 @@ describe('object utility', () => {
       expect(cloned.b).not.toBe(original.b);
     });
 
-    it('should handle null and undefined', () => {
-      expect(object.clone(null as any)).toBeNull();
-      expect(object.clone(undefined as any)).toBeUndefined();
+    it('should throw an error when the object is null or undefined', () => {
+      expect(() => object.clone(null as any)).toThrow();
+      expect(() => object.clone(undefined as any)).toThrow();
     });
   });
 

@@ -1,17 +1,23 @@
 import { is } from '../../either/either.builder';
+import { assert } from '../assert/assert';
+import { $is } from '../is/is';
+import { not } from '../operators/operators';
+import { deepMerge } from './deep-merge';
 
 export const $object = {
   are: (object: object) => {
     return {
       all: {
-        empty: Object.values(object).every((value) => value === null || value === undefined || value === ''),
+        empty: Object.values(object).every((value) => $is.empty(value)),
       },
     };
   },
 
   action: (object: object) => {
+    assert(not($is.nil(object)), 'object is null or undefined');
+
     return {
-      merge: (target: object) => Object.assign(object, target),
+      merge: (target: object) => deepMerge(object, target),
       clone: () => JSON.parse(JSON.stringify(object)),
     };
   },

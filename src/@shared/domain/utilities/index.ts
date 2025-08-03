@@ -6,7 +6,6 @@ export * from './html/html';
 export * from './multimedia/multimedia';
 export * from './object/object';
 export * from './operators/operators';
-export * from './aws/aws';
 export * from './random/random';
 export * from './string/string';
 export * from './sleep/sleep';
