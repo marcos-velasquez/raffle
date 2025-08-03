@@ -5,17 +5,19 @@ import { Raffle } from '@context/shared/domain/raffle';
 import { AdminUseCase } from '../../../shared/application/admin.usecase';
 import { RaffleRemovedEvent } from '../../domain/raffle.event';
 
-export class RemoveRaffleUseCase extends AdminUseCase<Raffle, Promise<E.Either<void, void>>> {
+export type RemoveRaffleUseCaseProps = Raffle;
+
+export class RemoveRaffleUseCase extends AdminUseCase<RemoveRaffleUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
     super(progressBuilder().withStart('Eliminando rifa...').withComplete('Rifa eliminada con éxito').build());
   }
 
-  protected async next(raffle: Raffle): Promise<E.Either<void, void>> {
-    assert(not(raffle.has.purchased), 'Not allowed to remove a raffle with purchases');
+  protected async next(props: RemoveRaffleUseCaseProps): Promise<E.Either<void, void>> {
+    assert(not(props.has.purchased), 'Not allowed to remove a raffle with purchases');
 
     this.start();
-    const result = await this.raffleRepository.remove(raffle);
-    result.mapRight(() => this.bus.publish(new RaffleRemovedEvent(raffle)));
+    const result = await this.raffleRepository.remove(props);
+    result.mapRight(() => this.bus.publish(new RaffleRemovedEvent(props)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();
   }

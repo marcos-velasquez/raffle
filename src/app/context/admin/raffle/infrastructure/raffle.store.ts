@@ -37,10 +37,10 @@ export const RaffleStore = signalStore(
         raffles: state.raffles.filter((r) => r.getId() !== raffle.getId()),
       }));
     },
-    edit(raffle: Raffle) {
+    update(raffle: Raffle) {
       patchState(store, (state) => ({
         raffles: state.raffles.map((r) => (r.getId() === raffle.getId() ? raffle : r)),
       }));
     },
-  })),
+  }))
 );

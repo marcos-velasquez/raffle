@@ -44,7 +44,9 @@ export class RaffleEditorComponent implements OnInit {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(() => {
-        when(raffleFacade.edit({ raffle: this.raffle(), primitives: this.form.getRawValue() })).map(() => this.close());
+        when(raffleFacade.update({ raffle: this.raffle(), primitives: this.form.getRawValue() })).map(() =>
+          this.close()
+        );
       });
   }
 }

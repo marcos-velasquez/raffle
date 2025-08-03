@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { UseCase } from '@shared/application';
 import { auth } from '@context/admin/authentication/infrastructure';
-import { UnauthorizedException } from '../domain/admin.exception';
+import { UnauthorizedException } from '../domain';
 
 export abstract class AdminUseCase<K, T> extends UseCase<K, void> {
   public execute(arg: K): void {

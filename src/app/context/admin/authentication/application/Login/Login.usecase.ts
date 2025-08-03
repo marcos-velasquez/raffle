@@ -10,9 +10,9 @@ export class LoginUseCase extends UseCase<LoginProps, Promise<E.Either<void, voi
     super(progressBuilder().withStart('Validando credenciales...').withComplete('Inicio de sesión exitoso').build());
   }
 
-  public async execute(input: LoginProps): Promise<E.Either<void, void>> {
+  public async execute(props: LoginProps): Promise<E.Either<void, void>> {
     this.start();
-    const result = await this.authenticationService.login(Credential.from(input));
+    const result = await this.authenticationService.login(Credential.from(props));
     result.mapRight((user) => this.bus.publish(new UserLoggedIn(user)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();

@@ -20,7 +20,7 @@ import { rouletteFacade } from '@context/admin/roulette/application';
 })
 export class RouletteComponent {
   private readonly winnerDialog = viewChild.required(DialogComponent);
-  private readonly ref = viewChild.required<ElementRef<HTMLElement>>('rouletteRef');
+  private readonly rouletteRef = viewChild.required<ElementRef<HTMLElement>>('rouletteRef');
 
   public readonly raffle = input.required<Raffle>();
 
@@ -29,7 +29,7 @@ export class RouletteComponent {
   constructor(private readonly rouletteService: RouletteService) {}
 
   ngOnInit() {
-    this.rouletteService.props = { el: this.ref().nativeElement, labels: Label.many(this.raffle()) };
+    this.rouletteService.props = { el: this.rouletteRef().nativeElement, labels: Label.many(this.raffle()) };
   }
 
   public spin() {

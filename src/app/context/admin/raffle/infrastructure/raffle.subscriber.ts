@@ -11,6 +11,6 @@ export class RaffleSubscriber extends BaseSubscriber {
   protected listen(): void {
     bus.on(RaffleCreatedEvent).subscribe(({ raffle }) => this.store.insert(raffle));
     bus.on(RaffleRemovedEvent).subscribe(({ raffle }) => this.store.remove(raffle));
-    bus.on(RaffleEditedEvent).subscribe(({ raffle }) => this.store.edit(raffle));
+    bus.on(RaffleEditedEvent).subscribe(({ raffle }) => this.store.update(raffle));
   }
 }

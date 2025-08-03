@@ -8,7 +8,7 @@ export class NumberValueFilterPipe implements PipeTransform {
     return is
       .nil(value)
       .mapRight(() => numbers)
-      .mapLeft(() => numbers.filter((n) => n.is.equal.value(value!))).value;
+      .mapLeft(() => numbers.filter((n) => n.is.equal.value(value))).value;
   }
 }
 

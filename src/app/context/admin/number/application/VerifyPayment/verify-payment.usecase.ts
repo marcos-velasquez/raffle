@@ -2,8 +2,8 @@ import * as E from '@sweet-monads/either';
 import { progressBuilder } from '@shared/application';
 import { assert, BaseRepository, boolean, EitherBuilder, transaction } from '@shared/domain';
 import { Raffle } from '@context/shared/domain/raffle';
-import { AdminUseCase } from '../../../shared/application/admin.usecase';
-import { PaymentVerifiedEvent } from '../../domain/number.event';
+import { AdminUseCase } from '../../../shared/application';
+import { PaymentVerifiedEvent } from '../../domain';
 
 export type VerifyPaymentUseCaseProps = { raffle: Raffle; value: number };
 

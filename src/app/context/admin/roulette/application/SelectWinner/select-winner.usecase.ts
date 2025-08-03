@@ -1,8 +1,8 @@
 import * as E from '@sweet-monads/either';
 import { assert, BaseRepository, EitherBuilder, transaction } from '@shared/domain';
 import { Raffle } from '@context/shared/domain/raffle';
-import { AdminUseCase } from '../../../shared/application/admin.usecase';
-import { WinnerSelectedEvent } from '../../domain/roulette.event';
+import { AdminUseCase } from '../../../shared/application';
+import { WinnerSelectedEvent } from '../../domain';
 
 export type SelectWinnerUseCaseProps = { raffle: Raffle; value: number };
 

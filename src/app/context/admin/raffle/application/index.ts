@@ -11,7 +11,7 @@ export class RaffleFacade {
     new CreateRaffleUseCase(this.raffleRepository).execute(primitives);
   }
 
-  public edit(input: EditRaffleUseCaseProps): void {
+  public update(input: EditRaffleUseCaseProps): void {
     new EditRaffleUseCase(this.raffleRepository).execute(input);
   }
 
