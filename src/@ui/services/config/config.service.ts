@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { merge } from 'lodash';
+import { object } from '@shared/domain';
 import { BehaviorSubject } from 'rxjs';
 import { UI_CONFIG } from './config.constant';
 import { Scheme, UiConfig, scheme } from './config.types';
@@ -15,7 +15,7 @@ export class ConfigService {
   }
 
   public set config(value: Partial<UiConfig>) {
-    const config = merge({}, this.config$.getValue(), value);
+    const config = object.merge(this.config$.getValue(), value);
     this.store.value = config;
     this.config$.next(config);
   }

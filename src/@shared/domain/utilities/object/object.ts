@@ -25,7 +25,7 @@ export const $object = {
 
 export const object = {
   clone: <T extends object>(object: T) => $object.action(object).clone() as T,
-  merge: <T extends object>(origin: T, target: object) => $object.action(origin).merge(target),
+  merge: <T extends object>(origin: T, target: object) => $object.action(origin).merge(target) as T,
   all: {
     empty: (object: object) => is.affirmative($object.are(object).all.empty),
   },

@@ -1,5 +1,4 @@
-import { clone } from 'lodash';
-import { IdFactory } from '@shared/domain';
+import { IdFactory, object } from '@shared/domain';
 
 export abstract class Entity<K> {
   private id: string;
@@ -22,7 +21,7 @@ export abstract class Entity<K> {
   }
 
   public clone<T>(): T {
-    return clone(this) as unknown as T;
+    return object.clone(this) as unknown as T;
   }
 
   public abstract toPrimitives(): K;
