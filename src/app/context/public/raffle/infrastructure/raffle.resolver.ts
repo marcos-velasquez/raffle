@@ -5,5 +5,5 @@ import { Raffle } from '@context/shared/domain/raffle';
 import { RaffleStore } from './raffle.store';
 
 export const raffleResolver: ResolveFn<Raffle> = (route) => {
-  return when(route.paramMap.get('id')).map((id) => inject(RaffleStore).get(id!)).value as Raffle;
+  return when(route.paramMap.get('id')).map((id) => inject(RaffleStore).get(id)).value as Raffle;
 };

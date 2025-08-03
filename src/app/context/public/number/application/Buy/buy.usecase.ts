@@ -28,10 +28,12 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
     return {
       start: () => {
         assert(number.is.available, 'El número no está disponible');
+
         when(number.switch.inPayment()).map(() => this.raffleRepository.update(raffle));
       },
       complete: async (payer: PayerPrimitives) => {
         assert(number.is.inPayment, 'El número debe estar en proceso de pago');
+
         this.start();
         const result = await transaction(raffle).run(() => {
           number.action.create.payer(payer);
@@ -44,6 +46,7 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
       },
       cancel: () => {
         assert(number.is.inPayment, 'El número debe estar en proceso de pago');
+
         when(number.switch.available()).map(() => this.raffleRepository.update(raffle));
       },
     };

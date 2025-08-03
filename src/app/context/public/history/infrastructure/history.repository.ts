@@ -15,8 +15,8 @@ export class PocketbaseHistoryRepository extends PocketbaseRepository<History, H
     try {
       const result = await this.collection.getFullList({ expand: 'raffle' });
       result.forEach((item) => object.merge(item, item.expand));
-      const aggregates = result.map((item) => this.options.mapper(item as unknown as HistoryPrimitives));
-      return E.right(aggregates);
+      const entities = result.map((item) => this.options.mapper(item as unknown as HistoryPrimitives));
+      return E.right(entities);
     } catch (error) {
       return E.left(error as Error);
     }

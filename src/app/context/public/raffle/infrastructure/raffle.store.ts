@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Raffle } from '@context/shared/domain/raffle';
 import { signalStore, withState, patchState, withMethods, withHooks } from '@ngrx/signals';
-import { RaffleCriteria } from '../domain/raffle.criteria';
+import { RaffleCriteria } from '../domain';
 import { PocketbaseRaffleRepository } from './raffle.repository';
 
 type RaffleState = {
