@@ -2,6 +2,7 @@ import { is } from '../../either/either.builder';
 import { assert } from '../assert/assert';
 import { $is } from '../is/is';
 import { not } from '../operators/operators';
+import { deepClone } from './deep-clone';
 import { deepMerge } from './deep-merge';
 
 export const $object = {
@@ -18,7 +19,7 @@ export const $object = {
 
     return {
       merge: (target: object) => deepMerge(object, target),
-      clone: () => JSON.parse(JSON.stringify(object)),
+      clone: () => deepClone(object),
     };
   },
 };

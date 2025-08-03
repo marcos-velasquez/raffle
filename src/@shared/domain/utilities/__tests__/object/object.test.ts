@@ -38,6 +38,17 @@ describe('object utility', () => {
       expect(object.merge({ a: 1 }, {})).toEqual({ a: 1 });
       expect(object.merge({}, { a: 1 })).toEqual({ a: 1 });
     });
+
+    it('should clone methods (functions) as well', () => {
+      const original = {
+        x: 1,
+        foo() {
+          return this.x + 1;
+        },
+      };
+
+      expect(object.clone(original).foo).not.toBeUndefined();
+    });
   });
 
   describe('all.empty', () => {
