@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { object } from '../utilities';
 
-export class Transaction<T extends Object> {
+export class Transaction<T extends object> {
   private readonly initialState: T;
 
   constructor(private readonly target: T) {
@@ -10,7 +10,7 @@ export class Transaction<T extends Object> {
 
   public async run<R>(doAction: () => Promise<E.Either<Error, R>>): Promise<E.Either<Error, R>> {
     const result = await doAction();
-    result.mapLeft(() => object.merge(this.target, this.initialState));
+    result.mapLeft(() => Object.assign(this.target, this.initialState));
     return result;
   }
 }

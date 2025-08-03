@@ -1,7 +1,7 @@
 import { Component, ElementRef, inject, input, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { delay, tap } from 'rxjs';
-import { seg } from '@shared/domain';
+import { convert } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
 import { RouletteService } from '@ui/services/roulette';
 import { ConfettiService } from '@ui/services/confetti';
@@ -38,10 +38,10 @@ export class RouletteComponent {
         .spin()
         .pipe(
           tap((value) => rouletteFacade.selectWinner({ raffle: this.raffle(), value: ++value })),
-          delay(seg(1)),
+          delay(convert.seg(1).to.ms()),
           tap(() => this.winnerDialog().open()),
           tap(() => this.confettiService.start()),
-          delay(seg(2))
+          delay(convert.seg(2).to.ms())
         )
         .subscribe(() => {
           recorder.stop().then(({ file }) => {

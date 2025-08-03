@@ -1,6 +1,6 @@
-import { Aggregate, assert, has, EMAIL_REGEX, not, or } from '@shared/domain';
+import { Entity, assert, has, EMAIL_REGEX, not, or } from '@shared/domain';
 
-export class User extends Aggregate<User> {
+export class User extends Entity<User> {
   private constructor(public readonly email: string) {
     super();
     assert(or(email.length === 0, EMAIL_REGEX.test(email)), 'Email is invalid');

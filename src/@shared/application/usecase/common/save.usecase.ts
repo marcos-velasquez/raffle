@@ -6,17 +6,17 @@ import { UseCaseProgress } from '../models';
 export abstract class SaveUseCase<T, K> extends UseCase<T, Promise<E.Either<void, void>>> {
   constructor(
     protected readonly repository: BaseRepository<K>,
-    protected readonly SavedEvent: new (aggregate: K) => DomainEvent,
-    progress: UseCaseProgress,
+    protected readonly SavedEvent: new (entity: K) => DomainEvent,
+    progress: UseCaseProgress
   ) {
     super(progress);
   }
 
   public async execute(input: T): Promise<E.Either<void, void>> {
     this.start();
-    const aggregate = this.create(input);
-    const result = await this.repository.save(aggregate);
-    result.mapRight(() => this.bus.publish(new this.SavedEvent(aggregate)));
+    const entity = this.create(input);
+    const result = await this.repository.save(entity);
+    result.mapRight(() => this.bus.publish(new this.SavedEvent(entity)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();
   }

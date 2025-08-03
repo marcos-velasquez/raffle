@@ -14,7 +14,7 @@ export class AppComponent {
   title = 'raffle';
 
   constructor() {
-    inject(SplashScreenService).activate();
+    inject(SplashScreenService).enable();
     inject(AppSubscriber).init();
   }
 }

@@ -14,14 +14,14 @@ export class SplashScreenService {
         delay(100),
         take(1)
       )
-      .subscribe(() => this.deactivate());
+      .subscribe(() => this.disable());
   }
 
-  public activate(): void {
+  public enable(): void {
     this.document.body.classList.remove('splash-screen-hidden');
   }
 
-  public deactivate(): void {
+  public disable(): void {
     this.document.body.classList.add('splash-screen-hidden');
   }
 }

@@ -1,22 +1,25 @@
-import { signalStore, withState, patchState, withMethods } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
 type LoaderState = {
-  isActive: boolean;
+  isEnable: boolean;
 };
 
 const initialState: LoaderState = {
-  isActive: false,
+  isEnable: false,
 };
 
 export const LoaderStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods((store) => ({
-    activate() {
-      patchState(store, () => ({ isActive: true }));
+    isDisable() {
+      return !store.isEnable();
     },
-    deactivate() {
-      patchState(store, () => ({ isActive: false }));
+    enable() {
+      patchState(store, () => ({ isEnable: true }));
+    },
+    disable() {
+      patchState(store, () => ({ isEnable: false }));
     },
   }))
 );

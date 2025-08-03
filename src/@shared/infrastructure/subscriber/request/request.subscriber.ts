@@ -14,8 +14,8 @@ export class RequestSubscriber extends BaseSubscriber {
   protected listen() {
     this.bus.on(RequestStartedEvent).subscribe(({ message }) => {
       this.toastService.wait(message);
-      this.loadingBarService.activate();
-      this.loaderStore.activate();
+      this.loadingBarService.disable();
+      this.loaderStore.enable();
     });
 
     this.bus.on(RequestSuccessfulEvent).subscribe(({ message }) => {
@@ -31,7 +31,7 @@ export class RequestSubscriber extends BaseSubscriber {
 
   private finish() {
     this.toastService.dismissWait();
-    this.loadingBarService.deactivate();
-    this.loaderStore.deactivate();
+    this.loadingBarService.enable();
+    this.loaderStore.disable();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, effect, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { signalList } from '@shared/domain/signal';
-import { _URL, when } from '@shared/domain';
+import { $url, when } from '@shared/domain';
 import Dropzone from 'dropzone';
 
 @Component({
@@ -38,7 +38,7 @@ export class DropzoneComponent {
       autoProcessQueue: false,
       init: async () => {
         for (const url of this.defaultUrls()) {
-          const file = await _URL.toFile(url);
+          const file = await $url.to.file(url);
           when(dropzone.emit('addedfile', file)).map(() => dropzone.emit('thumbnail', file, url));
         }
       },

@@ -3,10 +3,10 @@ import * as E from '@sweet-monads/either';
 import { RecordModel, RecordService } from 'pocketbase';
 import { Collections } from '@pocketbase';
 import { pb } from '@shared/infrastructure';
-import { Aggregate, BaseRepository, Criteria } from '@shared/domain';
+import { Entity, BaseRepository, Criteria } from '@shared/domain';
 import { CriteriaConverter } from './criteria.converter';
 
-export abstract class PocketbaseRepository<T extends Aggregate<K>, K extends { [key: string]: any }>
+export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key: string]: any }>
   implements BaseRepository<T>
 {
   protected readonly collection: RecordService<RecordModel>;
@@ -23,7 +23,7 @@ export abstract class PocketbaseRepository<T extends Aggregate<K>, K extends { [
         const aggregate = this.options.mapper(record as unknown as K);
         this.subject.next(aggregate);
       },
-      { filter: new CriteriaConverter(criteria).convert() },
+      { filter: new CriteriaConverter(criteria).convert() }
     );
     return this.subject.asObservable();
   }

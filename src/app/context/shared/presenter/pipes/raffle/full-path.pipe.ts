@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FullPathPipe } from '@shared/infrastructure';
+import { FullPathPipe } from '@shared/presenter';
 import { Raffle } from '@context/shared/domain/raffle';
 
 @Pipe({ name: 'fullPath' })

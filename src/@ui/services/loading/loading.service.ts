@@ -5,11 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 export class LoadingBarService {
   public readonly active$ = new BehaviorSubject<boolean>(false);
 
-  public activate(): void {
+  public disable(): void {
     this.active$.next(true);
   }
 
-  public deactivate(): void {
+  public enable(): void {
     this.active$.next(false);
   }
 }

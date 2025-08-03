@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Wheel } from 'spin-wheel';
-import { Random, seg } from '@shared/domain';
+import { convert, random } from '@shared/domain';
 import { DEFAULT_ROULETTE_PROPS } from './roulette-props';
 
 export type RouletteProps = { el: HTMLElement; labels: string[] };
@@ -19,9 +19,9 @@ export class Roulette {
 
   public spin(): Promise<number> {
     return new Promise((resolve) => {
-      const winner = Random.from(this.wheel.items);
-      const revolution = Random.int(7, 15);
-      const duration = seg(10);
+      const winner = random.from(this.wheel.items) as number;
+      const revolution = random.int(7, 15);
+      const duration = convert.seg(10).to.ms();
       this.wheel.onRest = () => resolve(winner);
       this.wheel.spinToItem(winner, duration, false, revolution);
     });

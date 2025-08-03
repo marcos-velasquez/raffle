@@ -21,7 +21,7 @@ class And extends LogicalOperator {
   }
 
   public evaluate(): boolean {
-    return this.values.reduce((acc, arg) => acc && arg.evaluate(), false);
+    return this.values.reduce((acc, arg) => acc && arg.evaluate(), !!this.values[0]?.evaluate());
   }
 }
 
@@ -34,7 +34,7 @@ class Or extends LogicalOperator {
   }
 
   public evaluate(): boolean {
-    return this.values.reduce((acc, arg) => acc || arg.evaluate(), false);
+    return this.values.reduce((acc, arg) => acc || arg.evaluate(), !!this.values[0]?.evaluate());
   }
 }
 
@@ -52,4 +52,3 @@ export const not = (condition: unknown) => new Not(new Value(boolean(condition))
 export const and = (...args: boolean[]) => new And(...args.map((arg) => new Value(arg))).evaluate();
 export const or = (...args: boolean[]) => new Or(...args.map((arg) => new Value(arg))).evaluate();
 export const boolean = (value: unknown) => new Value(value).evaluate();
-export const has = (value: unknown) => boolean(value);

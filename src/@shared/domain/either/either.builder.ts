@@ -1,4 +1,3 @@
-import { isEmpty, isNil } from 'lodash';
 import * as E from '@sweet-monads/either';
 import { boolean } from '../utilities';
 
@@ -95,11 +94,22 @@ export class EitherBuilder<T = undefined, K = undefined> {
   }
 }
 
+export * as E from '@sweet-monads/either';
 export const when = <T>(value: T) => new EitherBuilder<void, T>().setRight(value).build();
+export const has = (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(value)).build();
 export const is = {
   undefined: (value: unknown) => new EitherBuilder().fromLeftBoolean(boolean(value)).build(),
   affirmative: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(value)).build(),
   error: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(value instanceof Error)).build(),
-  empty: (value: unknown) => new EitherBuilder().fromRightBoolean(isEmpty(value)).build(),
-  nil: (value: unknown) => new EitherBuilder().fromRightBoolean(isNil(value)).build(),
+  empty: (value: unknown) =>
+    new EitherBuilder()
+      .fromRightBoolean(
+        (Array.isArray(value) && value.length === 0) || value === null || value === undefined || value === ''
+      )
+      .build(),
+  nil: (value: unknown) => new EitherBuilder().fromRightBoolean(value === null || value === undefined).build(),
+  string: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(typeof value === 'string')).build(),
+  number: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(typeof value === 'number')).build(),
+  boolean: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(typeof value === 'boolean')).build(),
+  array: (value: unknown) => new EitherBuilder().fromRightBoolean(boolean(Array.isArray(value))).build(),
 };

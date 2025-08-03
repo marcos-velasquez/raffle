@@ -1,8 +1,8 @@
-import { Aggregate, assert, boolean, not } from '@shared/domain';
+import { Entity, assert, boolean, not } from '@shared/domain';
 import { Number, NumberPrimitives } from './number';
 import { PayerPrimitives } from './payer';
 
-export class Raffle extends Aggregate<RafflePrimitives> {
+export class Raffle extends Entity<RafflePrimitives> {
   public static readonly MIN_PRICE = 1;
   public static readonly MIN_IMAGES = 1;
   public static readonly MIN_NUMBERS = 2;
@@ -12,7 +12,7 @@ export class Raffle extends Aggregate<RafflePrimitives> {
     public readonly description: string,
     public readonly images: string[],
     public readonly price: number,
-    public readonly numbers: Number[],
+    public readonly numbers: Number[]
   ) {
     super();
     assert(title.trim().length > 0, 'Title is required');
@@ -97,7 +97,7 @@ export class Raffle extends Aggregate<RafflePrimitives> {
       description,
       images,
       price,
-      numbers.map((primitives) => Number.from(primitives)),
+      numbers.map((primitives) => Number.from(primitives))
     ).withId(id);
   }
 

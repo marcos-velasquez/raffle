@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import confetti from 'canvas-confetti';
-import { seg } from '@shared/domain';
+import { convert } from '@shared/domain';
 
 @Injectable({ providedIn: 'root' })
 export class ConfettiService {
@@ -9,7 +9,7 @@ export class ConfettiService {
     spread: 360,
     ticks: 60,
     zIndex: 0,
-    duration: seg(15),
+    duration: convert.seg(15).to.ms(),
     interval: 250,
   };
 

@@ -1,7 +1,7 @@
-import { Aggregate, assert } from '@shared/domain';
+import { Entity, assert } from '@shared/domain';
 import { Raffle, RafflePrimitives } from '@context/shared/domain';
 
-export class History extends Aggregate<HistoryPrimitives> {
+export class History extends Entity<HistoryPrimitives> {
   private constructor(public readonly video: string, public readonly raffle: Raffle) {
     super();
     assert(video.trim().length > 0, 'Video is required');

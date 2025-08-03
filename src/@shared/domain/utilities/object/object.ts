@@ -1,29 +1,26 @@
-import { cloneDeep, merge } from 'lodash';
 import { is } from '../../either/either.builder';
 
-export class _Object {
-  constructor(private readonly object: Object) {}
-
-  public get are() {
+export const $object = {
+  are: (object: object) => {
     return {
       all: {
-        empty: Object.values(this.object).every((value) => value === null || value === undefined || value === ''),
+        empty: Object.values(object).every((value) => value === null || value === undefined || value === ''),
       },
     };
-  }
+  },
 
-  public get action() {
+  action: (object: object) => {
     return {
-      merge: (object: Object) => merge(this.object, object),
-      clone: () => cloneDeep(this.object),
+      merge: (target: object) => Object.assign(object, target),
+      clone: () => JSON.parse(JSON.stringify(object)),
     };
-  }
-}
+  },
+};
 
 export const object = {
-  clone: <T extends Object>(object: T) => new _Object(object).action.clone() as T,
-  merge: <T extends Object>(origin: T, target: T) => new _Object(origin).action.merge(target),
+  clone: <T extends object>(object: T) => $object.action(object).clone() as T,
+  merge: <T extends object>(origin: T, target: object) => $object.action(origin).merge(target),
   all: {
-    empty: (object: Object) => is.affirmative(new _Object(object).are.all.empty),
+    empty: (object: object) => is.affirmative($object.are(object).all.empty),
   },
 };
