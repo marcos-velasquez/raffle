@@ -1,4 +1,4 @@
-import { Random } from '@shared/domain';
+import { random } from '@shared/domain';
 import { Raffle, RaffleCreatePrimitives } from '../raffle';
 import { Payer } from '../payer';
 
@@ -10,8 +10,6 @@ describe('Raffle', () => {
     price: 10,
     quantityNumbers: 5,
   };
-
-  const random = () => Random.int(1, validRafflePrimitives.quantityNumbers);
 
   it('should create a valid raffle instance', () => {
     const raffle = Raffle.create(validRafflePrimitives);
@@ -61,7 +59,7 @@ describe('Raffle', () => {
 
   it('should correctly determine if a number is purchased', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const value = random();
+    const value = random.int(1, validRafflePrimitives.quantityNumbers);
     const numberToPurchase = raffle.get.number(value);
     numberToPurchase.switch.inPayment();
     numberToPurchase.switch.inVerification();
@@ -71,7 +69,7 @@ describe('Raffle', () => {
 
   it('should correctly determine if is completed', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const value = random();
+    const value = random.int(1, validRafflePrimitives.quantityNumbers);
     const numberToWin = raffle.get.number(value);
     numberToWin.switch.inPayment();
     numberToWin.switch.inVerification();
@@ -83,7 +81,7 @@ describe('Raffle', () => {
 
   it('should correctly determine if the raffle has a winner', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const numberToWin = raffle.get.number(random());
+    const numberToWin = raffle.get.number(random.int(1, validRafflePrimitives.quantityNumbers));
     numberToWin.switch.inPayment();
     numberToWin.switch.inVerification();
     numberToWin.switch.purchased();
@@ -102,7 +100,7 @@ describe('Raffle', () => {
 
   it('should correctly determine if the raffle has purchased numbers', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const value = random();
+    const value = random.int(1, validRafflePrimitives.quantityNumbers);
     raffle.get.number(value).switch.inPayment();
     raffle.get.number(value).switch.inVerification();
     raffle.get.number(value).switch.purchased();
@@ -112,7 +110,7 @@ describe('Raffle', () => {
 
   it('should get the correct remaining number count', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const value = random();
+    const value = random.int(1, validRafflePrimitives.quantityNumbers);
     raffle.get.number(value).switch.inPayment();
     raffle.get.number(value).switch.inVerification();
     raffle.get.number(value).switch.purchased();
@@ -122,7 +120,7 @@ describe('Raffle', () => {
 
   it('should get the correct purchased number count', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    const value = random();
+    const value = random.int(1, validRafflePrimitives.quantityNumbers);
     for (let i = 1; i <= validRafflePrimitives.quantityNumbers - value; i++) {
       raffle.get.number(i).switch.inPayment();
       raffle.get.number(i).switch.inVerification();

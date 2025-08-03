@@ -1,4 +1,4 @@
-import { Random } from '@shared/domain';
+import { random } from '@shared/domain';
 import { Number, NumberPrimitives, NumberState } from '../number';
 import { Payer } from '../payer';
 
@@ -82,7 +82,7 @@ describe('Number class', () => {
   });
 
   it('should verify if value is equal to another value', () => {
-    const value = Random.int(1, 100);
+    const value = random.int(1, 100);
     const number = Number.create({ value });
     const otherNumber = Number.create({ value });
     expect(number.is.equal.value(otherNumber.get.value)).toBe(true);
@@ -131,7 +131,7 @@ describe('Number class', () => {
     expect(number.get.payer).toEqual(primitives.payer);
   });
   it('should create multiple Number instances', () => {
-    const quantity = Random.int(1, 100);
+    const quantity = random.int(1, 100);
 
     const numbers = Number.many(quantity);
 
