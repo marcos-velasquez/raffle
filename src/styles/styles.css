@@ -17,6 +17,10 @@
   [expandImage] {
     @apply cursor-pointer;
   }
+
+  .validator-hint {
+    @apply visible!;
+  }
 }
 
 @layer components {
