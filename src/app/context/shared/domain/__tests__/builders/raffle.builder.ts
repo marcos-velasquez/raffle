@@ -2,7 +2,7 @@ import { Number, NumberState } from '../../number';
 import { Raffle, RafflePrimitives } from '../../raffle';
 
 export class RaffleBuilder {
-  private readonly primitives: RafflePrimitives = {
+  protected readonly primitives: RafflePrimitives = {
     id: 'test',
     title: 'Test',
     description: 'Test',
@@ -41,7 +41,7 @@ export class RaffleBuilder {
     return {
       payer: {
         random: () => {
-          this.primitives.numbers.find((n) => n.value === value)!.payer = {
+          this.primitives.numbers.find((n) => n.value === value).payer = {
             name: 'TestPayer',
             phone: 'TestPhone',
             voucher: 'TestVoucher',
@@ -50,7 +50,7 @@ export class RaffleBuilder {
         },
       },
       state: (state: NumberState) => {
-        this.primitives.numbers.find((n) => n.value === value)!.state = state;
+        this.primitives.numbers.find((n) => n.value === value).state = state;
         return this;
       },
     };
@@ -72,7 +72,15 @@ export class RaffleBuilder {
           return this;
         },
       },
+      count: (count: number) => {
+        this.primitives.numbers = Number.many(count).map((number) => number.toPrimitives());
+        return this;
+      },
     };
+  }
+
+  public getNumbers() {
+    return this.primitives.numbers;
   }
 
   public build() {

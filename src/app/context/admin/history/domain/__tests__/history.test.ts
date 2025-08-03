@@ -1,23 +1,12 @@
 import { History } from '../history';
 import { Raffle } from '@context/shared/domain/raffle';
-import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { RaffleMother } from '../../../../shared/domain/__tests__/builders/raffle.mother';
 
 describe('History entity', () => {
   const validFile = { type: 'video/mp4' } as File;
 
-  const completedRafflePrimitives = new RaffleBuilder()
-    .withTitle('Completed')
-    .withCompleted(true)
-    .withNumber(1)
-    .state('winner')
-    .build()
-    .toPrimitives();
-
-  const incompleteRafflePrimitives = new RaffleBuilder()
-    .withTitle('NotCompleted')
-    .withCompleted(false)
-    .build()
-    .toPrimitives();
+  const completedRafflePrimitives = RaffleMother.completed();
+  const incompleteRafflePrimitives = RaffleMother.notCompleted();
 
   it('should create a History entity with valid file and completed raffle', () => {
     const history = History.create({ file: validFile, raffle: completedRafflePrimitives });
