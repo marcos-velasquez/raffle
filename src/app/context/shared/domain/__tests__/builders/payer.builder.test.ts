@@ -2,7 +2,9 @@ import { PayerPrimitives } from '../../payer';
 
 // Test dummy para Jest
 describe('PayerBuilder util', () => {
-  it('dummy', () => { expect(true).toBe(true); });
+  it('dummy', () => {
+    expect(true).toBe(true);
+  });
 });
 
 export class PayerBuilder {

@@ -1,6 +1,6 @@
 import * as E from '@sweet-monads/either';
 import { EitherBuilder, BaseRepository, bus } from '@shared/domain';
-import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { History } from '@context/admin/history/domain/history';
 import { HistoryCreatedEvent } from '../../domain/history.event';
 import { CreateHistoryUseCase } from './create.usecase';

@@ -2,7 +2,7 @@ import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { BaseRepository, EitherBuilder, object } from '@shared/domain';
 import { Raffle } from '@context/shared/domain/raffle';
-import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { DeclinePaymentUseCase, DeclinePaymentUseCaseProps } from './decline-payment.usecase';
 import { PaymentDeclinedEvent } from '../../domain/number.event';
 

@@ -1,6 +1,6 @@
 import { History } from '../history';
 import { Raffle } from '@context/shared/domain/raffle';
-import { RaffleMother } from '../../../../shared/domain/__tests__/builders/raffle.mother';
+import { RaffleMother } from '../../../../shared/domain/__tests__/builders/raffle.mother.test';
 
 describe('History entity', () => {
   const validFile = { type: 'video/mp4' } as File;

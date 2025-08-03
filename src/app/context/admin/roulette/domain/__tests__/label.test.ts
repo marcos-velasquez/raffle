@@ -1,4 +1,4 @@
-import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { Label } from '../label';
 
 describe('Labels', () => {
@@ -7,7 +7,7 @@ describe('Labels', () => {
 
     const result = Label.many(raffle);
 
-    result.forEach(label => {
+    result.forEach((label) => {
       expect(label).toMatch(/^\d+\. [A-Za-z ]+$/);
     });
   });

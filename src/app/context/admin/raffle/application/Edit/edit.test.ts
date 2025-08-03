@@ -2,7 +2,7 @@ import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository } from '@shared/domain';
-import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { Raffle, RaffleEditPrimitives } from '@context/shared/domain/raffle';
 import { RaffleEditedEvent } from '../../domain/raffle.event';
 import { EditRaffleUseCase } from './edit.usecase';

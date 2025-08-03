@@ -1,6 +1,6 @@
 import { Raffle } from '../../../../shared/domain/raffle';
 import { History, HistoryPrimitives } from '../history';
-import { RaffleBuilder } from '../../../../shared/domain/__tests__/builders/raffle.builder';
+import { RaffleBuilder } from '../../../../shared/domain/__tests__/builders/raffle.builder.test';
 
 describe('History', () => {
   const validHistoryPrimitives: HistoryPrimitives = {
