@@ -20,8 +20,8 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
     this.collection.subscribe(
       '*',
       ({ record }) => {
-        const aggregate = this.options.mapper(record as unknown as K);
-        this.subject.next(aggregate);
+        const entity = this.options.mapper(record as unknown as K);
+        this.subject.next(entity);
       },
       { filter: new CriteriaConverter(criteria).convert() }
     );
@@ -31,8 +31,8 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
   public async findAll(criteria = new Criteria()): Promise<E.Either<Error, T[]>> {
     try {
       const result = await this.collection.getFullList({ filter: new CriteriaConverter(criteria).convert() });
-      const aggregates = result.map((item) => this.options.mapper(item as unknown as K));
-      return E.right(aggregates);
+      const entities = result.map((item) => this.options.mapper(item as unknown as K));
+      return E.right(entities);
     } catch (error) {
       return E.left(error as Error);
     }
@@ -42,28 +42,28 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
     return this.findAll(criteria).then((result) => result.map((a) => a[0]));
   }
 
-  public async save(aggregate: T): Promise<E.Either<Error, T>> {
+  public async save(entity: T): Promise<E.Either<Error, T>> {
     try {
-      const record = await this.collection.create(aggregate.toPrimitives());
+      const record = await this.collection.create(entity.toPrimitives());
       return E.right(this.options.mapper(record as unknown as K));
     } catch (error) {
       return E.left(error as Error);
     }
   }
 
-  public async update(aggregate: T): Promise<E.Either<Error, T>> {
+  public async update(entity: T): Promise<E.Either<Error, T>> {
     try {
-      const record = await this.collection.update(aggregate.getId(), aggregate.toPrimitives());
+      const record = await this.collection.update(entity.getId(), entity.toPrimitives());
       return E.right(this.options.mapper(record as unknown as K));
     } catch (error) {
       return E.left(error as Error);
     }
   }
 
-  public async remove(aggregate: T): Promise<E.Either<Error, T>> {
+  public async remove(entity: T): Promise<E.Either<Error, T>> {
     try {
-      await this.collection.delete(aggregate.getId());
-      return E.right(aggregate);
+      await this.collection.delete(entity.getId());
+      return E.right(entity);
     } catch (error) {
       return E.left(error as Error);
     }
