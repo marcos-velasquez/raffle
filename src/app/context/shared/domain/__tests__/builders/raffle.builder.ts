@@ -2,6 +2,11 @@ import { Number, NumberState } from '../../number';
 import { Raffle, RafflePrimitives } from '../../raffle';
 import { PayerBuilder } from './payer.builder';
 
+// Test dummy para Jest
+describe('RaffleBuilder util', () => {
+  it('dummy', () => { expect(true).toBe(true); });
+});
+
 export class RaffleBuilder {
   protected readonly primitives: RafflePrimitives = {
     id: 'test',

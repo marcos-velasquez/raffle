@@ -7,7 +7,9 @@ describe('Labels', () => {
 
     const result = Label.many(raffle);
 
-    expect(result).toEqual(expect.arrayContaining([expect.stringMatching(/^\d+\. [A-Za-z]+$/)]));
+    result.forEach(label => {
+      expect(label).toMatch(/^\d+\. [A-Za-z ]+$/);
+    });
   });
 
   it('should return an empty array if there are no payers', () => {

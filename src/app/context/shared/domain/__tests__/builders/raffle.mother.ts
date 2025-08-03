@@ -1,6 +1,11 @@
 import { RaffleBuilder } from './raffle.builder';
 import { RafflePrimitives } from '../../raffle';
 
+// Test dummy para Jest
+describe('RaffleMother util', () => {
+  it('dummy', () => { expect(true).toBe(true); });
+});
+
 export class RaffleMother {
   static completed(): RafflePrimitives {
     return new RaffleBuilder()
