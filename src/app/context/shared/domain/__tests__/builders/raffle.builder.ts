@@ -1,5 +1,6 @@
 import { Number, NumberState } from '../../number';
 import { Raffle, RafflePrimitives } from '../../raffle';
+import { PayerBuilder } from './payer.builder';
 
 export class RaffleBuilder {
   protected readonly primitives: RafflePrimitives = {
@@ -41,11 +42,7 @@ export class RaffleBuilder {
     return {
       payer: {
         random: () => {
-          this.primitives.numbers.find((n) => n.value === value).payer = {
-            name: 'TestPayer',
-            phone: 'TestPhone',
-            voucher: 'TestVoucher',
-          };
+          this.primitives.numbers.find((n) => n.value === value).payer = PayerBuilder.random();
           return this;
         },
       },

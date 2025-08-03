@@ -3,6 +3,7 @@ import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder';
+import { PayerBuilder } from '@context/shared/domain/__tests__/builders/payer.builder';
 import { Raffle } from '@context/shared/domain/raffle';
 import { BuyNumberEvent } from '../../domain/number.event';
 import { BuyNumberUseCase, BuyNumberUseCaseProps } from './buy.usecase';
@@ -26,7 +27,7 @@ describe('BuyNumberUseCase', () => {
   it('should publish BuyNumberEvent and complete with success message on successful buy', async () => {
     mockRaffleRepositoryService.update?.mockResolvedValue(E.right(validInput.raffle));
 
-    const result = await useCase.execute(validInput);
+    const result = await useCase.execute(validInput).complete(PayerBuilder.random());
 
     expect(mockRaffleRepositoryService.update).toHaveBeenCalledTimes(1);
     expect(mockRaffleRepositoryService.update).toHaveBeenCalledWith(expect.objectContaining(validInput.raffle));
@@ -44,7 +45,7 @@ describe('BuyNumberUseCase', () => {
     const error = new Error('Buy number failed');
     mockRaffleRepositoryService.update?.mockResolvedValue(E.left(error));
 
-    const result = await useCase.execute(validInput);
+    const result = await useCase.execute(validInput).complete(PayerBuilder.random());
 
     expect(mockRaffleRepositoryService.update).toHaveBeenCalledTimes(1);
     expect(mockRaffleRepositoryService.update).toHaveBeenCalledWith(expect.objectContaining(validInput.raffle));
@@ -57,7 +58,7 @@ describe('BuyNumberUseCase', () => {
   it('should complete with error message on failed buy number with not inPayment', async () => {
     const raffle = new RaffleBuilder().build();
 
-    await expect(() => useCase.execute({ ...validInput, raffle })).rejects.toThrow();
+    await expect(() => useCase.execute({ ...validInput, raffle }).complete(PayerBuilder.random())).rejects.toThrow();
     expect(mockRaffleRepositoryService.update).not.toHaveBeenCalled();
   });
 });
