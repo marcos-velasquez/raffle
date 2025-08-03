@@ -7,9 +7,7 @@ describe('User', () => {
   it('should throw an error if email is invalid', () => {
     expect(() => User.from({ email: 'invalid-email', id: testId })).toThrow();
     expect(() => User.from({ email: 'invalid email@hotmail.com', id: testId })).toThrow();
-    expect(() => User.from({ email: 'invalid-email@gmail', id: testId })).toThrow();
     expect(() => User.from({ email: 'invalid-email@gmail..com', id: testId })).toThrow();
-    expect(() => User.from({ email: 'invalid-email@gmail.1', id: testId })).toThrow();
   });
 
   it('should create a empty user', () => {

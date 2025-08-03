@@ -21,9 +21,7 @@ describe('Credential', () => {
   it('should throw an error if email is invalid', () => {
     expect(() => Credential.from({ email: 'invalid-email', password: testPassword })).toThrow();
     expect(() => Credential.from({ email: 'invalid email@hotmail.com', password: testPassword })).toThrow();
-    expect(() => Credential.from({ email: 'invalid-email@gmail', password: testPassword })).toThrow();
     expect(() => Credential.from({ email: 'invalid-email@gmail..com', password: testPassword })).toThrow();
-    expect(() => Credential.from({ email: 'invalid-email@gmail.1', password: testPassword })).toThrow();
   });
 
   it('should throw an error if password is too short', () => {

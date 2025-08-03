@@ -32,6 +32,11 @@ export class RaffleBuilder {
     return this;
   }
 
+  public withCompleted(completed: boolean): this {
+    this.primitives.completed = completed;
+    return this;
+  }
+
   public withNumber(value: number) {
     return {
       payer: {
