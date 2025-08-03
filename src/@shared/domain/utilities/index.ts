@@ -12,3 +12,4 @@ export * from './string/string';
 export * from './sleep/sleep';
 export * from './regex';
 export * from './url/url';
+export * from './is/is';

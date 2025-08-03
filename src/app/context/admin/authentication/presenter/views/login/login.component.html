@@ -13,7 +13,7 @@
         </div>
         <input [formControlName]="'email'" class="w-full input input-bordered focus:input-primary" />
         @if (form.get('email')?.touched && form.get('email')?.invalid) {
-          <div class="validator-hint text-error">Por favor, ingrese un correo electrónico válido</div>
+        <div class="validator-hint text-error">Por favor, ingrese un correo electrónico válido</div>
         }
       </section>
 
@@ -40,15 +40,15 @@
         </button>
 
         @if (form.get('password')?.touched && form.get('password')?.invalid) {
-          <div class="validator-hint text-error">Por favor, ingrese una contraseña válida</div>
+        <div class="validator-hint text-error">Por favor, ingrese una contraseña válida</div>
         }
       </section>
 
-      <button (click)="login()" [disabled]="loaderStore.isActive()" class="btn btn-soft btn-primary btn-block mt-5">
-        @if (loaderStore.isActive()) {
-          <span class="loading loading-spinner loading-sm"></span>
+      <button (click)="login()" [disabled]="loaderStore.isEnable()" class="btn btn-soft btn-primary btn-block mt-5">
+        @if (loaderStore.isEnable()) {
+        <span class="loading loading-spinner loading-sm"></span>
         } @else {
-          <span> Aceptar </span>
+        <span> Aceptar </span>
         }
       </button>
     </form>
