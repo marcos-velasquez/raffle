@@ -8,12 +8,12 @@ import { LoadingBarService } from '../../services/loading/loading.service';
   styles: [':host { width: 100%; display: flex; position: fixed; top: 0; z-index: 999;}'],
 })
 export class LoadingBarComponent extends BaseComponent {
-  public readonly isActive = signal<boolean>(true);
+  public readonly isEnable = signal<boolean>(true);
 
   constructor() {
     super();
     inject(LoadingBarService)
       .active$.pipe(this.unsubscribe())
-      .subscribe((value) => this.isActive.set(value));
+      .subscribe((value) => this.isEnable.set(value));
   }
 }

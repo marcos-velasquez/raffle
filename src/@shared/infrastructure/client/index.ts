@@ -1,1 +1,1 @@
-export * from './pocketbase';
+export * from './pocketbase/pocketbase';
