@@ -1,7 +1,5 @@
 @if (isAdmin()) {
-<button [routerLink]="['/admin/raffle']" class="btn btn-ghost">
-  <span class="icon-[heroicons--cog-6-tooth-16-solid]"></span>
-</button>
+<button [routerLink]="['/admin/raffle']" class="btn btn-ghost">{{ 'navigation.management' | transloco }}</button>
 
 <button (click)="logout()" class="btn btn-ghost">
   <span class="icon-[heroicons--arrow-left-start-on-rectangle-16-solid]"></span>

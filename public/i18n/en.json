@@ -8,7 +8,8 @@
   },
   "navigation": {
     "raffles": "Raffles",
-    "history": "History"
+    "history": "History",
+    "management": "Management"
   },
   "raffle": {
     "create": "Create Raffle",

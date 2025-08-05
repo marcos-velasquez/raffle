@@ -8,7 +8,8 @@
   },
   "navigation": {
     "raffles": "Rifas",
-    "history": "Historial"
+    "history": "Historial",
+    "management": "Gestión"
   },
   "raffle": {
     "create": "Crear Rifa",
