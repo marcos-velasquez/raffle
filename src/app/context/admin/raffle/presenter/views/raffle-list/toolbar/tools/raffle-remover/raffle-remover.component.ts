@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { confirmation } from '@ui/services/confirmation';
+import { ConfirmationService } from '@ui/services/confirmation';
 import { raffleFacade } from '@context/admin/raffle/application';
 import { Raffle } from '@context/shared/domain/raffle';
 
@@ -12,7 +12,9 @@ import { Raffle } from '@context/shared/domain/raffle';
 export class RaffleRemoverComponent {
   public readonly raffle = input.required<Raffle>();
 
+  private readonly confirmation = inject(ConfirmationService);
+
   public remove() {
-    confirmation.open().mapRight(() => raffleFacade.remove(this.raffle()));
+    this.confirmation.open().mapRight(() => raffleFacade.remove(this.raffle()));
   }
 }

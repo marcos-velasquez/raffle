@@ -3,6 +3,7 @@ import { TranslocoService } from '@jsverse/transloco';
 import { is } from '@shared/domain';
 
 export type ConfirmationProps = { message: string };
+
 @Injectable({ providedIn: 'root' })
 export class ConfirmationService {
   private readonly transloco = inject(TranslocoService);
@@ -12,5 +13,3 @@ export class ConfirmationService {
     return is.affirmative(window.confirm(message));
   }
 }
-
-export const confirmation = new ConfirmationService();
