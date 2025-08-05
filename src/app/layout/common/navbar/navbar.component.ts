@@ -5,10 +5,11 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { BaseComponent } from '@core/base';
 import { SchemeComponent } from './tools/scheme/scheme.component';
 import { AccountComponent } from './tools/account/account.component';
+import { LanguageComponent } from './tools/language/language.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterLink, TranslocoPipe, SchemeComponent, AccountComponent],
+  imports: [CommonModule, RouterLink, TranslocoPipe, SchemeComponent, AccountComponent, LanguageComponent],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent extends BaseComponent {}

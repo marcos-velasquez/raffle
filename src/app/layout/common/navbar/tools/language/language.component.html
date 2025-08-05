@@ -1,0 +1,13 @@
+@if (isSpanish()) {
+<button (click)="switchToEnglish()" class="btn btn-ghost">
+  <div class="flex items-center rounded-full">
+    <span class="text-sm font-medium">EN</span>
+  </div>
+</button>
+} @else {
+<button (click)="switchToSpanish()" class="btn btn-ghost">
+  <div class="flex items-center rounded-full">
+    <span class="text-sm font-medium">ES</span>
+  </div>
+</button>
+}
