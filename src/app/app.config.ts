@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection, provideBrowserGlobalErro
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideUi } from '@core/providers';
+import { provideUi, provideTranslation } from '@core/providers';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -12,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     provideRouter(appRoutes, withComponentInputBinding(), withViewTransitions()),
+    provideTranslation(),
     provideUi(),
   ],
 };

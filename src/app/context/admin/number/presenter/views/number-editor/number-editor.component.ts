@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { confirmation } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
@@ -8,7 +9,7 @@ import { numberFacade } from '../../../application';
 
 @Component({
   selector: 'app-number-editor',
-  imports: [CommonModule, RaffleDetailsComponent, NumberComponent, ExpandImageDirective],
+  imports: [CommonModule, TranslocoPipe, RaffleDetailsComponent, NumberComponent, ExpandImageDirective],
   templateUrl: './number-editor.component.html',
 })
 export class NumberEditorComponent {

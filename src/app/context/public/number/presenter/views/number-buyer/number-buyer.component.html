@@ -8,42 +8,42 @@
 
   <form [formGroup]="form" class="form-container mx-auto bg-base-200 rounded-lg p-6 shadow-sm">
     <header class="text-center">
-      <h3 class="text-2xl font-semibold">Comprar Número</h3>
+      <h3 class="text-2xl font-semibold">{{ 'number.buy' | transloco }}</h3>
     </header>
 
     <section>
       <div class="label">
-        <span class="label-text">Nombre completo</span>
+        <span class="label-text">{{ 'number.fullName' | transloco }}</span>
       </div>
       <input formControlName="name" class="w-full input input-bordered focus:input-primary" />
       @if (form.get('name')?.touched && form.get('name')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese un nombre válido</div>
+      <div class="validator-hint text-error">{{ 'number.nameValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Teléfono</span>
+        <span class="label-text">{{ 'number.phone' | transloco }}</span>
       </div>
       <input formControlName="phone" onlyNumber class="w-full input input-bordered focus:input-primary" />
       @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese un número de teléfono válido</div>
+      <div class="validator-hint text-error">{{ 'number.phoneValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Comprobante</span>
+        <span class="label-text">{{ 'number.voucher' | transloco }}</span>
       </div>
       <ui-dropzone (change)="form.patchValue({ voucher: $event })" />
       @if (form.get('voucher')?.touched && form.get('voucher')?.invalid) {
-      <div class="validator-hint text-error">Debe ingresar un comprobante válido</div>
+      <div class="validator-hint text-error">{{ 'number.voucherValidation' | transloco }}</div>
       }
     </section>
 
     <footer class="flex gap-2 justify-end">
-      <button (click)="cancel()" class="btn btn-ghost">Cancelar</button>
-      <button (click)="create()" class="btn btn-soft btn-primary">Comprar</button>
+      <button (click)="cancel()" class="btn btn-ghost">{{ 'actions.cancel' | transloco }}</button>
+      <button (click)="create()" class="btn btn-soft btn-primary">{{ 'actions.buy' | transloco }}</button>
     </footer>
   </form>
 </section>

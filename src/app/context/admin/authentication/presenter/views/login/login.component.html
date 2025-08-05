@@ -4,22 +4,22 @@
       <img src="images/logo/logo.svg" alt="logo" />
     </div>
 
-    <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight">Iniciar sesión</div>
+    <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight">{{ 'auth.login' | transloco }}</div>
 
     <form [formGroup]="form" class="form-container mt-8">
       <section>
         <div class="label">
-          <span class="label-text">Correo electrónico</span>
+          <span class="label-text">{{ 'auth.email' | transloco }}</span>
         </div>
         <input [formControlName]="'email'" class="w-full input input-bordered focus:input-primary" />
         @if (form.get('email')?.touched && form.get('email')?.invalid) {
-        <div class="validator-hint text-error">Por favor, ingrese un correo electrónico válido</div>
+        <div class="validator-hint text-error">{{ 'auth.emailValidation' | transloco }}</div>
         }
       </section>
 
       <section class="relative">
         <div class="label">
-          <span class="label-text">Contraseña</span>
+          <span class="label-text">{{ 'auth.password' | transloco }}</span>
         </div>
 
         <input

@@ -8,9 +8,9 @@
 
   <article class="w-full flex justify-center gap-2">
     @if (number.is.inPayment || number.is.inVerification) {
-    <button (click)="declinePayment()" class="btn lg:btn-wide btn-error">Declinar</button>
+    <button (click)="declinePayment()" class="btn lg:btn-wide btn-error">{{ 'actions.decline' | transloco }}</button>
     } @if (number.is.inVerification) {
-    <button (click)="verifyPayment()" class="btn lg:btn-wide btn-primary">Verificar</button>
+    <button (click)="verifyPayment()" class="btn lg:btn-wide btn-primary">{{ 'actions.verify' | transloco }}</button>
     }
   </article>
 

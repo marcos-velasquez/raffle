@@ -1,0 +1,80 @@
+{
+  "auth": {
+    "login": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "emailValidation": "Por favor, ingrese un correo electrónico válido",
+    "passwordValidation": "Por favor, ingrese una contraseña válida"
+  },
+  "navigation": {
+    "raffles": "Rifas",
+    "history": "Historial"
+  },
+  "raffle": {
+    "create": "Crear Rifa",
+    "title": "Título",
+    "description": "Descripción",
+    "price": "Precio",
+    "quantityNumbers": "Cantidad de números",
+    "titleValidation": "Por favor, ingrese un título válido",
+    "descriptionValidation": "Por favor, ingrese una descripción válida",
+    "priceValidation": "Por favor, ingrese un precio válido",
+    "quantityValidation": "Por favor, ingrese una cantidad de números válida",
+    "selectWinner": "Seleccionar ganador"
+  },
+  "number": {
+    "buy": "Comprar Número",
+    "fullName": "Nombre completo",
+    "phone": "Teléfono",
+    "voucher": "Comprobante",
+    "nameValidation": "Por favor, ingrese un nombre válido",
+    "phoneValidation": "Por favor, ingrese un número de teléfono válido",
+    "voucherValidation": "Debe ingresar un comprobante válido"
+  },
+  "actions": {
+    "cancel": "Cancelar",
+    "buy": "Comprar",
+    "decline": "Declinar",
+    "verify": "Verificar",
+    "close": "Cerrar",
+    "create": "Crear",
+    "edit": "Editar",
+    "remove": "Eliminar",
+    "save": "Guardar"
+  },
+  "confirmations": {
+    "default": "¿Estás seguro de realizar esta acción?",
+    "deleteRaffle": "¿Estás seguro de eliminar esta rifa?",
+    "selectWinner": "¿Estás seguro de seleccionar el ganador?"
+  },
+  "messages": {
+    "loading": "Cargando...",
+    "success": "Operación exitosa",
+    "error": "Ha ocurrido un error",
+    "raffleCreated": "Rifa creada exitosamente",
+    "raffleUpdated": "Rifa actualizada exitosamente",
+    "raffleDeleted": "Rifa eliminada exitosamente",
+    "numberPurchased": "Número comprado exitosamente",
+    "paymentVerified": "Pago verificado exitosamente",
+    "paymentDeclined": "Pago rechazado",
+    "winnerSelected": "Ganador seleccionado exitosamente"
+  },
+  "status": {
+    "available": "Disponible",
+    "reserved": "Reservado",
+    "purchased": "Comprado",
+    "active": "Activa",
+    "finished": "Finalizada"
+  },
+  "currency": {
+    "bs": "Bs."
+  },
+  "placeholders": {
+    "enterTitle": "Ingrese el título",
+    "enterDescription": "Ingrese la descripción",
+    "enterPrice": "Ingrese el precio",
+    "enterQuantity": "Ingrese la cantidad",
+    "enterName": "Ingrese su nombre completo",
+    "enterPhone": "Ingrese su teléfono"
+  }
+}

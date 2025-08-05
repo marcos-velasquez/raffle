@@ -2,6 +2,7 @@ import { Component, inject, input, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { OnlyNumberDirective } from '@shared/presenter';
 import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
@@ -14,6 +15,7 @@ import { numberFacade } from '../../../application';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    TranslocoPipe,
     DropzoneComponent,
     OnlyNumberDirective,
     RaffleDetailsComponent,

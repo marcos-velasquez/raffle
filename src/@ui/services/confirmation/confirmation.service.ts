@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
-import { is, object } from '@shared/domain';
+import { Injectable, inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+import { is } from '@shared/domain';
 
 export type ConfirmationProps = { message: string };
 @Injectable({ providedIn: 'root' })
 export class ConfirmationService {
-  private readonly defaultProps: ConfirmationProps = { message: 'Estas seguro de realizar esta acción?' };
+  private readonly transloco = inject(TranslocoService);
 
   public open(props: Partial<ConfirmationProps> = {}) {
-    return is.affirmative(window.confirm(object.merge(this.defaultProps, props).message));
+    const message = props.message || this.transloco.translate('confirmations.default');
+    return is.affirmative(window.confirm(message));
   }
 }
 

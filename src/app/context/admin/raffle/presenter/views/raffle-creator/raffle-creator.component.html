@@ -7,52 +7,52 @@
 <ui-dialog>
   <form [formGroup]="form" class="form-container">
     <header>
-      <h3 class="text-xl font-semibold">Crear Rifa</h3>
+      <h3 class="text-xl font-semibold">{{ 'raffle.create' | transloco }}</h3>
     </header>
 
     <section>
       <div class="label">
-        <span class="label-text">Título</span>
+        <span class="label-text">{{ 'raffle.title' | transloco }}</span>
       </div>
       <input formControlName="title" class="w-full input input-bordered focus:input-primary" />
       @if (form.get('title')?.touched && form.get('title')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese un título válido</div>
+      <div class="validator-hint text-error">{{ 'raffle.titleValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Descripción</span>
+        <span class="label-text">{{ 'raffle.description' | transloco }}</span>
       </div>
       <input formControlName="description" class="w-full input input-bordered focus:input-primary" />
       @if (form.get('description')?.touched && form.get('description')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese una descripción válida</div>
+      <div class="validator-hint text-error">{{ 'raffle.descriptionValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Precio</span>
+        <span class="label-text">{{ 'raffle.price' | transloco }}</span>
       </div>
       <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
       @if (form.get('price')?.touched && form.get('price')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese un precio válido</div>
+      <div class="validator-hint text-error">{{ 'raffle.priceValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Cantidad de números</span>
+        <span class="label-text">{{ 'raffle.quantityNumbers' | transloco }}</span>
       </div>
       <input formControlName="quantityNumbers" type="number" class="w-full input input-bordered focus:input-primary" />
       @if (form.get('quantityNumbers')?.touched && form.get('quantityNumbers')?.invalid) {
-      <div class="validator-hint text-error">Por favor, ingrese una cantidad de números válida</div>
+      <div class="validator-hint text-error">{{ 'raffle.quantityValidation' | transloco }}</div>
       }
     </section>
 
     <section>
       <div class="label">
-        <span class="label-text">Imágenes</span>
+        <span class="label-text">{{ 'raffle.images' | transloco }}</span>
       </div>
       <ui-dropzone (change)="form.patchValue({ images: $event })" />
       @if (form.get('images')?.touched && form.get('images')?.invalid) {

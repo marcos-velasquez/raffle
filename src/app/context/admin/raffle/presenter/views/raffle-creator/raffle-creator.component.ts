@@ -1,6 +1,7 @@
 import { Component, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
 import { DropzoneComponent } from '@ui/components/dropzone';
@@ -9,7 +10,7 @@ import { raffleFacade } from '@context/admin/raffle/application';
 
 @Component({
   selector: 'app-raffle-creator',
-  imports: [CommonModule, ReactiveFormsModule, DialogComponent, DropzoneComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoPipe, DialogComponent, DropzoneComponent],
   templateUrl: './raffle-creator.component.html',
 })
 export class RaffleCreatorComponent {

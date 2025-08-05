@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { BaseComponent } from '@core/base';
 import { is } from '@shared/domain';
 import { authenticationFacade } from '../../../application';
 
 @Component({
   selector: 'login',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, TranslocoPipe],
   templateUrl: './login.component.html',
 })
 export class LoginComponent extends BaseComponent {
