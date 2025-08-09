@@ -1,6 +1,7 @@
 import { Component, ElementRef, inject, input, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { delay, tap } from 'rxjs';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { convert } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
 import { RouletteService } from '@ui/services/roulette';
@@ -14,7 +15,7 @@ import { rouletteFacade } from '@context/admin/roulette/application';
 
 @Component({
   selector: 'app-roulette',
-  imports: [CommonModule, DialogComponent, NumberDetailsComponent],
+  imports: [CommonModule, TranslocoPipe, DialogComponent, NumberDetailsComponent],
   templateUrl: './roulette.component.html',
   styles: [':host { display:block; }'],
 })

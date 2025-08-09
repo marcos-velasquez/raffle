@@ -1,6 +1,6 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
-import { BaseRepository, EitherBuilder } from '@shared/domain';
+import { BaseRepository, EitherBuilder, Exception } from '@shared/domain';
 import { Raffle } from '@context/shared/domain/raffle';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { WinnerSelectedEvent } from '../../domain/roulette.event';
@@ -36,8 +36,8 @@ describe('SelectWinnerUseCase', () => {
   });
 
   it('should complete with error message on failed decline payment', async () => {
-    const error = new Error('decline payment failed');
-    mockRaffleRepository.update?.mockResolvedValue(E.left(error));
+    const exception = new Exception('decline payment failed');
+    mockRaffleRepository.update?.mockResolvedValue(E.left(exception));
 
     const result = await useCase['next'](validInput);
 
@@ -45,8 +45,8 @@ describe('SelectWinnerUseCase', () => {
     expect(validInput.raffle.has.winner).toBe(false);
     expect(mockRaffleRepository.update).toHaveBeenCalledTimes(1);
     expect(mockRaffleRepository.update).toHaveBeenCalledWith(validInput.raffle);
-    expect(bus.publish).toHaveBeenCalledWith({ error });
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith({ exception });
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 
   it('should complete with error with raffle is not purchased', async () => {

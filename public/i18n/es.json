@@ -134,5 +134,9 @@
     "payment-verified": "Estimado/a {{name}}, tu pago para el número ({{number}}) de la rifa \"{{raffleTitle}}\" ha sido verificado. ¡Mucha suerte! Si tienes alguna pregunta, no dudes en contactarnos.",
     "winner-selected-winner": "🎉 ¡Felicidades, {{name}}! 🎉 ¡Eres el ganador de la rifa \"{{raffleTitle}}\"! El número afortunado es el ({{winnerNumber}}). ¡Disfruta tu premio!",
     "winner-selected-participant": "Informamos a todos los participantes de la rifa \"{{raffleTitle}}\" que ya tenemos un ganador. El número afortunado es el ({{winnerNumber}}) y el ganador es {{winnerName}}. ¡Felicitaciones al ganador y gracias por participar!"
+  },
+  "roulette": {
+    "start": "Iniciar",
+    "winner": "Ganador"
   }
 }

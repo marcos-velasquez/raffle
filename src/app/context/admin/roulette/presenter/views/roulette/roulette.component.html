@@ -1,5 +1,7 @@
 <header class="text-center">
-  <button #startBtn (click)="spin(); startBtn.remove()" class="btn btn-soft btn-primary w-45">Iniciar</button>
+  <button #startBtn (click)="spin(); startBtn.remove()" class="btn btn-soft btn-primary w-45">
+    {{ 'roulette.start' | transloco }}
+  </button>
 </header>
 
 <div #rouletteRef></div>
@@ -7,7 +9,7 @@
 <ui-dialog #dialog>
   @if (dialog.is.open) {
   <section class="h-full flex flex-col justify-center items-center gap-3">
-    <h3 class="text-2xl font-semibold">Ganador</h3>
+    <h3 class="text-2xl font-semibold">{{ 'roulette.winner' | transloco }}</h3>
     <app-number-details [number]="raffle().get.winner" />
   </section>
   }
