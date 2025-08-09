@@ -90,6 +90,13 @@
     "active": "Active",
     "finished": "Finished"
   },
+  "numberStates": {
+    "available": "Available",
+    "inPayment": "In payment process",
+    "inVerification": "In verification process",
+    "purchased": "Reserved",
+    "winner": "Winner"
+  },
   "currency": {
     "bs": "Bs."
   },
@@ -106,5 +113,14 @@
     "defaultMessage": "Drag files here or click to upload them",
     "fileTooBig": "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MiB.",
     "maxFilesExceeded": "You can not upload any more files."
+  },
+  "filters": {
+    "searchByNumber": "Search by number",
+    "searchByState": "Search by state",
+    "all": "All",
+    "available": "Available",
+    "inPayment": "In payment process",
+    "inVerification": "In verification process",
+    "purchased": "Reserved"
   }
 }

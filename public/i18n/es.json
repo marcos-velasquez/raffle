@@ -90,6 +90,13 @@
     "active": "Activa",
     "finished": "Finalizada"
   },
+  "numberStates": {
+    "available": "Disponible",
+    "inPayment": "En proceso de pago",
+    "inVerification": "En proceso de verificación",
+    "purchased": "Apartado",
+    "winner": "Ganador"
+  },
   "currency": {
     "bs": "Bs."
   },
@@ -106,5 +113,14 @@
     "defaultMessage": "Arrastra aquí los archivos o haz click para subirlos",
     "fileTooBig": "El archivo pesa ({{filesize}}MB). Peso máximo: {{maxFilesize}}MiB.",
     "maxFilesExceeded": "No puedes subir mas de {{maxFiles}} archivos."
+  },
+  "filters": {
+    "searchByNumber": "Buscar por número",
+    "searchByState": "Buscar por estado",
+    "all": "Todos",
+    "available": "Disponibles",
+    "inPayment": "En proceso de pago",
+    "inVerification": "En proceso de verificación",
+    "purchased": "Apartados"
   }
 }

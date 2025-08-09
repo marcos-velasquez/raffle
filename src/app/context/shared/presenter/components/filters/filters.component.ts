@@ -1,12 +1,13 @@
 import { Component, ContentChild, input, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { Number } from '../../../domain';
 import { NumberStateFilterPipe, NumberValueFilterPipe, FilterState } from '../../pipes';
 
 @Component({
   selector: 'app-filters',
-  imports: [CommonModule, ReactiveFormsModule, NumberValueFilterPipe, NumberStateFilterPipe],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoPipe, NumberValueFilterPipe, NumberStateFilterPipe],
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent {

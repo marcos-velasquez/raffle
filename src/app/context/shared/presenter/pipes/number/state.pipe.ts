@@ -1,4 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { NumberState } from '@context/shared/domain/number';
 
 @Pipe({ name: 'color' })
@@ -16,13 +17,9 @@ export class NumberColorStatePipe implements PipeTransform {
 
 @Pipe({ name: 'text' })
 export class NumberTextStatePipe implements PipeTransform {
+  private readonly transloco = inject(TranslocoService);
+
   transform(state: NumberState): string {
-    return {
-      available: 'Disponible',
-      inPayment: 'En proceso de pago',
-      inVerification: 'En proceso de verificación',
-      purchased: 'Apartado',
-      winner: 'Ganador',
-    }[state];
+    return this.transloco.translate(`numberStates.${state}`);
   }
 }
