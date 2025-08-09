@@ -78,7 +78,9 @@
   },
   "errors": {
     "numberNotAvailable": "The number is not available",
-    "numberMustBeInPayment": "The number must be in payment process"
+    "numberMustBeInPayment": "The number must be in payment process",
+    "raffleRemoveNotAllowed": "Not allowed to remove a raffle with numbers purchased",
+    "raffleEditNotAllowed": "Not allowed to edit a raffle with numbers purchased"
   },
   "status": {
     "available": "Available",
