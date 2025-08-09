@@ -85,9 +85,10 @@
   },
   "errors": {
     "numberNotAvailable": "The number is not available",
-    "numberMustBeInPayment": "The number must be in payment process",
-    "raffleRemoveNotAllowed": "Not allowed to remove a raffle with numbers purchased",
-    "raffleEditNotAllowed": "Not allowed to edit a raffle with numbers purchased"
+    "payerNotFound": "Payer not found",
+    "raffleRemoveNotAllowed": "Removing a raffle with purchased numbers is not allowed",
+    "raffleEditNotAllowed": "Editing a raffle with purchased numbers is not allowed",
+    "unauthorized": "You do not have permission to perform this action."
   },
   "status": {
     "available": "Available",

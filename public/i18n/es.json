@@ -85,9 +85,10 @@
   },
   "errors": {
     "numberNotAvailable": "El número no está disponible",
-    "numberMustBeInPayment": "El número debe estar en proceso de pago",
+    "payerNotFound": "Pagador no encontrado",
     "raffleRemoveNotAllowed": "No se permite eliminar una rifa con números comprados",
-    "raffleEditNotAllowed": "No se permite editar una rifa con números comprados"
+    "raffleEditNotAllowed": "No se permite editar una rifa con números comprados",
+    "unauthorized": "No posee permisos para realizar esta acción."
   },
   "status": {
     "available": "Disponible",
