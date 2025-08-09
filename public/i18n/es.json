@@ -100,5 +100,11 @@
     "enterQuantity": "Ingrese la cantidad",
     "enterName": "Ingrese su nombre completo",
     "enterPhone": "Ingrese su teléfono"
+  },
+  "dropzone": {
+    "removeFile": "Eliminar",
+    "defaultMessage": "Arrastra aquí los archivos o haz click para subirlos",
+    "fileTooBig": "El archivo pesa ({{filesize}}MB). Peso máximo: {{maxFilesize}}MiB.",
+    "maxFilesExceeded": "No puedes subir mas de {{maxFiles}} archivos."
   }
 }

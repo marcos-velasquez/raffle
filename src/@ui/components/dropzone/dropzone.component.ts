@@ -1,5 +1,6 @@
-import { Component, effect, ElementRef, input, output, signal, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, output, signal, viewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslocoService } from '@jsverse/transloco';
 import { signalList } from '@shared/domain/signal';
 import { $url, when } from '@shared/domain';
 import Dropzone from 'dropzone';
@@ -18,6 +19,7 @@ export class DropzoneComponent {
   public readonly defaultUrls = input<string[]>([]);
 
   public readonly files = signalList(signal<File[]>([]));
+  private readonly transloco = inject(TranslocoService);
 
   constructor() {
     effect(() => this.change.emit(this.files.values));
@@ -27,10 +29,10 @@ export class DropzoneComponent {
     const dropzone = new Dropzone(this.dropzoneElement().nativeElement, {
       url: '/',
       addRemoveLinks: true,
-      dictRemoveFile: 'Eliminar',
-      dictDefaultMessage: 'Arrastra aquí los archivos o haz click para subirlos',
-      dictFileTooBig: 'El archivo pesa ({{filesize}}MB). Peso máximo: {{maxFilesize}}MiB.',
-      dictMaxFilesExceeded: 'No puedes subir mas de {{maxFiles}} archivos.',
+      dictRemoveFile: this.transloco.translate('dropzone.removeFile'),
+      dictDefaultMessage: this.transloco.translate('dropzone.defaultMessage'),
+      dictFileTooBig: this.transloco.translate('dropzone.fileTooBig'),
+      dictMaxFilesExceeded: this.transloco.translate('dropzone.maxFilesExceeded'),
       maxFilesize: this.maxFilesize(),
       maxFiles: this.maxFiles(),
       acceptedFiles: this.acceptedFiles(),

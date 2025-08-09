@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import confetti from 'canvas-confetti';
 import { convert, random } from '@shared/domain';
 
+export type ConfettiProps = confetti.Options & { duration: number; interval: number };
 @Injectable({ providedIn: 'root' })
 export class ConfettiService {
   private readonly defaults: Partial<ConfettiProps> = {
@@ -38,9 +39,4 @@ export class ConfettiService {
       });
     }, options.interval);
   }
-}
-
-interface ConfettiProps extends confetti.Options {
-  duration: number;
-  interval: number;
 }

@@ -100,5 +100,11 @@
     "enterQuantity": "Enter quantity",
     "enterName": "Enter your full name",
     "enterPhone": "Enter your phone number"
+  },
+  "dropzone": {
+    "removeFile": "Remove",
+    "defaultMessage": "Drag files here or click to upload them",
+    "fileTooBig": "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MiB.",
+    "maxFilesExceeded": "You can not upload any more files."
   }
 }
