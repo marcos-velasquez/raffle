@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
+import { Exception } from '@shared/domain';
 import { toast } from 'ngx-sonner';
 
 @Injectable({ providedIn: 'root' })
@@ -12,15 +13,17 @@ export class SonnerToasterService {
     toast.success(this.translateService.translate(message));
   }
 
-  public error(message: string) {
-    toast.error(this.translateService.translate(message));
+  public error(exception: Exception) {
+    toast.error(this.translateService.translate(exception.message, exception.params));
   }
 
   public wait(message: string) {
-    this.waitId = toast.loading(this.translateService.translate(message), { duration: Number.POSITIVE_INFINITY });
+    this.waitId = toast.loading(this.translateService.translate(message), {
+      duration: Number.POSITIVE_INFINITY,
+    });
   }
 
-  public dismissWait() {
+  public disable() {
     toast.dismiss(this.waitId);
   }
 }

@@ -1,3 +1,4 @@
+import { Exception } from '@shared/domain';
 import { DomainEvent } from '../base.event';
 
 export class RequestStartedEvent extends DomainEvent {
@@ -13,7 +14,7 @@ export class RequestSuccessfulEvent extends DomainEvent {
 }
 
 export class RequestFailedEvent extends DomainEvent {
-  constructor(public readonly error: Error) {
+  constructor(public readonly exception: Exception) {
     super();
   }
 }

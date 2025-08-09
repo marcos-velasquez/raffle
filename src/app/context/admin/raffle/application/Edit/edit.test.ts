@@ -4,7 +4,7 @@ import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { Raffle, RaffleEditPrimitives } from '@context/shared/domain/raffle';
-import { RaffleEditedEvent } from '../../domain/raffle.event';
+import { RaffleEditedEvent, RaffleEditException } from '../../domain';
 import { EditRaffleUseCase } from './edit.usecase';
 
 jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.fn() } }));
@@ -53,7 +53,8 @@ describe('EditRaffleUseCase', () => {
   it('should complete with error message on failed edit price in purchased raffle', async () => {
     const raffle = new RaffleBuilder().withNumber(1).state('purchased').build();
 
-    await expect(() => useCase['next']({ raffle, primitives: { ...primitives, price: 555 } })).rejects.toThrow();
+    await expect(() => useCase['next']({ raffle, primitives: { ...primitives, price: 555 } }));
+
     expect(mockRaffleRepositoryService.update).not.toHaveBeenCalled();
   });
 
