@@ -4,7 +4,8 @@
     "email": "Correo electrónico",
     "password": "Contraseña",
     "emailValidation": "Por favor, ingrese un correo electrónico válido",
-    "passwordValidation": "Por favor, ingrese una contraseña válida"
+    "passwordValidation": "Por favor, ingrese una contraseña válida",
+    "logout": "Cerrar sesión"
   },
   "navigation": {
     "raffles": "Rifas",

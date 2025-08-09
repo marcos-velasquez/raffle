@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Wheel } from 'spin-wheel';
 import { convert, random } from '@shared/domain';
-import { DEFAULT_ROULETTE_PROPS } from './roulette-props';
+import { defaultProps } from './roulette-props';
 
 export type RouletteProps = { el: HTMLElement; labels: string[] };
 
@@ -9,7 +9,7 @@ export class Roulette {
   private readonly wheel: Wheel;
 
   constructor(props: RouletteProps) {
-    this.wheel = new Wheel(props.el, { ...DEFAULT_ROULETTE_PROPS, items: props.labels.map((label) => ({ label })) });
+    this.wheel = new Wheel(props.el, { ...defaultProps, items: props.labels.map((label) => ({ label })) });
     const image = new Image();
     image.src = 'images/roulette-overlay.svg';
     image.onload = () => {

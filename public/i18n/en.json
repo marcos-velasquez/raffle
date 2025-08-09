@@ -4,7 +4,8 @@
     "email": "Email",
     "password": "Password",
     "emailValidation": "Please enter a valid email address",
-    "passwordValidation": "Please enter a valid password"
+    "passwordValidation": "Please enter a valid password",
+    "logout": "Logout"
   },
   "navigation": {
     "raffles": "Raffles",

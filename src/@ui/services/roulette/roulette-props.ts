@@ -1,4 +1,4 @@
-export const DEFAULT_ROULETTE_PROPS = {
+export const defaultProps = {
   radius: 0.84,
   itemLabelRadius: 0.93,
   itemLabelRadiusMax: 0.35,
