@@ -1,10 +1,10 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
-import { BaseRepository } from '@shared/domain';
+import { BaseRepository, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { Raffle, RaffleEditPrimitives } from '@context/shared/domain/raffle';
-import { RaffleEditedEvent, RaffleEditException } from '../../domain';
+import { RaffleEditedEvent } from '../../domain';
 import { EditRaffleUseCase } from './edit.usecase';
 
 jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.fn() } }));
@@ -36,8 +36,8 @@ describe('EditRaffleUseCase', () => {
 
   it('should complete with error message on failed edit', async () => {
     const raffle = new RaffleBuilder().build();
-    const error = new Error('Edit raffle failed');
-    mockRaffleRepositoryService.update?.mockResolvedValue(E.left(error));
+    const exception = new Exception('Edit raffle failed');
+    mockRaffleRepositoryService.update?.mockResolvedValue(E.left(exception));
 
     const result = await useCase['next']({ raffle, primitives });
 
@@ -46,8 +46,8 @@ describe('EditRaffleUseCase', () => {
       expect.objectContaining({ ...Raffle.from({ ...raffle.toPrimitives(), ...primitives }), id: expect.anything() })
     );
     expect(raffle.toPrimitives()).not.toEqual(expect.objectContaining({ ...primitives }));
-    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ error: error }));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 
   it('should complete with error message on failed edit price in purchased raffle', async () => {

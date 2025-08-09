@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RaffleEditorComponent as ImplementationRaffleEditorComponent } from '@context/admin/raffle/presenter/views/raffle-editor/raffle-editor.component';
 import { Raffle } from '@context/shared/domain/raffle';
+import { RaffleEditorComponent as ImplementationRaffleEditorComponent } from '../../../../raffle-editor/raffle-editor.component';
 
 @Component({
   selector: 'app-raffle-editor-tool',

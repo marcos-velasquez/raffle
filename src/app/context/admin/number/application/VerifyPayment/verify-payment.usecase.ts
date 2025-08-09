@@ -9,7 +9,9 @@ export type VerifyPaymentUseCaseProps = { raffle: Raffle; value: number };
 
 export class VerifyPaymentUseCase extends AdminUseCase<VerifyPaymentUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(progressBuilder().withStart('progress.verifyingPayment').withComplete('progress.paymentVerifiedSuccess').build());
+    super(
+      progressBuilder().withStart('progress.verifyingPayment').withComplete('progress.paymentVerifiedSuccess').build()
+    );
   }
 
   protected async next({ raffle, value }: VerifyPaymentUseCaseProps): Promise<E.Either<void, void>> {

@@ -14,15 +14,20 @@
   },
   "raffle": {
     "create": "Crear Rifa",
+    "edit": "Editar Rifa",
     "title": "Título",
     "description": "Descripción",
     "price": "Precio",
     "quantityNumbers": "Cantidad de números",
+    "images": "Imágenes",
     "titleValidation": "Por favor, ingrese un título válido",
     "descriptionValidation": "Por favor, ingrese una descripción válida",
     "priceValidation": "Por favor, ingrese un precio válido",
     "quantityValidation": "Por favor, ingrese una cantidad de números válida",
-    "selectWinner": "Seleccionar ganador"
+    "imagesValidation": "Debe ingresar al menos una imagen",
+    "selectWinner": "Seleccionar ganador",
+    "cancel": "Cancelar",
+    "editAction": "Editar"
   },
   "number": {
     "buy": "Comprar Número",

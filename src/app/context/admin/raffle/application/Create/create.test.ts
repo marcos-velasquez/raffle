@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
-import { BaseRepository } from '@shared/domain';
+import { BaseRepository, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { Raffle } from '@context/shared/domain/raffle';
 import { RaffleCreatedEvent } from '../../domain/raffle.event';
@@ -36,8 +36,8 @@ describe('CreateRaffleUseCase', () => {
   it('should complete with error message on failed create', async () => {
     const raffle = new RaffleBuilder().build();
     const primitives = { ...raffle.toPrimitives(), quantityNumbers: raffle.numbers.length };
-    const error = new Error('Create raffle failed');
-    mockRaffleRepositoryService.save?.mockResolvedValue(E.left(error));
+    const exception = new Exception('Create raffle failed');
+    mockRaffleRepositoryService.save?.mockResolvedValue(E.left(exception));
 
     const result = await useCase['next'](primitives);
 
@@ -45,7 +45,7 @@ describe('CreateRaffleUseCase', () => {
     expect(mockRaffleRepositoryService.save).toHaveBeenCalledWith(
       expect.objectContaining({ ...Raffle.create(primitives), id: expect.anything() })
     );
-    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ error: error }));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 });

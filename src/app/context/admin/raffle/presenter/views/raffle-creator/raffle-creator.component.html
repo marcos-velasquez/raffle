@@ -56,13 +56,13 @@
       </div>
       <ui-dropzone (change)="form.patchValue({ images: $event })" />
       @if (form.get('images')?.touched && form.get('images')?.invalid) {
-      <div class="validator-hint text-error">Debe ingresar al menos una imagen</div>
+      <div class="validator-hint text-error">{{ 'raffle.imagesValidation' | transloco }}</div>
       }
     </section>
 
     <footer class="flex gap-2 justify-end">
-      <button (click)="close()" class="btn btn-ghost">Cancelar</button>
-      <button (click)="create()" class="btn btn-soft btn-primary">Crear</button>
+      <button (click)="close()" class="btn btn-ghost">{{ 'raffle.cancel' | transloco }}</button>
+      <button (click)="create()" class="btn btn-soft btn-primary">{{ 'raffle.create' | transloco }}</button>
     </footer>
   </form>
 </ui-dialog>

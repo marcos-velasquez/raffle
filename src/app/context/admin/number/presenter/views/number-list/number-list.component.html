@@ -2,7 +2,9 @@
   <header>
     <app-raffle-details [raffle]="raffle()" />
     @if (raffle().is.purchased) {
-    <button [routerLink]="['roulette']" class="btn btn-primary btn-wide block mx-auto mt-4">{{ 'raffle.selectWinner' | transloco }}</button>
+    <button [routerLink]="['roulette']" class="btn btn-primary btn-wide block mx-auto mt-4">
+      {{ 'raffle.selectWinner' | transloco }}
+    </button>
     }
   </header>
 

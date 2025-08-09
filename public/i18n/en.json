@@ -14,15 +14,20 @@
   },
   "raffle": {
     "create": "Create Raffle",
+    "edit": "Edit Raffle",
     "title": "Title",
     "description": "Description",
     "price": "Price",
     "quantityNumbers": "Number of tickets",
+    "images": "Images",
     "titleValidation": "Please enter a valid title",
     "descriptionValidation": "Please enter a valid description",
     "priceValidation": "Please enter a valid price",
     "quantityValidation": "Please enter a valid number of tickets",
-    "selectWinner": "Select Winner"
+    "imagesValidation": "You must enter at least one image",
+    "selectWinner": "Select winner",
+    "cancel": "Cancel",
+    "editAction": "Edit"
   },
   "number": {
     "buy": "Buy Number",

@@ -2,7 +2,7 @@ import * as E from '@sweet-monads/either';
 import { progressBuilder } from '@shared/application';
 import { BaseRepository, EitherBuilder } from '@shared/domain';
 import { Raffle, RaffleEditPrimitives } from '@context/shared/domain/raffle';
-import { AdminUseCase } from '../../../shared/application/admin.usecase';
+import { AdminUseCase } from '../../../shared/application';
 import { RaffleEditedEvent, RaffleEditException } from '../../domain';
 
 export type EditRaffleUseCaseProps = { raffle: Raffle; primitives: RaffleEditPrimitives };

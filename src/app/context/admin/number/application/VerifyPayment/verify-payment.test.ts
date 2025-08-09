@@ -1,6 +1,6 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
-import { BaseRepository, EitherBuilder } from '@shared/domain';
+import { BaseRepository, EitherBuilder, Exception } from '@shared/domain';
 import { Raffle } from '@context/shared/domain/raffle';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { PaymentVerifiedEvent } from '../../domain/number.event';
@@ -36,8 +36,8 @@ describe('VerifyPaymentUseCase', () => {
   });
 
   it('should complete with error message on failed verify payment', async () => {
-    const error = new Error('verify payment failed');
-    mockRaffleRepository.update?.mockResolvedValue(E.left(error));
+    const exception = new Exception('verify payment failed');
+    mockRaffleRepository.update?.mockResolvedValue(E.left(exception));
 
     const result = await useCase['next'](validInput);
 
@@ -45,8 +45,8 @@ describe('VerifyPaymentUseCase', () => {
     expect(validInput.raffle.get.number(1).has.payer).toBe(true);
     expect(mockRaffleRepository.update).toHaveBeenCalledTimes(1);
     expect(mockRaffleRepository.update).toHaveBeenCalledWith(validInput.raffle);
-    expect(bus.publish).toHaveBeenCalledWith({ error });
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith({ exception });
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 
   it('should complete with error with not found number verify payment', async () => {
