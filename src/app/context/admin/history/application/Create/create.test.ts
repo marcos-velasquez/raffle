@@ -1,5 +1,5 @@
 import * as E from '@sweet-monads/either';
-import { EitherBuilder, BaseRepository, bus } from '@shared/domain';
+import { EitherBuilder, BaseRepository, bus, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { History } from '@context/admin/history/domain/history';
 import { HistoryCreatedEvent } from '../../domain/history.event';
@@ -38,9 +38,9 @@ describe('CreateHistoryUseCase', () => {
     const raffle = new RaffleBuilder().withNumber(1).state('winner').build();
     const file = new File([new Blob()], 'text.webm', { type: 'video/webm' });
     const primitives = { file, raffle: raffle.toPrimitives() };
-    const error = new Error('Create History failed');
+    const exception = new Exception('Create History failed');
 
-    mockHistoryRepositoryService.save?.mockResolvedValue(E.left(error));
+    mockHistoryRepositoryService.save?.mockResolvedValue(E.left(exception));
 
     const result = await useCase['next'](primitives);
 
@@ -48,7 +48,7 @@ describe('CreateHistoryUseCase', () => {
     expect(mockHistoryRepositoryService.save).toHaveBeenCalledWith(
       expect.objectContaining({ ...History.create(primitives), id: expect.anything() })
     );
-    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ error: error }));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 });
