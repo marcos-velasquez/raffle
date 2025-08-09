@@ -19,7 +19,7 @@ export class Roulette {
 
   public spin(): Promise<number> {
     return new Promise((resolve) => {
-      const winner = random.from(this.wheel.items) as number;
+      const winner = random.from(this.wheel.items.map((_, index) => index)) as number;
       const revolution = random.int(7, 15);
       const duration = convert.seg(10).to.ms();
       this.wheel.onRest = () => resolve(winner);
