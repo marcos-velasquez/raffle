@@ -42,7 +42,8 @@
     "create": "Crear",
     "edit": "Editar",
     "remove": "Eliminar",
-    "save": "Guardar"
+    "save": "Guardar",
+    "accept": "Aceptar"
   },
   "confirmations": {
     "default": "¿Estás seguro de realizar esta acción?",

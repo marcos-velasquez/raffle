@@ -5,4 +5,8 @@ export class Exception extends Error {
     super(message);
     this.params = params;
   }
+
+  public static from(error: Error) {
+    return new Exception(error.message);
+  }
 }

@@ -26,10 +26,9 @@ export class LoginComponent extends BaseComponent {
   public login() {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
-      .mapRight(() => {
-        authenticationFacade
-          .login(this.form.getRawValue())
-          .then((result) => result.mapRight(() => this.router.navigate(['/admin/raffle'])));
+      .mapRight(async () => {
+        const result = await authenticationFacade.login(this.form.getRawValue());
+        result.mapRight(() => this.router.navigate(['/admin/raffle']));
       });
   }
 }

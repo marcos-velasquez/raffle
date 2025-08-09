@@ -1,6 +1,6 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
-import { EitherBuilder } from '@shared/domain/either/either.builder';
+import { EitherBuilder, Exception } from '@shared/domain';
 import { User, AuthenticationService, UserLoggedIn } from '../../domain';
 import { LoginUseCase } from './Login.usecase';
 
@@ -29,14 +29,14 @@ describe('LoginUseCase', () => {
   });
 
   it('should complete with error message on failed login', async () => {
-    const error = new Error('Login failed');
-    mockAuthenticationService.login?.mockResolvedValue(E.left(error));
+    const exception = new Exception('Login failed');
+    mockAuthenticationService.login?.mockResolvedValue(E.left(exception));
 
     const result = await useCase.execute(validInput);
 
     expect(mockAuthenticationService.login).toHaveBeenCalledTimes(1);
     expect(mockAuthenticationService.login).toHaveBeenCalledWith(validInput);
-    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ error: error }));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 });

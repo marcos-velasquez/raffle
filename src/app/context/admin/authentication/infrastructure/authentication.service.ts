@@ -1,6 +1,6 @@
 import * as E from '@sweet-monads/either';
 import { pb } from '@shared/infrastructure';
-import { bus, EitherBuilder } from '@shared/domain';
+import { bus, EitherBuilder, Exception } from '@shared/domain';
 import { Credential, User, AuthenticationService, UserLoggedIn, UserLoggedOut } from '../domain';
 
 export class PocketbaseAuthenticationService implements AuthenticationService {
@@ -12,20 +12,20 @@ export class PocketbaseAuthenticationService implements AuthenticationService {
     }
   }
 
-  public async login(credential: Credential): Promise<E.Either<Error, User>> {
+  public async login(credential: Credential): Promise<E.Either<Exception, User>> {
     try {
       const result = await pb.collection('_superusers').authWithPassword(credential.email, credential.password);
       return E.right(User.from({ email: result.record.email, id: result.record.id }));
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(Exception.from(error));
     }
   }
 
-  public async logout(): Promise<E.Either<Error, void>> {
+  public async logout(): Promise<E.Either<Exception, void>> {
     try {
       return E.right(pb.authStore.clear());
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(Exception.from(error));
     }
   }
 }

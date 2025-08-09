@@ -42,7 +42,8 @@
     "create": "Create",
     "edit": "Edit",
     "remove": "Remove",
-    "save": "Save"
+    "save": "Save",
+    "accept": "Accept"
   },
   "confirmations": {
     "default": "Are you sure you want to perform this action?",

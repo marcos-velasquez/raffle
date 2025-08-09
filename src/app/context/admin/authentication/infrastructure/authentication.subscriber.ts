@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BaseSubscriber } from '@shared/infrastructure';
-import { UserLoggedIn, UserLoggedOut } from '../domain/authentication.event';
+import { UserLoggedIn, UserLoggedOut } from '../domain';
 import { UserStore } from './user.store';
 
 @Injectable({ providedIn: 'root' })

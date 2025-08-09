@@ -1,8 +1,8 @@
 <section class="w-full h-screen bg-base-200 flex items-center px-4 py-8 sm:p-12 max-w-screen-sm mx-auto">
   <div class="mx-auto w-full sm:mx-0">
-    <div class="w-12">
+    <header class="w-12">
       <img src="images/logo.svg" alt="logo" />
-    </div>
+    </header>
 
     <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight">{{ 'auth.login' | transloco }}</div>
 
@@ -11,7 +11,9 @@
         <div class="label">
           <span class="label-text">{{ 'auth.email' | transloco }}</span>
         </div>
+
         <input [formControlName]="'email'" class="w-full input input-bordered focus:input-primary" />
+
         @if (form.get('email')?.touched && form.get('email')?.invalid) {
         <div class="validator-hint text-error">{{ 'auth.emailValidation' | transloco }}</div>
         }
@@ -40,7 +42,7 @@
         </button>
 
         @if (form.get('password')?.touched && form.get('password')?.invalid) {
-        <div class="validator-hint text-error">Por favor, ingrese una contraseña válida</div>
+        <div class="validator-hint text-error">{{ 'auth.passwordValidation' | transloco }}</div>
         }
       </section>
 
@@ -48,7 +50,7 @@
         @if (loaderStore.isEnable()) {
         <span class="loading loading-spinner loading-sm"></span>
         } @else {
-        <span> Aceptar </span>
+        <span>{{ 'actions.accept' | transloco }}</span>
         }
       </button>
     </form>

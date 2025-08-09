@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { UseCase } from '@shared/application';
 import { EitherBuilder } from '@shared/domain';
-import { AuthenticationService, UserLoggedOut } from '../../../authentication/domain';
+import { AuthenticationService, UserLoggedOut } from '../../domain';
 
 export class LogoutUseCase extends UseCase<void, Promise<E.Either<void, void>>> {
   constructor(private readonly authenticationService: AuthenticationService) {
