@@ -1,5 +1,5 @@
 import * as E from '@sweet-monads/either';
-import { bus } from '@shared/domain';
+import { bus, Exception } from '@shared/domain';
 import { UseCaseProgress } from './models';
 
 export abstract class UseCase<T, K> {
@@ -14,6 +14,10 @@ export abstract class UseCase<T, K> {
   protected complete(result: E.Either<Error, unknown>): void {
     result.mapLeft((error) => UseCaseProgress.completeFor(error).complete());
     result.mapRight(() => this.progress.complete());
+  }
+
+  protected throw(exception: Exception): E.Either<void, void> {
+    return E.left(this.complete(E.left(exception)));
   }
 
   abstract execute(arg: T): K;

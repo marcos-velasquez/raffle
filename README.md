@@ -45,7 +45,6 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Mostrar el listado de números de una rifa con su respectivo estado**
   - **Actualizar en tiempo real el estado de los números**
   - **Permitir filtrar por estado o valor**
-  - **Permitir consultar la información de un número en verificación o comprado**
 
 - **Proceso de Compra**:
 

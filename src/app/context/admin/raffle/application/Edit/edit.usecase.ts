@@ -1,9 +1,9 @@
 import * as E from '@sweet-monads/either';
 import { progressBuilder } from '@shared/application';
-import { assert, BaseRepository, EitherBuilder, not, or } from '@shared/domain';
+import { BaseRepository, EitherBuilder } from '@shared/domain';
 import { Raffle, RaffleEditPrimitives } from '@context/shared/domain/raffle';
 import { AdminUseCase } from '../../../shared/application/admin.usecase';
-import { RaffleEditedEvent } from '../../domain/raffle.event';
+import { RaffleEditedEvent, RaffleEditException } from '../../domain';
 
 export type EditRaffleUseCaseProps = { raffle: Raffle; primitives: RaffleEditPrimitives };
 
@@ -13,8 +13,8 @@ export class EditRaffleUseCase extends AdminUseCase<EditRaffleUseCaseProps, Prom
   }
 
   protected async next({ raffle, primitives }: EditRaffleUseCaseProps): Promise<E.Either<void, void>> {
-    const isPriceEqual = raffle.is.equal.price(primitives.price);
-    assert(or(isPriceEqual, not(raffle.has.purchased)), 'Not allowed to edit price of purchased raffle');
+    const isPriceDifferent = !raffle.is.equal.price(primitives.price);
+    if (isPriceDifferent && raffle.has.purchased) return this.throw(new RaffleEditException());
 
     this.start();
     const result = await this.raffleRepository.update(Raffle.from({ ...raffle.toPrimitives(), ...primitives }));

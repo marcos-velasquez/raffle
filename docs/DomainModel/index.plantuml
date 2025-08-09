@@ -19,7 +19,7 @@ class Raffle {
     images
     price
 }
-Raffle o-down-> "2..n" Number
+Raffle *-down-> "2..n" Number
 
 class Number {
     value
