@@ -1,2 +1,2 @@
-export * from './templates';
 export * from './whatsapp.sender';
+export * from './template';

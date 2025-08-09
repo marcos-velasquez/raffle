@@ -123,5 +123,11 @@
     "inPayment": "In payment process",
     "inVerification": "In verification process",
     "purchased": "Reserved"
+  },
+  "templates": {
+    "payment-declined": "Dear {{name}}, we inform you that the payment for the purchase of number ({{number}}) for the raffle \"{{raffleTitle}}\" has been declined. If you believe this is an error, we invite you to contact our support team as soon as possible.",
+    "payment-verified": "Dear {{name}}, your payment for number ({{number}}) of the raffle \"{{raffleTitle}}\" has been verified. Good luck! If you have any questions, don't hesitate to contact us.",
+    "winner-selected-winner": "🎉 Congratulations, {{name}}! 🎉 You are the winner of the raffle \"{{raffleTitle}}\"! The lucky number is ({{winnerNumber}}). Enjoy your prize!",
+    "winner-selected-participant": "We inform all participants of the raffle \"{{raffleTitle}}\" that we already have a winner. The lucky number is ({{winnerNumber}}) and the winner is {{winnerName}}. Congratulations to the winner and thank you for participating!"
   }
 }
