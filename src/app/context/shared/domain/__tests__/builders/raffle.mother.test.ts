@@ -1,13 +1,6 @@
 import { RaffleBuilder } from './raffle.builder.test';
 import { RafflePrimitives } from '../../raffle';
 
-// Test dummy para Jest
-describe('RaffleMother util', () => {
-  it('dummy', () => {
-    expect(true).toBe(true);
-  });
-});
-
 export class RaffleMother {
   static completed(): RafflePrimitives {
     return new RaffleBuilder()
@@ -53,3 +46,9 @@ export class RaffleMother {
     return new RaffleBuilder().withNumbers().count(count).build().toPrimitives();
   }
 }
+
+describe('RaffleMother util', () => {
+  it('dummy', () => {
+    expect(true).toBe(true);
+  });
+});

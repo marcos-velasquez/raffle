@@ -90,8 +90,8 @@ export class Number {
     return number;
   }
 
-  public static create(primitives: Pick<NumberPrimitives, 'value'>) {
-    return new Number(primitives.value);
+  public static create({ value }: Pick<NumberPrimitives, 'value'>) {
+    return new Number(value);
   }
 
   public static many(quantity: number) {

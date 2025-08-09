@@ -1,12 +1,5 @@
 import { PayerPrimitives } from '../../payer';
 
-// Test dummy para Jest
-describe('PayerBuilder util', () => {
-  it('dummy', () => {
-    expect(true).toBe(true);
-  });
-});
-
 export class PayerBuilder {
   private primitives: PayerPrimitives = {
     name: 'Test Name',
@@ -37,3 +30,9 @@ export class PayerBuilder {
     return new PayerBuilder().build();
   }
 }
+
+describe('PayerBuilder util', () => {
+  it('dummy', () => {
+    expect(true).toBe(true);
+  });
+});
