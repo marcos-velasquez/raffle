@@ -60,6 +60,26 @@
     "paymentDeclined": "Pago rechazado",
     "winnerSelected": "Ganador seleccionado exitosamente"
   },
+  "progress": {
+    "creatingRaffle": "Creando rifa...",
+    "raffleCreatedSuccess": "Rifa creada con éxito",
+    "updatingRaffle": "Actualizando rifa...",
+    "raffleUpdatedSuccess": "Rifa actualizada con éxito",
+    "removingRaffle": "Eliminando rifa...",
+    "raffleRemovedSuccess": "Rifa eliminada con éxito",
+    "validatingCredentials": "Validando credenciales...",
+    "loginSuccess": "Inicio de sesión exitoso",
+    "buyingNumber": "Comprando número...",
+    "purchaseWillBeVerified": "Su compra será verificada por un administrador.",
+    "decliningPayment": "Declinando pago...",
+    "paymentDeclinedSuccess": "Pago declinado con éxito",
+    "verifyingPayment": "Verificando pago...",
+    "paymentVerifiedSuccess": "Pago verificado con éxito"
+  },
+  "errors": {
+    "numberNotAvailable": "El número no está disponible",
+    "numberMustBeInPayment": "El número debe estar en proceso de pago"
+  },
   "status": {
     "available": "Disponible",
     "reserved": "Reservado",

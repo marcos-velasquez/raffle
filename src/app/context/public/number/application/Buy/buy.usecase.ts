@@ -17,8 +17,8 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
     super(
       progressBuilder()
-        .withStart('Comprando número...')
-        .withComplete('Su compra será verificada por un administrador.')
+        .withStart('progress.buyingNumber')
+        .withComplete('progress.purchaseWillBeVerified')
         .build()
     );
   }
@@ -27,12 +27,12 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
     const number = raffle.get.number(value);
     return {
       start: () => {
-        assert(number.is.available, 'El número no está disponible');
+        assert(number.is.available, 'errors.numberNotAvailable');
 
         when(number.switch.inPayment()).map(() => this.raffleRepository.update(raffle));
       },
       complete: async (payer: PayerPrimitives) => {
-        assert(number.is.inPayment, 'El número debe estar en proceso de pago');
+        assert(number.is.inPayment, 'errors.numberMustBeInPayment');
 
         this.start();
         const result = await transaction(raffle).run(() => {
@@ -45,7 +45,7 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
         return new EitherBuilder().fromEitherToVoid(result).build();
       },
       cancel: () => {
-        assert(number.is.inPayment, 'El número debe estar en proceso de pago');
+        assert(number.is.inPayment, 'errors.numberMustBeInPayment');
 
         when(number.switch.available()).map(() => this.raffleRepository.update(raffle));
       },

@@ -9,7 +9,7 @@ export type DeclinePaymentUseCaseProps = { raffle: Raffle; value: number };
 
 export class DeclinePaymentUseCase extends AdminUseCase<DeclinePaymentUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(progressBuilder().withStart('Declinando pago...').withComplete('Pago declinado con éxito').build());
+    super(progressBuilder().withStart('progress.decliningPayment').withComplete('progress.paymentDeclinedSuccess').build());
   }
 
   protected async next({ raffle, value }: DeclinePaymentUseCaseProps): Promise<E.Either<void, void>> {

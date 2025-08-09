@@ -9,7 +9,7 @@ export type RemoveRaffleUseCaseProps = Raffle;
 
 export class RemoveRaffleUseCase extends AdminUseCase<RemoveRaffleUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(progressBuilder().withStart('Eliminando rifa...').withComplete('Rifa eliminada con éxito').build());
+    super(progressBuilder().withStart('progress.removingRaffle').withComplete('progress.raffleRemovedSuccess').build());
   }
 
   protected async next(raffle: RemoveRaffleUseCaseProps): Promise<E.Either<void, void>> {

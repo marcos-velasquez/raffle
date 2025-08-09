@@ -9,7 +9,7 @@ export type CreateRaffleUseCaseProps = RaffleCreatePrimitives;
 
 export class CreateRaffleUseCase extends AdminUseCase<CreateRaffleUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(progressBuilder().withStart('Creando rifa...').withComplete('Rifa creada con éxito').build());
+    super(progressBuilder().withStart('progress.creatingRaffle').withComplete('progress.raffleCreatedSuccess').build());
   }
 
   protected async next(props: CreateRaffleUseCaseProps): Promise<E.Either<void, void>> {

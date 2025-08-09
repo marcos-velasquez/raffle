@@ -9,7 +9,7 @@ export type EditRaffleUseCaseProps = { raffle: Raffle; primitives: RaffleEditPri
 
 export class EditRaffleUseCase extends AdminUseCase<EditRaffleUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(progressBuilder().withStart('Actualizando rifa...').withComplete('Rifa actualizada con éxito').build());
+    super(progressBuilder().withStart('progress.updatingRaffle').withComplete('progress.raffleUpdatedSuccess').build());
   }
 
   protected async next({ raffle, primitives }: EditRaffleUseCaseProps): Promise<E.Either<void, void>> {

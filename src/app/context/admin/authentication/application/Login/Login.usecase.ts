@@ -7,7 +7,7 @@ export type LoginProps = { email: string; password: string };
 
 export class LoginUseCase extends UseCase<LoginProps, Promise<E.Either<void, void>>> {
   constructor(private readonly authenticationService: AuthenticationService) {
-    super(progressBuilder().withStart('Validando credenciales...').withComplete('Inicio de sesión exitoso').build());
+    super(progressBuilder().withStart('progress.validatingCredentials').withComplete('progress.loginSuccess').build());
   }
 
   public async execute(props: LoginProps): Promise<E.Either<void, void>> {

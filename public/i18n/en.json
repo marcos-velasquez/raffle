@@ -60,6 +60,26 @@
     "paymentDeclined": "Payment declined",
     "winnerSelected": "Winner selected successfully"
   },
+  "progress": {
+    "creatingRaffle": "Creating raffle...",
+    "raffleCreatedSuccess": "Raffle created successfully",
+    "updatingRaffle": "Updating raffle...",
+    "raffleUpdatedSuccess": "Raffle updated successfully",
+    "removingRaffle": "Removing raffle...",
+    "raffleRemovedSuccess": "Raffle removed successfully",
+    "validatingCredentials": "Validating credentials...",
+    "loginSuccess": "Login successful",
+    "buyingNumber": "Buying number...",
+    "purchaseWillBeVerified": "Your purchase will be verified by an administrator.",
+    "decliningPayment": "Declining payment...",
+    "paymentDeclinedSuccess": "Payment declined successfully",
+    "verifyingPayment": "Verifying payment...",
+    "paymentVerifiedSuccess": "Payment verified successfully"
+  },
+  "errors": {
+    "numberNotAvailable": "The number is not available",
+    "numberMustBeInPayment": "The number must be in payment process"
+  },
   "status": {
     "available": "Available",
     "reserved": "Reserved",
