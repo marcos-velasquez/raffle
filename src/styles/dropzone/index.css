@@ -1,3 +1,7 @@
+.dropzone {
+  @apply w-96 mx-auto;
+}
+
 .dropzone .dz-preview.dz-image-preview {
   @apply bg-transparent;
 }
