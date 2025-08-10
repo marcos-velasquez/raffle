@@ -17,14 +17,9 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
   }
 
   public valuesChange(criteria = new Criteria()): Observable<T> {
-    this.collection.subscribe(
-      '*',
-      ({ record }) => {
-        const entity = this.options.mapper(record as unknown as K);
-        this.subject.next(entity);
-      },
-      { filter: new CriteriaConverter(criteria).convert() }
-    );
+    this.collection.subscribe('*', ({ record }) => this.subject.next(this.options.mapper(record as unknown as K)), {
+      filter: new CriteriaConverter(criteria).convert(),
+    });
     return this.subject.asObservable();
   }
 
