@@ -15,12 +15,7 @@ export type BuyNumberOutput = {
 
 export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOutput> {
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
-    super(
-      progressBuilder()
-        .withStart('progress.buyingNumber')
-        .withComplete('progress.purchaseWillBeVerified')
-        .build()
-    );
+    super(progressBuilder().withStart('progress.buyingNumber').withComplete('progress.purchaseWillBeVerified').build());
   }
 
   public execute({ raffle, value }: BuyNumberUseCaseProps): BuyNumberOutput {

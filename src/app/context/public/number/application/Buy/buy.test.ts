@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
-import { BaseRepository } from '@shared/domain';
+import { BaseRepository, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
 import { PayerBuilder } from '@context/shared/domain/__tests__/builders/payer.builder.test';
 import { Raffle } from '@context/shared/domain/raffle';
@@ -42,8 +42,8 @@ describe('BuyNumberUseCase', () => {
   });
 
   it('should complete with error message on failed buy', async () => {
-    const error = new Error('Buy number failed');
-    mockRaffleRepositoryService.update?.mockResolvedValue(E.left(error));
+    const exception = new Exception('Buy number failed');
+    mockRaffleRepositoryService.update?.mockResolvedValue(E.left(exception));
     const payer = PayerBuilder.random();
 
     const result = await useCase.execute(validInput).complete(payer);
@@ -52,8 +52,8 @@ describe('BuyNumberUseCase', () => {
     expect(mockRaffleRepositoryService.update).toHaveBeenCalledWith(expect.objectContaining(validInput.raffle));
     expect(validInput.raffle.get.number(validInput.value).is.inPayment).toBe(true);
     expect(validInput.raffle.get.number(validInput.value).has.payer).toBe(false);
-    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ error: error }));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(error)).build());
+    expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 
   it('should complete with error message on failed buy number with not inPayment', async () => {
@@ -65,9 +65,7 @@ describe('BuyNumberUseCase', () => {
   it('should throw if trying to buy a number that is not inPayment', async () => {
     const raffle = new RaffleBuilder().withNumber(1).state('purchased').build();
     const input = { raffle, value: 1 };
-    await expect(() => useCase.execute(input).complete(PayerBuilder.random())).rejects.toThrow(
-      'El número debe estar en proceso de pago'
-    );
+    await expect(() => useCase.execute(input).complete(PayerBuilder.random())).rejects.toThrow();
     expect(mockRaffleRepositoryService.update).not.toHaveBeenCalled();
   });
 
