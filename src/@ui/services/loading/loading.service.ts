@@ -6,10 +6,10 @@ export class LoadingBarService {
   public readonly active$ = new BehaviorSubject<boolean>(false);
 
   public disable(): void {
-    this.active$.next(true);
+    this.active$.next(false);
   }
 
   public enable(): void {
-    this.active$.next(false);
+    this.active$.next(true);
   }
 }
