@@ -22,12 +22,12 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
     const number = raffle.get.number(value);
     return {
       start: () => {
-        assert(number.is.available, 'errors.numberNotAvailable');
+        assert(number.is.available, 'Number is not available');
 
         when(number.switch.inPayment()).map(() => this.raffleRepository.update(raffle));
       },
       complete: async (payer: PayerPrimitives) => {
-        assert(number.is.inPayment, 'errors.numberMustBeInPayment');
+        assert(number.is.inPayment, 'Number is not in payment');
 
         this.start();
         const result = await transaction(raffle).run(() => {
@@ -40,7 +40,7 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
         return new EitherBuilder().fromEitherToVoid(result).build();
       },
       cancel: () => {
-        assert(number.is.inPayment, 'errors.numberMustBeInPayment');
+        assert(number.is.inPayment, 'Number is not in payment');
 
         when(number.switch.available()).map(() => this.raffleRepository.update(raffle));
       },

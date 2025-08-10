@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ConfirmationService } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
-import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
+import { RaffleDetailsComponent, NumberComponent, RaffleFullPathPipe } from '@context/shared/presenter';
 import { Raffle } from '@context/shared/domain';
 import { numberFacade } from '../../../application';
 
 @Component({
   selector: 'app-number-editor',
-  imports: [CommonModule, TranslocoPipe, RaffleDetailsComponent, NumberComponent, ExpandImageDirective],
+  imports: [
+    CommonModule,
+    TranslocoPipe,
+    RaffleFullPathPipe,
+    RaffleDetailsComponent,
+    NumberComponent,
+    ExpandImageDirective,
+  ],
   templateUrl: './number-editor.component.html',
 })
 export class NumberEditorComponent {
