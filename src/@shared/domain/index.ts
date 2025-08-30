@@ -8,3 +8,4 @@ export * from './event';
 export * from './utilities';
 export * from './criteria';
 export * from './exception/base.exception';
+export * from './signal';

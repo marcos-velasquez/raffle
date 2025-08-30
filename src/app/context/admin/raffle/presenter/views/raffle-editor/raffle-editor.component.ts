@@ -34,7 +34,7 @@ export class RaffleEditorComponent implements OnInit {
   }
 
   public open(): void {
-    this.uiDialog().open();
+    when(this.form.reset()).map(() => this.uiDialog().open());
   }
 
   public close(): void {

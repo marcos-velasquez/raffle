@@ -3,13 +3,10 @@ import * as E from '@sweet-monads/either';
 import { Collections } from '@pocketbase';
 import { PocketbaseRepository } from '@shared/infrastructure';
 import { Exception } from '@shared/domain';
-import { History, HistoryPrimitives, HistoryService } from '../domain';
+import { History, HistoryPrimitives } from '../domain';
 
 @Injectable({ providedIn: 'root' })
-export class PocketbaseHistoryRepository
-  extends PocketbaseRepository<History, HistoryPrimitives>
-  implements HistoryService
-{
+export class PocketbaseHistoryRepository extends PocketbaseRepository<History, HistoryPrimitives> {
   constructor() {
     super({ collection: Collections.History, mapper: History.create });
   }

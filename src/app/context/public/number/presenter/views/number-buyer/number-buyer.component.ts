@@ -8,7 +8,9 @@ import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
 import { Raffle } from '@context/shared/domain';
-import { numberFacade } from '../../../application';
+import { numberFacade, BuyNumberOutput } from '../../../application';
+import { PocketbaseVoucherRepository } from '../../../infrastructure';
+import { Voucher } from '@context/public/number/domain';
 
 @Component({
   selector: 'app-number-buyer',
@@ -27,7 +29,9 @@ export class NumberBuyerComponent {
   public readonly value = input.required({ transform: numberAttribute });
   public readonly raffle = input.required<Raffle>();
 
-  public buyUseCase: any;
+  public readonly voucherRepository = inject(PocketbaseVoucherRepository);
+
+  public buyUseCase: BuyNumberOutput;
   public readonly form: FormGroup;
 
   constructor(private readonly router: Router) {
@@ -49,9 +53,15 @@ export class NumberBuyerComponent {
 
   public create(): void {
     is.affirmative(this.form.valid)
-      .mapLeft(() => this.form.markAllAsTouched())
-      .mapRight(() => {
-        when(this.buyUseCase.complete(this.form.getRawValue())).map(() => this.router.navigate(['..']));
+      .asyncMap(() => this.voucherRepository.save(new Voucher(this.form.value.voucher)))
+      .then((result) => {
+        console.log(result);
       });
+
+    /*   .mapLeft(() => this.form.markAllAsTouched())
+      .mapRight(async () => {
+    
+        when(this.buyUseCase.complete(this.form.getRawValue())).map(() => this.router.navigate(['..']));
+      }); */
   }
 }

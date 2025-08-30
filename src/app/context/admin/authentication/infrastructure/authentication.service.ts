@@ -30,8 +30,8 @@ export class PocketbaseAuthenticationService implements AuthenticationService {
   }
 }
 
-export const auth = {
+export const auth = () => ({
   is: {
     admin: new EitherBuilder().fromRightBoolean(pb.authStore.isValid).build(),
   },
-};
+});

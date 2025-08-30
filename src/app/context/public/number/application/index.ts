@@ -1,6 +1,8 @@
 import { PocketbaseRaffleRepository } from '@context/public/raffle/infrastructure/raffle.repository';
 import { BuyNumberUseCase, BuyNumberUseCaseProps } from './Buy/buy.usecase';
 
+export * from './Buy/buy.usecase';
+
 export class NumberFacade {
   private readonly raffleRepository = new PocketbaseRaffleRepository();
 

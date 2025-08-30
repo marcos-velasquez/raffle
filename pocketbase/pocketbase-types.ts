@@ -13,6 +13,7 @@ export enum Collections {
 	Superusers = "_superusers",
 	History = "history",
 	Raffles = "raffles",
+	Vouchers = "vouchers",
 }
 
 // Alias types for improved usability
@@ -20,15 +21,20 @@ export type IsoDateString = string
 export type RecordIdString = string
 export type HTMLString = string
 
+type ExpandType<T> = unknown extends T
+	? T extends unknown
+		? { expand?: unknown }
+		: { expand: T }
+	: { expand: T }
+
 // System fields
-export type BaseSystemFields<T = never> = {
+export type BaseSystemFields<T = unknown> = {
 	id: RecordIdString
 	collectionId: string
 	collectionName: Collections
-	expand?: T
-}
+} & ExpandType<T>
 
-export type AuthSystemFields<T = never> = {
+export type AuthSystemFields<T = unknown> = {
 	email: string
 	emailVisibility: boolean
 	username: string
@@ -106,6 +112,13 @@ export type RafflesRecord<Tnumbers = unknown> = {
 	updated?: IsoDateString
 }
 
+export type VouchersRecord = {
+	created?: IsoDateString
+	file: string
+	id: string
+	updated?: IsoDateString
+}
+
 // Response types include system fields and match responses from the PocketBase API
 export type AuthoriginsResponse<Texpand = unknown> = Required<AuthoriginsRecord> & BaseSystemFields<Texpand>
 export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRecord> & BaseSystemFields<Texpand>
@@ -114,6 +127,7 @@ export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemF
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
 export type HistoryResponse<Texpand = unknown> = Required<HistoryRecord> & BaseSystemFields<Texpand>
 export type RafflesResponse<Tnumbers = unknown, Texpand = unknown> = Required<RafflesRecord<Tnumbers>> & BaseSystemFields<Texpand>
+export type VouchersResponse<Texpand = unknown> = Required<VouchersRecord> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
@@ -125,6 +139,7 @@ export type CollectionRecords = {
 	_superusers: SuperusersRecord
 	history: HistoryRecord
 	raffles: RafflesRecord
+	vouchers: VouchersRecord
 }
 
 export type CollectionResponses = {
@@ -135,6 +150,7 @@ export type CollectionResponses = {
 	_superusers: SuperusersResponse
 	history: HistoryResponse
 	raffles: RafflesResponse
+	vouchers: VouchersResponse
 }
 
 // Type for usage with type asserted PocketBase instance
@@ -148,4 +164,5 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: '_superusers'): RecordService<SuperusersResponse>
 	collection(idOrName: 'history'): RecordService<HistoryResponse>
 	collection(idOrName: 'raffles'): RecordService<RafflesResponse>
+	collection(idOrName: 'vouchers'): RecordService<VouchersResponse>
 }

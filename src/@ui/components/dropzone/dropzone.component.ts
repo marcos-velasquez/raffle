@@ -1,16 +1,17 @@
-import { Component, effect, ElementRef, input, output, signal, viewChild, inject } from '@angular/core';
+import { Component, effect, ElementRef, input, output, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
-import { signalList } from '@shared/domain/signal';
-import { $url, when } from '@shared/domain';
+import { switchMap } from 'rxjs';
 import Dropzone from 'dropzone';
+import { $url, when, signalList } from '@shared/domain';
+import { BaseComponent } from '@shared/presenter';
 
 @Component({
   selector: 'ui-dropzone',
   imports: [CommonModule],
   templateUrl: './dropzone.component.html',
 })
-export class DropzoneComponent {
+export class DropzoneComponent extends BaseComponent {
   public readonly dropzoneElement = viewChild.required<ElementRef<HTMLFormElement>>('dropzone');
   public readonly change = output<File[]>();
   public readonly maxFiles = input(10);
@@ -18,14 +19,27 @@ export class DropzoneComponent {
   public readonly acceptedFiles = input('image/*');
   public readonly defaultUrls = input<string[]>([]);
 
+  public readonly dropzone = signal<Dropzone | null>(null);
   public readonly files = signalList(signal<File[]>([]));
-  private readonly transloco = inject(TranslocoService);
 
-  constructor() {
+  constructor(private readonly transloco: TranslocoService) {
+    super();
     effect(() => this.change.emit(this.files.values));
   }
 
   ngAfterViewInit() {
+    this.transloco.langChanges$
+      .pipe(
+        switchMap(() => this.transloco.load(this.transloco.getActiveLang())),
+        this.unsubscribe()
+      )
+      .subscribe(() => this.initializeDropzone());
+  }
+
+  private initializeDropzone() {
+    this.dropzone()?.destroy();
+    this.dropzoneElement().nativeElement.innerHTML = '';
+
     const dropzone = new Dropzone(this.dropzoneElement().nativeElement, {
       url: '/',
       addRemoveLinks: true,
@@ -41,12 +55,13 @@ export class DropzoneComponent {
       init: async () => {
         for (const url of this.defaultUrls()) {
           const file = await $url.to.file(url);
-          when(dropzone.emit('addedfile', file)).map(() => dropzone.emit('thumbnail', file, url));
+          when(this.dropzone()?.emit('addedfile', file)).map(() => this.dropzone()?.emit('thumbnail', file, url));
         }
       },
     });
 
-    dropzone.on('addedfile', (file) => this.files.insert(file));
-    dropzone.on('removedfile', (file) => this.files.remove(file));
+    this.dropzone.set(dropzone);
+    this.dropzone().on('addedfile', (file) => this.files.insert(file));
+    this.dropzone().on('removedfile', (file) => this.files.remove(file));
   }
 }

@@ -5,7 +5,9 @@ import { UnauthorizedException } from '../domain';
 
 export abstract class AdminUseCase<K, T> extends UseCase<K, void> {
   public execute(arg: K): void {
-    auth.is.admin.mapRight(() => this.next(arg)).mapLeft(() => this.complete(E.left(new UnauthorizedException())));
+    auth()
+      .is.admin.mapRight(() => this.next(arg))
+      .mapLeft(() => this.complete(E.left(new UnauthorizedException())));
   }
 
   protected abstract next(arg: K): T;

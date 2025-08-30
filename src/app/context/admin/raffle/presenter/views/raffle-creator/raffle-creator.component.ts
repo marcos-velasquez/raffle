@@ -28,7 +28,7 @@ export class RaffleCreatorComponent {
   }
 
   public open() {
-    this.uiDialog().open();
+    when(this.form.reset()).map(() => this.uiDialog().open());
   }
 
   public close() {
