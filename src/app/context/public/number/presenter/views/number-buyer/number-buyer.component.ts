@@ -8,9 +8,9 @@ import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
 import { Raffle } from '@context/shared/domain';
+import { Voucher } from '@context/public/number/domain';
 import { numberFacade, BuyNumberOutput } from '../../../application';
 import { PocketbaseVoucherRepository } from '../../../infrastructure';
-import { Voucher } from '@context/public/number/domain';
 
 @Component({
   selector: 'app-number-buyer',
@@ -51,17 +51,17 @@ export class NumberBuyerComponent {
     when(this.buyUseCase.cancel()).map(() => this.router.navigate(['..']));
   }
 
-  public create(): void {
+  public async create(): Promise<void> {
     is.affirmative(this.form.valid)
-      .asyncMap(() => this.voucherRepository.save(new Voucher(this.form.value.voucher)))
-      .then((result) => {
-        console.log(result);
-      });
-
-    /*   .mapLeft(() => this.form.markAllAsTouched())
+      .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(async () => {
-    
-        when(this.buyUseCase.complete(this.form.getRawValue())).map(() => this.router.navigate(['..']));
-      }); */
+        const result = await this.voucherRepository.save(Voucher.from({ value: this.form.value.voucher[0] }));
+        result.mapRight(async ({ value }) => {
+          const { name, phone } = this.form.value;
+          const payerPrimitives = { name, phone, voucher: value.toString() };
+          const result = await this.buyUseCase.complete(payerPrimitives);
+          result.map(() => this.router.navigate(['..']));
+        });
+      });
   }
 }

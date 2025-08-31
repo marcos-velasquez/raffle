@@ -1,25 +1,25 @@
-import { assert } from '@shared/domain';
 import { Entity } from '@shared/domain';
 
 export class Voucher extends Entity<VoucherPrimitives> {
-  constructor(public readonly file: File) {
+  constructor(public readonly value: File | string) {
     super();
-    assert(file instanceof File, 'file must be a File');
-    assert(file.size > 0, 'file must not be empty');
-    assert(file.type.includes('image/'), 'file must be an image');
+  }
+
+  public toString(): string {
+    return this.value as string;
   }
 
   public toPrimitives(): VoucherPrimitives {
     return {
-      file: this.file,
+      value: this.value,
     };
   }
 
   public static from(primitives: VoucherPrimitives): Voucher {
-    return new Voucher(primitives.file);
+    return new Voucher(primitives.value);
   }
 }
 
 export type VoucherPrimitives = {
-  file: File;
+  value: File | string;
 };
