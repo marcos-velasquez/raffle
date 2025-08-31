@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Collections } from '@pocketbase';
 import { PocketbaseRepository } from '@shared/infrastructure';
-import { Voucher, VoucherPrimitives } from '../domain/voucher';
+import { Voucher, VoucherPrimitives } from '@context/shared/domain';
 
 @Injectable({ providedIn: 'root' })
 export class PocketbaseVoucherRepository extends PocketbaseRepository<Voucher, VoucherPrimitives> {

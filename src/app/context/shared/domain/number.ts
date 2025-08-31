@@ -40,7 +40,7 @@ export class Number {
   public get action() {
     return {
       create: {
-        payer: (payer: PayerPrimitives) => (this.payer = Payer.create(payer)),
+        payer: (payer: PayerPrimitives) => (this.payer = Payer.from(payer)),
       },
       remove: {
         payer: () => {
@@ -86,7 +86,7 @@ export class Number {
   public static from({ value, state, payer }: NumberPrimitives) {
     const number = new Number(value);
     number.state = state;
-    number.payer = payer ? Payer.create(payer) : Payer.null();
+    number.payer = payer ? Payer.from(payer) : Payer.null();
     return number;
   }
 

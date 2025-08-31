@@ -23,7 +23,7 @@
     </div>
 
     <div>
-      <img expandImage [src]="raffle() | fullPath : payer.voucher" alt="voucher" class="max-w-screen-sm" />
+      <img expandImage [src]="payer.voucher | fullPath" alt="voucher" class="max-w-screen-sm" />
     </div>
   </article>
   }

@@ -7,8 +7,7 @@ import { OnlyNumberDirective } from '@shared/presenter';
 import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
-import { Raffle } from '@context/shared/domain';
-import { Voucher } from '@context/public/number/domain';
+import { Raffle, Voucher } from '@context/shared/domain';
 import { numberFacade, BuyNumberOutput } from '../../../application';
 import { PocketbaseVoucherRepository } from '../../../infrastructure';
 
@@ -55,10 +54,10 @@ export class NumberBuyerComponent {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(async () => {
-        const result = await this.voucherRepository.save(Voucher.from({ value: this.form.value.voucher[0] }));
-        result.mapRight(async ({ value }) => {
+        const result = await this.voucherRepository.save(Voucher.create({ value: this.form.value.voucher[0] }));
+        result.mapRight(async (voucher) => {
           const { name, phone } = this.form.value;
-          const payerPrimitives = { name, phone, voucher: value.toString() };
+          const payerPrimitives = { name, phone, voucher: Voucher.from(voucher.toPrimitives()).toPrimitives() };
           const result = await this.buyUseCase.complete(payerPrimitives);
           result.map(() => this.router.navigate(['..']));
         });

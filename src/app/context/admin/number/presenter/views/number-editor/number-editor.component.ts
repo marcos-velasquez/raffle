@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ConfirmationService } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
-import { RaffleDetailsComponent, NumberComponent, RaffleFullPathPipe } from '@context/shared/presenter';
+import { RaffleDetailsComponent, NumberComponent, VoucherFullPathPipe } from '@context/shared/presenter';
 import { Raffle } from '@context/shared/domain';
 import { numberFacade } from '../../../application';
 
@@ -12,7 +12,7 @@ import { numberFacade } from '../../../application';
   imports: [
     CommonModule,
     TranslocoPipe,
-    RaffleFullPathPipe,
+    VoucherFullPathPipe,
     RaffleDetailsComponent,
     NumberComponent,
     ExpandImageDirective,
