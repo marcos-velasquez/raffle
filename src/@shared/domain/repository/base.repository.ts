@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Criteria } from '../criteria/Criteria';
 
 export interface BaseRepository<T> {
-  valuesChange(): Observable<T>;
+  valuesChange(): Observable<T[]>;
   findAll(criteria: Criteria): Promise<E.Either<Error, T[]>>;
   findOne(criteria: Criteria): Promise<E.Either<Error, T | undefined>>;
   save(entity: T): Promise<E.Either<Error, T>>;

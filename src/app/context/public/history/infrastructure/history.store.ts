@@ -19,6 +19,9 @@ export const HistoryStore = signalStore(
       repository.findAll().then((result) => {
         result.mapRight((histories) => patchState(store, { histories }));
       });
+      repository.valuesChange().subscribe((histories) => {
+        patchState(store, { histories });
+      });
     },
   })),
   withMethods((store) => ({

@@ -17,8 +17,11 @@ export const RaffleStore = signalStore(
   withState(initialState),
   withHooks((store, repository = inject(PocketbaseRaffleRepository)) => ({
     onInit() {
-      repository.valuesChange().subscribe((raffle) => {
-        patchState(store, { raffles: [raffle] });
+      repository.findAll(RaffleCriteria.available()).then((result) => {
+        result.mapRight((raffles) => patchState(store, { raffles }));
+      });
+      repository.valuesChange(RaffleCriteria.available()).subscribe((raffles) => {
+        patchState(store, { raffles });
       });
     },
   })),

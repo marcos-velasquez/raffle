@@ -10,16 +10,18 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
   implements BaseRepository<T>
 {
   protected readonly collection: RecordService<RecordModel>;
-  protected readonly subject = new Subject<T>();
+  protected readonly subject = new Subject<T[]>();
 
   constructor(protected readonly options: { collection: Collections; mapper: (arg: K) => T }) {
     this.collection = pb.collection(this.options.collection);
   }
 
-  public valuesChange(criteria = new Criteria()): Observable<T> {
-    this.collection.subscribe('*', ({ record }) => this.subject.next(this.options.mapper(record as unknown as K)), {
-      filter: new CriteriaConverter(criteria).convert(),
-    });
+  public valuesChange(criteria = new Criteria()): Observable<T[]> {
+    this.collection.subscribe(
+      '*',
+      async () => (await this.findAll(criteria)).mapRight((entities) => this.subject.next(entities)),
+      { filter: new CriteriaConverter(criteria).convert() }
+    );
     return this.subject.asObservable();
   }
 
