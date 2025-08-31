@@ -15,8 +15,8 @@ import { raffleFacade } from '@context/admin/raffle/application';
   templateUrl: './raffle-editor.component.html',
 })
 export class RaffleEditorComponent implements OnInit {
-  public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly raffle = input.required<Raffle>();
+  public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
 
   constructor() {
@@ -29,12 +29,13 @@ export class RaffleEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.patchValue({ ...this.raffle().toPrimitives() });
     is.affirmative(this.raffle().has.purchased).mapRight(() => this.form.get('price')!.disable());
   }
 
   public open(): void {
-    when(this.form.reset()).map(() => this.uiDialog().open());
+    when(this.form.patchValue({ ...this.raffle().toPrimitives() })).map(() => {
+      this.uiDialog().open();
+    });
   }
 
   public close(): void {
