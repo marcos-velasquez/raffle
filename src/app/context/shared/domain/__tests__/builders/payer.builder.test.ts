@@ -1,10 +1,14 @@
 import { PayerPrimitives } from '../../payer';
+import { VoucherPrimitives } from '../../voucher';
 
 export class PayerBuilder {
   private primitives: PayerPrimitives = {
     name: 'Test Name',
     phone: '123456789',
-    voucher: 'voucher-123',
+    voucher: {
+      id: 'voucher-id-123',
+      value: 'voucher-123',
+    },
   };
 
   public withName(name: string) {
@@ -17,7 +21,7 @@ export class PayerBuilder {
     return this;
   }
 
-  public withVoucher(voucher: string) {
+  public withVoucher(voucher: VoucherPrimitives) {
     this.primitives.voucher = voucher;
     return this;
   }
