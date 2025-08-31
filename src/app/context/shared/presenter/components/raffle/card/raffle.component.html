@@ -10,9 +10,11 @@
   <div class="card-body">
     <div class="flex justify-between items-center">
       <h2 class="card-title">{{ raffle().title }}</h2>
+      @if (!raffle().has.winner) {
       <h3 class="badge font-medium" [class]="{ 'badge-success': raffle().is.purchased }">
         {{ raffle().get.purchased }}/{{ raffle().get.length }}
       </h3>
+      }
     </div>
     <p class="text-balance">{{ raffle().description }}</p>
     <footer class="card-actions justify-end mt-2">

@@ -10,9 +10,11 @@
   <div class="card-body">
     <h2 class="card-title">{{ raffle().title }}</h2>
     <p class="text-balance">{{ raffle().description }}</p>
+    @if (!raffle().has.winner) {
     <h3 class="badge badge-neutral font-medium" [class]="{ 'badge-success': raffle().is.purchased }">
       {{ raffle().get.purchased }}/{{ raffle().get.length }}
     </h3>
+    }
     <p class="text-2xl font-semibold tracking-tight">{{ raffle().price }} Bs.</p>
   </div>
 </article>
