@@ -63,4 +63,10 @@ export class NumberBuyerComponent {
         });
       });
   }
+
+  public ngOnDestroy(): void {
+    if (!this.buyUseCase.isCompleted()) {
+      this.buyUseCase.cancel();
+    }
+  }
 }

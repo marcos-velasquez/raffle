@@ -2,7 +2,7 @@
 
 pocketbase/pb_data
 pocketbase/pb_migrations
-pocketbase/pb_hooks
+!pocketbase/pb_hooks/cleanup_payments.pb.js
 
 
 # compiled output

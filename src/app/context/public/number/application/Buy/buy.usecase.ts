@@ -8,12 +8,15 @@ import { BuyNumberEvent } from '../../domain/number.event';
 export type BuyNumberUseCaseProps = { raffle: Raffle; value: number };
 
 export type BuyNumberOutput = {
+  isCompleted: () => boolean;
   start: () => void;
   complete: (payer: PayerPrimitives) => Promise<E.Either<void, void>>;
   cancel: () => void;
 };
 
 export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOutput> {
+  private isCompleted = false;
+
   constructor(private readonly raffleRepository: BaseRepository<Raffle>) {
     super(progressBuilder().withStart('progress.buyingNumber').withComplete('progress.purchaseWillBeVerified').build());
   }
@@ -21,6 +24,7 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
   public execute({ raffle, value }: BuyNumberUseCaseProps): BuyNumberOutput {
     const number = raffle.get.number(value);
     return {
+      isCompleted: () => this.isCompleted,
       start: () => {
         assert(number.is.available, 'Number is not available');
 
@@ -36,6 +40,7 @@ export class BuyNumberUseCase extends UseCase<BuyNumberUseCaseProps, BuyNumberOu
           return this.raffleRepository.update(raffle);
         });
         result.mapRight((raffle) => this.bus.publish(new BuyNumberEvent(raffle, value)));
+        result.mapRight(() => (this.isCompleted = true));
         this.complete(result);
         return new EitherBuilder().fromEitherToVoid(result).build();
       },
