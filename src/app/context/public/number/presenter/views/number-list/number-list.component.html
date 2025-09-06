@@ -7,7 +7,11 @@
     <ng-template let-numbers>
       <ul class="w-full flex flex-wrap justify-center gap-y-12 gap-x-4">
         @for (number of numbers; track number.value) {
-        <li [routerLink]="['numbers', number.value]" class="relative animate-bounce-fade-in cursor-pointer">
+        <li
+          [routerLink]="number.is.available ? ['numbers', number.value] : null"
+          class="relative animate-bounce-fade-in cursor-pointer"
+          [ngClass]="{ 'cursor-not-allowed!': !number.is.available }"
+        >
           <app-number [number]="number" />
         </li>
         }
