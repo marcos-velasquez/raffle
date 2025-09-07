@@ -8,13 +8,13 @@ export const publicRoutes: Route[] = [
     data: { layout: 'basic' },
     children: [
       {
-        path: 'raffle/:id/numbers/:value',
+        path: 'raffle/:raffleId/numbers/:value',
         canActivate: [redirectRaffleNotFoundTo('')],
         loadComponent: () =>
           import('./number/presenter/views/number-buyer/number-buyer.component').then((c) => c.NumberBuyerComponent),
       },
       {
-        path: 'raffle/:id',
+        path: 'raffle/:raffleId',
         canActivate: [redirectRaffleNotFoundTo('')],
         loadComponent: () =>
           import('./number/presenter/views/number-list/number-list.component').then((c) => c.NumberListComponent),

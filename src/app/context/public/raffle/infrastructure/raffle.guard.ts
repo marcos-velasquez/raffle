@@ -5,7 +5,7 @@ import { RaffleStore } from './raffle.store';
 
 export function redirectRaffleNotFoundTo(redirect: string): CanActivateFn {
   return (route: ActivatedRouteSnapshot) => {
-    const raffleId = route.paramMap.get('id') as string;
+    const raffleId = route.paramMap.get('raffleId') as string;
     return is
       .affirmative(inject(RaffleStore).has(raffleId))
       .mapRight(() => true)
