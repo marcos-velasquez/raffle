@@ -8,7 +8,7 @@ export class NumberValueFilterPipe implements PipeTransform {
     return is
       .nil(value)
       .mapRight(() => numbers)
-      .mapLeft(() => numbers.filter((n) => n.is.equal.value(value))).value;
+      .mapLeft(() => numbers.filter((number) => number.is.equal.value(value))).value;
   }
 }
 
@@ -20,6 +20,6 @@ export class NumberStateFilterPipe implements PipeTransform {
     return is
       .affirmative(state === 'all')
       .mapRight(() => numbers)
-      .mapLeft(() => numbers.filter((n) => n.is.equal.state(state as NumberState))).value;
+      .mapLeft(() => numbers.filter((number) => number.is.equal.state(state as NumberState))).value;
   }
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { OnlyNumberDirective } from '@shared/presenter';
-import { is, sleep, when } from '@shared/domain';
+import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
 import { Raffle, Voucher } from '@context/shared/domain';
@@ -25,21 +25,16 @@ import { PocketbaseVoucherRepository } from '../../../infrastructure';
   templateUrl: './number-buyer.component.html',
 })
 export class NumberBuyerComponent {
-  public readonly value = input.required({ transform: numberAttribute });
   public readonly raffle = input.required<Raffle>();
+  public readonly value = input.required({ transform: numberAttribute });
 
-  public readonly voucherRepository = inject(PocketbaseVoucherRepository);
+  private readonly router = inject(Router);
 
   public buyUseCase: BuyNumberOutput;
   public readonly form: FormGroup;
 
-  constructor(private readonly router: Router) {
-    effect(() => {
-      if (this.buyUseCase && this.raffle().get.number(this.value()).is.available) {
-        this.router.navigate(['..']);
-      }
-    });
-
+  constructor(private readonly voucherRepository: PocketbaseVoucherRepository) {
+    effect(() => this.ensureAvailability());
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -50,6 +45,12 @@ export class NumberBuyerComponent {
   ngOnInit(): void {
     this.buyUseCase = numberFacade.buy({ raffle: this.raffle(), value: this.value() });
     this.buyUseCase.start();
+  }
+
+  private ensureAvailability(): void {
+    if (this.buyUseCase && this.raffle().get.number(this.value()).is.available) {
+      this.router.navigate(['..']);
+    }
   }
 
   public cancel(): void {

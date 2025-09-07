@@ -7,7 +7,7 @@ export const raffleResolver: ResolveFn<Raffle> = (route) => {
   const store = inject(RaffleStore);
   return new Proxy({} as Raffle, {
     get(_, prop) {
-      return store.get(route.paramMap.get('id'))?.[prop as keyof Raffle];
+      return store.get(route.paramMap.get('id'))?.[prop];
     },
   });
 };

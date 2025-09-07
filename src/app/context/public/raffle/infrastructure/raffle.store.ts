@@ -20,17 +20,10 @@ export const RaffleStore = signalStore(
       repository.findAll(RaffleCriteria.available()).then((result) => {
         result.mapRight((raffles) => patchState(store, { raffles }));
       });
-      repository.valuesChange(RaffleCriteria.available()).subscribe((raffles) => {
-        patchState(store, { raffles });
-      });
+      repository.valuesChange(RaffleCriteria.available()).subscribe((raffles) => patchState(store, { raffles }));
     },
   })),
-  withMethods((store, repository = inject(PocketbaseRaffleRepository)) => ({
-    switchAvailable() {
-      repository.findAll(RaffleCriteria.available()).then((result) => {
-        result.mapRight((raffles) => patchState(store, { raffles }));
-      });
-    },
+  withMethods((store) => ({
     has(id: string) {
       return store.raffles().some((r) => r.getId() === id);
     },
