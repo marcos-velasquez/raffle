@@ -18,9 +18,7 @@ export class SonnerToasterService {
   }
 
   public wait(message: string) {
-    this.waitId = toast.loading(this.translateService.translate(message), {
-      duration: Number.POSITIVE_INFINITY,
-    });
+    this.waitId = toast.loading(this.translateService.translate(message), { duration: Number.POSITIVE_INFINITY });
   }
 
   public disable() {

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { LoadingBarService } from '@ui/services/loading';
 import { RequestStartedEvent, RequestSuccessfulEvent, RequestFailedEvent } from '@shared/domain';
-import { LoaderStore } from '../../store/loader/loader.store';
+import { LoaderStore } from '../../store';
 import { ToastService } from '../../services';
 import { BaseSubscriber } from '../base.subscriber';
 

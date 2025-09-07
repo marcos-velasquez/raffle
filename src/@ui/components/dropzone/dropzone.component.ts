@@ -12,12 +12,13 @@ import { BaseComponent } from '@shared/presenter';
   templateUrl: './dropzone.component.html',
 })
 export class DropzoneComponent extends BaseComponent {
-  public readonly dropzoneElement = viewChild.required<ElementRef<HTMLFormElement>>('dropzone');
-  public readonly change = output<File[]>();
   public readonly maxFiles = input(10);
   public readonly maxFilesize = input(10);
   public readonly acceptedFiles = input('image/*');
   public readonly defaultUrls = input<string[]>([]);
+
+  public readonly dropzoneElement = viewChild.required<ElementRef<HTMLFormElement>>('dropzone');
+  public readonly change = output<File[]>();
 
   public readonly dropzone = signal<Dropzone | null>(null);
   public readonly files = signalList(signal<File[]>([]));

@@ -11,7 +11,7 @@ export class ExpandImageDirective {
     this.viewer = new Viewer(this.el.nativeElement, { transition: false });
   }
 
-  @HostListener('click') click() {
+  @HostListener('click') onClick() {
     this.viewer.show();
   }
 }

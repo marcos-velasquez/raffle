@@ -8,7 +8,7 @@ import { fromEvent } from 'rxjs';
   templateUrl: './dialog.component.html',
 })
 export class DialogComponent {
-  readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  public readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
   public get close$() {
     return fromEvent(this.dialog().nativeElement, 'close');
@@ -16,7 +16,8 @@ export class DialogComponent {
 
   public get is() {
     return {
-      open: this.dialog().nativeElement.open,
+      opened: this.dialog().nativeElement.open,
+      closed: !this.dialog().nativeElement.open,
     };
   }
 

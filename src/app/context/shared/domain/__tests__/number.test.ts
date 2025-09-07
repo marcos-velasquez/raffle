@@ -1,6 +1,5 @@
 import { random } from '@shared/domain';
 import { Number, NumberPrimitives, NumberState } from '../number';
-import { Payer } from '../payer';
 
 describe('Number class', () => {
   const value = 1;
@@ -99,7 +98,7 @@ describe('Number class', () => {
   it('should verify if number has payer', () => {
     const number = Number.create({ value });
     expect(number.has.payer).toBe(false);
-    number.action.create.payer(Payer.create({ name: 'John Doe', phone: '1234567890', voucher: 'ABC123' }));
+    number.action.create.payer({ name: 'John Doe', phone: '1234567890', voucher: { id: '123', value: 'ABC123' } });
     expect(number.has.payer).toBe(true);
     number.action.remove.payer();
     expect(number.has.payer).toBe(false);
@@ -113,7 +112,7 @@ describe('Number class', () => {
     expect(primitives).toEqual({
       value: 1,
       state: 'available',
-      payer: Payer.null().toPrimitives(),
+      payer: { name: '', phone: '', voucher: { id: expect.any(String), value: '' } },
     });
   });
 
@@ -121,7 +120,7 @@ describe('Number class', () => {
     const primitives: NumberPrimitives = {
       value: 1,
       state: 'available',
-      payer: Payer.create({ name: 'John Doe', phone: '1234567890', voucher: 'ABC123' }),
+      payer: { name: 'John Doe', phone: '1234567890', voucher: { id: '123', value: 'ABC123' } },
     };
 
     const number = Number.from(primitives);
@@ -130,6 +129,7 @@ describe('Number class', () => {
     expect(number.get.state).toBe(primitives.state);
     expect(number.get.payer).toEqual(primitives.payer);
   });
+
   it('should create multiple Number instances', () => {
     const quantity = random.int(1, 100);
 

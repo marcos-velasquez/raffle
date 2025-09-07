@@ -5,10 +5,7 @@ export const deepClone = <T>(obj: T): T => {
     if (desc && typeof desc.value === 'function') {
       Object.defineProperty(cloned, key, desc);
     } else if (desc && desc.value && typeof desc.value === 'object') {
-      Object.defineProperty(cloned, key, {
-        ...desc,
-        value: deepClone(desc.value),
-      });
+      Object.defineProperty(cloned, key, { ...desc, value: deepClone(desc.value) });
     } else if (desc) {
       Object.defineProperty(cloned, key, desc);
     }

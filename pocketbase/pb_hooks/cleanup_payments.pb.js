@@ -1,23 +1,18 @@
 cronAdd('cleanup-expired-payments', '* * * * *', () => {
   const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString().replace('T', ' ').replace('Z', '');
-  const filter = `updated != "" && updated >= "${fiveMinutesAgo}"`;
-  const raffles = $app.findRecordsByFilter('raffles', filter);
+  const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000);
 
-  let hasChanges = false;
+  $app.findRecordsByFilter('raffles', `updated != "" && updated >= "${fiveMinutesAgo}"`).forEach((raffle) => {
+    if (new Date(raffle.get('updated')) > twoMinutesAgo) return;
 
-  raffles.forEach((raffle) => {
-    const numbers = JSON.parse(raffle.get('numbers')) || [];
+    const numbers = JSON.parse(raffle.get('numbers') || '[]');
+    let hasChanges = false;
 
     numbers.forEach((number) => {
       if (number.state === 'inPayment') {
-        const raffleUpdated = new Date(raffle.get('updated'));
-        const twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000);
-
-        if (raffleUpdated <= twoMinutesAgo) {
-          number.state = 'available';
-          number.payer = { name: '', phone: '', voucher: { id: number.payer.voucher.id, value: '' } };
-          hasChanges = true;
-        }
+        number.state = 'available';
+        number.payer = { name: '', phone: '', voucher: { id: number.payer.voucher.id, value: '' } };
+        hasChanges = true;
       }
     });
 
