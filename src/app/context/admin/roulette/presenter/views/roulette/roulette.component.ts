@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { delay, tap } from 'rxjs';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -7,9 +7,9 @@ import { DialogComponent } from '@ui/components/dialog';
 import { RouletteService } from '@ui/services/roulette';
 import { ConfettiService } from '@ui/services/confetti';
 import { recording } from '@ui/services/recorder';
-import { Raffle } from '@context/shared/domain/raffle';
 import { NumberDetailsComponent } from '@context/shared/presenter';
 import { Label } from '@context/admin/roulette/domain';
+import { RaffleStore } from '@context/admin/raffle/infrastructure';
 import { historyFacade } from '@context/admin/history/application';
 import { rouletteFacade } from '@context/admin/roulette/application';
 
@@ -20,12 +20,15 @@ import { rouletteFacade } from '@context/admin/roulette/application';
   styles: [':host { display:block; }'],
 })
 export class RouletteComponent {
-  public readonly raffle = input.required<Raffle>();
+  public readonly raffleId = input.required<string>();
 
   private readonly winnerDialog = viewChild.required(DialogComponent);
   private readonly rouletteRef = viewChild.required<ElementRef<HTMLElement>>('rouletteRef');
 
+  private readonly store = inject(RaffleStore);
   private readonly confettiService = inject(ConfettiService);
+
+  public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
   constructor(private readonly rouletteService: RouletteService) {}
 

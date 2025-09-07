@@ -1,7 +1,6 @@
 import { Route } from '@angular/router';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from './authentication/infrastructure';
 import { redirectRaffleNotFoundTo } from './raffle/infrastructure/raffle.guard';
-import { raffleResolver } from './raffle/infrastructure/raffle.resolver';
 
 export const adminRoutes: Route[] = [
   {
@@ -14,23 +13,20 @@ export const adminRoutes: Route[] = [
     ...canActivate(() => redirectUnauthorizedTo(['admin/authentication'])),
     children: [
       {
-        path: 'raffle/:id',
+        path: 'raffle/:raffleId',
         canActivate: [redirectRaffleNotFoundTo('admin/raffle')],
-        resolve: { raffle: raffleResolver },
         loadComponent: () =>
           import('./number/presenter/views/number-list/number-list.component').then((c) => c.NumberListComponent),
       },
       {
-        path: 'raffle/:id/numbers/:value',
+        path: 'raffle/:raffleId/numbers/:value',
         canActivate: [redirectRaffleNotFoundTo('admin/raffle')],
-        resolve: { raffle: raffleResolver },
         loadComponent: () =>
           import('./number/presenter/views/number-editor/number-editor.component').then((c) => c.NumberEditorComponent),
       },
       {
-        path: 'raffle/:id/roulette',
+        path: 'raffle/:raffleId/roulette',
         canActivate: [redirectRaffleNotFoundTo('admin/raffle')],
-        resolve: { raffle: raffleResolver },
         loadComponent: () =>
           import('./roulette/presenter/views/roulette/roulette.component').then((c) => c.RouletteComponent),
       },

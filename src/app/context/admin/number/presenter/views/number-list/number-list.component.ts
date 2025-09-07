@@ -1,9 +1,9 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { RaffleDetailsComponent, NumberComponent, FiltersComponent } from '@context/shared/presenter';
-import { Raffle } from '@context/shared/domain';
+import { RaffleStore } from '@context/admin/raffle/infrastructure';
 
 @Component({
   selector: 'app-number-list',
@@ -11,5 +11,8 @@ import { Raffle } from '@context/shared/domain';
   templateUrl: './number-list.component.html',
 })
 export class NumberListComponent {
-  public readonly raffle = input.required<Raffle>();
+  public readonly raffleId = input.required<string>();
+  public readonly store = inject(RaffleStore);
+
+  public readonly raffle = computed(() => this.store.get(this.raffleId()));
 }

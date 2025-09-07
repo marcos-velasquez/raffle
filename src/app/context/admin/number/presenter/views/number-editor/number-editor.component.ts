@@ -1,10 +1,10 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ConfirmationService } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
 import { RaffleDetailsComponent, NumberComponent, VoucherFullPathPipe } from '@context/shared/presenter';
-import { Raffle } from '@context/shared/domain';
+import { RaffleStore } from '@context/admin/raffle/infrastructure';
 import { numberFacade } from '../../../application';
 
 @Component({
@@ -21,9 +21,12 @@ import { numberFacade } from '../../../application';
 })
 export class NumberEditorComponent {
   public readonly value = input.required<string>();
-  public readonly raffle = input.required<Raffle>();
+  public readonly raffleId = input.required<string>();
 
+  private readonly store = inject(RaffleStore);
   private readonly confirmation = inject(ConfirmationService);
+
+  public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
   public declinePayment() {
     this.confirmation.open().mapRight(() => {
