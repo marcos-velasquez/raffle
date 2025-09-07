@@ -20,10 +20,10 @@ import { rouletteFacade } from '@context/admin/roulette/application';
   styles: [':host { display:block; }'],
 })
 export class RouletteComponent {
+  public readonly raffle = input.required<Raffle>();
+
   private readonly winnerDialog = viewChild.required(DialogComponent);
   private readonly rouletteRef = viewChild.required<ElementRef<HTMLElement>>('rouletteRef');
-
-  public readonly raffle = input.required<Raffle>();
 
   private readonly confettiService = inject(ConfettiService);
 

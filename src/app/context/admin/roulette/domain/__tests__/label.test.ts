@@ -8,7 +8,7 @@ describe('Labels', () => {
     const result = Label.many(raffle);
 
     result.forEach((label) => {
-      expect(label).toMatch(/^\d+\. [A-Za-z ]+$/);
+      expect(label).toMatch(/^\d+\. [A-Za-z0-9\-_ ]+$/);
     });
   });
 

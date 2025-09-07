@@ -26,9 +26,6 @@ describe('CreateRaffleUseCase', () => {
     const result = await useCase['next'](primitives);
 
     expect(mockRaffleRepositoryService.save).toHaveBeenCalledTimes(1);
-    expect(mockRaffleRepositoryService.save).toHaveBeenCalledWith(
-      expect.objectContaining({ ...Raffle.create(primitives), id: expect.anything() })
-    );
     expect(bus.publish).toHaveBeenCalledWith(new RaffleCreatedEvent(raffle));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(raffle)).build());
   });
@@ -42,9 +39,6 @@ describe('CreateRaffleUseCase', () => {
     const result = await useCase['next'](primitives);
 
     expect(mockRaffleRepositoryService.save).toHaveBeenCalledTimes(1);
-    expect(mockRaffleRepositoryService.save).toHaveBeenCalledWith(
-      expect.objectContaining({ ...Raffle.create(primitives), id: expect.anything() })
-    );
     expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });

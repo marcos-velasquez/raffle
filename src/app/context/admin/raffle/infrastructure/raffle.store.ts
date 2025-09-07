@@ -20,10 +20,7 @@ export const RaffleStore = signalStore(
       repository.findAll(RaffleCriteria.available()).then((result) => {
         result.mapRight((raffles) => patchState(store, { raffles }));
       });
-      repository.valuesChange(RaffleCriteria.available()).subscribe((raffles) => {
-        console.log('raffles', raffles);
-        patchState(store, { raffles });
-      });
+      repository.valuesChange(RaffleCriteria.available()).subscribe((raffles) => patchState(store, { raffles }));
     },
   })),
   withMethods((store) => ({

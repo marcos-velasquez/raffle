@@ -14,10 +14,7 @@ export class User extends Entity<User> {
   }
 
   public toPrimitives<UserPrimitives>(): UserPrimitives {
-    return {
-      email: this.email,
-      id: this.getId(),
-    } as UserPrimitives;
+    return { id: this.getId(), email: this.email } as UserPrimitives;
   }
 
   public static empty() {

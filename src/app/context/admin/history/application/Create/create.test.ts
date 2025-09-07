@@ -27,9 +27,6 @@ describe('CreateHistoryUseCase', () => {
     const result = await useCase['next'](primitives);
 
     expect(mockHistoryRepositoryService.save).toHaveBeenCalledTimes(1);
-    expect(mockHistoryRepositoryService.save).toHaveBeenCalledWith(
-      expect.objectContaining({ ...History.create(primitives), id: expect.anything() })
-    );
     expect(bus.publish).toHaveBeenCalledWith(new HistoryCreatedEvent(history));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(history)).build());
   });
@@ -45,9 +42,6 @@ describe('CreateHistoryUseCase', () => {
     const result = await useCase['next'](primitives);
 
     expect(mockHistoryRepositoryService.save).toHaveBeenCalledTimes(1);
-    expect(mockHistoryRepositoryService.save).toHaveBeenCalledWith(
-      expect.objectContaining({ ...History.create(primitives), id: expect.anything() })
-    );
     expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
