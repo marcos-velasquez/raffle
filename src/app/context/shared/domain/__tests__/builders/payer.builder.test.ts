@@ -11,18 +11,25 @@ export class PayerBuilder {
     },
   };
 
-  public withName(name: string) {
+  public withName(name: string): this {
     this.primitives.name = name;
     return this;
   }
 
-  public withPhone(phone: string) {
+  public withPhone(phone: string): this {
     this.primitives.phone = phone;
     return this;
   }
 
-  public withVoucher(voucher: VoucherPrimitives) {
+  public withVoucher(voucher: VoucherPrimitives): this {
     this.primitives.voucher = voucher;
+    return this;
+  }
+
+  public withEmptyFields(): this {
+    this.primitives.name = '';
+    this.primitives.phone = '';
+    this.primitives.voucher = { id: '', value: '' };
     return this;
   }
 
@@ -31,7 +38,27 @@ export class PayerBuilder {
   }
 
   public static random(): PayerPrimitives {
-    return new PayerBuilder().build();
+    const randomId = Math.random().toString(36).substring(7);
+    return new PayerBuilder()
+      .withName(`User-${randomId}`)
+      .withPhone(`+1-555-${Math.floor(Math.random() * 9000) + 1000}`)
+      .withVoucher({ 
+        id: `voucher-${randomId}`, 
+        value: `VOUCHER-${randomId.toUpperCase()}` 
+      })
+      .build();
+  }
+
+  public static empty(): PayerPrimitives {
+    return new PayerBuilder().withEmptyFields().build();
+  }
+
+  public static withName(name: string): PayerBuilder {
+    return new PayerBuilder().withName(name);
+  }
+
+  public static withPhone(phone: string): PayerBuilder {
+    return new PayerBuilder().withPhone(phone);
   }
 }
 
