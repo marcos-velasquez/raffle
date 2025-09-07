@@ -1,10 +1,10 @@
-import { Component, inject, input, numberAttribute } from '@angular/core';
+import { Component, effect, inject, input, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { OnlyNumberDirective } from '@shared/presenter';
-import { is, when } from '@shared/domain';
+import { is, sleep, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
 import { Raffle, Voucher } from '@context/shared/domain';
@@ -34,6 +34,12 @@ export class NumberBuyerComponent {
   public readonly form: FormGroup;
 
   constructor(private readonly router: Router) {
+    effect(() => {
+      if (this.buyUseCase && this.raffle().get.number(this.value()).is.available) {
+        this.router.navigate(['..']);
+      }
+    });
+
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],

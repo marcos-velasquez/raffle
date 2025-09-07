@@ -36,7 +36,8 @@
     "voucher": "Receipt",
     "nameValidation": "Please enter a valid name",
     "phoneValidation": "Please enter a valid phone number",
-    "voucherValidation": "You must upload a valid receipt"
+    "voucherValidation": "You must upload a valid receipt",
+    "maxLimit": "You have 2 minutes to complete the purchase, if you do not do so the purchase will be canceled."
   },
   "actions": {
     "cancel": "Cancel",

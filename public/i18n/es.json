@@ -36,7 +36,8 @@
     "voucher": "Comprobante",
     "nameValidation": "Por favor, ingrese un nombre válido",
     "phoneValidation": "Por favor, ingrese un número de teléfono válido",
-    "voucherValidation": "Debe ingresar un comprobante válido"
+    "voucherValidation": "Debe ingresar un comprobante válido",
+    "maxLimit": "Tienes 2 minutos para completar la compra, si no lo haces la compra será cancelada."
   },
   "actions": {
     "cancel": "Cancelar",
