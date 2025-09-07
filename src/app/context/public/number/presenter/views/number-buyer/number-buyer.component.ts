@@ -57,7 +57,7 @@ export class NumberBuyerComponent {
     when(this.buyUseCase.cancel()).map(() => this.router.navigate(['..']));
   }
 
-  public async create(): Promise<void> {
+  public async buy(): Promise<void> {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(async () => {
@@ -66,7 +66,7 @@ export class NumberBuyerComponent {
           const { name, phone } = this.form.value;
           const payerPrimitives = { name, phone, voucher: Voucher.from(voucher.toPrimitives()).toPrimitives() };
           const result = await this.buyUseCase.complete(payerPrimitives);
-          result.map(() => this.router.navigate(['..']));
+          result.mapRight(() => this.router.navigate(['..']));
         });
       });
   }
