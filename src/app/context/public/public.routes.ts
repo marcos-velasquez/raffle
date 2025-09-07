@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { redirectRaffleNotFoundTo, raffleResolver } from './raffle/infrastructure';
+import { redirectRaffleNotFoundTo } from './raffle/infrastructure';
 import { redirectHistoryNotFoundTo, historyResolver } from './history/infrastructure';
 
 export const publicRoutes: Route[] = [
@@ -10,14 +10,12 @@ export const publicRoutes: Route[] = [
       {
         path: 'raffle/:id/numbers/:value',
         canActivate: [redirectRaffleNotFoundTo('')],
-        resolve: { raffle: raffleResolver },
         loadComponent: () =>
           import('./number/presenter/views/number-buyer/number-buyer.component').then((c) => c.NumberBuyerComponent),
       },
       {
         path: 'raffle/:id',
         canActivate: [redirectRaffleNotFoundTo('')],
-        resolve: { raffle: raffleResolver },
         loadComponent: () =>
           import('./number/presenter/views/number-list/number-list.component').then((c) => c.NumberListComponent),
       },

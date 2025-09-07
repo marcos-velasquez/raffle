@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, numberAttribute } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,7 +7,8 @@ import { OnlyNumberDirective } from '@shared/presenter';
 import { is, when } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
-import { Raffle, Voucher } from '@context/shared/domain';
+import { RaffleStore } from '@context/admin/raffle/infrastructure';
+import { Voucher } from '@context/shared/domain';
 import { numberFacade, BuyNumberOutput } from '../../../application';
 import { PocketbaseVoucherRepository } from '../../../infrastructure';
 
@@ -25,10 +26,13 @@ import { PocketbaseVoucherRepository } from '../../../infrastructure';
   templateUrl: './number-buyer.component.html',
 })
 export class NumberBuyerComponent {
-  public readonly raffle = input.required<Raffle>();
+  public readonly raffleId = input.required<string>();
   public readonly value = input.required({ transform: numberAttribute });
 
+  private readonly store = inject(RaffleStore);
   private readonly router = inject(Router);
+
+  public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
   public buyUseCase: BuyNumberOutput;
   public readonly form: FormGroup;
