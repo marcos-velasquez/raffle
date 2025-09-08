@@ -53,12 +53,12 @@ export class NumberBuyerComponent {
 
   private ensureAvailability(): void {
     if (this.buyUseCase && this.raffle().get.number(this.value()).is.available) {
-      this.router.navigate(['..']);
+      this.cancel();
     }
   }
 
   public cancel(): void {
-    when(this.buyUseCase.cancel()).map(() => this.router.navigate(['..']));
+    this.router.navigate(['raffle', this.raffleId()]);
   }
 
   public async buy(): Promise<void> {
