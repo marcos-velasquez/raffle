@@ -1,5 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ConfirmationService } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
@@ -23,20 +24,24 @@ export class NumberEditorComponent {
   public readonly value = input.required<string>();
   public readonly raffleId = input.required<string>();
 
+  private readonly router = inject(Router);
   private readonly store = inject(RaffleStore);
-  private readonly confirmation = inject(ConfirmationService);
 
   public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
+  constructor(private readonly confirmationService: ConfirmationService) {}
+
   public declinePayment() {
-    this.confirmation.open().mapRight(() => {
+    this.confirmationService.open().mapRight(async () => {
       numberFacade.declinePayment({ raffle: this.raffle(), value: +this.value() });
+      this.router.navigate(['/admin/raffle', this.raffleId()]);
     });
   }
 
   public verifyPayment() {
-    this.confirmation.open().mapRight(() => {
+    this.confirmationService.open().mapRight(async () => {
       numberFacade.verifyPayment({ raffle: this.raffle(), value: +this.value() });
+      this.router.navigate(['/admin/raffle', this.raffleId()]);
     });
   }
 }
