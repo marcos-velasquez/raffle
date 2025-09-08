@@ -4,5 +4,5 @@ import { BaseComponent as SharedBaseComponent } from '@shared/presenter';
 
 export class BaseComponent extends SharedBaseComponent {
   private readonly userStore = inject(UserStore);
-  protected readonly isAdmin = computed(() => this.userStore.user().is.admin);
+  protected readonly isAdmin = computed(() => this.userStore.user().is.admin.isRight());
 }

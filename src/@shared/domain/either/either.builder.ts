@@ -96,7 +96,7 @@ export class EitherBuilder<T = undefined, K = undefined> {
 
 export * as E from '@sweet-monads/either';
 export const when = <T>(value: T) => new EitherBuilder<void, T>().setRight(value).build();
-export const has = (value: unknown) => new EitherBuilder().fromRightBoolean($is.boolean(value)).build();
+export const has = (value: unknown) => new EitherBuilder().fromRightBoolean(!!value).build();
 export const is = {
   undefined: (value: unknown) => new EitherBuilder().fromLeftBoolean($is.undefined(value)).build(),
   affirmative: (value: unknown) => new EitherBuilder().fromRightBoolean($is.affirmative(value)).build(),
