@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { OnlyNumberDirective } from '@shared/presenter';
-import { is, when } from '@shared/domain';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { is } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
 import { RaffleStore } from '@context/admin/raffle/infrastructure';
@@ -18,11 +18,12 @@ import { PocketbaseVoucherRepository } from '../../../infrastructure';
     CommonModule,
     ReactiveFormsModule,
     TranslocoPipe,
+    NgxMaskDirective,
     DropzoneComponent,
-    OnlyNumberDirective,
     RaffleDetailsComponent,
     NumberComponent,
   ],
+  providers: [provideNgxMask()],
   templateUrl: './number-buyer.component.html',
 })
 export class NumberBuyerComponent {
@@ -41,7 +42,7 @@ export class NumberBuyerComponent {
     effect(() => this.ensureAvailability());
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      phone: ['58', [Validators.required]],
       voucher: ['', [Validators.required]],
     });
   }

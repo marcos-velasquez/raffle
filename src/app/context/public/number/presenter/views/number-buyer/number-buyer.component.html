@@ -26,7 +26,12 @@
       <div class="label">
         <span class="label-text">{{ 'number.phone' | transloco }}</span>
       </div>
-      <input formControlName="phone" onlyNumber class="w-full input input-bordered focus:input-primary" />
+      <input
+        formControlName="phone"
+        [mask]="'(00) 000-0000000'"
+        [showMaskTyped]="true"
+        class="w-full input input-bordered focus:input-primary"
+      />
       @if (form.get('phone')?.touched && form.get('phone')?.invalid) {
       <div class="validator-hint text-error">{{ 'number.phoneValidation' | transloco }}</div>
       }
