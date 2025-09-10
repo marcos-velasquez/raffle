@@ -1,7 +1,7 @@
 @let number = raffle().get.number(+value());
 
-<section class="w-full flex flex-col gap-5">
-  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4">
+<section class="w-full flex flex-col gap-5 px-3">
+  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4 px-3">
     <app-raffle-details [raffle]="raffle()" class="w-full" />
     <app-number [number]="number" />
   </header>
@@ -23,7 +23,7 @@
     </div>
 
     <div>
-      <img expandImage [src]="payer.voucher | fullPath" alt="voucher" class="max-w-screen-sm" />
+      <img expandImage [src]="payer.voucher | fullPath" alt="voucher" class="w-full max-w-screen-sm" />
     </div>
   </article>
   }

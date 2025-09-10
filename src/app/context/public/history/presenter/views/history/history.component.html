@@ -1,4 +1,4 @@
-<section class="w-full flex flex-col gap-5">
+<section class="w-full flex flex-col gap-5 px-3">
   <header>
     <app-raffle-details [raffle]="history().raffle" />
   </header>
@@ -8,7 +8,7 @@
     <app-number-details [number]="history().raffle.get.winner!"></app-number-details>
   </section>
 
-  <video class="h-full w-full rounded-lg" controls>
+  <video class="h-full w-full rounded-lg mt-4" controls>
     <source [src]="'history' | fullPath : history().getId() : history().video" />
   </video>
 </section>

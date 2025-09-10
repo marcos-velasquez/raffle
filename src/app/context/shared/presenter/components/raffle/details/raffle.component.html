@@ -1,4 +1,6 @@
-<article class="card card-side bg-base-100 shadow-lg">
+<article
+  class="card card-side bg-base-100 shadow-lg flex-col items-center text-center xl:flex-row xl:items-start xl:text-left"
+>
   <header expandImage class="carousel rounded-box" style="scrollbar-width: auto">
     @for (url of raffle().images; track $index) {
     <figure class="carousel-item w-full rounded-b-none">
@@ -7,7 +9,7 @@
     }
   </header>
 
-  <div class="card-body">
+  <div class="card-body items-center xl:items-start">
     <h2 class="card-title">{{ raffle().title }}</h2>
     <p class="text-balance">{{ raffle().description }}</p>
     @if (!raffle().has.winner) {

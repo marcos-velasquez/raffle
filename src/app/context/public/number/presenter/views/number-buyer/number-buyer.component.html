@@ -1,12 +1,12 @@
 @let number = raffle().get.number(+value());
 
 <section class="w-full flex flex-col gap-5">
-  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4">
+  <header class="grid lg:grid-cols-[1fr_auto] items-center justify-items-center gap-4 px-2">
     <app-raffle-details [raffle]="raffle()" class="w-full" />
     <app-number [number]="number" />
   </header>
 
-  <form [formGroup]="form" class="form-container mx-auto bg-base-200 rounded-lg p-6 shadow-sm">
+  <form [formGroup]="form" class="form-container mx-auto bg-base-200 rounded-lg p-6 shadow-sm mt-4 xl:mt-0!">
     <header class="flex flex-col gap-3 items-center text-center">
       <h3 class="text-2xl font-semibold">{{ 'number.buy' | transloco }}</h3>
       <small class="max-w-xs text-warning">{{ 'number.maxLimit' | transloco }}</small>
