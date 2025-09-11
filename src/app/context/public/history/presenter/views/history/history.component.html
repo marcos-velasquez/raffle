@@ -11,4 +11,14 @@
   <video class="h-full w-full rounded-lg mt-4" controls>
     <source [src]="'history' | fullPath : history().getId() : history().video" />
   </video>
+
+  @if(isAdmin()){
+  <footer class="flex justify-center mt-4">
+    @if(history().deliveryReceipt){
+    <img [src]="'history' | fullPath : history().getId() : history().deliveryReceipt" alt="delivery receipt" />
+    }@else {
+    <button class="btn btn-outline btn-primary">{{ 'history.uploadDeliveryReceipt' | transloco }}</button>
+    }
+  </footer>
+  }
 </section>

@@ -140,5 +140,8 @@
   "roulette": {
     "start": "Iniciar",
     "winner": "Ganador"
+  },
+  "history": {
+    "uploadDeliveryReceipt": "Subir comprobante de entrega"
   }
 }

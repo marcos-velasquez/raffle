@@ -1,0 +1,13 @@
+<form #form>
+  <input
+    #input
+    (change)="change($event); form.reset()"
+    [accept]="accept()"
+    [multiple]="multiple()"
+    [disabled]="disabled()"
+    type="file"
+    class="hidden"
+  />
+</form>
+
+<ng-container *ngTemplateOutlet="pickerTemplate(); context: { pick }" />
