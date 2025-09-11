@@ -4,7 +4,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { BaseComponent } from '@core/base';
 import { FullPathPipe } from '@shared/presenter';
 import { NumberDetailsComponent, RaffleDetailsComponent } from '@context/shared/presenter';
-import { History } from '@context/shared/domain';
+import { History } from '../../../domain';
 
 @Component({
   selector: 'app-history',
