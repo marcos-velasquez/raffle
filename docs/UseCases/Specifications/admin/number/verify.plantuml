@@ -1,4 +1,4 @@
-@startuml DeclinePaymentUseCase
+@startuml VerifyPaymentUseCase
 
 !include ../../../../config/config.puml
 

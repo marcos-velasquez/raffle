@@ -1,0 +1,44 @@
+@startuml UploadDeliveryReceiptUseCase
+
+
+!include ../../../../config/config.puml
+
+state INITIAL as "OPENED_HISTORY"
+state END as "OPENED_HISTORY"
+state 1 as " "
+state 2 as " "
+state C <<choice>>
+
+
+INITIAL -down-> 1
+note on link
+El administrador solicita subir un comprobante de entrega.
+end note
+
+1 --> C
+note on link
+<b>Sistema permite</b>
+* subir comprobante de pago 
+
+* confirmar
+* cancelar
+end note
+
+C -down[#red]-> END
+note on link
+cancelar
+end note 
+
+C --> 2
+note on link
+El administrador sube el comprobante de entrega.
+end note
+
+2 --> END
+note on link
+<b>Sistema</b>
+* Persiste el comprobante de entrega
+* Muestra el comprobante de entrega
+end note 
+
+@enduml

@@ -13,6 +13,7 @@ Admin --> (Logout)
 Admin --> (Verify payment)
 Admin --> (Decline payment)
 Admin --> (Select winner number)
+Admin --> (Upload delivery receipt)
 
 Admin --> (Filter numbers)
 Public --> (Filter numbers)

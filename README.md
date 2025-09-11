@@ -61,6 +61,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Mostrar historial de rifas completadas:**
     - Resaltando el número ganador (color o etiqueta)
     - Con el respectivo video del sorteo
+    - Con el comprobante de entrega
 
 ### 2. Administrador
 
@@ -89,7 +90,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Seleccionar ganador mediante una ruleta virtual cuando todos los números estén apartados**
     - Grabar el sorteo y mostrar el nombre del ganador
     - La ruleta mostrará el número y el nombre del comprador
-    - La rifa estará completada y pasará a mostrarse en el historial con su respectiva grabación del sorteo
+    - La rifa estará completada y pasará a mostrarse en el historial con su respectiva grabación del sorteo y posteriormente el comprobante de entrega
 
 - **Notificaciones**:
   - **Enviar notificaciones al usuario (Mediante WhatsApp)**
@@ -117,6 +118,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 4. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
 5. Agrega nuevas rifas al sistema si es necesario
 6. Una vez todos los números de una rifa estén comprados, utiliza la ruleta virtual para seleccionar al ganador
+7. Una vez entregado el premio al ganador, se sube el comprobante de entrega en el historial de la rifa
 
 ## Glosario
 
@@ -159,6 +161,8 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 
 **Grabación del sorteo**: Registro visual del momento en que se lleva a cabo el sorteo de la rifa para seleccionar el ganador.
 
+**Comprobante de entrega**: Registro visual del momento en que se entrega el premio al ganador.
+
 ## Modelo de Dominio
 
 ![Diagrama del Modelo de Dominio](./out/docs/DomainModel/index/DomainModel.png)
@@ -197,13 +201,17 @@ _Diagrama general que muestra todos los casos de uso del sistema y los actores i
 
 **Verificar Pago**
 
-![Verificar Pago](./out/docs/UseCases/Specifications/admin/number/verify/DeclinePaymentUseCase.png)
+![Verificar Pago](./out/docs/UseCases/Specifications/admin/number/verify/VerifyPaymentUseCase.png)
 
 #### Selección de Ganador
 
 **Seleccionar Ganador con Ruleta Virtual**
 
 ![Seleccionar Ganador](./out/docs/UseCases/Specifications/admin/roulette/select-winner/SelectWinnerUseCase.png)
+
+**Subir Comprobante de Entrega**
+
+![Subir Comprobante de Entrega](./out/docs/UseCases/Specifications/admin/history/Upload-delivery-receipt/UploadDeliveryReceiptUseCase.png)
 
 ### Casos de Uso del Usuario Público
 
@@ -238,3 +246,5 @@ npm run start
 ```sh
 npm run build
 ```
+
+---

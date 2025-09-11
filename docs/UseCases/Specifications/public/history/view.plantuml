@@ -29,6 +29,7 @@ note on link
 <b>El sistema muestra la información detallada de la rifa seleccionada</b>
 * Numero ganador con el nombre del comprador
 * Video del sorteo
+* Comprobante de entrega
 end note 
 
 @enduml
