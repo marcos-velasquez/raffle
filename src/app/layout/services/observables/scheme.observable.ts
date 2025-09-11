@@ -13,6 +13,7 @@ export class SchemeObservable {
       map(([config, mql]) => {
         scheme(config.scheme).is.auto.mapRight(() => {
           config.scheme = mql.breakpoints['(prefers-color-scheme: dark)'] ? Scheme.DARK : Scheme.LIGHT;
+          configService.config = config;
         });
         return config.scheme;
       })

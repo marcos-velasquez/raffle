@@ -9,10 +9,7 @@ export type UiProviderConfig = { config?: UiConfig };
 
 export const provideUi = ({ config }: UiProviderConfig): Array<Provider | EnvironmentProviders> => {
   const providers: Array<Provider | EnvironmentProviders> = [
-    {
-      provide: UI_CONFIG,
-      useValue: config ?? {},
-    },
+    { provide: UI_CONFIG, useValue: config ?? {} },
     provideEnvironmentInitializer(() => inject(ConfirmationService)),
     provideEnvironmentInitializer(() => inject(LoadingBarService)),
     provideEnvironmentInitializer(() => inject(MediaWatcherService)),

@@ -36,8 +36,4 @@ export class ConfigService {
       },
     };
   }
-
-  public reset(): void {
-    this.config$.next(this.config as Required<UiConfig>);
-  }
 }
