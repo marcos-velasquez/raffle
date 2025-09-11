@@ -1,19 +1,19 @@
 import * as E from '@sweet-monads/either';
 import { BaseRepository, EitherBuilder } from '@shared/domain';
-import { History, HistoryCreatePrimitives } from '@context/admin/history/domain/history';
+import { HistoryCreator, HistoryCreatorPrimitives } from '@context/admin/history/domain/history-creator';
 import { AdminUseCase } from '../../../shared/application';
 import { HistoryCreatedEvent } from '../../domain';
 
-export type CreateHistoryProps = HistoryCreatePrimitives;
+export type CreateHistoryProps = HistoryCreatorPrimitives;
 
 export class CreateHistoryUseCase extends AdminUseCase<CreateHistoryProps, Promise<E.Either<void, void>>> {
-  constructor(private readonly historyRepository: BaseRepository<History>) {
+  constructor(private readonly historyRepository: BaseRepository<HistoryCreator>) {
     super();
   }
 
   protected async next(props: CreateHistoryProps): Promise<E.Either<void, void>> {
     this.start();
-    const history = History.create(props);
+    const history = HistoryCreator.create(props);
     const result = await this.historyRepository.save(history);
     result.mapRight((history) => this.bus.publish(new HistoryCreatedEvent(history)));
     this.complete(result);

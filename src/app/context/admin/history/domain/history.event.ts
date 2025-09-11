@@ -1,8 +1,8 @@
 import { DomainEvent } from '@shared/domain';
-import { History } from './history';
+import { HistoryCreator } from './history-creator';
 
 export class HistoryCreatedEvent extends DomainEvent {
-  constructor(public readonly history: History) {
+  constructor(public readonly history: HistoryCreator) {
     super();
   }
 }

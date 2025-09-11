@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { EitherBuilder, BaseRepository, bus, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
-import { History } from '@context/admin/history/domain/history';
+import { HistoryCreator } from '@context/admin/history/domain/history';
 import { HistoryCreatedEvent } from '../../domain/history.event';
 import { CreateHistoryUseCase } from './create.usecase';
 
@@ -9,18 +9,18 @@ jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.
 
 describe('CreateHistoryUseCase', () => {
   let useCase: CreateHistoryUseCase;
-  let mockHistoryRepositoryService: Partial<jest.Mocked<BaseRepository<History>>>;
+  let mockHistoryRepositoryService: Partial<jest.Mocked<BaseRepository<HistoryCreator>>>;
 
   beforeEach(() => {
     mockHistoryRepositoryService = { save: jest.fn() };
-    useCase = new CreateHistoryUseCase(mockHistoryRepositoryService as BaseRepository<History>);
+    useCase = new CreateHistoryUseCase(mockHistoryRepositoryService as BaseRepository<HistoryCreator>);
   });
 
   it('should publish HistoryCreated event and complete with success message on successful create', async () => {
     const raffle = new RaffleBuilder().withNumber(1).state('winner').build();
     const file = new File([new Blob()], 'text.webm', { type: 'video/webm' });
     const primitives = { file, raffle: raffle.toPrimitives() };
-    const history = History.create(primitives);
+    const history = HistoryCreator.create(primitives);
 
     mockHistoryRepositoryService.save?.mockResolvedValue(E.right(history));
 

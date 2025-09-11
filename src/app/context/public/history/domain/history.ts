@@ -2,10 +2,10 @@ import { Entity, assert } from '@shared/domain';
 import { Raffle, RafflePrimitives } from '@context/shared/domain';
 
 export class History extends Entity<HistoryPrimitives> {
-  private constructor(
+  constructor(
     public readonly video: string,
     public readonly raffle: Raffle,
-    public readonly deliveryReceipt: string | undefined
+    public readonly deliveryReceipt?: string | undefined
   ) {
     super();
     assert(video.trim().length > 0, 'Video is required');
