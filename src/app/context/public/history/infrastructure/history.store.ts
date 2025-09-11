@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { signalStore, withState, patchState, withHooks, withMethods } from '@ngrx/signals';
 import { PocketbaseHistoryRepository } from './history.repository';
-import { History } from '../domain';
+import { History } from '@context/shared/domain';
 
 type HistoryState = {
   histories: History[];

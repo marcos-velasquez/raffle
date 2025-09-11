@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FullPathPipe } from '@shared/presenter';
 import { NumberDetailsComponent, RaffleDetailsComponent } from '@context/shared/presenter';
-import { History } from '../../../domain';
+import { History } from '@context/shared/domain';
 
 @Component({
   selector: 'app-history',
