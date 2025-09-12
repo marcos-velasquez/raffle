@@ -26,8 +26,12 @@ export class PocketbaseHistoryRepository extends PocketbaseRepository<History, H
 
   public override async update(history: History): Promise<E.Either<Exception, History>> {
     try {
-      const { id, history: historyPrimitives, deliveryReceipt } = (history as HistoryUpdater).toPrimitives();
-      const record = await this.collection.update(id, { ...historyPrimitives, deliveryReceipt });
+      const { history: historyPrimitives, deliveryReceipt } = (history as HistoryUpdater).toPrimitives();
+      const record = await this.collection.update(historyPrimitives.id, {
+        ...historyPrimitives,
+        raffle: historyPrimitives.raffle.id,
+        deliveryReceipt,
+      });
       return E.right(this.options.mapper(record as unknown as HistoryUpdaterPrimitives));
     } catch (error) {
       return E.left(Exception.from(error));

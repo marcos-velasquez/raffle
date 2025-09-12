@@ -1,15 +1,14 @@
 @if(isAdmin()){
-<footer class="flex justify-center">
+<footer class="max-w-5/12 min-w-xs mx-auto text-center space-y-4">
   @if(history().deliveryReceipt){
-  <img [src]="'history' | fullPath : history().getId() : history().deliveryReceipt" alt="delivery receipt" />
-  }@else {
-  <ui-uploader>
+  <img [src]="'history' | fullPath : history().getId() : history().deliveryReceipt" class="" alt="delivery receipt" />
+  }
+  <ui-uploader (valueChange)="update($event)">
     <ng-template #picker let-pick>
       <button (click)="pick()" class="btn btn-outline btn-primary">
         {{ 'history.uploadDeliveryReceipt' | transloco }}
       </button>
     </ng-template>
   </ui-uploader>
-  }
 </footer>
 }

@@ -9,19 +9,17 @@ export class HistoryUpdater extends Entity<HistoryUpdaterPrimitives> {
 
   public toPrimitives(): HistoryUpdaterPrimitives {
     return {
-      id: this.getId(),
       history: this.history.toPrimitives(),
       deliveryReceipt: this.deliveryReceipt,
     };
   }
 
-  public static from({ id, history, deliveryReceipt }: HistoryUpdaterPrimitives) {
-    return new HistoryUpdater(History.from(history), deliveryReceipt).withId(id);
+  public static from({ history, deliveryReceipt }: HistoryUpdaterPrimitives) {
+    return new HistoryUpdater(History.from(history), deliveryReceipt);
   }
 }
 
 export type HistoryUpdaterPrimitives = {
-  id: string;
   history: HistoryPrimitives;
   deliveryReceipt: File;
 };

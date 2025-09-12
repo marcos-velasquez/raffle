@@ -5,6 +5,7 @@ import { BaseComponent } from '@core/base';
 import { UploaderComponent } from '@ui/components/uploader';
 import { FullPathPipe } from '@shared/presenter';
 import { History } from '@context/shared/domain';
+import { historyFacade } from '@context/admin/history/application';
 
 @Component({
   selector: 'app-delivery-receipt',
@@ -13,4 +14,8 @@ import { History } from '@context/shared/domain';
 })
 export class DeliveryReceiptComponent extends BaseComponent {
   public readonly history = input.required<History>();
+
+  public update(file: File | File[]) {
+    historyFacade.update({ history: this.history().toPrimitives(), deliveryReceipt: file as File });
+  }
 }
