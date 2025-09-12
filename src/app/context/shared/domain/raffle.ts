@@ -116,5 +116,5 @@ export type RafflePrimitives = {
   numbers: NumberPrimitives[];
 };
 
-export type RaffleEditPrimitives = Omit<RafflePrimitives, 'id' | 'numbers' | 'completed'>;
-export type RaffleCreatePrimitives = RaffleEditPrimitives & { quantityNumbers: number };
+export type RaffleUpdatePrimitives = Omit<RafflePrimitives, 'id' | 'numbers' | 'completed'>;
+export type RaffleCreatePrimitives = RaffleUpdatePrimitives & { quantityNumbers: number };

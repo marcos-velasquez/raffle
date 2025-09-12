@@ -9,7 +9,7 @@ jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.
 describe('LoginUseCase', () => {
   let useCase: LoginUseCase;
   let mockAuthenticationService: Partial<jest.Mocked<AuthenticationService>>;
-  const validInput = { email: 'email@example.com', password: 'password' };
+  const validProps = { email: 'email@example.com', password: 'password' };
 
   beforeEach(() => {
     mockAuthenticationService = { login: jest.fn() };
@@ -17,13 +17,13 @@ describe('LoginUseCase', () => {
   });
 
   it('should publish UserLoggedIn event and complete with success message on successful login', async () => {
-    const user = User.create(validInput.email);
+    const user = User.create(validProps.email);
     mockAuthenticationService.login?.mockResolvedValue(E.right(user));
 
-    const result = await useCase.execute(validInput);
+    const result = await useCase.execute(validProps);
 
     expect(mockAuthenticationService.login).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticationService.login).toHaveBeenCalledWith(validInput);
+    expect(mockAuthenticationService.login).toHaveBeenCalledWith(validProps);
     expect(bus.publish).toHaveBeenCalledWith(new UserLoggedIn(user));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(user)).build());
   });
@@ -32,10 +32,10 @@ describe('LoginUseCase', () => {
     const exception = new Exception('Login failed');
     mockAuthenticationService.login?.mockResolvedValue(E.left(exception));
 
-    const result = await useCase.execute(validInput);
+    const result = await useCase.execute(validProps);
 
     expect(mockAuthenticationService.login).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticationService.login).toHaveBeenCalledWith(validInput);
+    expect(mockAuthenticationService.login).toHaveBeenCalledWith(validProps);
     expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });

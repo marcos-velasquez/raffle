@@ -9,7 +9,7 @@ export class Credential {
     assert(password.length >= Credential.MIN_PASSWORD_LENGTH, 'Password is too short');
   }
 
-  public static from(input: { email: string; password: string }): Credential {
-    return new Credential(input.email, input.password);
+  public static from(props: { email: string; password: string }): Credential {
+    return new Credential(props.email, props.password);
   }
 }

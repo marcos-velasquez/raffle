@@ -11,40 +11,40 @@ jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.
 describe('SelectWinnerUseCase', () => {
   let useCase: SelectWinnerUseCase;
   let mockRaffleRepository: Partial<jest.Mocked<BaseRepository<Raffle>>>;
-  let validInput: SelectWinnerUseCaseProps;
+  let validProps: SelectWinnerUseCaseProps;
 
   beforeEach(() => {
     mockRaffleRepository = { update: jest.fn() };
     useCase = new SelectWinnerUseCase(mockRaffleRepository as BaseRepository<Raffle>);
-    validInput = {
+    validProps = {
       raffle: new RaffleBuilder().withNumbers().purchased().build(),
       value: 1,
     };
   });
 
-  it('should publish RaffleEdited event and complete with success message on successful select winner', async () => {
-    mockRaffleRepository.update?.mockResolvedValue(E.right(validInput.raffle));
+  it('should publish RaffleUpdated event and complete with success message on successful select winner', async () => {
+    mockRaffleRepository.update?.mockResolvedValue(E.right(validProps.raffle));
 
-    const result = await useCase['next'](validInput);
+    const result = await useCase['next'](validProps);
 
-    expect(validInput.raffle.is.completed).toBe(true);
-    expect(validInput.raffle.has.winner).toBe(true);
+    expect(validProps.raffle.is.completed).toBe(true);
+    expect(validProps.raffle.has.winner).toBe(true);
     expect(mockRaffleRepository.update).toHaveBeenCalledTimes(1);
-    expect(mockRaffleRepository.update).toHaveBeenCalledWith(validInput.raffle);
-    expect(bus.publish).toHaveBeenCalledWith(new WinnerSelectedEvent(validInput.raffle));
-    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(validInput.raffle)).build());
+    expect(mockRaffleRepository.update).toHaveBeenCalledWith(validProps.raffle);
+    expect(bus.publish).toHaveBeenCalledWith(new WinnerSelectedEvent(validProps.raffle));
+    expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(validProps.raffle)).build());
   });
 
   it('should complete with error message on failed decline payment', async () => {
     const exception = new Exception('decline payment failed');
     mockRaffleRepository.update?.mockResolvedValue(E.left(exception));
 
-    const result = await useCase['next'](validInput);
+    const result = await useCase['next'](validProps);
 
-    expect(validInput.raffle.is.completed).toBe(false);
-    expect(validInput.raffle.has.winner).toBe(false);
+    expect(validProps.raffle.is.completed).toBe(false);
+    expect(validProps.raffle.has.winner).toBe(false);
     expect(mockRaffleRepository.update).toHaveBeenCalledTimes(1);
-    expect(mockRaffleRepository.update).toHaveBeenCalledWith(validInput.raffle);
+    expect(mockRaffleRepository.update).toHaveBeenCalledWith(validProps.raffle);
     expect(bus.publish).toHaveBeenCalledWith({ exception });
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
@@ -52,6 +52,6 @@ describe('SelectWinnerUseCase', () => {
   it('should complete with error with raffle is not purchased', async () => {
     const raffle = new RaffleBuilder().build();
 
-    await expect(() => useCase['next']({ ...validInput, raffle })).rejects.toThrow();
+    await expect(() => useCase['next']({ ...validProps, raffle })).rejects.toThrow();
   });
 });

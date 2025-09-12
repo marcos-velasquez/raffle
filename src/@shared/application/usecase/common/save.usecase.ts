@@ -12,14 +12,14 @@ export abstract class SaveUseCase<T, K> extends UseCase<T, Promise<E.Either<void
     super(progress);
   }
 
-  public async execute(input: T): Promise<E.Either<void, void>> {
+  public async execute(props: T): Promise<E.Either<void, void>> {
     this.start();
-    const entity = this.create(input);
+    const entity = this.create(props);
     const result = await this.repository.save(entity);
     result.mapRight(() => this.bus.publish(new this.SavedEvent(entity)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();
   }
 
-  protected abstract create(input: T): K;
+  protected abstract create(props: T): K;
 }

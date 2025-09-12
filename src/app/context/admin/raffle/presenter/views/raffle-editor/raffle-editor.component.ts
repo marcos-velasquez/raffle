@@ -42,7 +42,7 @@ export class RaffleEditorComponent implements OnInit {
     this.uiDialog().close();
   }
 
-  public edit(): void {
+  public update(): void {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(() => {

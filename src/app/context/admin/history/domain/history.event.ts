@@ -8,7 +8,7 @@ export class HistoryCreatedEvent extends DomainEvent {
   }
 }
 
-export class HistoryEditedEvent extends DomainEvent {
+export class HistoryUpdatedEvent extends DomainEvent {
   constructor(public readonly history: HistoryUpdater) {
     super();
   }

@@ -6,8 +6,8 @@ export * from './Buy/buy.usecase';
 export class NumberFacade {
   private readonly raffleRepository = new PocketbaseRaffleRepository();
 
-  public buy(input: BuyNumberUseCaseProps) {
-    return new BuyNumberUseCase(this.raffleRepository).execute(input);
+  public buy(props: BuyNumberUseCaseProps) {
+    return new BuyNumberUseCase(this.raffleRepository).execute(props);
   }
 }
 

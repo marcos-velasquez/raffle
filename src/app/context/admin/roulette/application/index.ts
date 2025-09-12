@@ -4,8 +4,8 @@ import { SelectWinnerUseCase, SelectWinnerUseCaseProps } from './SelectWinner/se
 export class RouletteFacade {
   private readonly raffleRepository = new PocketbaseRaffleRepository();
 
-  public selectWinner(input: SelectWinnerUseCaseProps): void {
-    new SelectWinnerUseCase(this.raffleRepository).execute(input);
+  public selectWinner(props: SelectWinnerUseCaseProps): void {
+    new SelectWinnerUseCase(this.raffleRepository).execute(props);
   }
 }
 

@@ -6,7 +6,7 @@ export class RaffleRemoveException extends Exception {
   }
 }
 
-export class RaffleEditException extends Exception {
+export class RaffleUpdateException extends Exception {
   constructor() {
     super('errors.raffleEditNotAllowed');
   }

@@ -7,7 +7,7 @@ export class RaffleCreatedEvent extends DomainEvent {
   }
 }
 
-export class RaffleEditedEvent extends DomainEvent {
+export class RaffleUpdatedEvent extends DomainEvent {
   constructor(public readonly raffle: Raffle) {
     super();
   }

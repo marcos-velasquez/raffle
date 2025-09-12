@@ -5,12 +5,12 @@ import { VerifyPaymentUseCase, VerifyPaymentUseCaseProps } from './VerifyPayment
 export class NumberFacade {
   private readonly raffleRepository = new PocketbaseRaffleRepository();
 
-  public declinePayment(input: DeclinePaymentUseCaseProps) {
-    new DeclinePaymentUseCase(this.raffleRepository).execute(input);
+  public declinePayment(props: DeclinePaymentUseCaseProps) {
+    new DeclinePaymentUseCase(this.raffleRepository).execute(props);
   }
 
-  public verifyPayment(input: VerifyPaymentUseCaseProps) {
-    new VerifyPaymentUseCase(this.raffleRepository).execute(input);
+  public verifyPayment(props: VerifyPaymentUseCaseProps) {
+    new VerifyPaymentUseCase(this.raffleRepository).execute(props);
   }
 }
 
