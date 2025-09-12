@@ -1,7 +1,7 @@
 import { Component, contentChild, ElementRef, input, output, TemplateRef, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type PickerTemplate = TemplateRef<{ pick: VoidFunction }>;
+export type PickerTemplate = TemplateRef<{ $implicit: VoidFunction }>;
 
 @Component({
   selector: 'ui-uploader',

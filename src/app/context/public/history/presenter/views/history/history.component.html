@@ -8,17 +8,9 @@
     <app-number-details [number]="history().raffle.get.winner!"></app-number-details>
   </section>
 
-  <video class="h-full w-full rounded-lg mt-4" controls>
+  <video class="h-full w-full rounded-lg my-4" controls>
     <source [src]="'history' | fullPath : history().getId() : history().video" />
   </video>
 
-  @if(isAdmin()){
-  <footer class="flex justify-center mt-4">
-    @if(history().deliveryReceipt){
-    <img [src]="'history' | fullPath : history().getId() : history().deliveryReceipt" alt="delivery receipt" />
-    }@else {
-    <button class="btn btn-outline btn-primary">{{ 'history.uploadDeliveryReceipt' | transloco }}</button>
-    }
-  </footer>
-  }
+  <app-delivery-receipt [history]="history()" />
 </section>

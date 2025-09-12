@@ -1,0 +1,15 @@
+@if(isAdmin()){
+<footer class="flex justify-center">
+  @if(history().deliveryReceipt){
+  <img [src]="'history' | fullPath : history().getId() : history().deliveryReceipt" alt="delivery receipt" />
+  }@else {
+  <ui-uploader>
+    <ng-template #picker let-pick>
+      <button (click)="pick()" class="btn btn-outline btn-primary">
+        {{ 'history.uploadDeliveryReceipt' | transloco }}
+      </button>
+    </ng-template>
+  </ui-uploader>
+  }
+</footer>
+}
