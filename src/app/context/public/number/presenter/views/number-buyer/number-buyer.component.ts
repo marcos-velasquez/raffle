@@ -11,6 +11,7 @@ import { RaffleStore } from '@context/admin/raffle/infrastructure';
 import { Voucher } from '@context/shared/domain';
 import { numberFacade, BuyNumberOutput } from '../../../application';
 import { PocketbaseVoucherRepository } from '../../../infrastructure';
+import { PaymentDetailsComponent } from './components';
 
 @Component({
   selector: 'app-number-buyer',
@@ -22,6 +23,7 @@ import { PocketbaseVoucherRepository } from '../../../infrastructure';
     DropzoneComponent,
     RaffleDetailsComponent,
     NumberComponent,
+    PaymentDetailsComponent,
   ],
   providers: [provideNgxMask()],
   templateUrl: './number-buyer.component.html',

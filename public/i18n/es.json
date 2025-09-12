@@ -49,7 +49,8 @@
     "edit": "Editar",
     "remove": "Eliminar",
     "save": "Guardar",
-    "accept": "Aceptar"
+    "accept": "Aceptar",
+    "copy": "Copiar"
   },
   "confirmations": {
     "default": "¿Estás seguro de realizar esta acción?",
@@ -66,7 +67,8 @@
     "numberPurchased": "Número comprado exitosamente",
     "paymentVerified": "Pago verificado exitosamente",
     "paymentDeclined": "Pago rechazado",
-    "winnerSelected": "Ganador seleccionado exitosamente"
+    "winnerSelected": "Ganador seleccionado exitosamente",
+    "copiedToClipboard": "Copiado al portapapeles"
   },
   "progress": {
     "creatingRaffle": "Creando rifa...",
@@ -109,6 +111,9 @@
   },
   "currency": {
     "bs": "Bs."
+  },
+  "payment": {
+    "mobilePay": "Pago móvil"
   },
   "placeholders": {
     "enterTitle": "Ingrese el título",

@@ -49,7 +49,8 @@
     "edit": "Edit",
     "remove": "Remove",
     "save": "Save",
-    "accept": "Accept"
+    "accept": "Accept",
+    "copy": "Copy"
   },
   "confirmations": {
     "default": "Are you sure you want to perform this action?",
@@ -66,7 +67,8 @@
     "numberPurchased": "Number purchased successfully",
     "paymentVerified": "Payment verified successfully",
     "paymentDeclined": "Payment declined",
-    "winnerSelected": "Winner selected successfully"
+    "winnerSelected": "Winner selected successfully",
+    "copiedToClipboard": "Copied to clipboard"
   },
   "progress": {
     "creatingRaffle": "Creating raffle...",
@@ -109,6 +111,9 @@
   },
   "currency": {
     "bs": "Bs."
+  },
+  "payment": {
+    "mobilePay": "Mobile Pay"
   },
   "placeholders": {
     "enterTitle": "Enter title",
