@@ -6,7 +6,7 @@ import { HistoryUpdatedEvent, HistoryUpdater } from '../../domain';
 
 export type UpdaterHistoryUseCaseProps = HistoryUpdater;
 
-export class EditHistoryUseCase extends AdminUseCase<UpdaterHistoryUseCaseProps, Promise<E.Either<void, void>>> {
+export class UpdateHistoryUseCase extends AdminUseCase<UpdaterHistoryUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly historyRepository: BaseRepository<HistoryUpdater>) {
     super(
       progressBuilder().withStart('progress.updatingHistory').withComplete('progress.historyUpdatedSuccess').build()

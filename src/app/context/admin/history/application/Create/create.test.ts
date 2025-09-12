@@ -1,7 +1,7 @@
 import * as E from '@sweet-monads/either';
 import { EitherBuilder, BaseRepository, bus, Exception } from '@shared/domain';
 import { RaffleBuilder } from '@context/shared/domain/__tests__/builders/raffle.builder.test';
-import { HistoryCreator } from '@context/admin/history/domain/history';
+import { HistoryCreator } from '@context/admin/history/domain/history-creator';
 import { HistoryCreatedEvent } from '../../domain/history.event';
 import { CreateHistoryUseCase } from './create.usecase';
 

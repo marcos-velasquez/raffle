@@ -14,11 +14,21 @@ export class PocketbaseHistoryRepository extends PocketbaseRepository<History, H
     super({ collection: Collections.History, mapper: HistoryCreator.create });
   }
 
-  public override async save(history: HistoryCreator): Promise<E.Either<Exception, HistoryCreator>> {
+  public override async save(history: History): Promise<E.Either<Exception, History>> {
     try {
-      const { id, file, raffle } = history.toPrimitives();
+      const { id, file, raffle } = (history as HistoryCreator).toPrimitives();
       const record = await this.collection.create({ id, video: file, raffle: raffle.id });
-      return E.right(this.options.mapper(record as unknown as HistoryCreatorPrimitives) as HistoryCreator);
+      return E.right(this.options.mapper(record as unknown as HistoryCreatorPrimitives));
+    } catch (error) {
+      return E.left(Exception.from(error));
+    }
+  }
+
+  public override async update(history: History): Promise<E.Either<Exception, History>> {
+    try {
+      const { id, history: historyPrimitives, deliveryReceipt } = (history as HistoryUpdater).toPrimitives();
+      const record = await this.collection.update(id, { ...historyPrimitives, deliveryReceipt });
+      return E.right(this.options.mapper(record as unknown as HistoryUpdaterPrimitives));
     } catch (error) {
       return E.left(Exception.from(error));
     }
