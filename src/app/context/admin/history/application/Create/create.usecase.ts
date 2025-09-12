@@ -4,14 +4,14 @@ import { HistoryCreator, HistoryCreatorPrimitives } from '@context/admin/history
 import { AdminUseCase } from '../../../shared/application';
 import { HistoryCreatedEvent } from '../../domain';
 
-export type CreateHistoryProps = HistoryCreatorPrimitives;
+export type CreateHistoryUseCaseProps = HistoryCreatorPrimitives;
 
-export class CreateHistoryUseCase extends AdminUseCase<CreateHistoryProps, Promise<E.Either<void, void>>> {
+export class CreateHistoryUseCase extends AdminUseCase<CreateHistoryUseCaseProps, Promise<E.Either<void, void>>> {
   constructor(private readonly historyRepository: BaseRepository<HistoryCreator>) {
     super();
   }
 
-  protected async next(props: CreateHistoryProps): Promise<E.Either<void, void>> {
+  protected async next(props: CreateHistoryUseCaseProps): Promise<E.Either<void, void>> {
     this.start();
     const history = HistoryCreator.create(props);
     const result = await this.historyRepository.save(history);

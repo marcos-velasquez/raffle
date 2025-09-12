@@ -3,10 +3,13 @@ import * as E from '@sweet-monads/either';
 import { Collections } from '@pocketbase';
 import { PocketbaseRepository } from '@shared/infrastructure';
 import { Exception } from '@shared/domain';
-import { HistoryCreator, HistoryCreatorPrimitives } from '../domain';
+import { HistoryCreator, HistoryCreatorPrimitives, HistoryUpdater, HistoryUpdaterPrimitives } from '../domain';
+
+type History = HistoryCreator | HistoryUpdater;
+type HistoryPrimitives = HistoryCreatorPrimitives | HistoryUpdaterPrimitives;
 
 @Injectable({ providedIn: 'root' })
-export class PocketbaseHistoryRepository extends PocketbaseRepository<HistoryCreator, HistoryCreatorPrimitives> {
+export class PocketbaseHistoryRepository extends PocketbaseRepository<History, HistoryPrimitives> {
   constructor() {
     super({ collection: Collections.History, mapper: HistoryCreator.create });
   }
@@ -15,7 +18,7 @@ export class PocketbaseHistoryRepository extends PocketbaseRepository<HistoryCre
     try {
       const { id, file, raffle } = history.toPrimitives();
       const record = await this.collection.create({ id, video: file, raffle: raffle.id });
-      return E.right(this.options.mapper(record as unknown as HistoryCreatorPrimitives));
+      return E.right(this.options.mapper(record as unknown as HistoryCreatorPrimitives) as HistoryCreator);
     } catch (error) {
       return E.left(Exception.from(error));
     }

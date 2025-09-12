@@ -1,12 +1,16 @@
-import { HistoryCreatorPrimitives } from '@context/admin/history/domain/history-creator';
 import { PocketbaseHistoryRepository } from '../infrastructure/history.repository';
-import { CreateHistoryUseCase } from './Create/create.usecase';
+import { CreateHistoryUseCaseProps, CreateHistoryUseCase } from './Create/create.usecase';
+import { EditHistoryUseCase, UpdaterHistoryUseCaseProps } from './Edit/edit.usecase';
 
 export class HistoryFacade {
   private readonly historyRepository = new PocketbaseHistoryRepository();
 
-  public create(primitives: HistoryCreatorPrimitives): void {
+  public create(primitives: CreateHistoryUseCaseProps): void {
     new CreateHistoryUseCase(this.historyRepository).execute(primitives);
+  }
+
+  public update(primitives: UpdaterHistoryUseCaseProps): void {
+    new EditHistoryUseCase(this.historyRepository).execute(primitives);
   }
 }
 

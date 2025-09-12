@@ -1,5 +1,5 @@
 import { assert, Entity } from '@shared/domain';
-import { History, HistoryPrimitives } from '@context/public/history/domain';
+import { History, HistoryPrimitives } from '@context/shared/domain';
 
 export class HistoryUpdater extends Entity<HistoryUpdaterPrimitives> {
   private constructor(private readonly history: History, private readonly deliveryReceipt: File) {

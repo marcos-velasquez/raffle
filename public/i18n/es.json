@@ -82,7 +82,9 @@
     "decliningPayment": "Declinando pago...",
     "paymentDeclinedSuccess": "Pago declinado con éxito",
     "verifyingPayment": "Verificando pago...",
-    "paymentVerifiedSuccess": "Pago verificado con éxito"
+    "paymentVerifiedSuccess": "Pago verificado con éxito",
+    "updatingHistory": "Actualizando historial...",
+    "historyUpdatedSuccess": "Historial actualizado con éxito"
   },
   "errors": {
     "numberNotAvailable": "El número no está disponible",
