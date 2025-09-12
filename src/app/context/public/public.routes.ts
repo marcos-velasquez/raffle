@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { redirectRaffleNotFoundTo } from './raffle/infrastructure';
-import { redirectHistoryNotFoundTo, historyResolver } from './history/infrastructure';
+import { redirectHistoryNotFoundTo } from './history/infrastructure';
 
 export const publicRoutes: Route[] = [
   {
@@ -20,9 +20,8 @@ export const publicRoutes: Route[] = [
           import('./number/presenter/views/number-list/number-list.component').then((c) => c.NumberListComponent),
       },
       {
-        path: 'history/:id',
+        path: 'history/:historyId',
         canActivate: [redirectHistoryNotFoundTo('/history')],
-        resolve: { history: historyResolver },
         loadComponent: () =>
           import('./history/presenter/views/history/history.component').then((c) => c.HistoryComponent),
       },

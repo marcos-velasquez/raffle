@@ -5,7 +5,7 @@ import { HistoryStore } from './history.store';
 
 export function redirectHistoryNotFoundTo(redirect: string): CanActivateFn {
   return (route: ActivatedRouteSnapshot) => {
-    const historyId = route.paramMap.get('id') as string;
+    const historyId = route.paramMap.get('historyId') as string;
     return is
       .affirmative(inject(HistoryStore).has(historyId))
       .mapRight(() => true)
