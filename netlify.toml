@@ -4,8 +4,6 @@
 
 [[plugins]]
   package = "@netlify/angular-runtime"
-  [plugins.inputs]
-    packagePath = "./"
 
 [build.environment]
   NODE_VERSION = "22"
