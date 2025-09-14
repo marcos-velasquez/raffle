@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter';
 import { is } from '@shared/domain';
 import { authenticationFacade } from '../../../application';
 

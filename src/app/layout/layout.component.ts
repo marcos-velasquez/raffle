@@ -1,5 +1,5 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter';
 import { LoadingBarComponent } from '@ui/components/loading-bar';
 import { LayoutService } from './services/layout.service';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';

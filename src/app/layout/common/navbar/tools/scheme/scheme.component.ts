@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter';
 import { ConfigService } from '@ui/services/config';
 
 @Component({

@@ -11,6 +11,7 @@ export enum Collections {
 	Mfas = "_mfas",
 	Otps = "_otps",
 	Superusers = "_superusers",
+	Config = "config",
 	History = "history",
 	Raffles = "raffles",
 	Vouchers = "vouchers",
@@ -92,8 +93,18 @@ export type SuperusersRecord = {
 	verified?: boolean
 }
 
+export type ConfigRecord = {
+	created?: IsoDateString
+	currency_suffix?: string
+	id: string
+	payment_details?: string
+	phone_prefix?: string
+	updated?: IsoDateString
+}
+
 export type HistoryRecord = {
 	created?: IsoDateString
+	deliveryReceipt?: string
 	id: string
 	raffle: RecordIdString
 	updated?: IsoDateString
@@ -114,9 +125,9 @@ export type RafflesRecord<Tnumbers = unknown> = {
 
 export type VouchersRecord = {
 	created?: IsoDateString
-	file: string
 	id: string
 	updated?: IsoDateString
+	value: string
 }
 
 // Response types include system fields and match responses from the PocketBase API
@@ -125,6 +136,7 @@ export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRec
 export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemFields<Texpand>
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
+export type ConfigResponse<Texpand = unknown> = Required<ConfigRecord> & BaseSystemFields<Texpand>
 export type HistoryResponse<Texpand = unknown> = Required<HistoryRecord> & BaseSystemFields<Texpand>
 export type RafflesResponse<Tnumbers = unknown, Texpand = unknown> = Required<RafflesRecord<Tnumbers>> & BaseSystemFields<Texpand>
 export type VouchersResponse<Texpand = unknown> = Required<VouchersRecord> & BaseSystemFields<Texpand>
@@ -137,6 +149,7 @@ export type CollectionRecords = {
 	_mfas: MfasRecord
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
+	config: ConfigRecord
 	history: HistoryRecord
 	raffles: RafflesRecord
 	vouchers: VouchersRecord
@@ -148,6 +161,7 @@ export type CollectionResponses = {
 	_mfas: MfasResponse
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
+	config: ConfigResponse
 	history: HistoryResponse
 	raffles: RafflesResponse
 	vouchers: VouchersResponse
@@ -162,6 +176,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: '_mfas'): RecordService<MfasResponse>
 	collection(idOrName: '_otps'): RecordService<OtpsResponse>
 	collection(idOrName: '_superusers'): RecordService<SuperusersResponse>
+	collection(idOrName: 'config'): RecordService<ConfigResponse>
 	collection(idOrName: 'history'): RecordService<HistoryResponse>
 	collection(idOrName: 'raffles'): RecordService<RafflesResponse>
 	collection(idOrName: 'vouchers'): RecordService<VouchersResponse>

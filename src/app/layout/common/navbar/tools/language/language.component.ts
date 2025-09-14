@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter';
 
 @Component({
   selector: 'app-language',

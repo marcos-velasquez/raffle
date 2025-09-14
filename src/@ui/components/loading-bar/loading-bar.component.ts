@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter/components/base';
 import { LoadingBarService } from '../../services/loading/loading.service';
 
 @Component({

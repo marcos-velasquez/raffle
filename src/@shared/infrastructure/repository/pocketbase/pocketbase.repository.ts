@@ -35,7 +35,7 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
     }
   }
 
-  public findOne(criteria: Criteria): Promise<E.Either<Error, T>> {
+  public findOne(criteria: Criteria = new Criteria()): Promise<E.Either<Error, T>> {
     return this.findAll(criteria).then((result) => result.map((a) => a[0]));
   }
 

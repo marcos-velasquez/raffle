@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { BaseComponent } from '@core/base';
+import { BaseComponent } from '@context/shared/presenter';
 import { authenticationFacade } from '@context/admin/authentication/application';
 
 @Component({
