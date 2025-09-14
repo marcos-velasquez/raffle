@@ -2,10 +2,14 @@
   publish = "dist/raffle/browser"
   command = "npm install --legacy-peer-deps --force && npm run build"
 
+[[plugins]]
+  package = "@netlify/angular-runtime"
+  [plugins.inputs]
+    packagePath = "apps/raffle"
+
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
-
 
 [[redirects]]
   from = "/*"
