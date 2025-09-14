@@ -5,7 +5,7 @@
 [[plugins]]
   package = "@netlify/angular-runtime"
   [plugins.inputs]
-    packagePath = "apps/raffle"
+    packagePath = "./"
 
 [build.environment]
   NODE_VERSION = "22"
