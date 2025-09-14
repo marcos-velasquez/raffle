@@ -1,8 +1,6 @@
 # See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-pocketbase/pb_data
-pocketbase/pb_migrations
-!pocketbase/pb_hooks/cleanup_payments.pb.js
+
 
 
 # compiled output
