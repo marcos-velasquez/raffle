@@ -11,9 +11,8 @@ RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.21/poc
     && unzip pocketbase_0.22.21_linux_amd64.zip \
     && rm pocketbase_0.22.21_linux_amd64.zip
 
-# Copy hooks and migrations if they exist
+# Copy hooks only (skip migrations for clean start)
 COPY pocketbase/pb_hooks ./pb_hooks
-COPY pocketbase/pb_migrations ./pb_migrations
 
 # Make PocketBase executable
 RUN chmod +x pocketbase
