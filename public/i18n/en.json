@@ -109,9 +109,6 @@
     "purchased": "Reserved",
     "winner": "Winner"
   },
-  "currency": {
-    "bs": "Bs."
-  },
   "payment": {
     "mobilePay": "Mobile Pay"
   },

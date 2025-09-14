@@ -109,9 +109,6 @@
     "purchased": "Apartado",
     "winner": "Ganador"
   },
-  "currency": {
-    "bs": "Bs."
-  },
   "payment": {
     "mobilePay": "Pago móvil"
   },
