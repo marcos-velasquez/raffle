@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build raffle --configuration=production",
+    "build": "nx build",
     "test": "nx test",
     "generate:types": "npx pocketbase-typegen@ --db ./pocketbase/pb_data/data.db --out ./pocketbase/pocketbase-types.ts"
   },
