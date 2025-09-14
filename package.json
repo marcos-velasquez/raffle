@@ -34,7 +34,8 @@
     "spin-wheel": "^5.0.2",
     "uuid": "^11.1.0",
     "viewerjs": "^1.11.7",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "nx": "21.3.1"
   },
   "devDependencies": {
     "@angular-devkit/core": "~20.1.0",
