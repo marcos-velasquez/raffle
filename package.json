@@ -21,7 +21,7 @@
     "@angular/router": "~20.1.0",
     "@jsverse/transloco": "^7.6.1",
     "@midudev/tailwind-animations": "^0.2.0",
-    "@ngrx/signals": "^19.0.0",
+    "@ngrx/signals": "^20.0.1",
     "@sweet-monads/either": "^3.3.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/postcss": "^4.1.11",
