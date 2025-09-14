@@ -1,13 +1,15 @@
 FROM alpine:latest
 
-# Install ca-certificates and libc6-compat for binary compatibility
-RUN apk --no-cache add ca-certificates libc6-compat
+# Install dependencies
+RUN apk --no-cache add ca-certificates wget unzip
 
 # Create app directory
 WORKDIR /app
 
-# Copy PocketBase binary
-COPY pocketbase/pocketbase .
+# Download PocketBase for Linux x64
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.22.21/pocketbase_0.22.21_linux_amd64.zip \
+    && unzip pocketbase_0.22.21_linux_amd64.zip \
+    && rm pocketbase_0.22.21_linux_amd64.zip
 
 # Copy hooks and migrations if they exist
 COPY pocketbase/pb_hooks ./pb_hooks
