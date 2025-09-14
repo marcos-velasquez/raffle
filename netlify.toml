@@ -1,6 +1,6 @@
 [build]
   publish = "dist/raffle/browser"
-  command = "npm run build -f"
+  command = "npm install --legacy-peer-deps && npm run build"
 
 [build.environment]
   NODE_VERSION = "22"
