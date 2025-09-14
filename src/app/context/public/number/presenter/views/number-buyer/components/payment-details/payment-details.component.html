@@ -1,8 +1,8 @@
 <ul class="text-sm font-bold">
   <li class="underline">{{ 'payment.mobilePay' | transloco }}</li>
-  <li>Venezuela</li>
-  <li>123456789</li>
-  <li>04121112312</li>
+  @for (item of config().split.paymentDetails; track $index) {
+  <li>{{ item }}</li>
+  }
   <button (click)="copyToClipboard()" class="btn btn-outline btn-primary btn-xs mt-1">
     {{ 'actions.copy' | transloco }}
   </button>

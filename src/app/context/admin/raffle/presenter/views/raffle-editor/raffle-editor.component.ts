@@ -6,7 +6,7 @@ import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { Raffle } from '@context/shared/domain/raffle';
-import { RaffleFullPathsPipe } from '@context/shared/presenter';
+import { BaseComponent, RaffleFullPathsPipe } from '@context/shared/presenter';
 import { raffleFacade } from '@context/admin/raffle/application';
 
 @Component({
@@ -14,12 +14,13 @@ import { raffleFacade } from '@context/admin/raffle/application';
   imports: [CommonModule, ReactiveFormsModule, TranslocoPipe, DialogComponent, DropzoneComponent, RaffleFullPathsPipe],
   templateUrl: './raffle-editor.component.html',
 })
-export class RaffleEditorComponent implements OnInit {
+export class RaffleEditorComponent extends BaseComponent implements OnInit {
   public readonly raffle = input.required<Raffle>();
   public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
 
   constructor() {
+    super();
     this.form = inject(FormBuilder).group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],

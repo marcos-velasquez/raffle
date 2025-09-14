@@ -28,7 +28,12 @@
       <div class="label">
         <span class="label-text">{{ 'raffle.price' | transloco }}</span>
       </div>
-      <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
+      <input
+        formControlName="price"
+        [placeholder]="config().currency"
+        type="number"
+        class="w-full input input-bordered focus:input-primary"
+      />
       @if (form.get('price')?.touched && form.get('price')?.invalid) {
       <div class="validator-hint text-error">{{ 'raffle.priceValidation' | transloco }}</div>
       }

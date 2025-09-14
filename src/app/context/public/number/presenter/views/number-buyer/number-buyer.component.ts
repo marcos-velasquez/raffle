@@ -6,7 +6,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { is } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
-import { RaffleDetailsComponent, NumberComponent } from '@context/shared/presenter';
+import { RaffleDetailsComponent, NumberComponent, BaseComponent } from '@context/shared/presenter';
 import { RaffleStore } from '@context/admin/raffle/infrastructure';
 import { Voucher } from '@context/shared/domain';
 import { numberFacade, BuyNumberOutput } from '../../../application';
@@ -28,7 +28,7 @@ import { PaymentDetailsComponent } from './components';
   providers: [provideNgxMask()],
   templateUrl: './number-buyer.component.html',
 })
-export class NumberBuyerComponent {
+export class NumberBuyerComponent extends BaseComponent {
   public readonly raffleId = input.required<string>();
   public readonly value = input.required({ transform: numberAttribute });
 
@@ -41,10 +41,11 @@ export class NumberBuyerComponent {
   public readonly form: FormGroup;
 
   constructor(private readonly voucherRepository: PocketbaseVoucherRepository) {
+    super();
     effect(() => this.ensureAvailability());
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
-      phone: ['58', [Validators.required]],
+      phone: [this.config().phonePrefix, [Validators.required]],
       voucher: ['', [Validators.required]],
     });
   }

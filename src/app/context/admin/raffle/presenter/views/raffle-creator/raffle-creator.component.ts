@@ -5,6 +5,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
 import { DropzoneComponent } from '@ui/components/dropzone';
+import { BaseComponent } from '@context/shared/presenter';
 import { Raffle } from '@context/shared/domain';
 import { raffleFacade } from '@context/admin/raffle/application';
 
@@ -13,11 +14,12 @@ import { raffleFacade } from '@context/admin/raffle/application';
   imports: [CommonModule, ReactiveFormsModule, TranslocoPipe, DialogComponent, DropzoneComponent],
   templateUrl: './raffle-creator.component.html',
 })
-export class RaffleCreatorComponent {
+export class RaffleCreatorComponent extends BaseComponent {
   public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
 
   constructor() {
+    super();
     this.form = inject(FormBuilder).group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],

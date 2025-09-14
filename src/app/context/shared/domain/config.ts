@@ -15,6 +15,12 @@ export class Config extends Entity<ConfigPrimitives> {
     };
   }
 
+  public get split() {
+    return {
+      paymentDetails: this.paymentDetails.split(','),
+    };
+  }
+
   public toPrimitives(): ConfigPrimitives {
     return { ...this };
   }
