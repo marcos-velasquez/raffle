@@ -1,9 +1,10 @@
 [build]
   publish = "dist/raffle/browser"
-  command = "npm install --legacy-peer-deps --force && npm run build"
+  command = "npm ci --legacy-peer-deps --force && npx nx build raffle --configuration=production"
 
 [build.environment]
   NODE_VERSION = "22"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 [[redirects]]
   from = "/*"
