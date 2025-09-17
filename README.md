@@ -244,6 +244,7 @@ Antes de ejecutar el servidor de desarrollo, necesitas iniciar PocketBase:
 ```
 
 **Credenciales de prueba para el panel de administración:**
+- URL: `http://localhost:4200/admin/authentication`
 - Email: `test@gmail.com`
 - Contraseña: `test1234`
 
