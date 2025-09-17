@@ -235,6 +235,18 @@ _Este caso de uso está disponible tanto para administradores como para usuarios
 
 ## Desarrollo
 
+### Ejecutar PocketBase
+
+Antes de ejecutar el servidor de desarrollo, necesitas iniciar PocketBase:
+
+```sh
+./pocketbase/pocketbase serve
+```
+
+**Credenciales de prueba para el panel de administración:**
+- Email: `test@gmail.com`
+- Contraseña: `test1234`
+
 ### Ejecutar el servidor de desarrollo
 
 ```sh
