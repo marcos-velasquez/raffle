@@ -7,7 +7,14 @@ User <|-down- Public
 class Admin {}
 Admin -down-> Raffle : "(create, delete, update) >"
 Admin -down- Number: "(verify, decline) >"
-Admin ..> Wheel 
+Admin ..> Wheel
+Admin o-down-> "1..n" Configuration : "(create, update, delete) >"
+
+class Configuration {
+    paymentDetails
+    phonePrefix
+    currency
+}
 
 class Public {}
 Public o-down-> "*" Number : "buy >"

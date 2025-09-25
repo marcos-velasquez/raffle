@@ -78,6 +78,18 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Permitir eliminar rifas:**
     - No se puede eliminar una rifa con números comprados
 
+- **Configuración del Sistema**:
+
+  - **Permitir crear configuración:**
+    - Detalles del pago (información de cuenta bancaria, métodos de pago)
+    - Prefijo del teléfono (código de país para notificaciones)
+    - Moneda (tipo de moneda utilizada en las rifas)
+  - **Permitir actualizar configuración:**
+  - **Permitir eliminar configuración:**
+  - **Permitir ver configuración:**
+    - Consultar configuraciones existentes
+    - Ver detalles completos de cada configuración
+
 - **Gestión de Números**:
 
   - **Filtrar números por estado o valor**
@@ -113,12 +125,16 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 ### 2. Administrador
 
 1. Inicia sesión en el panel de administración
-2. Visualiza las rifas activas y filtra los números en proceso de pago
-3. Verifica los pagos revisando los comprobantes
-4. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
-5. Agrega nuevas rifas al sistema si es necesario
-6. Una vez todos los números de una rifa estén comprados, utiliza la ruleta virtual para seleccionar al ganador
-7. Una vez entregado el premio al ganador, se sube el comprobante de entrega en el historial de la rifa
+2. Configura el sistema estableciendo:
+   - Detalles del pago (información bancaria, métodos aceptados)
+   - Prefijo del teléfono para notificaciones WhatsApp
+   - Tipo de moneda a utilizar
+3. Visualiza las rifas activas y filtra los números en proceso de pago
+4. Verifica los pagos revisando los comprobantes
+5. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
+6. Agrega nuevas rifas al sistema utilizando la configuración establecida
+7. Una vez todos los números de una rifa estén comprados, utiliza la ruleta virtual para seleccionar al ganador
+8. Una vez entregado el premio al ganador, se sube el comprobante de entrega en el historial de la rifa
 
 ## Glosario
 
@@ -162,6 +178,14 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 **Grabación del sorteo**: Registro visual del momento en que se lleva a cabo el sorteo de la rifa para seleccionar el ganador.
 
 **Comprobante de entrega**: Registro visual del momento en que se entrega el premio al ganador.
+
+**Configuración del Sistema**: Conjunto de parámetros globales que definen el comportamiento del sistema de rifas, incluyendo información de pago, configuración de notificaciones y moneda.
+
+**Detalles del Pago**: Información específica sobre los métodos de pago aceptados, incluyendo datos bancarios, cuentas digitales o cualquier otro medio de pago configurado por el administrador.
+
+**Prefijo del Teléfono**: Código de país utilizado para el envío de notificaciones WhatsApp, que se antepone automáticamente a los números de teléfono de los usuarios.
+
+**Moneda**: Tipo de moneda configurada en el sistema que se utiliza para mostrar los precios de las rifas y procesar los pagos.
 
 ## Modelo de Dominio
 
@@ -244,6 +268,7 @@ Antes de ejecutar el servidor de desarrollo, necesitas iniciar PocketBase:
 ```
 
 **Credenciales de prueba para el panel de administración:**
+
 - URL: `http://localhost:4200/admin/authentication`
 - Email: `test@gmail.com`
 - Contraseña: `test1234`
