@@ -47,3 +47,7 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 
 .angular
+
+
+pocketbase/pb_data
+pocketbase/pb_migrations

@@ -6,6 +6,7 @@ import { ConfirmationService } from '@ui/services/confirmation';
 import { ExpandImageDirective } from '@ui/directives/expand-image';
 import { RaffleDetailsComponent, NumberComponent, VoucherFullPathPipe } from '@context/shared/presenter';
 import { RaffleStore } from '@context/admin/raffle/infrastructure';
+import { NumberSubscriber } from '../../../infrastructure';
 import { numberFacade } from '../../../application';
 
 @Component({
@@ -29,7 +30,9 @@ export class NumberEditorComponent {
 
   public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
-  constructor(private readonly confirmationService: ConfirmationService) {}
+  constructor(private readonly confirmationService: ConfirmationService) {
+    inject(NumberSubscriber).init();
+  }
 
   public declinePayment() {
     this.confirmationService.open().mapRight(async () => {

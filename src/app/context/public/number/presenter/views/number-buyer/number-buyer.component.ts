@@ -7,10 +7,10 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { is } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent, BaseComponent } from '@context/shared/presenter';
-import { RaffleStore } from '@context/admin/raffle/infrastructure';
 import { Voucher } from '@context/shared/domain';
+import { PocketbaseVoucherRepository } from '@context/shared/infrastructure';
+import { RaffleStore } from '@context/public/raffle/infrastructure';
 import { numberFacade, BuyNumberOutput } from '../../../application';
-import { PocketbaseVoucherRepository } from '../../../infrastructure';
 import { PaymentDetailsComponent } from './components';
 
 @Component({
@@ -72,7 +72,7 @@ export class NumberBuyerComponent extends BaseComponent {
         const result = await this.voucherRepository.save(Voucher.create({ value: this.form.value.voucher[0] }));
         result.mapRight(async (voucher) => {
           const { name, phone } = this.form.value;
-          const payerPrimitives = { name, phone, voucher: Voucher.from(voucher.toPrimitives()).toPrimitives() };
+          const payerPrimitives = { name, phone, voucher: voucher.toPrimitives() };
           const result = await this.buyUseCase.complete(payerPrimitives);
           result.mapRight(() => this.router.navigate(['..']));
         });
