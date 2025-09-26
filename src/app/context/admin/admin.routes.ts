@@ -35,6 +35,11 @@ export const adminRoutes: Route[] = [
         loadComponent: () =>
           import('./raffle/presenter/views/raffle-list/raffle-list.component').then((c) => c.RaffleListComponent),
       },
+      {
+        path: 'configuration',
+        loadComponent: () =>
+          import('./configuration/presenter/views/configuration-list/configuration-list.component').then((c) => c.ConfigurationListComponent),
+      },
     ],
   },
 ];

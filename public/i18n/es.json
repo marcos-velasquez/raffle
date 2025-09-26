@@ -10,7 +10,8 @@
   "navigation": {
     "raffles": "Rifas",
     "history": "Historial",
-    "management": "Gestión"
+    "management": "Gestión",
+    "configuration": "Configuración"
   },
   "raffle": {
     "create": "Crear Rifa",
@@ -28,6 +29,32 @@
     "selectWinner": "Seleccionar ganador",
     "cancel": "Cancelar",
     "editAction": "Editar"
+  },
+  "configuration": {
+    "title": "Configuración del Sistema",
+    "noConfigurations": "No hay configuraciones disponibles",
+    "currency": "Moneda",
+    "phonePrefix": "Prefijo Telefónico",
+    "paymentDetails": "Detalles de Pago",
+    "card": {
+      "title": "Configuración"
+    },
+    "create": {
+      "title": "Crear Configuración",
+      "button": "Nueva Configuración"
+    },
+    "edit": {
+      "title": "Editar Configuración"
+    },
+    "delete": {
+      "title": "Eliminar Configuración",
+      "confirmation": "¿Estás seguro de eliminar esta configuración?"
+    },
+    "placeholders": {
+      "currency": "Ej: USD, EUR, COP",
+      "phonePrefix": "Ej: +57, +1, +34",
+      "paymentDetails": "Información de cuenta bancaria, métodos de pago aceptados, etc."
+    }
   },
   "number": {
     "buy": "Comprar Número",
@@ -86,7 +113,15 @@
     "verifyingPayment": "Verificando pago...",
     "paymentVerifiedSuccess": "Pago verificado con éxito",
     "updatingHistory": "Actualizando historial...",
-    "historyUpdatedSuccess": "Historial actualizado con éxito"
+    "historyUpdatedSuccess": "Historial actualizado con éxito",
+    "creatingConfiguration": "Creando configuración...",
+    "configurationCreatedSuccess": "Configuración creada con éxito",
+    "updatingConfiguration": "Actualizando configuración...",
+    "configurationUpdatedSuccess": "Configuración actualizada con éxito",
+    "removingConfiguration": "Eliminando configuración...",
+    "configurationRemovedSuccess": "Configuración eliminada con éxito",
+    "loadingConfigurations": "Cargando configuraciones...",
+    "configurationsLoadedSuccess": "Configuraciones cargadas con éxito"
   },
   "errors": {
     "numberNotAvailable": "El número no está disponible",
@@ -147,5 +182,9 @@
   },
   "history": {
     "uploadDeliveryReceipt": "Subir comprobante de entrega"
+  },
+  "validation": {
+    "required": "Este campo es requerido",
+    "invalid": "El valor ingresado no es válido"
   }
 }

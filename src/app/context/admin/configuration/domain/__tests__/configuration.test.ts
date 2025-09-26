@@ -1,0 +1,142 @@
+import { ConfigurationBuilder } from './configuration.builder.test';
+import { ConfigurationMother } from './configuration.mother.test';
+
+describe('Configuration', () => {
+  describe('create', () => {
+    it('should create a configuration with valid data', () => {
+      const configuration = ConfigurationMother.usd();
+
+      expect(configuration.currency).toBe('USD');
+      expect(configuration.phonePrefix).toBe('+1');
+      expect(configuration.paymentDetails).toBe('US Bank account: 123456789');
+    });
+
+    it('should throw error when currency is empty', () => {
+      expect(() => {
+        new ConfigurationBuilder()
+          .withCurrency('')
+          .withPhonePrefix('+1')
+          .withPaymentDetails('Bank account: 123456789')
+          .build();
+      }).toThrow('Currency is required');
+    });
+
+    it('should throw error when phonePrefix is empty', () => {
+      expect(() => {
+        new ConfigurationBuilder()
+          .withCurrency('USD')
+          .withPhonePrefix('')
+          .withPaymentDetails('Bank account: 123456789')
+          .build();
+      }).toThrow('Phone prefix is required');
+    });
+
+    it('should throw error when paymentDetails is empty', () => {
+      expect(() => {
+        new ConfigurationBuilder()
+          .withCurrency('USD')
+          .withPhonePrefix('+1')
+          .withPaymentDetails('')
+          .build();
+      }).toThrow('Payment details are required');
+    });
+  });
+
+  describe('from', () => {
+    it('should create configuration from standard primitives', () => {
+      const configuration = ConfigurationMother.cop();
+
+      expect(configuration.getId()).toBeDefined();
+      expect(configuration.currency).toBe('COP');
+      expect(configuration.phonePrefix).toBe('+57');
+      expect(configuration.paymentDetails).toBe('Nequi: 3001234567');
+    });
+
+    it('should create configuration with custom id', () => {
+      const customId = 'custom-test-id';
+      const configuration = ConfigurationMother.withId(customId);
+
+      expect(configuration.getId()).toBe(customId);
+      expect(configuration.currency).toBe('USD'); // default from builder
+    });
+  });
+
+  describe('toPrimitives', () => {
+    it('should convert configuration to primitives', () => {
+      const testId = 'test-id';
+      const paymentDetails = 'PayPal: test@example.com';
+      const configuration = new ConfigurationBuilder()
+        .withId(testId)
+        .withCurrency('USD')
+        .withPhonePrefix('+1')
+        .withPaymentDetails(paymentDetails)
+        .build();
+
+      const primitives = configuration.toPrimitives();
+
+      expect(primitives).toEqual({
+        id: testId,
+        currency: 'USD',
+        phonePrefix: '+1',
+        paymentDetails: paymentDetails,
+      });
+    });
+  });
+
+  describe('is.equal', () => {
+    it('should check currency equality', () => {
+      const configuration = ConfigurationMother.usd();
+
+      expect(configuration.is.equal.currency('USD')).toBe(true);
+      expect(configuration.is.equal.currency('EUR')).toBe(false);
+    });
+
+    it('should check phonePrefix equality', () => {
+      const configuration = ConfigurationMother.usd();
+
+      expect(configuration.is.equal.phonePrefix('+1')).toBe(true);
+      expect(configuration.is.equal.phonePrefix('+57')).toBe(false);
+    });
+
+    it('should check paymentDetails equality', () => {
+      const paymentDetails = 'Custom payment details';
+      const configuration = ConfigurationMother.withPaymentDetails(paymentDetails);
+
+      expect(configuration.paymentDetails).toBe(paymentDetails);
+    });
+  });
+
+  describe('different currency configurations', () => {
+    it('should create different currency configurations', () => {
+      const usdConfig = ConfigurationMother.usd();
+      const euroConfig = ConfigurationMother.euro();
+      const copConfig = ConfigurationMother.cop();
+
+      expect(usdConfig.currency).toBe('USD');
+      expect(usdConfig.phonePrefix).toBe('+1');
+
+      expect(euroConfig.currency).toBe('EUR');
+      expect(euroConfig.phonePrefix).toBe('+34');
+
+      expect(copConfig.currency).toBe('COP');
+      expect(copConfig.phonePrefix).toBe('+57');
+    });
+
+    it('should create random configurations', () => {
+      const config1 = ConfigurationMother.random();
+      const config2 = ConfigurationMother.random();
+
+      expect(config1.getId()).not.toBe(config2.getId());
+      expect(config1.currency).toBeDefined();
+      expect(config2.currency).toBeDefined();
+    });
+
+    it('should create multiple configurations', () => {
+      const configurations = ConfigurationMother.many(3);
+
+      expect(configurations).toHaveLength(3);
+      expect(configurations[0].getId()).not.toBe(configurations[1].getId());
+      expect(configurations[1].getId()).not.toBe(configurations[2].getId());
+    });
+  });
+});
