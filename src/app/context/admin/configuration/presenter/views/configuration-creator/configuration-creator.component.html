@@ -1,6 +1,5 @@
-<button (click)="open()" class="btn btn-primary">
-  <span class="icon-[heroicons--plus]"></span>
-  {{ 'configuration.create.button' | transloco }}
+<button (click)="open()" class="btn btn-soft btn-primary absolute bottom-0 inset-x-0 w-fit mx-auto">
+  <span class="icon-[heroicons--plus-circle-16-solid]"></span>
 </button>
 
 <ui-dialog>
@@ -59,7 +58,6 @@
         {{ 'actions.cancel' | transloco }}
       </button>
       <button (click)="create()" [disabled]="form.invalid" class="btn btn-soft btn-primary">
-        <span class="icon-[heroicons--plus]"></span>
         {{ 'actions.create' | transloco }}
       </button>
     </footer>

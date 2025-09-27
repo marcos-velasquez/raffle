@@ -1,13 +1,12 @@
 import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslocoModule } from '@jsverse/transloco';
 import { ConfirmationService } from '@ui/services/confirmation';
-import { Configuration } from '../../../domain';
-import { configurationFacade } from '../../../application';
+import { configurationFacade } from '../../../../../../application';
+import { Configuration } from '../../../../../../domain';
 
 @Component({
-  selector: 'app-configuration-remover',
-  imports: [CommonModule, TranslocoModule],
+  selector: 'app-configuration-remover-tool',
+  imports: [CommonModule],
   templateUrl: './configuration-remover.component.html',
 })
 export class ConfigurationRemoverComponent {

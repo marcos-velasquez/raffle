@@ -1,18 +1,9 @@
-<div class="w-full space-y-6">
-  <div class="flex justify-between items-center">
-    <h1 class="text-2xl font-bold">{{ 'configuration.title' | transloco }}</h1>
-    <app-configuration-creator />
-  </div>
-
-  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-    @for (configuration of configurationStore.configurations(); track configuration.getId()) {
-      <app-configuration-card [configuration]="configuration" />
-    }
-    
-    @if (configurationStore.configurations().length === 0) {
-      <div class="col-span-full text-center py-12 text-gray-500">
-        <p>{{ 'configuration.noConfigurations' | transloco }}</p>
-      </div>
-    }
-  </div>
-</div>
+<ul class="w-full grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center gap-y-12 gap-x-4">
+  @for (configuration of configurationStore.configurations(); track configuration.getId()) {
+  <li class="md:w-full relative animate-fade-in">
+    <app-configuration-card [configuration]="configuration" />
+    <app-configuration-toolbar [configuration]="configuration" />
+  </li>
+  }
+  <app-configuration-creator class="animate-fade-in" />
+</ul>
