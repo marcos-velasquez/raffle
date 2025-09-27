@@ -1,0 +1,18 @@
+<div class="w-full space-y-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold">{{ 'configuration.title' | transloco }}</h1>
+    <app-configuration-creator />
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    @for (configuration of configurationStore.configurations(); track configuration.getId()) {
+      <app-configuration-card [configuration]="configuration" />
+    }
+    
+    @if (configurationStore.configurations().length === 0) {
+      <div class="col-span-full text-center py-12 text-gray-500">
+        <p>{{ 'configuration.noConfigurations' | transloco }}</p>
+      </div>
+    }
+  </div>
+</div>

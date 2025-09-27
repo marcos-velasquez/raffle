@@ -35,6 +35,10 @@ export class Configuration extends Entity<ConfigurationPrimitives> {
       primitives.id
     );
   }
+
+  public static create(primitives: ConfigurationCreatePrimitives): Configuration {
+    return new Configuration(primitives.currency, primitives.phonePrefix, primitives.paymentDetails);
+  }
 }
 
 export type ConfigurationPrimitives = {
@@ -45,3 +49,4 @@ export type ConfigurationPrimitives = {
 };
 
 export type ConfigurationUpdatePrimitives = Omit<ConfigurationPrimitives, 'id'>;
+export type ConfigurationCreatePrimitives = ConfigurationUpdatePrimitives;
