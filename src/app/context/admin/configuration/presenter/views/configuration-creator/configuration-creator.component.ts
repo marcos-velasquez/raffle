@@ -1,15 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
+import { is, when } from '@shared/domain';
+import { DialogComponent } from '@ui/components/dialog';
 import { configurationFacade } from '../../../application';
 
 @Component({
   selector: 'app-configuration-creator',
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, DialogComponent],
   templateUrl: './configuration-creator.component.html',
 })
 export class ConfigurationCreatorComponent {
+  public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
 
   constructor() {
@@ -20,21 +23,19 @@ export class ConfigurationCreatorComponent {
     });
   }
 
-  public isModalOpen = false;
-
-  public openModal() {
-    this.isModalOpen = true;
-    this.form.reset();
+  public open() {
+    when(this.form.reset()).map(() => this.uiDialog().open());
   }
 
-  public closeModal() {
-    this.isModalOpen = false;
+  public close() {
+    this.uiDialog().close();
   }
 
-  public async onSubmit() {
-    if (this.form.valid) {
-      await configurationFacade.create(this.form.value);
-      this.closeModal();
-    }
+  public async create() {
+    is.affirmative(this.form.valid)
+      .mapLeft(() => this.form.markAllAsTouched())
+      .mapRight(() => {
+        when(configurationFacade.create(this.form.getRawValue())).map(() => this.close());
+      });
   }
 }

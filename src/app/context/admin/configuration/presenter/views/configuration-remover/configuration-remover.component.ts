@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
+import { ConfirmationService } from '@ui/services/confirmation';
 import { Configuration } from '../../../domain';
 import { configurationFacade } from '../../../application';
 
@@ -12,18 +13,9 @@ import { configurationFacade } from '../../../application';
 export class ConfigurationRemoverComponent {
   public readonly configuration = input.required<Configuration>();
 
-  public isModalOpen = false;
+  private readonly confirmation = inject(ConfirmationService);
 
-  public openModal() {
-    this.isModalOpen = true;
-  }
-
-  public closeModal() {
-    this.isModalOpen = false;
-  }
-
-  public async onConfirm() {
-    await configurationFacade.remove(this.configuration());
-    this.closeModal();
+  public remove() {
+    this.confirmation.open().mapRight(() => configurationFacade.remove(this.configuration()));
   }
 }

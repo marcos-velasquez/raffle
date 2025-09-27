@@ -1,19 +1,21 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
+import { is, when } from '@shared/domain';
+import { DialogComponent } from '@ui/components/dialog';
 import { Configuration } from '../../../domain';
 import { configurationFacade } from '../../../application';
 
 @Component({
   selector: 'app-configuration-editor',
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, DialogComponent],
   templateUrl: './configuration-editor.component.html',
 })
 export class ConfigurationEditorComponent {
   public readonly configuration = input.required<Configuration>();
 
-  public isModalOpen = false;
+  public readonly uiDialog = viewChild.required(DialogComponent);
 
   public form: FormGroup;
 
@@ -25,23 +27,21 @@ export class ConfigurationEditorComponent {
     });
   }
 
-  public openModal() {
-    this.isModalOpen = true;
-    this.form.patchValue({
-      currency: this.configuration().currency,
-      phonePrefix: this.configuration().phonePrefix,
-      paymentDetails: this.configuration().paymentDetails,
-    });
+  public open() {
+    when(this.form.patchValue(this.configuration().toPrimitives())).map(() => this.uiDialog().open());
   }
 
-  public closeModal() {
-    this.isModalOpen = false;
+  public close() {
+    this.uiDialog().close();
   }
 
-  public async onSubmit() {
-    if (this.form.valid) {
-      await configurationFacade.update({ configuration: this.configuration(), primitives: this.form.value });
-      this.closeModal();
-    }
+  public async update() {
+    is.affirmative(this.form.valid)
+      .mapLeft(() => this.form.markAllAsTouched())
+      .mapRight(() => {
+        when(configurationFacade.update({ configuration: this.configuration(), primitives: this.form.value })).map(() =>
+          this.close()
+        );
+      });
   }
 }

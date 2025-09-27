@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ConfigurationStore } from '../../../infrastructure/configuration.store';
 import { ConfigurationCreatorComponent } from '../configuration-creator/configuration-creator.component';
-import { ConfigurationCardComponent } from '../configuration-card/configuration-card.component';
+import { ConfigurationCardComponent } from '../../components';
 
 @Component({
   selector: 'app-configuration-list',

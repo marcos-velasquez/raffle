@@ -1,71 +1,66 @@
-<button (click)="openModal()" class="w-full text-left">
+<button (click)="open()" class="w-full text-left">
   <ng-content></ng-content>
 </button>
 
-@if (isModalOpen) {
-<div class="modal modal-open">
-  <div class="modal-box w-11/12 max-w-2xl">
-    <form [formGroup]="form">
-      <h3 class="text-lg font-bold mb-4">
-        <span class="icon-[heroicons--pencil] mr-2"></span>
-        {{ 'configuration.edit.title' | transloco }}
-      </h3>
+<ui-dialog>
+  <form [formGroup]="form" class="form-container">
+    <header>
+      <h3 class="text-xl font-semibold">{{ 'configuration.edit.title' | transloco }}</h3>
+    </header>
 
-      <div class="form-control w-full mb-4">
-        <label for="currency" class="label">
-          {{ 'configuration.currency' | transloco }}
-        </label>
-        <input
-          id="currency"
-          formControlName="currency"
-          placeholder="{{ 'configuration.placeholders.currency' | transloco }}"
-          class="input input-bordered w-full"
-        />
-        @if (form.get('currency')?.invalid && form.get('currency')?.touched) {
-        <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
-        }
-      </div>
+    <section>
+      <label for="currency" class="label">
+        {{ 'configuration.currency' | transloco }}
+      </label>
+      <input
+        id="currency"
+        formControlName="currency"
+        placeholder="{{ 'configuration.placeholders.currency' | transloco }}"
+        class="input input-bordered w-full"
+      />
+      @if (form.get('currency')?.invalid && form.get('currency')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
 
-      <div class="form-control w-full mb-4">
-        <label for="phonePrefix" class="label">
-          {{ 'configuration.phonePrefix' | transloco }}
-        </label>
-        <input
-          id="phonePrefix"
-          formControlName="phonePrefix"
-          placeholder="{{ 'configuration.placeholders.phonePrefix' | transloco }}"
-          class="input input-bordered w-full"
-        />
-        @if (form.get('phonePrefix')?.invalid && form.get('phonePrefix')?.touched) {
-        <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
-        }
-      </div>
+    <section>
+      <label for="phonePrefix" class="label">
+        {{ 'configuration.phonePrefix' | transloco }}
+      </label>
+      <input
+        id="phonePrefix"
+        formControlName="phonePrefix"
+        placeholder="{{ 'configuration.placeholders.phonePrefix' | transloco }}"
+        class="input input-bordered w-full"
+      />
+      @if (form.get('phonePrefix')?.invalid && form.get('phonePrefix')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
 
-      <div class="form-control w-full mb-6">
-        <label for="paymentDetails" class="label">
-          {{ 'configuration.paymentDetails' | transloco }}
-        </label>
-        <textarea
-          id="paymentDetails"
-          formControlName="paymentDetails"
-          placeholder="{{ 'configuration.placeholders.paymentDetails' | transloco }}"
-          class="textarea textarea-bordered h-24 w-full"
-        ></textarea>
-        @if (form.get('paymentDetails')?.invalid && form.get('paymentDetails')?.touched) {
-        <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
-        }
-      </div>
+    <section>
+      <label for="paymentDetails" class="label">
+        {{ 'configuration.paymentDetails' | transloco }}
+      </label>
+      <textarea
+        id="paymentDetails"
+        formControlName="paymentDetails"
+        placeholder="{{ 'configuration.placeholders.paymentDetails' | transloco }}"
+        class="textarea textarea-bordered h-24 w-full"
+      ></textarea>
+      @if (form.get('paymentDetails')?.invalid && form.get('paymentDetails')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
 
-      <div class="modal-action">
-        <button (click)="closeModal()" class="btn">
-          {{ 'actions.cancel' | transloco }}
-        </button>
-        <button (click)="onSubmit()" [disabled]="form.invalid" class="btn btn-primary">
-          <span class="icon-[heroicons--check]"></span>
-          {{ 'actions.save' | transloco }}
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-}
+    <footer class="flex justify-end gap-2">
+      <button (click)="close()" class="btn btn-ghost">
+        {{ 'actions.cancel' | transloco }}
+      </button>
+      <button (click)="update()" [disabled]="form.invalid" class="btn btn-soft btn-primary">
+        <span class="icon-[heroicons--check]"></span>
+        {{ 'actions.save' | transloco }}
+      </button>
+    </footer>
+  </form>
+</ui-dialog>
