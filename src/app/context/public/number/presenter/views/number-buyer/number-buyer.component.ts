@@ -45,7 +45,7 @@ export class NumberBuyerComponent extends BaseComponent {
     effect(() => this.ensureAvailability());
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
-      phone: [this.config().phonePrefix, [Validators.required]],
+      phone: ['', [Validators.required]],
       voucher: ['', [Validators.required]],
     });
   }

@@ -1,9 +1,11 @@
 <ul class="text-sm font-bold">
+  @for (configuration of configurations(); track $index) {
   <li class="underline">{{ 'payment.mobilePay' | transloco }}</li>
-  @for (item of config().split.paymentDetails; track $index) {
+  @for (item of configuration.split.paymentDetails; track $index) {
   <li>{{ item }}</li>
   }
-  <button (click)="copyToClipboard()" class="btn btn-outline btn-primary btn-xs mt-1">
+  <button (click)="copyToClipboard(configuration)" class="btn btn-outline btn-primary btn-xs mt-1">
     {{ 'actions.copy' | transloco }}
   </button>
+  }
 </ul>

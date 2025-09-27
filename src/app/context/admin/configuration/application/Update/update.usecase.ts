@@ -1,8 +1,9 @@
 import * as E from '@sweet-monads/either';
 import { progressBuilder } from '@shared/application';
 import { BaseRepository, EitherBuilder } from '@shared/domain';
+import { Configuration, ConfigurationUpdatePrimitives } from '@context/shared/domain';
 import { AdminUseCase } from '../../../shared/application';
-import { ConfigurationUpdatedEvent, Configuration, ConfigurationUpdatePrimitives } from '../../domain';
+import { ConfigurationUpdatedEvent } from '../../domain';
 
 export type UpdateConfigurationUseCaseProps = {
   configuration: Configuration;

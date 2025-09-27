@@ -7,7 +7,9 @@ export class Number {
   private state: NumberState = 'available';
   private payer: Payer = Payer.null();
 
-  private constructor(public readonly value: number) {}
+  private constructor(public readonly value: number) {
+    assert(!!value, 'Number is required');
+  }
 
   public get get() {
     return {
@@ -43,9 +45,7 @@ export class Number {
         payer: (payer: PayerPrimitives) => (this.payer = Payer.from(payer)),
       },
       remove: {
-        payer: () => {
-          this.payer = Payer.null();
-        },
+        payer: () => (this.payer = Payer.null()),
       },
     };
   }

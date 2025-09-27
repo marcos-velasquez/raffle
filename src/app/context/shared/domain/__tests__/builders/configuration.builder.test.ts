@@ -1,4 +1,4 @@
-import { Configuration, ConfigurationPrimitives } from '../configuration';
+import { Configuration, ConfigurationPrimitives } from '../../configuration';
 
 export class ConfigurationBuilder {
   protected readonly primitives: ConfigurationPrimitives = {
@@ -56,7 +56,7 @@ export class ConfigurationBuilder {
     const prefixes = ['+1', '+57', '+34', '+52', '+54'];
     const randomCurrency = currencies[Math.floor(Math.random() * currencies.length)];
     const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-    
+
     return new ConfigurationBuilder()
       .withId(`config-${randomId}`)
       .withCurrency(randomCurrency)
@@ -112,7 +112,7 @@ describe('ConfigurationBuilder util', () => {
       .withPhonePrefix('+34')
       .withPaymentDetails('IBAN: ES123456789')
       .build();
-    
+
     expect(configuration.currency).toBe('EUR');
     expect(configuration.phonePrefix).toBe('+34');
     expect(configuration.paymentDetails).toBe('IBAN: ES123456789');
@@ -121,7 +121,7 @@ describe('ConfigurationBuilder util', () => {
   it('should create random configurations', () => {
     const config1 = ConfigurationBuilder.random().build();
     const config2 = ConfigurationBuilder.random().build();
-    
+
     expect(config1.getId()).not.toBe(config2.getId());
   });
 
@@ -129,13 +129,13 @@ describe('ConfigurationBuilder util', () => {
     const usdConfig = ConfigurationBuilder.usd().build();
     const euroConfig = ConfigurationBuilder.euro().build();
     const copConfig = ConfigurationBuilder.cop().build();
-    
+
     expect(usdConfig.currency).toBe('USD');
     expect(usdConfig.phonePrefix).toBe('+1');
-    
+
     expect(euroConfig.currency).toBe('EUR');
     expect(euroConfig.phonePrefix).toBe('+34');
-    
+
     expect(copConfig.currency).toBe('COP');
     expect(copConfig.phonePrefix).toBe('+57');
   });

@@ -21,6 +21,12 @@ export class Configuration extends Entity<ConfigurationPrimitives> {
     };
   }
 
+  public get split() {
+    return {
+      paymentDetails: this.paymentDetails.split(','),
+    };
+  }
+
   public toPrimitives(): ConfigurationPrimitives {
     return {
       id: this.getId(),
@@ -28,6 +34,10 @@ export class Configuration extends Entity<ConfigurationPrimitives> {
       phonePrefix: this.phonePrefix,
       paymentDetails: this.paymentDetails,
     };
+  }
+
+  public static empty(): Configuration {
+    return new Configuration('', '', '');
   }
 
   public static from(primitives: ConfigurationPrimitives): Configuration {

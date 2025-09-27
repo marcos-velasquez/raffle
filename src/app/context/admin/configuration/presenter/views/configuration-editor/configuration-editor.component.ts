@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { TranslocoModule } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
-import { Configuration } from '../../../domain';
+import { Configuration } from '@context/shared/domain';
 import { configurationFacade } from '../../../application';
 
 @Component({

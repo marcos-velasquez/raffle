@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Configuration } from '../../../domain';
+import { Configuration } from '@context/shared/domain';
 
 @Component({
   selector: 'app-configuration-card',

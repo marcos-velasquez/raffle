@@ -1,5 +1,5 @@
 import { DomainEvent } from '@shared/domain';
-import { Configuration } from './configuration';
+import { Configuration } from '@context/shared/domain';
 
 export class ConfigurationCreatedEvent extends DomainEvent {
   constructor(public readonly configuration: Configuration) {

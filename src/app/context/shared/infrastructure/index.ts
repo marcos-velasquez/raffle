@@ -1,3 +1,3 @@
-export * from './config.repository';
-export * from './config.store';
+export * from './configuration.repository';
+export * from './configuration.store';
 export * from './voucher.repository';

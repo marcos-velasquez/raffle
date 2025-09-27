@@ -20,7 +20,7 @@ describe('UpdateRaffleUseCase', () => {
     primitives = { title: 'Update title', description: 'Update description', images: ['update.jpg'], price: 1000 };
   });
 
-  it('should publish RaffleUpdateed event and complete with success message on successful update', async () => {
+  it('should publish RaffleUpdated event and complete with success message on successful update', async () => {
     const raffle = new RaffleBuilder().build();
     const updatedRaffle = Raffle.from({ ...raffle.toPrimitives(), ...primitives, id: expect.anything() });
 

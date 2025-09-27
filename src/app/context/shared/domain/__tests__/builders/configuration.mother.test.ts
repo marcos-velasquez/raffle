@@ -1,4 +1,4 @@
-import { Configuration } from '../configuration';
+import { Configuration } from '../../configuration';
 import { ConfigurationBuilder } from './configuration.builder.test';
 
 export class ConfigurationMother {
@@ -35,22 +35,16 @@ export class ConfigurationMother {
   }
 
   public static withPaymentDetails(paymentDetails: string): Configuration {
-    return new ConfigurationBuilder()
-      .withPaymentDetails(paymentDetails)
-      .build();
+    return new ConfigurationBuilder().withPaymentDetails(paymentDetails).build();
   }
 
   public static withId(id: string): Configuration {
-    return new ConfigurationBuilder()
-      .withId(id)
-      .build();
+    return new ConfigurationBuilder().withId(id).build();
   }
 
   public static invalid(): Configuration {
     try {
-      return new ConfigurationBuilder()
-        .withEmptyFields()
-        .build();
+      return new ConfigurationBuilder().withEmptyFields().build();
     } catch {
       // Return a valid configuration if empty fields throw error
       return ConfigurationMother.minimal();
@@ -82,7 +76,7 @@ describe('ConfigurationMother util', () => {
   it('should create random configurations', () => {
     const config1 = ConfigurationMother.random();
     const config2 = ConfigurationMother.random();
-    
+
     expect(config1.getId()).not.toBe(config2.getId());
   });
 
@@ -94,8 +88,8 @@ describe('ConfigurationMother util', () => {
 
   it('should create configurations with different currencies', () => {
     const configurations = ConfigurationMother.withDifferentCurrencies();
-    const currencies = configurations.map(config => config.currency);
-    
+    const currencies = configurations.map((config) => config.currency);
+
     expect(currencies).toContain('USD');
     expect(currencies).toContain('EUR');
     expect(currencies).toContain('COP');

@@ -1,5 +1,5 @@
-import { ConfigurationBuilder } from './configuration.builder.test';
-import { ConfigurationMother } from './configuration.mother.test';
+import { ConfigurationBuilder } from './builders/configuration.builder.test';
+import { ConfigurationMother } from './builders/configuration.mother.test';
 
 describe('Configuration', () => {
   describe('create', () => {
@@ -33,11 +33,7 @@ describe('Configuration', () => {
 
     it('should throw error when paymentDetails is empty', () => {
       expect(() => {
-        new ConfigurationBuilder()
-          .withCurrency('USD')
-          .withPhonePrefix('+1')
-          .withPaymentDetails('')
-          .build();
+        new ConfigurationBuilder().withCurrency('USD').withPhonePrefix('+1').withPaymentDetails('').build();
       }).toThrow('Payment details are required');
     });
   });
@@ -106,6 +102,35 @@ describe('Configuration', () => {
     });
   });
 
+  describe('split', () => {
+    it('should split payment details by comma', () => {
+      const paymentDetails = 'Bank account: 123456789,PayPal: test@example.com,Nequi: 3001234567';
+      const configuration = ConfigurationMother.withPaymentDetails(paymentDetails);
+
+      const splitDetails = configuration.split.paymentDetails;
+
+      expect(splitDetails).toEqual(['Bank account: 123456789', 'PayPal: test@example.com', 'Nequi: 3001234567']);
+    });
+
+    it('should return single item when no comma separator', () => {
+      const paymentDetails = 'Single payment method';
+      const configuration = ConfigurationMother.withPaymentDetails(paymentDetails);
+
+      const splitDetails = configuration.split.paymentDetails;
+
+      expect(splitDetails).toEqual(['Single payment method']);
+    });
+
+    it('should handle payment details with multiple commas', () => {
+      const paymentDetails = 'Method 1,Method 2,Method 3,Method 4';
+      const configuration = ConfigurationMother.withPaymentDetails(paymentDetails);
+
+      const splitDetails = configuration.split.paymentDetails;
+
+      expect(splitDetails).toEqual(['Method 1', 'Method 2', 'Method 3', 'Method 4']);
+    });
+  });
+
   describe('different currency configurations', () => {
     it('should create different currency configurations', () => {
       const usdConfig = ConfigurationMother.usd();
@@ -129,14 +154,6 @@ describe('Configuration', () => {
       expect(config1.getId()).not.toBe(config2.getId());
       expect(config1.currency).toBeDefined();
       expect(config2.currency).toBeDefined();
-    });
-
-    it('should create multiple configurations', () => {
-      const configurations = ConfigurationMother.many(3);
-
-      expect(configurations).toHaveLength(3);
-      expect(configurations[0].getId()).not.toBe(configurations[1].getId());
-      expect(configurations[1].getId()).not.toBe(configurations[2].getId());
     });
   });
 });

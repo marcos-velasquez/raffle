@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Configuration } from '@context/shared/domain';
 import { ConfigurationEditorComponent as ImplementationRaffleEditorComponent } from '../../../../configuration-editor/configuration-editor.component';
-import { Configuration } from '../../../../../../domain';
 
 @Component({
   selector: 'app-configuration-editor-tool',

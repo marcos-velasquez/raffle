@@ -1,4 +1,4 @@
-import { PocketbaseConfigurationRepository } from '../infrastructure/configuration.repository';
+import { PocketbaseConfigurationRepository } from '@context/shared/infrastructure';
 import { CreateConfigurationUseCase, CreateConfigurationUseCaseProps } from './Create/create.usecase';
 import { RemoveConfigurationUseCase, RemoveConfigurationUseCaseProps } from './Remove/remove.usecase';
 import { UpdateConfigurationUseCase, UpdateConfigurationUseCaseProps } from './Update/update.usecase';

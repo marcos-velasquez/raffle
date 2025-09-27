@@ -14,8 +14,7 @@ export class CreateRaffleUseCase extends AdminUseCase<CreateRaffleUseCaseProps, 
 
   protected async next(props: CreateRaffleUseCaseProps): Promise<E.Either<void, void>> {
     this.start();
-    const raffle = Raffle.create(props);
-    const result = await this.raffleRepository.save(raffle);
+    const result = await this.raffleRepository.save(Raffle.create(props));
     result.mapRight((raffle) => this.bus.publish(new RaffleCreatedEvent(raffle)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();

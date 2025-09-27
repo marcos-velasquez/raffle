@@ -1,5 +1,5 @@
 import { BaseRepository } from '@shared/domain';
-import { PocketbaseHistoryRepository } from '../infrastructure/history.repository';
+import { PocketbaseHistoryRepository } from '../infrastructure';
 import { CreateHistoryUseCaseProps, CreateHistoryUseCase } from './Create/create.usecase';
 import { UpdateHistoryUseCase, UpdaterHistoryUseCaseProps } from './Update/update.usecase';
 import { HistoryCreator, HistoryUpdater } from '../domain';

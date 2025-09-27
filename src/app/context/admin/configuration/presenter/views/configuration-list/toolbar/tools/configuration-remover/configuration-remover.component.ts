@@ -1,8 +1,8 @@
 import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmationService } from '@ui/services/confirmation';
+import { Configuration } from '@context/shared/domain';
 import { configurationFacade } from '../../../../../../application';
-import { Configuration } from '../../../../../../domain';
 
 @Component({
   selector: 'app-configuration-remover-tool',

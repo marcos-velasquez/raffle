@@ -1,8 +1,9 @@
 import * as E from '@sweet-monads/either';
 import { progressBuilder } from '@shared/application';
 import { BaseRepository, EitherBuilder } from '@shared/domain';
+import { Configuration } from '@context/shared/domain';
 import { AdminUseCase } from '../../../shared/application';
-import { ConfigurationRemovedEvent, Configuration } from '../../domain';
+import { ConfigurationRemovedEvent } from '../../domain';
 
 export type RemoveConfigurationUseCaseProps = Configuration;
 

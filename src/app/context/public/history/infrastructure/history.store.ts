@@ -16,7 +16,9 @@ export const HistoryStore = signalStore(
   withState(initialState),
   withHooks((store, repository = inject(PocketbaseHistoryRepository)) => ({
     onInit() {
-      repository.findAll().then((result) => result.mapRight((histories) => patchState(store, { histories })));
+      repository.findAll().then((result) => {
+        result.mapRight((histories) => patchState(store, { histories }));
+      });
       repository.valuesChange().subscribe((histories) => patchState(store, { histories }));
     },
   })),

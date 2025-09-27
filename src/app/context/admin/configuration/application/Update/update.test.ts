@@ -2,10 +2,10 @@ import * as E from '@sweet-monads/either';
 import { bus } from '@shared/domain/event/event-bus.model';
 import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository, Exception } from '@shared/domain';
-import { Configuration, ConfigurationUpdatePrimitives } from '../../domain';
+import { Configuration, ConfigurationUpdatePrimitives } from '@context/shared/domain';
+import { ConfigurationMother } from '@context/shared/domain/__tests__/builders/configuration.mother.test';
+import { ConfigurationBuilder } from '@context/shared/domain/__tests__/builders/configuration.builder.test';
 import { ConfigurationUpdatedEvent } from '../../domain/configuration.event';
-import { ConfigurationBuilder } from '../../domain/__tests__/configuration.builder.test';
-import { ConfigurationMother } from '../../domain/__tests__/configuration.mother.test';
 import { UpdateConfigurationUseCase, UpdateConfigurationUseCaseProps } from './update.usecase';
 
 jest.mock('@shared/domain/event/event-bus.model', () => ({ bus: { publish: jest.fn() } }));
