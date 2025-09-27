@@ -51,9 +51,9 @@
       "confirmation": "Are you sure you want to delete this configuration?"
     },
     "placeholders": {
-      "currency": "e.g: USD, EUR, COP",
-      "phonePrefix": "e.g: +57, +1, +34",
-      "paymentDetails": "Bank account information, accepted payment methods, etc."
+      "currency": "e.g: Bs, Usd, Eur, Cop",
+      "phonePrefix": "e.g: 58, 57, 1, 34",
+      "paymentDetails": "e.g: Bank, Account number, Identification... Separated by commas."
     }
   },
   "number": {

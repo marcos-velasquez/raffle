@@ -17,6 +17,11 @@
     @apply cursor-pointer;
   }
 
+  input::placeholder,
+  textarea::placeholder {
+    @apply opacity-60;
+  }
+
   .validator-hint {
     @apply visible!;
   }
