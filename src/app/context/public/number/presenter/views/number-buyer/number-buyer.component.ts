@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -77,6 +77,13 @@ export class NumberBuyerComponent extends BaseComponent {
           result.mapRight(() => this.router.navigate(['..']));
         });
       });
+  }
+
+  @HostListener('window:beforeunload')
+  @HostListener('window:unload')
+  @HostListener('window:blur')
+  public onPageExit(): void {
+    this.cancel();
   }
 
   public ngOnDestroy(): void {
