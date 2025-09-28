@@ -1,11 +1,23 @@
-<ul class="text-sm font-bold">
-  @for (configuration of configurations(); track $index) {
-  <li class="underline">{{ 'payment.mobilePay' | transloco }}</li>
-  @for (item of configuration.split.paymentDetails; track $index) {
-  <li>{{ item }}</li>
-  }
-  <button (click)="copyToClipboard(configuration)" class="btn btn-outline btn-primary btn-xs mt-1">
-    {{ 'actions.copy' | transloco }}
-  </button>
-  }
-</ul>
+@for (configuration of configurations(); track configuration.getId();) {
+<article class="collapse collapse-arrow bg-base-100 border border-base-300">
+  <input type="radio" name="my-accordion-2" [checked]="false" />
+  <header class="collapse-title font-semibold">
+    <img
+      [src]="configuration | fullPath"
+      alt="reference image"
+      class="size-10 rounded-full object-cover aspect-square"
+    />
+  </header>
+
+  <section class="collapse-content text-sm">
+    @for (details of configuration.split.paymentDetails; track $index) {
+    <p>{{ details }}</p>
+    }
+
+    <button (click)="copyToClipboard(configuration)" class="btn btn-outline btn-primary btn-xs mt-2">
+      {{ 'actions.copy' | transloco }}
+    </button>
+  </section>
+</article>
+
+}

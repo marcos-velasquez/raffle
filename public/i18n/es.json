@@ -142,9 +142,6 @@
     "purchased": "Apartado",
     "winner": "Ganador"
   },
-  "payment": {
-    "mobilePay": "Pago móvil"
-  },
   "placeholders": {
     "enterTitle": "Ingrese el título",
     "enterDescription": "Ingrese la descripción",

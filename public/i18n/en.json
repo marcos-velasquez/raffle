@@ -141,9 +141,6 @@
     "purchased": "Reserved",
     "winner": "Winner"
   },
-  "payment": {
-    "mobilePay": "Mobile Pay"
-  },
   "placeholders": {
     "enterTitle": "Enter title",
     "enterDescription": "Enter description",
