@@ -9,6 +9,7 @@ export class WinnerSelectedTemplate extends TemplateTransloco {
   public toString(): string {
     const isPayerWinner = this.number.is.equal.value(this.winner.value);
     const historyUrl = location.origin + '/history/' + this.history.getId();
+
     if (isPayerWinner) {
       return this.translocoService.translate('templates.winner-selected-winner', {
         name: this.payer.name,
