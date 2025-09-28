@@ -34,8 +34,8 @@ export class RaffleMother {
     return new RaffleBuilder().withTitle('NoImages').withImages([]).build().toPrimitives();
   }
 
-  static withPrice(price: number): RafflePrimitives {
-    return new RaffleBuilder().withTitle('CustomPrice').withPrice(price).build().toPrimitives();
+  static withPrice(value: number, currency = 'USD'): RafflePrimitives {
+    return new RaffleBuilder().withTitle('CustomPrice').withPrice(value, currency).build().toPrimitives();
   }
 
   static withCustomTitle(title: string): RafflePrimitives {

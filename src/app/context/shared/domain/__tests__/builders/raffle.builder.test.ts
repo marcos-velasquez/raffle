@@ -8,7 +8,7 @@ export class RaffleBuilder {
     title: 'Test Raffle',
     description: 'Test raffle description',
     images: ['test1.png', 'test2.png'],
-    price: 10,
+    price: { value: 10, currency: 'USD' },
     completed: false,
     numbers: Number.many(5).map((number) => number.toPrimitives()),
   };
@@ -28,8 +28,8 @@ export class RaffleBuilder {
     return this;
   }
 
-  public withPrice(price: number): this {
-    this.primitives.price = price;
+  public withPrice(value: number, currency = 'USD'): this {
+    this.primitives.price = { value, currency };
     return this;
   }
 
@@ -47,7 +47,7 @@ export class RaffleBuilder {
     this.primitives.title = 'Min';
     this.primitives.description = 'Min desc';
     this.primitives.images = ['min.png'];
-    this.primitives.price = 1;
+    this.primitives.price = { value: 1, currency: 'USD' };
     this.primitives.numbers = Number.many(2).map((number) => number.toPrimitives());
     return this;
   }
@@ -56,7 +56,7 @@ export class RaffleBuilder {
     this.primitives.title = '';
     this.primitives.description = '';
     this.primitives.images = [];
-    this.primitives.price = 0;
+    this.primitives.price = { value: 0, currency: 'USD' };
     return this;
   }
 
@@ -116,7 +116,7 @@ export class RaffleBuilder {
       .withId(`raffle-${randomId}`)
       .withTitle(`Raffle ${randomId}`)
       .withDescription(`Description for raffle ${randomId}`)
-      .withPrice(Math.floor(Math.random() * 100) + 1)
+      .withPrice(Math.floor(Math.random() * 100) + 1, 'USD')
       .withNumbers().count(Math.floor(Math.random() * 48) + 2);
   }
 
@@ -128,8 +128,8 @@ export class RaffleBuilder {
     return new RaffleBuilder().withTitle(title);
   }
 
-  public static withPrice(price: number): RaffleBuilder {
-    return new RaffleBuilder().withPrice(price);
+  public static withPrice(value: number, currency = 'USD'): RaffleBuilder {
+    return new RaffleBuilder().withPrice(value, currency);
   }
 
   public static completed(): RaffleBuilder {
@@ -143,19 +143,21 @@ describe('RaffleBuilder util', () => {
   it('should build a raffle with default values', () => {
     const raffle = new RaffleBuilder().build();
     expect(raffle.title).toBe('Test Raffle');
-    expect(raffle.price).toBe(10);
+    expect(raffle.price.value).toBe(10);
+    expect(raffle.price.currency).toBe('USD');
     expect(raffle.get.length).toBe(5);
   });
 
   it('should build a raffle with custom values', () => {
     const raffle = new RaffleBuilder()
       .withTitle('Custom Title')
-      .withPrice(25)
+      .withPrice(25, 'EUR')
       .withNumbers().count(10)
       .build();
     
     expect(raffle.title).toBe('Custom Title');
-    expect(raffle.price).toBe(25);
+    expect(raffle.price.value).toBe(25);
+    expect(raffle.price.currency).toBe('EUR');
     expect(raffle.get.length).toBe(10);
   });
 

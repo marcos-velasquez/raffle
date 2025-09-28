@@ -13,7 +13,7 @@ export class UpdateRaffleUseCase extends AdminUseCase<UpdateRaffleUseCaseProps, 
   }
 
   protected async next({ raffle, primitives }: UpdateRaffleUseCaseProps): Promise<E.Either<void, void>> {
-    const isPriceDifferent = !raffle.is.equal.price(primitives.price);
+    const isPriceDifferent = !raffle.is.equal.price(primitives.price.value);
     if (isPriceDifferent && raffle.has.purchased) return this.throw(new RaffleUpdateException());
 
     this.start();
