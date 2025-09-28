@@ -5,10 +5,12 @@ import { PocketbaseConfigurationRepository } from './configuration.repository';
 
 type ConfigurationState = {
   configurations: Configuration[];
+  selected: Configuration | null;
 };
 
 const initialState: ConfigurationState = {
   configurations: [],
+  selected: null,
 };
 
 export const ConfigurationStore = signalStore(
@@ -17,7 +19,7 @@ export const ConfigurationStore = signalStore(
   withHooks((store, repository = inject(PocketbaseConfigurationRepository)) => ({
     onInit() {
       repository.findAll().then((result) => {
-        result.mapRight((configurations) => patchState(store, { configurations }));
+        result.mapRight((configurations) => patchState(store, { configurations, selected: configurations[0] }));
       });
       repository.valuesChange().subscribe((configurations) => patchState(store, { configurations }));
     },
@@ -35,6 +37,9 @@ export const ConfigurationStore = signalStore(
       patchState(store, (state) => ({
         configurations: state.configurations.map((c) => (c.getId() === configuration.getId() ? configuration : c)),
       }));
+    },
+    select(configuration: Configuration) {
+      patchState(store, { selected: configuration });
     },
   }))
 );

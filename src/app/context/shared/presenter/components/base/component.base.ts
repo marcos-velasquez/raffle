@@ -4,9 +4,9 @@ import { ConfigurationStore } from '@context/shared/infrastructure';
 import { BaseComponent as SharedBaseComponent } from '@shared/presenter';
 
 export class BaseComponent extends SharedBaseComponent {
-  private readonly configStore = inject(ConfigurationStore);
-  protected readonly configurations = computed(() => this.configStore.configurations());
+  public readonly configStore = inject(ConfigurationStore);
+  protected readonly configuration = computed(() => this.configStore.selected());
 
-  private readonly userStore = inject(UserStore);
+  public readonly userStore = inject(UserStore);
   protected readonly isAdmin = computed(() => this.userStore.user().is.admin.isRight());
 }

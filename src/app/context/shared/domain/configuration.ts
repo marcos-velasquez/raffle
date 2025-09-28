@@ -28,6 +28,12 @@ export class Configuration extends Entity<ConfigurationPrimitives> {
     };
   }
 
+  public get suffix() {
+    return {
+      currency: (value: number) => `${value} ${this.currency}`,
+    };
+  }
+
   public toPrimitives(): ConfigurationPrimitives {
     return {
       id: this.getId(),

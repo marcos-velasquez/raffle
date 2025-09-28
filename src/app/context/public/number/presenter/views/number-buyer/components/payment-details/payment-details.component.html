@@ -1,6 +1,6 @@
-@for (configuration of configurations(); track configuration.getId();) {
+@for (configuration of configStore.configurations(); track configuration.getId();) {
 <article class="collapse collapse-arrow bg-base-100 border border-base-300">
-  <input type="radio" name="my-accordion-2" [checked]="false" />
+  <input type="radio" name="my-accordion-2" (change)="configStore.select(configuration)" [checked]="false" />
   <header class="collapse-title font-semibold">
     <img
       [src]="configuration | fullPath"
