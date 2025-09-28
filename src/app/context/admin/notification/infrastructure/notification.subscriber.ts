@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { bus } from '@shared/domain';
 import { BaseSubscriber } from '@shared/infrastructure';
-import { WinnerSelectedEvent } from '@context/admin/roulette/domain/roulette.event';
+import { HistoryCreatedEvent } from '@context/admin/history/domain';
 import { PaymentDeclinedEvent, PaymentVerifiedEvent } from '@context/admin/number/domain/number.event';
 import { WhatsappSender } from '../domain';
 import { TemplateTransloco, translate } from './template.transloco';
@@ -26,9 +26,9 @@ export class NotificationSubscriber extends BaseSubscriber {
       WhatsappSender.create(this.translate(new _.PaymentVerifiedTemplate(raffle, value))).send();
     });
 
-    bus.on(WinnerSelectedEvent).subscribe(({ raffle }) => {
-      for (const number of raffle.numbers) {
-        WhatsappSender.create(this.translate(new _.WinnerSelectedTemplate(raffle, number.value))).send();
+    bus.on(HistoryCreatedEvent).subscribe(({ history }) => {
+      for (const number of history.raffle.numbers) {
+        WhatsappSender.create(this.translate(new _.WinnerSelectedTemplate(history, number.value))).send();
       }
     });
   }
