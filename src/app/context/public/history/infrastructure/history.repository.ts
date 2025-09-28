@@ -13,7 +13,7 @@ export class PocketbaseHistoryRepository extends PocketbaseRepository<History, H
 
   public override async findAll(): Promise<E.Either<Error, History[]>> {
     try {
-      const result = await this.collection.getFullList({ expand: 'raffle' });
+      const result = await this.collection.getFullList({ expand: 'raffle', sort: '-created' });
       const histories = result.map((item) => object.merge(item, item.expand));
       const entities = histories.map((item) => this.options.mapper(item as unknown as HistoryPrimitives));
       return E.right(entities);
