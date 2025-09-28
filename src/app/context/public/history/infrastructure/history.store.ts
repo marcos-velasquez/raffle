@@ -5,10 +5,12 @@ import { PocketbaseHistoryRepository } from './history.repository';
 
 type HistoryState = {
   histories: History[];
+  isLoading: boolean;
 };
 
 const initialState: HistoryState = {
   histories: [],
+  isLoading: true,
 };
 
 export const HistoryStore = signalStore(
@@ -17,7 +19,7 @@ export const HistoryStore = signalStore(
   withHooks((store, repository = inject(PocketbaseHistoryRepository)) => ({
     onInit() {
       repository.findAll().then((result) => {
-        result.mapRight((histories) => patchState(store, { histories }));
+        result.mapRight((histories) => patchState(store, { histories, isLoading: false }));
       });
       repository.valuesChange().subscribe((histories) => patchState(store, { histories }));
     },
