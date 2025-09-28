@@ -6,6 +6,6 @@ import { Configuration, ConfigurationPrimitives } from '../domain';
 @Injectable({ providedIn: 'root' })
 export class PocketbaseConfigurationRepository extends PocketbaseRepository<Configuration, ConfigurationPrimitives> {
   constructor() {
-    super({ collection: Collections.Config, mapper: Configuration.from });
+    super({ collection: Collections.Configuration, mapper: Configuration.from });
   }
 }

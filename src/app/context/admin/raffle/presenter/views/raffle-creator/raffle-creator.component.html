@@ -4,7 +4,8 @@
   </button>
 </article>
 
-<ui-dialog>
+<ui-dialog #dialogRef>
+  @if(dialogRef.is.opened){
   <form [formGroup]="form" class="form-container">
     <header>
       <h3 class="text-xl font-semibold">{{ 'raffle.create' | transloco }}</h3>
@@ -67,4 +68,5 @@
       <button (click)="create()" class="btn btn-soft btn-primary">{{ 'raffle.create' | transloco }}</button>
     </footer>
   </form>
+  }
 </ui-dialog>

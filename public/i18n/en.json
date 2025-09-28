@@ -31,23 +31,20 @@
     "editAction": "Edit"
   },
   "configuration": {
-    "title": "System Configuration",
-    "noConfigurations": "No configurations available",
+    "title": "Configuration",
     "currency": "Currency",
-    "phonePrefix": "Phone Prefix",
-    "paymentDetails": "Payment Details",
-    "card": {
-      "title": "Configuration"
+    "phonePrefix": "Phone prefix",
+    "paymentDetails": "Payment details",
+    "referenceImage": "Reference image",
+    "actions": {
+      "create": "Create configuration",
+      "update": "Update configuration",
+      "remove": "Remove configuration"
     },
-    "create": {
-      "title": "Create Configuration",
-      "button": "New Configuration"
-    },
-    "edit": {
-      "title": "Edit Configuration"
-    },
-    "delete": {
-      "title": "Delete Configuration",
+    "messages": {
+      "created": "Configuration created successfully",
+      "updated": "Configuration updated successfully",
+      "removed": "Configuration removed successfully",
       "confirmation": "Are you sure you want to delete this configuration?"
     },
     "placeholders": {

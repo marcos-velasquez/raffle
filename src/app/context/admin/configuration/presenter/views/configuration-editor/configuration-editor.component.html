@@ -1,7 +1,7 @@
 <ui-dialog>
   <form [formGroup]="form" class="form-container">
     <header>
-      <h3 class="text-xl font-semibold">{{ 'configuration.edit.title' | transloco }}</h3>
+      <h3 class="text-xl font-semibold">{{ 'configuration.actions.update' | transloco }}</h3>
     </header>
 
     <section>
@@ -45,6 +45,20 @@
         class="textarea textarea-bordered h-24 w-full"
       ></textarea>
       @if (form.get('paymentDetails')?.invalid && form.get('paymentDetails')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">{{ 'configuration.referenceImage' | transloco }}</span>
+      </div>
+      <ui-dropzone
+        (change)="form.patchValue({ image: $event })"
+        [defaultUrls]="[configuration() | fullPath]"
+        [maxFiles]="1"
+      />
+      @if (form.get('image')?.touched && form.get('image')?.invalid) {
       <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
       }
     </section>

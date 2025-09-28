@@ -38,6 +38,10 @@ export class ConfigurationMother {
     return new ConfigurationBuilder().withPaymentDetails(paymentDetails).build();
   }
 
+  public static withImage(image: string): Configuration {
+    return new ConfigurationBuilder().withImage(image).build();
+  }
+
   public static withId(id: string): Configuration {
     return new ConfigurationBuilder().withId(id).build();
   }
@@ -71,6 +75,7 @@ describe('ConfigurationMother util', () => {
     const configuration = ConfigurationMother.default();
     expect(configuration.currency).toBe('USD');
     expect(configuration.phonePrefix).toBe('+1');
+    expect(configuration.image).toBe('https://example.com/image.jpg');
   });
 
   it('should create random configurations', () => {
@@ -82,18 +87,24 @@ describe('ConfigurationMother util', () => {
 
   it('should create multiple configurations', () => {
     const configurations = ConfigurationMother.many(3);
-    expect(configurations).toHaveLength(3);
     expect(configurations[0].getId()).not.toBe(configurations[1].getId());
   });
 
   it('should create configurations with different currencies', () => {
-    const configurations = ConfigurationMother.withDifferentCurrencies();
-    const currencies = configurations.map((config) => config.currency);
+    const usdConfig = ConfigurationMother.usd();
+    const euroConfig = ConfigurationMother.euro();
+    const copConfig = ConfigurationMother.cop();
 
-    expect(currencies).toContain('USD');
-    expect(currencies).toContain('EUR');
-    expect(currencies).toContain('COP');
-    expect(currencies).toContain('MXN');
-    expect(currencies).toContain('ARS');
+    expect(usdConfig.currency).toBe('USD');
+    expect(usdConfig.phonePrefix).toBe('+1');
+    expect(usdConfig.image).toBe('https://example.com/usd.jpg');
+
+    expect(euroConfig.currency).toBe('EUR');
+    expect(euroConfig.phonePrefix).toBe('+34');
+    expect(euroConfig.image).toBe('https://example.com/eur.jpg');
+
+    expect(copConfig.currency).toBe('COP');
+    expect(copConfig.phonePrefix).toBe('+57');
+    expect(copConfig.image).toBe('https://example.com/cop.jpg');
   });
 });

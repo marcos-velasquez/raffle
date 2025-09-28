@@ -3,8 +3,14 @@
     <header class="flex justify-between items-start">
       <h2 class="card-title gap-2 text-lg">
         <span class="icon-[heroicons--cog-6-tooth] text-primary"></span>
-        {{ 'configuration.card.title' | transloco }}
+        {{ 'configuration.title' | transloco }}
       </h2>
+
+      <img
+        src="{{ configuration() | fullPath }}"
+        alt="reference-image"
+        class="size-10 rounded-full object-cover aspect-square"
+      />
     </header>
 
     <div class="space-y-4 mt-4">

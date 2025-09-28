@@ -6,6 +6,7 @@ export class ConfigurationBuilder {
     currency: 'USD',
     phonePrefix: '+1',
     paymentDetails: 'Bank account: 123456789',
+    image: 'https://example.com/image.jpg',
   };
 
   public withId(id: string): this {
@@ -28,10 +29,16 @@ export class ConfigurationBuilder {
     return this;
   }
 
+  public withImage(image: string): this {
+    this.primitives.image = image;
+    return this;
+  }
+
   public withMinimalData(): this {
     this.primitives.currency = 'USD';
     this.primitives.phonePrefix = '+1';
     this.primitives.paymentDetails = 'Min payment details';
+    this.primitives.image = 'https://example.com/min.jpg';
     return this;
   }
 
@@ -39,6 +46,7 @@ export class ConfigurationBuilder {
     this.primitives.currency = '';
     this.primitives.phonePrefix = '';
     this.primitives.paymentDetails = '';
+    this.primitives.image = '';
     return this;
   }
 
@@ -76,25 +84,32 @@ export class ConfigurationBuilder {
     return new ConfigurationBuilder().withPhonePrefix(phonePrefix);
   }
 
+  public static withImage(image: string): ConfigurationBuilder {
+    return new ConfigurationBuilder().withImage(image);
+  }
+
   public static usd(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('USD')
       .withPhonePrefix('+1')
-      .withPaymentDetails('US Bank account: 123456789');
+      .withPaymentDetails('US Bank account: 123456789')
+      .withImage('https://example.com/usd.jpg');
   }
 
   public static euro(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('EUR')
       .withPhonePrefix('+34')
-      .withPaymentDetails('IBAN: ES123456789');
+      .withPaymentDetails('IBAN: ES123456789')
+      .withImage('https://example.com/eur.jpg');
   }
 
   public static cop(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('COP')
       .withPhonePrefix('+57')
-      .withPaymentDetails('Nequi: 3001234567');
+      .withPaymentDetails('Nequi: 3001234567')
+      .withImage('https://example.com/cop.jpg');
   }
 }
 
@@ -104,6 +119,7 @@ describe('ConfigurationBuilder util', () => {
     expect(configuration.currency).toBe('USD');
     expect(configuration.phonePrefix).toBe('+1');
     expect(configuration.paymentDetails).toBe('Bank account: 123456789');
+    expect(configuration.image).toBe('https://example.com/image.jpg');
   });
 
   it('should build a configuration with custom values', () => {
@@ -111,11 +127,13 @@ describe('ConfigurationBuilder util', () => {
       .withCurrency('EUR')
       .withPhonePrefix('+34')
       .withPaymentDetails('IBAN: ES123456789')
+      .withImage('https://example.com/custom.jpg')
       .build();
 
     expect(configuration.currency).toBe('EUR');
     expect(configuration.phonePrefix).toBe('+34');
     expect(configuration.paymentDetails).toBe('IBAN: ES123456789');
+    expect(configuration.image).toBe('https://example.com/custom.jpg');
   });
 
   it('should create random configurations', () => {
@@ -132,11 +150,14 @@ describe('ConfigurationBuilder util', () => {
 
     expect(usdConfig.currency).toBe('USD');
     expect(usdConfig.phonePrefix).toBe('+1');
+    expect(usdConfig.image).toBe('https://example.com/usd.jpg');
 
     expect(euroConfig.currency).toBe('EUR');
     expect(euroConfig.phonePrefix).toBe('+34');
+    expect(euroConfig.image).toBe('https://example.com/eur.jpg');
 
     expect(copConfig.currency).toBe('COP');
     expect(copConfig.phonePrefix).toBe('+57');
+    expect(copConfig.image).toBe('https://example.com/cop.jpg');
   });
 });

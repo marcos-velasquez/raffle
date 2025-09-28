@@ -2,10 +2,11 @@
   <span class="icon-[heroicons--plus-circle-16-solid]"></span>
 </button>
 
-<ui-dialog>
+<ui-dialog #dialogRef>
+  @if(dialogRef.is.opened){
   <form [formGroup]="form" class="form-container">
     <header>
-      <h3 class="text-xl font-semibold">{{ 'configuration.create.title' | transloco }}</h3>
+      <h3 class="text-xl font-semibold">{{ 'configuration.actions.create' | transloco }}</h3>
     </header>
 
     <section class="form-control w-full mb-4">
@@ -53,6 +54,16 @@
       }
     </section>
 
+    <section>
+      <div class="label">
+        <span class="label-text">{{ 'configuration.referenceImage' | transloco }}</span>
+      </div>
+      <ui-dropzone (change)="form.patchValue({ image: $event })" [maxFiles]="1" />
+      @if (form.get('image')?.touched && form.get('image')?.invalid) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
+
     <footer class="flex gap-2 justify-end">
       <button (click)="close()" class="btn btn-ghost">
         {{ 'actions.cancel' | transloco }}
@@ -62,4 +73,5 @@
       </button>
     </footer>
   </form>
+  }
 </ui-dialog>

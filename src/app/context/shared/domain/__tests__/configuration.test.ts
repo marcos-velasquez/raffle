@@ -46,6 +46,7 @@ describe('Configuration', () => {
       expect(configuration.currency).toBe('COP');
       expect(configuration.phonePrefix).toBe('+57');
       expect(configuration.paymentDetails).toBe('Nequi: 3001234567');
+      expect(configuration.image).toBe('https://example.com/cop.jpg');
     });
 
     it('should create configuration with custom id', () => {
@@ -75,6 +76,7 @@ describe('Configuration', () => {
         currency: 'USD',
         phonePrefix: '+1',
         paymentDetails: paymentDetails,
+        image: 'https://example.com/image.jpg',
       });
     });
   });
@@ -99,6 +101,13 @@ describe('Configuration', () => {
       const configuration = ConfigurationMother.withPaymentDetails(paymentDetails);
 
       expect(configuration.paymentDetails).toBe(paymentDetails);
+    });
+
+    it('should check image value', () => {
+      const imageUrl = 'https://example.com/custom-image.jpg';
+      const configuration = ConfigurationMother.withImage(imageUrl);
+
+      expect(configuration.image).toBe(imageUrl);
     });
   });
 
@@ -139,12 +148,15 @@ describe('Configuration', () => {
 
       expect(usdConfig.currency).toBe('USD');
       expect(usdConfig.phonePrefix).toBe('+1');
+      expect(usdConfig.image).toBe('https://example.com/usd.jpg');
 
       expect(euroConfig.currency).toBe('EUR');
       expect(euroConfig.phonePrefix).toBe('+34');
+      expect(euroConfig.image).toBe('https://example.com/eur.jpg');
 
       expect(copConfig.currency).toBe('COP');
       expect(copConfig.phonePrefix).toBe('+57');
+      expect(copConfig.image).toBe('https://example.com/cop.jpg');
     });
 
     it('should create random configurations', () => {

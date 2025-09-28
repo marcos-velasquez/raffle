@@ -22,6 +22,10 @@
     @apply opacity-60;
   }
 
+  .label {
+    @apply mb-1;
+  }
+
   .validator-hint {
     @apply visible!;
   }

@@ -4,11 +4,12 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { TranslocoModule } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
+import { DropzoneComponent } from '@ui/components/dropzone';
 import { configurationFacade } from '../../../application';
 
 @Component({
   selector: 'app-configuration-creator',
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, DialogComponent],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, DialogComponent, DropzoneComponent],
   templateUrl: './configuration-creator.component.html',
 })
 export class ConfigurationCreatorComponent {
@@ -17,9 +18,10 @@ export class ConfigurationCreatorComponent {
 
   constructor() {
     this.form = inject(FormBuilder).group({
-      currency: ['', [Validators.required, Validators.minLength(1)]],
-      phonePrefix: ['', [Validators.required, Validators.minLength(1)]],
-      paymentDetails: ['', [Validators.required, Validators.minLength(1)]],
+      currency: ['', [Validators.required]],
+      phonePrefix: ['', [Validators.required]],
+      paymentDetails: ['', [Validators.required]],
+      image: ['', [Validators.required]],
     });
   }
 

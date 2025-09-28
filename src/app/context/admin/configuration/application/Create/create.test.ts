@@ -4,7 +4,6 @@ import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository, Exception } from '@shared/domain';
 import { Configuration } from '@context/shared/domain';
 import { ConfigurationMother } from '@context/shared/domain/__tests__/builders/configuration.mother.test';
-import { ConfigurationBuilder } from '@context/shared/domain/__tests__/builders/configuration.builder.test';
 import { ConfigurationCreatedEvent } from '../../domain';
 import { CreateConfigurationUseCase, CreateConfigurationUseCaseProps } from './create.usecase';
 
@@ -21,11 +20,11 @@ describe('CreateConfigurationUseCase', () => {
 
   it('should publish ConfigurationCreated event and complete with success message on successful create', async () => {
     const configuration = ConfigurationMother.usd();
-    const primitives = configuration.toPrimitives();
     const props: CreateConfigurationUseCaseProps = {
-      currency: primitives.currency,
-      phonePrefix: primitives.phonePrefix,
-      paymentDetails: primitives.paymentDetails,
+      currency: configuration.currency,
+      phonePrefix: configuration.phonePrefix,
+      paymentDetails: configuration.paymentDetails,
+      image: configuration.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(configuration));
 
@@ -38,11 +37,11 @@ describe('CreateConfigurationUseCase', () => {
 
   it('should complete with error message on failed create', async () => {
     const configuration = ConfigurationMother.euro();
-    const primitives = configuration.toPrimitives();
     const props: CreateConfigurationUseCaseProps = {
-      currency: primitives.currency,
-      phonePrefix: primitives.phonePrefix,
-      paymentDetails: primitives.paymentDetails,
+      currency: configuration.currency,
+      phonePrefix: configuration.phonePrefix,
+      paymentDetails: configuration.paymentDetails,
+      image: configuration.image,
     };
     const exception = new Exception('Create configuration failed');
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.left(exception));
@@ -55,12 +54,12 @@ describe('CreateConfigurationUseCase', () => {
   });
 
   it('should handle different currency configurations', async () => {
-    const configuration = ConfigurationBuilder.cop().build();
-    const primitives = configuration.toPrimitives();
+    const configuration = ConfigurationMother.cop();
     const props: CreateConfigurationUseCaseProps = {
-      currency: primitives.currency,
-      phonePrefix: primitives.phonePrefix,
-      paymentDetails: primitives.paymentDetails,
+      currency: configuration.currency,
+      phonePrefix: configuration.phonePrefix,
+      paymentDetails: configuration.paymentDetails,
+      image: configuration.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(configuration));
 
@@ -73,11 +72,11 @@ describe('CreateConfigurationUseCase', () => {
 
   it('should handle random configuration data', async () => {
     const configuration = ConfigurationMother.random();
-    const primitives = configuration.toPrimitives();
     const props: CreateConfigurationUseCaseProps = {
-      currency: primitives.currency,
-      phonePrefix: primitives.phonePrefix,
-      paymentDetails: primitives.paymentDetails,
+      currency: configuration.currency,
+      phonePrefix: configuration.phonePrefix,
+      paymentDetails: configuration.paymentDetails,
+      image: configuration.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(configuration));
 

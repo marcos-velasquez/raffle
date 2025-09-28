@@ -18,14 +18,14 @@ export class DropzoneComponent extends BaseComponent {
   public readonly defaultUrls = input<string[]>([]);
 
   public readonly dropzoneElement = viewChild.required<ElementRef<HTMLFormElement>>('dropzone');
-  public readonly change = output<File[]>();
+  public readonly change = output<File | File[]>();
 
   public readonly dropzone = signal<Dropzone | null>(null);
   public readonly files = signalList(signal<File[]>([]));
 
   constructor(private readonly transloco: TranslocoService) {
     super();
-    effect(() => this.change.emit(this.files.values));
+    effect(() => this.change.emit(this.maxFiles() === 1 ? this.files.values[0] : this.files.values));
   }
 
   ngAfterViewInit() {

@@ -31,23 +31,21 @@
     "editAction": "Editar"
   },
   "configuration": {
-    "title": "Configuración del Sistema",
+    "title": "Configuración",
     "noConfigurations": "No hay configuraciones disponibles",
     "currency": "Moneda",
-    "phonePrefix": "Prefijo Telefónico",
-    "paymentDetails": "Detalles de Pago",
-    "card": {
-      "title": "Configuración"
+    "phonePrefix": "Prefijo telefónico",
+    "paymentDetails": "Detalles de pago",
+    "referenceImage": "Imagen de referencia",
+    "actions": {
+      "create": "Crear configuración",
+      "update": "Actualizar configuración",
+      "remove": "Eliminar configuración"
     },
-    "create": {
-      "title": "Crear Configuración",
-      "button": "Nueva Configuración"
-    },
-    "edit": {
-      "title": "Editar Configuración"
-    },
-    "delete": {
-      "title": "Eliminar Configuración",
+    "messages": {
+      "created": "Configuración creada exitosamente",
+      "updated": "Configuración actualizada exitosamente",
+      "removed": "Configuración eliminada exitosamente",
       "confirmation": "¿Estás seguro de eliminar esta configuración?"
     },
     "placeholders": {

@@ -4,7 +4,6 @@ import { EitherBuilder } from '@shared/domain/either/either.builder';
 import { BaseRepository, Exception } from '@shared/domain';
 import { Configuration, ConfigurationUpdatePrimitives } from '@context/shared/domain';
 import { ConfigurationMother } from '@context/shared/domain/__tests__/builders/configuration.mother.test';
-import { ConfigurationBuilder } from '@context/shared/domain/__tests__/builders/configuration.builder.test';
 import { ConfigurationUpdatedEvent } from '../../domain/configuration.event';
 import { UpdateConfigurationUseCase, UpdateConfigurationUseCaseProps } from './update.usecase';
 
@@ -22,6 +21,7 @@ describe('UpdateConfigurationUseCase', () => {
       currency: 'EUR',
       phonePrefix: '+34',
       paymentDetails: 'Updated IBAN: ES987654321',
+      image: 'https://example.com/updated.jpg',
     };
   });
 
@@ -70,6 +70,7 @@ describe('UpdateConfigurationUseCase', () => {
       currency: 'COP',
       phonePrefix: '+57',
       paymentDetails: 'Nequi: 3001234567',
+      image: 'https://example.com/cop-updated.jpg',
     };
     const updatedConfiguration = Configuration.from({
       ...originalConfiguration.toPrimitives(),
@@ -92,7 +93,7 @@ describe('UpdateConfigurationUseCase', () => {
   });
 
   it('should handle partial update of configuration', async () => {
-    const originalConfiguration = ConfigurationBuilder.cop().build();
+    const originalConfiguration = ConfigurationMother.cop();
     const partialUpdatePrimitives: Partial<ConfigurationUpdatePrimitives> = {
       paymentDetails: 'Updated Bancolombia: 123456789',
     };
@@ -122,6 +123,7 @@ describe('UpdateConfigurationUseCase', () => {
       currency: 'MXN',
       phonePrefix: '+52',
       paymentDetails: 'SPEI: 123456789012345678',
+      image: 'https://example.com/mxn.jpg',
     };
     const updatedConfiguration = Configuration.from({
       ...originalConfiguration.toPrimitives(),
