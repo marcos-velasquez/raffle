@@ -11,7 +11,7 @@
     "raffles": "Raffles",
     "history": "History",
     "management": "Management",
-    "configuration": "Configuration"
+    "channel": "Channel"
   },
   "raffle": {
     "create": "Create Raffle",
@@ -30,22 +30,22 @@
     "cancel": "Cancel",
     "editAction": "Edit"
   },
-  "configuration": {
-    "title": "Configuration",
+  "channel": {
+    "title": "Channel",
     "currency": "Currency",
     "phonePrefix": "Phone prefix",
     "paymentDetails": "Payment details",
     "referenceImage": "Reference image",
     "actions": {
-      "create": "Create configuration",
-      "update": "Update configuration",
-      "remove": "Remove configuration"
+      "create": "Create channel",
+      "update": "Update channel",
+      "remove": "Remove channel"
     },
     "messages": {
-      "created": "Configuration created successfully",
-      "updated": "Configuration updated successfully",
-      "removed": "Configuration removed successfully",
-      "confirmation": "Are you sure you want to delete this configuration?"
+      "created": "Channel created successfully",
+      "updated": "Channel updated successfully",
+      "removed": "Channel removed successfully",
+      "confirmation": "Are you sure you want to delete this channel?"
     },
     "placeholders": {
       "currency": "e.g: Bs, Usd, Eur, Cop",
@@ -111,12 +111,12 @@
     "paymentVerifiedSuccess": "Payment verified successfully",
     "updatingHistory": "Updating history...",
     "historyUpdatedSuccess": "History updated successfully",
-    "creatingConfiguration": "Creating configuration...",
-    "configurationCreatedSuccess": "Configuration created successfully",
-    "updatingConfiguration": "Updating configuration...",
-    "configurationUpdatedSuccess": "Configuration updated successfully",
-    "removingConfiguration": "Removing configuration...",
-    "configurationRemovedSuccess": "Configuration removed successfully",
+    "creatingConfiguration": "Creating channel...",
+    "configurationCreatedSuccess": "Channel created successfully",
+    "updatingConfiguration": "Updating channel...",
+    "configurationUpdatedSuccess": "Channel updated successfully",
+    "removingConfiguration": "Removing channel...",
+    "configurationRemovedSuccess": "Channel removed successfully",
     "loadingConfigurations": "Loading configurations...",
     "configurationsLoadedSuccess": "Configurations loaded successfully"
   },

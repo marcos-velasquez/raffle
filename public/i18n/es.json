@@ -11,7 +11,7 @@
     "raffles": "Rifas",
     "history": "Historial",
     "management": "Gestión",
-    "configuration": "Configuración"
+    "channel": "Canal"
   },
   "raffle": {
     "create": "Crear Rifa",
@@ -30,23 +30,23 @@
     "cancel": "Cancelar",
     "editAction": "Editar"
   },
-  "configuration": {
-    "title": "Configuración",
+  "channel": {
+    "title": "Canal",
     "noConfigurations": "No hay configuraciones disponibles",
     "currency": "Moneda",
     "phonePrefix": "Prefijo telefónico",
     "paymentDetails": "Detalles de pago",
     "referenceImage": "Imagen de referencia",
     "actions": {
-      "create": "Crear configuración",
-      "update": "Actualizar configuración",
-      "remove": "Eliminar configuración"
+      "create": "Crear canal",
+      "update": "Actualizar canal",
+      "remove": "Eliminar canal"
     },
     "messages": {
-      "created": "Configuración creada exitosamente",
-      "updated": "Configuración actualizada exitosamente",
-      "removed": "Configuración eliminada exitosamente",
-      "confirmation": "¿Estás seguro de eliminar esta configuración?"
+      "created": "Canal creada exitosamente",
+      "updated": "Canal actualizada exitosamente",
+      "removed": "Canal eliminada exitosamente",
+      "confirmation": "¿Estás seguro de eliminar esta canal?"
     },
     "placeholders": {
       "currency": "Ej: Bs, Usd, Eur, Cop",
@@ -112,12 +112,12 @@
     "paymentVerifiedSuccess": "Pago verificado con éxito",
     "updatingHistory": "Actualizando historial...",
     "historyUpdatedSuccess": "Historial actualizado con éxito",
-    "creatingConfiguration": "Creando configuración...",
-    "configurationCreatedSuccess": "Configuración creada con éxito",
-    "updatingConfiguration": "Actualizando configuración...",
-    "configurationUpdatedSuccess": "Configuración actualizada con éxito",
-    "removingConfiguration": "Eliminando configuración...",
-    "configurationRemovedSuccess": "Configuración eliminada con éxito",
+    "creatingConfiguration": "Creando canal...",
+    "configurationCreatedSuccess": "Canal creada con éxito",
+    "updatingConfiguration": "Actualizando canal...",
+    "configurationUpdatedSuccess": "Canal actualizada con éxito",
+    "removingConfiguration": "Eliminando canal...",
+    "configurationRemovedSuccess": "Canal eliminada con éxito",
     "loadingConfigurations": "Cargando configuraciones...",
     "configurationsLoadedSuccess": "Configuraciones cargadas con éxito"
   },

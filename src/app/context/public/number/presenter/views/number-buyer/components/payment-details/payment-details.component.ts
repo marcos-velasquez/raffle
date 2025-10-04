@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastService } from '@shared/infrastructure';
 import { when } from '@shared/domain';
-import { BaseComponent, ConfigurationFullPathPipe } from '@context/shared/presenter';
-import { Configuration } from '@context/shared/domain';
+import { BaseComponent, ChannelFullPathPipe } from '@context/shared/presenter';
+import { Channel } from '@context/shared/domain';
 
 @Component({
   selector: 'app-payment-details',
-  imports: [CommonModule, TranslocoPipe, ConfigurationFullPathPipe],
+  imports: [CommonModule, TranslocoPipe, ChannelFullPathPipe],
   styles: [
     `
       :host {
@@ -21,8 +21,8 @@ import { Configuration } from '@context/shared/domain';
 export class PaymentDetailsComponent extends BaseComponent {
   private readonly toast = inject(ToastService);
 
-  public copyToClipboard(configuration: Configuration): void {
-    when(navigator.clipboard.writeText(configuration.paymentDetails)).mapRight(() => {
+  public copyToClipboard(channel: Channel): void {
+    when(navigator.clipboard.writeText(channel.paymentDetails)).mapRight(() => {
       this.toast.success('messages.copiedToClipboard');
     });
   }

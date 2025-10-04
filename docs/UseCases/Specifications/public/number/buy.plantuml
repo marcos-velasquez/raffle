@@ -23,9 +23,10 @@ state OPENED_NUMBER {
     IN_PAYMENT -down-> A 
     note on link
     <b>Sistema muestra</b>
-    * detalles del pago
-    * prefijo del teléfono
-    * moneda
+    * Métodos de pago
+        * imagen referencial
+        * detalles del pago
+        * moneda
 
     <b>Sistema requiere</b>
     * nombre completo

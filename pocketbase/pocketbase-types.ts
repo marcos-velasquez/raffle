@@ -11,7 +11,7 @@ export enum Collections {
 	Mfas = "_mfas",
 	Otps = "_otps",
 	Superusers = "_superusers",
-	Configuration = "configuration",
+	Channels = "channels",
 	History = "history",
 	Raffles = "raffles",
 	Vouchers = "vouchers",
@@ -93,13 +93,12 @@ export type SuperusersRecord = {
 	verified?: boolean
 }
 
-export type ConfigurationRecord = {
+export type ChannelsRecord = {
 	created?: IsoDateString
 	currency?: string
+	details?: string
 	id: string
 	image: string
-	paymentDetails?: string
-	phonePrefix?: string
 	updated?: IsoDateString
 }
 
@@ -112,14 +111,14 @@ export type HistoryRecord = {
 	video: string
 }
 
-export type RafflesRecord<Tnumbers = unknown> = {
+export type RafflesRecord<Tnumbers = unknown, Tprice = unknown> = {
 	completed?: boolean
 	created?: IsoDateString
 	description: HTMLString
 	id: string
 	images: string[]
 	numbers: null | Tnumbers
-	price: number
+	price: null | Tprice
 	title: string
 	updated?: IsoDateString
 }
@@ -137,9 +136,9 @@ export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRec
 export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemFields<Texpand>
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
-export type ConfigurationResponse<Texpand = unknown> = Required<ConfigurationRecord> & BaseSystemFields<Texpand>
+export type ChannelsResponse<Texpand = unknown> = Required<ChannelsRecord> & BaseSystemFields<Texpand>
 export type HistoryResponse<Texpand = unknown> = Required<HistoryRecord> & BaseSystemFields<Texpand>
-export type RafflesResponse<Tnumbers = unknown, Texpand = unknown> = Required<RafflesRecord<Tnumbers>> & BaseSystemFields<Texpand>
+export type RafflesResponse<Tnumbers = unknown, Tprice = unknown, Texpand = unknown> = Required<RafflesRecord<Tnumbers, Tprice>> & BaseSystemFields<Texpand>
 export type VouchersResponse<Texpand = unknown> = Required<VouchersRecord> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -150,7 +149,7 @@ export type CollectionRecords = {
 	_mfas: MfasRecord
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
-	configuration: ConfigurationRecord
+	channels: ChannelsRecord
 	history: HistoryRecord
 	raffles: RafflesRecord
 	vouchers: VouchersRecord
@@ -162,7 +161,7 @@ export type CollectionResponses = {
 	_mfas: MfasResponse
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
-	configuration: ConfigurationResponse
+	channels: ChannelsResponse
 	history: HistoryResponse
 	raffles: RafflesResponse
 	vouchers: VouchersResponse
@@ -177,7 +176,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: '_mfas'): RecordService<MfasResponse>
 	collection(idOrName: '_otps'): RecordService<OtpsResponse>
 	collection(idOrName: '_superusers'): RecordService<SuperusersResponse>
-	collection(idOrName: 'configuration'): RecordService<ConfigurationResponse>
+	collection(idOrName: 'channels'): RecordService<ChannelsResponse>
 	collection(idOrName: 'history'): RecordService<HistoryResponse>
 	collection(idOrName: 'raffles'): RecordService<RafflesResponse>
 	collection(idOrName: 'vouchers'): RecordService<VouchersResponse>

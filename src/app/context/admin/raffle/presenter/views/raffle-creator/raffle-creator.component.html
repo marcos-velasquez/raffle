@@ -1,4 +1,4 @@
-<article class="flex items-center justify-center card card-compact bg-base-200 w-96 h-96 shadow-xl">
+<!-- <article class="flex items-center justify-center card card-compact bg-base-200 w-96 h-96 shadow-xl">
   <button (click)="open()" class="btn btn-soft btn-primary">
     <span class="icon-[heroicons--plus-circle-16-solid]"></span>
   </button>
@@ -33,13 +33,37 @@
 
     <section>
       <div class="label">
-        <span class="label-text">{{ 'raffle.price' | transloco }}</span>
+        <span class="label-text">{{ 'raffle.prices' | transloco }}</span>
       </div>
-      <div class="relative">
-        <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
+      <div formArrayName="prices" class="space-y-3">
+        @for (method of paymentMethods(); track $index) {
+        <div class="flex items-center gap-3">
+          <span class="label-text font-medium min-w-[120px]">{{ method }}:</span>
+          <div class="flex-1 relative">
+            <input 
+              [formControlName]="$index" 
+              type="number" 
+              step="0.01"
+              min="0.01"
+              class="w-full input input-bordered focus:input-primary" 
+              [placeholder]="'Precio para ' + method"
+            />
+            @if (pricesFormArray.at($index)?.touched && pricesFormArray.at($index)?.invalid) {
+            <div class="validator-hint text-error text-sm mt-1">
+              @if (pricesFormArray.at($index)?.errors?.['required']) {
+                El precio es requerido
+              }
+              @if (pricesFormArray.at($index)?.errors?.['min']) {
+                El precio debe ser mayor a 0
+              }
+            </div>
+            }
+          </div>
+        </div>
+        }
       </div>
-      @if (form.get('price')?.touched && form.get('price')?.invalid) {
-      <div class="validator-hint text-error">{{ 'raffle.priceValidation' | transloco }}</div>
+      @if (pricesFormArray.touched && pricesFormArray.invalid) {
+      <div class="validator-hint text-error">{{ 'raffle.pricesValidation' | transloco }}</div>
       }
     </section>
 
@@ -70,3 +94,4 @@
   </form>
   }
 </ui-dialog>
+ -->

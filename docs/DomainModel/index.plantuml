@@ -8,11 +8,10 @@ class Admin {}
 Admin -down-> Raffle : "(create, delete, update) >"
 Admin -down- Number: "(verify, decline) >"
 Admin ..> Wheel
-Admin o-down-> "1..n" Configuration : "(create, update, delete) >"
+Admin o-down-> "1..n" Channel : "(create, update, delete) >"
 
-class Configuration {
+class Channel {
     paymentDetails
-    phonePrefix
     currency
 }
 

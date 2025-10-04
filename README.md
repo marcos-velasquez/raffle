@@ -78,17 +78,17 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Permitir eliminar rifas:**
     - No se puede eliminar una rifa con números comprados
 
-- **Configuración del Sistema**:
+- **Canales de pago del Sistema**:
 
-  - **Permitir crear configuración:**
+  - **Permitir crear canal:**
     - Detalles del pago (información de cuenta bancaria, métodos de pago)
-    - Prefijo del teléfono (código de país para notificaciones)
     - Moneda (tipo de moneda utilizada en las rifas)
-  - **Permitir actualizar configuración:**
-  - **Permitir eliminar configuración:**
-  - **Permitir ver configuración:**
+    - Imagen (imagen representativa del método de pago)
+  - **Permitir actualizar canal:**
+  - **Permitir eliminar canal:**
+  - **Permitir ver canal:**
     - Consultar configuraciones existentes
-    - Ver detalles completos de cada configuración
+    - Ver detalles completos de cada canal
 
 - **Gestión de Números**:
 
@@ -127,12 +127,12 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 1. Inicia sesión en el panel de administración
 2. Configura el sistema estableciendo:
    - Detalles del pago (información bancaria, métodos aceptados)
-   - Prefijo del teléfono para notificaciones WhatsApp
    - Tipo de moneda a utilizar
+   - Imagen (imagen representativa del método de pago)
 3. Visualiza las rifas activas y filtra los números en proceso de pago
 4. Verifica los pagos revisando los comprobantes
 5. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
-6. Agrega nuevas rifas al sistema utilizando la configuración establecida
+6. Agrega nuevas rifas al sistema utilizando la canal establecida
 7. Una vez todos los números de una rifa estén comprados, utiliza la ruleta virtual para seleccionar al ganador
 8. Una vez entregado el premio al ganador, se sube el comprobante de entrega en el historial de la rifa
 
@@ -179,7 +179,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 
 **Comprobante de entrega**: Registro visual del momento en que se entrega el premio al ganador.
 
-**Configuración del Sistema**: Conjunto de parámetros globales que definen el comportamiento del sistema de rifas, incluyendo información de pago, configuración de notificaciones y moneda.
+**Canal**: Medio de pago, incluyendo información de pago, moneda y imagen representativa.
 
 **Detalles del Pago**: Información específica sobre los métodos de pago aceptados, incluyendo datos bancarios, cuentas digitales o cualquier otro medio de pago configurado por el administrador.
 

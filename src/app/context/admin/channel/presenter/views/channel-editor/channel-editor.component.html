@@ -1,0 +1,60 @@
+<ui-dialog>
+  <form [formGroup]="form" class="form-container">
+    <header>
+      <h3 class="text-xl font-semibold">{{ 'channel.actions.update' | transloco }}</h3>
+    </header>
+
+    <section>
+      <label for="currency" class="label">
+        {{ 'channel.currency' | transloco }}
+      </label>
+      <input
+        id="currency"
+        formControlName="currency"
+        placeholder="{{ 'channel.placeholders.currency' | transloco }}"
+        class="input input-bordered w-full"
+      />
+      @if (form.get('currency')?.invalid && form.get('currency')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
+
+    <section>
+      <label for="paymentDetails" class="label">
+        {{ 'channel.paymentDetails' | transloco }}
+      </label>
+      <textarea
+        id="paymentDetails"
+        formControlName="paymentDetails"
+        placeholder="{{ 'channel.placeholders.paymentDetails' | transloco }}"
+        class="textarea textarea-bordered h-24 w-full"
+      ></textarea>
+      @if (form.get('paymentDetails')?.invalid && form.get('paymentDetails')?.touched) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
+
+    <section>
+      <div class="label">
+        <span class="label-text">{{ 'channel.referenceImage' | transloco }}</span>
+      </div>
+      <ui-dropzone
+        (change)="form.patchValue({ image: $event })"
+        [defaultUrls]="[channel() | fullPath]"
+        [maxFiles]="1"
+      />
+      @if (form.get('image')?.touched && form.get('image')?.invalid) {
+      <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
+      }
+    </section>
+
+    <footer class="flex justify-end gap-2">
+      <button (click)="close()" class="btn btn-ghost">
+        {{ 'actions.cancel' | transloco }}
+      </button>
+      <button (click)="update()" [disabled]="form.invalid" class="btn btn-soft btn-primary">
+        {{ 'actions.save' | transloco }}
+      </button>
+    </footer>
+  </form>
+</ui-dialog>

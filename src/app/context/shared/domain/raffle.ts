@@ -12,14 +12,17 @@ export class Raffle extends Entity<RafflePrimitives> {
     public readonly title: string,
     public readonly description: string,
     public readonly images: string[],
-    public readonly price: Price,
+    public readonly prices: Price[],
     public readonly numbers: Number[]
   ) {
     super();
     assert(title.trim().length > 0, 'Title is required');
     assert(description.trim().length > 0, 'Description is required');
     assert(images.length >= Raffle.MIN_IMAGES, `At least ${Raffle.MIN_IMAGES} images are required`);
-    assert(price.value >= Raffle.MIN_PRICE, 'Price must be greater than 0');
+    assert(
+      prices.every((price) => price.value >= Raffle.MIN_PRICE),
+      'Price must be greater than 0'
+    );
     assert(numbers.length >= Raffle.MIN_NUMBERS, `At least ${Raffle.MIN_NUMBERS} numbers are required`);
   }
 
@@ -29,7 +32,7 @@ export class Raffle extends Entity<RafflePrimitives> {
       completed: this.numbers.some((number) => number.is.winner),
       number: (value: number) => ({ ...this.find(value).is }),
       equal: {
-        price: (value: number) => this.price.is.equal(value),
+        price: (value: number, index: number) => this.prices[index].is.equal(value),
       },
     };
   }
@@ -42,8 +45,8 @@ export class Raffle extends Entity<RafflePrimitives> {
       winner: this.numbers.find((number) => number.is.winner),
       number: (value: number) => this.find(value),
       price: {
-        value: this.price.value,
-        toString: () => this.price.toString(),
+        value: this.prices[0].value,
+        toString: () => this.prices[0].toString(),
       },
       payers: {
         all: this.numbers.map((number) => number.get.payer),
@@ -90,24 +93,24 @@ export class Raffle extends Entity<RafflePrimitives> {
       title: this.title,
       description: this.description,
       images: this.images,
-      price: this.price.toPrimitives(),
+      prices: this.prices.map((price) => price.toPrimitives()),
       completed: this.is.completed,
       numbers: this.numbers.map((number) => number.toPrimitives()),
     };
   }
 
-  public static from({ title, description, images, price, numbers, id }: RafflePrimitives) {
+  public static from({ title, description, images, prices, numbers, id }: RafflePrimitives) {
     return new Raffle(
       title,
       description,
       images,
-      Price.from(price),
+      Price.many(prices),
       numbers.map((primitives) => Number.from(primitives))
     ).withId(id);
   }
 
-  public static create({ title, description, images, price, quantityNumbers }: RaffleCreatePrimitives) {
-    return new Raffle(title, description, images, Price.from(price), Number.many(quantityNumbers));
+  public static create({ title, description, images, prices, quantityNumbers }: RaffleCreatePrimitives) {
+    return new Raffle(title, description, images, Price.many(prices), Number.many(quantityNumbers));
   }
 }
 
@@ -116,7 +119,7 @@ export type RafflePrimitives = {
   title: string;
   description: string;
   images: string[];
-  price: PricePrimitives;
+  prices: PricePrimitives[];
   completed: boolean;
   numbers: NumberPrimitives[];
 };

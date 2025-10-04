@@ -1,10 +1,9 @@
-import { Configuration, ConfigurationPrimitives } from '../../configuration';
+import { Channel, ConfigurationPrimitives } from '../../channel';
 
 export class ConfigurationBuilder {
   protected readonly primitives: ConfigurationPrimitives = {
-    id: 'test-configuration-id',
+    id: 'test-channel-id',
     currency: 'USD',
-    phonePrefix: '+1',
     paymentDetails: 'Bank account: 123456789',
     image: 'https://example.com/image.jpg',
   };
@@ -16,11 +15,6 @@ export class ConfigurationBuilder {
 
   public withCurrency(currency: string): this {
     this.primitives.currency = currency;
-    return this;
-  }
-
-  public withPhonePrefix(phonePrefix: string): this {
-    this.primitives.phonePrefix = phonePrefix;
     return this;
   }
 
@@ -36,7 +30,6 @@ export class ConfigurationBuilder {
 
   public withMinimalData(): this {
     this.primitives.currency = 'USD';
-    this.primitives.phonePrefix = '+1';
     this.primitives.paymentDetails = 'Min payment details';
     this.primitives.image = 'https://example.com/min.jpg';
     return this;
@@ -44,14 +37,13 @@ export class ConfigurationBuilder {
 
   public withEmptyFields(): this {
     this.primitives.currency = '';
-    this.primitives.phonePrefix = '';
     this.primitives.paymentDetails = '';
     this.primitives.image = '';
     return this;
   }
 
-  public build(): Configuration {
-    return Configuration.from(this.primitives);
+  public build(): Channel {
+    return Channel.from(this.primitives);
   }
 
   public buildPrimitives(): ConfigurationPrimitives {
@@ -68,7 +60,6 @@ export class ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withId(`config-${randomId}`)
       .withCurrency(randomCurrency)
-      .withPhonePrefix(randomPrefix)
       .withPaymentDetails(`Payment details for ${randomCurrency} - ${randomId}`);
   }
 
@@ -80,10 +71,6 @@ export class ConfigurationBuilder {
     return new ConfigurationBuilder().withCurrency(currency);
   }
 
-  public static withPhonePrefix(phonePrefix: string): ConfigurationBuilder {
-    return new ConfigurationBuilder().withPhonePrefix(phonePrefix);
-  }
-
   public static withImage(image: string): ConfigurationBuilder {
     return new ConfigurationBuilder().withImage(image);
   }
@@ -91,7 +78,6 @@ export class ConfigurationBuilder {
   public static usd(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('USD')
-      .withPhonePrefix('+1')
       .withPaymentDetails('US Bank account: 123456789')
       .withImage('https://example.com/usd.jpg');
   }
@@ -99,7 +85,6 @@ export class ConfigurationBuilder {
   public static euro(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('EUR')
-      .withPhonePrefix('+34')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/eur.jpg');
   }
@@ -107,33 +92,29 @@ export class ConfigurationBuilder {
   public static cop(): ConfigurationBuilder {
     return new ConfigurationBuilder()
       .withCurrency('COP')
-      .withPhonePrefix('+57')
       .withPaymentDetails('Nequi: 3001234567')
       .withImage('https://example.com/cop.jpg');
   }
 }
 
 describe('ConfigurationBuilder util', () => {
-  it('should build a configuration with default values', () => {
-    const configuration = new ConfigurationBuilder().build();
-    expect(configuration.currency).toBe('USD');
-    expect(configuration.phonePrefix).toBe('+1');
-    expect(configuration.paymentDetails).toBe('Bank account: 123456789');
-    expect(configuration.image).toBe('https://example.com/image.jpg');
+  it('should build a channel with default values', () => {
+    const channel = new ConfigurationBuilder().build();
+    expect(channel.currency).toBe('USD');
+    expect(channel.paymentDetails).toBe('Bank account: 123456789');
+    expect(channel.image).toBe('https://example.com/image.jpg');
   });
 
-  it('should build a configuration with custom values', () => {
-    const configuration = new ConfigurationBuilder()
+  it('should build a channel with custom values', () => {
+    const channel = new ConfigurationBuilder()
       .withCurrency('EUR')
-      .withPhonePrefix('+34')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/custom.jpg')
       .build();
 
-    expect(configuration.currency).toBe('EUR');
-    expect(configuration.phonePrefix).toBe('+34');
-    expect(configuration.paymentDetails).toBe('IBAN: ES123456789');
-    expect(configuration.image).toBe('https://example.com/custom.jpg');
+    expect(channel.currency).toBe('EUR');
+    expect(channel.paymentDetails).toBe('IBAN: ES123456789');
+    expect(channel.image).toBe('https://example.com/custom.jpg');
   });
 
   it('should create random configurations', () => {
@@ -149,15 +130,12 @@ describe('ConfigurationBuilder util', () => {
     const copConfig = ConfigurationBuilder.cop().build();
 
     expect(usdConfig.currency).toBe('USD');
-    expect(usdConfig.phonePrefix).toBe('+1');
     expect(usdConfig.image).toBe('https://example.com/usd.jpg');
 
     expect(euroConfig.currency).toBe('EUR');
-    expect(euroConfig.phonePrefix).toBe('+34');
     expect(euroConfig.image).toBe('https://example.com/eur.jpg');
 
     expect(copConfig.currency).toBe('COP');
-    expect(copConfig.phonePrefix).toBe('+57');
     expect(copConfig.image).toBe('https://example.com/cop.jpg');
   });
 });

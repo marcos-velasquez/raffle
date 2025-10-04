@@ -1,0 +1,45 @@
+import { inject } from '@angular/core';
+import { signalStore, withState, patchState, withMethods, withHooks } from '@ngrx/signals';
+import { Channel } from '../domain';
+import { PocketbaseChannelRepository } from './channel.repository';
+
+type ChannelState = {
+  channels: Channel[];
+  selected: Channel | null;
+};
+
+const initialState: ChannelState = {
+  channels: [],
+  selected: null,
+};
+
+export const ChannelStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialState),
+  withHooks((store, repository = inject(PocketbaseChannelRepository)) => ({
+    onInit() {
+      repository.findAll().then((result) => {
+        result.mapRight((channels) => patchState(store, { channels, selected: channels[0] }));
+      });
+      repository.valuesChange().subscribe((channels) => patchState(store, { channels }));
+    },
+  })),
+  withMethods((store) => ({
+    insert(channel: Channel) {
+      patchState(store, (state) => ({ channels: [...state.channels, channel] }));
+    },
+    remove(channel: Channel) {
+      patchState(store, (state) => ({
+        channels: state.channels.filter((c) => c.getId() !== channel.getId()),
+      }));
+    },
+    update(channel: Channel) {
+      patchState(store, (state) => ({
+        channels: state.channels.map((c) => (c.getId() === channel.getId() ? channel : c)),
+      }));
+    },
+    select(channel: Channel) {
+      patchState(store, { selected: channel });
+    },
+  }))
+);

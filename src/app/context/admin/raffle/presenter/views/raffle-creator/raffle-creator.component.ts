@@ -1,6 +1,6 @@
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
@@ -17,20 +17,43 @@ import { raffleFacade } from '@context/admin/raffle/application';
 export class RaffleCreatorComponent extends BaseComponent {
   public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
+  /*   private readonly configurationStore = inject(ConfigurationStore); */
+  private readonly formBuilder = inject(FormBuilder);
+
+  /* public readonly paymentMethods = computed(() => {
+    const selected = this.configurationStore.selected();
+    return selected ? selected.split.paymentDetails : [];
+  }); */
 
   constructor() {
     super();
-    this.form = inject(FormBuilder).group({
+    this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      price: [0, [Validators.required, Validators.min(Raffle.MIN_PRICE)]],
+      prices: this.formBuilder.array([]),
       images: [[], [Validators.required, Validators.minLength(Raffle.MIN_IMAGES)]],
       quantityNumbers: [0, [Validators.required, Validators.min(Raffle.MIN_NUMBERS)]],
     });
   }
 
+  public get pricesFormArray(): FormArray {
+    return this.form.get('prices') as FormArray;
+  }
+
+  private initializePricesFormArray(): void {
+    const pricesArray = this.pricesFormArray;
+    pricesArray.clear();
+
+    /*   this.paymentMethods().forEach(() => {
+      pricesArray.push(this.formBuilder.control(0, [Validators.required, Validators.min(0.01)]));
+    }); */
+  }
+
   public open() {
-    when(this.form.reset()).map(() => this.uiDialog().open());
+    when(this.form.reset()).map(() => {
+      this.initializePricesFormArray();
+      this.uiDialog().open();
+    });
   }
 
   public close() {
@@ -41,7 +64,19 @@ export class RaffleCreatorComponent extends BaseComponent {
     is.affirmative(this.form.valid)
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(() => {
-        when(raffleFacade.create(this.form.getRawValue())).map(() => this.close());
+        const formValue = this.form.getRawValue();
+        // Convertir el array de precios en un objeto con los métodos de pago como claves
+        /* const pricesObject = this.paymentMethods().reduce((acc, method, index) => {
+          acc[method] = formValue.prices[index];
+          return acc;
+        }, {} as Record<string, number>);
+
+        const raffleData = {
+          ...formValue,
+          prices: pricesObject,
+        }; */
+
+        /* when(raffleFacade.create(raffleData)).map(() => this.close()); */
       });
   }
 }
