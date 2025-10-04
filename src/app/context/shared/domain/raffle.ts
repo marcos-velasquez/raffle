@@ -45,10 +45,7 @@ export class Raffle extends Entity<RafflePrimitives> {
       purchased: this.numbers.filter((number) => number.is.purchased).length,
       winner: this.numbers.find((number) => number.is.winner),
       number: (value: number) => this.find(value),
-      price: {
-        value: this.prices[0].value,
-        toString: () => this.prices[0].toString(),
-      },
+      price: (currency: string) => this.prices.find((price) => price.currency === currency),
       payers: {
         all: this.numbers.map((number) => number.get.payer),
         filled: this.numbers.filter((n) => n.has.payer).map((number) => number.get.payer),

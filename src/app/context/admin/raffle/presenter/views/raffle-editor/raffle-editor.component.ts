@@ -32,12 +32,12 @@ export class RaffleEditorComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    is.affirmative(this.raffle().has.purchased).mapRight(() => this.prices.disable());
-
     this.prices.clear();
     this.raffle().prices.forEach((price) =>
       this.prices.push(this.formBuilder.control(price.value, [Validators.required, Validators.min(Raffle.MIN_PRICE)]))
     );
+
+    is.affirmative(this.raffle().has.purchased).mapRight(() => this.prices.disable());
   }
 
   public get uniqueChannels() {
