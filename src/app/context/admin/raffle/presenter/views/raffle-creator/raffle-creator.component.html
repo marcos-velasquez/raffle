@@ -1,4 +1,4 @@
-<!-- <article class="flex items-center justify-center card card-compact bg-base-200 w-96 h-96 shadow-xl">
+<article class="flex items-center justify-center card card-compact bg-base-200 w-96 h-96 shadow-xl">
   <button (click)="open()" class="btn btn-soft btn-primary">
     <span class="icon-[heroicons--plus-circle-16-solid]"></span>
   </button>
@@ -36,35 +36,26 @@
         <span class="label-text">{{ 'raffle.prices' | transloco }}</span>
       </div>
       <div formArrayName="prices" class="space-y-3">
-        @for (method of paymentMethods(); track $index) {
+        @for (channel of uniqueChannels; track $index) {
         <div class="flex items-center gap-3">
-          <span class="label-text font-medium min-w-[120px]">{{ method }}:</span>
+          <span class="label-text font-medium min-w-[120px]">{{ channel.currency }}:</span>
           <div class="flex-1 relative">
-            <input 
-              [formControlName]="$index" 
-              type="number" 
-              step="0.01"
-              min="0.01"
-              class="w-full input input-bordered focus:input-primary" 
-              [placeholder]="'Precio para ' + method"
+            <input
+              [formControlName]="$index"
+              type="number"
+              step="1"
+              [placeholder]="'raffle.enterPriceTo' | transloco : { currency: channel.currency }"
+              class="w-full input input-bordered focus:input-primary"
             />
-            @if (pricesFormArray.at($index)?.touched && pricesFormArray.at($index)?.invalid) {
+            @if (prices.at($index)?.touched && prices.at($index)?.invalid) {
             <div class="validator-hint text-error text-sm mt-1">
-              @if (pricesFormArray.at($index)?.errors?.['required']) {
-                El precio es requerido
-              }
-              @if (pricesFormArray.at($index)?.errors?.['min']) {
-                El precio debe ser mayor a 0
-              }
+              {{ 'raffle.priceValidation' | transloco }}
             </div>
             }
           </div>
         </div>
         }
       </div>
-      @if (pricesFormArray.touched && pricesFormArray.invalid) {
-      <div class="validator-hint text-error">{{ 'raffle.pricesValidation' | transloco }}</div>
-      }
     </section>
 
     <section>
@@ -94,4 +85,3 @@
   </form>
   }
 </ui-dialog>
- -->

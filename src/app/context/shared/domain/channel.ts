@@ -8,7 +8,7 @@ export class Channel extends Entity<ChannelPrimitives> {
   ) {
     super();
     assert(currency.trim().length > 0, 'Currency is required');
-    assert(details.trim().length > 0, 'Payment details are required');
+    assert(details.trim().length > 0, 'Details are required');
   }
 
   public get is() {

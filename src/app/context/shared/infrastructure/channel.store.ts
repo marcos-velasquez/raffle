@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
-import { signalStore, withState, patchState, withMethods, withHooks } from '@ngrx/signals';
+import { signalStore, withState, patchState, withMethods, withHooks, withComputed } from '@ngrx/signals';
+import { computed } from '@angular/core';
 import { Channel } from '../domain';
 import { PocketbaseChannelRepository } from './channel.repository';
 
@@ -23,6 +24,11 @@ export const ChannelStore = signalStore(
       });
       repository.valuesChange().subscribe((channels) => patchState(store, { channels }));
     },
+  })),
+  withComputed((store) => ({
+    uniques: computed(() =>
+      store.channels().filter((channel, index, arr) => arr.findIndex((c) => c.currency === channel.currency) === index)
+    ),
   })),
   withMethods((store) => ({
     insert(channel: Channel) {

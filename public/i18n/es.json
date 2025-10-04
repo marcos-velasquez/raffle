@@ -18,7 +18,7 @@
     "edit": "Editar Rifa",
     "title": "Título",
     "description": "Descripción",
-    "price": "Precio",
+    "prices": "Precios",
     "quantityNumbers": "Cantidad de números",
     "images": "Imágenes",
     "titleValidation": "Por favor, ingrese un título válido",
@@ -43,10 +43,10 @@
       "remove": "Eliminar canal"
     },
     "messages": {
-      "created": "Canal creada exitosamente",
-      "updated": "Canal actualizada exitosamente",
-      "removed": "Canal eliminada exitosamente",
-      "confirmation": "¿Estás seguro de eliminar esta canal?"
+      "created": "Canal creado exitosamente",
+      "updated": "Canal actualizado exitosamente",
+      "removed": "Canal eliminado exitosamente",
+      "confirmation": "¿Estás seguro de eliminar este canal?"
     },
     "placeholders": {
       "currency": "Ej: Bs, Usd, Eur, Cop",
@@ -113,11 +113,11 @@
     "updatingHistory": "Actualizando historial...",
     "historyUpdatedSuccess": "Historial actualizado con éxito",
     "creatingChannel": "Creando canal...",
-    "channelCreatedSuccess": "Canal creada con éxito",
+    "channelCreatedSuccess": "Canal creado con éxito",
     "updatingChannel": "Actualizando canal...",
-    "channelUpdatedSuccess": "Canal actualizada con éxito",
+    "channelUpdatedSuccess": "Canal actualizado con éxito",
     "removingChannel": "Eliminando canal...",
-    "channelRemovedSuccess": "Canal eliminada con éxito",
+    "channelRemovedSuccess": "Canal eliminado con éxito",
     "loadingChannels": "Cargando canales...",
     "channelsLoadedSuccess": "Canales cargados con éxito"
   },
@@ -146,6 +146,7 @@
     "enterTitle": "Ingrese el título",
     "enterDescription": "Ingrese la descripción",
     "enterPrice": "Ingrese el precio",
+    "enterPriceTo": "Precio para {{currency}}",
     "enterQuantity": "Ingrese la cantidad",
     "enterName": "Ingrese su nombre completo",
     "enterPhone": "Ingrese su teléfono"

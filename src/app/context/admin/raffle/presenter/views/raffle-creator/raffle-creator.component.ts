@@ -1,6 +1,6 @@
-import { Component, inject, viewChild, computed } from '@angular/core';
+import { Component, inject, viewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { is, when } from '@shared/domain';
 import { DialogComponent } from '@ui/components/dialog';
@@ -14,16 +14,11 @@ import { raffleFacade } from '@context/admin/raffle/application';
   imports: [CommonModule, ReactiveFormsModule, TranslocoPipe, DialogComponent, DropzoneComponent],
   templateUrl: './raffle-creator.component.html',
 })
-export class RaffleCreatorComponent extends BaseComponent {
+export class RaffleCreatorComponent extends BaseComponent implements OnInit {
   public readonly uiDialog = viewChild.required(DialogComponent);
   public readonly form: FormGroup;
-  /*   private readonly configurationStore = inject(ConfigurationStore); */
-  private readonly formBuilder = inject(FormBuilder);
 
-  /* public readonly paymentMethods = computed(() => {
-    const selected = this.configurationStore.selected();
-    return selected ? selected.split.details : [];
-  }); */
+  private readonly formBuilder = inject(FormBuilder);
 
   constructor() {
     super();
@@ -36,24 +31,27 @@ export class RaffleCreatorComponent extends BaseComponent {
     });
   }
 
-  public get pricesFormArray(): FormArray {
+  ngOnInit(): void {
+    this.prices.clear();
+    this.channelStore
+      .uniques()
+      .forEach(() =>
+        this.prices.push(this.formBuilder.control(0, [Validators.required, Validators.min(Raffle.MIN_PRICE)]))
+      );
+  }
+
+  public get uniqueChannels() {
+    return this.channelStore.uniques();
+  }
+
+  public get prices(): FormArray {
     return this.form.get('prices') as FormArray;
   }
 
-  private initializePricesFormArray(): void {
-    const pricesArray = this.pricesFormArray;
-    pricesArray.clear();
-
-    /*   this.paymentMethods().forEach(() => {
-      pricesArray.push(this.formBuilder.control(0, [Validators.required, Validators.min(0.01)]));
-    }); */
-  }
-
   public open() {
-    when(this.form.reset()).map(() => {
-      this.initializePricesFormArray();
-      this.uiDialog().open();
-    });
+    when(this.form.reset())
+      .map(() => this.ngOnInit())
+      .map(() => this.uiDialog().open());
   }
 
   public close() {
@@ -65,18 +63,8 @@ export class RaffleCreatorComponent extends BaseComponent {
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(() => {
         const formValue = this.form.getRawValue();
-        // Convertir el array de precios en un objeto con los métodos de pago como claves
-        /* const pricesObject = this.paymentMethods().reduce((acc, method, index) => {
-          acc[method] = formValue.prices[index];
-          return acc;
-        }, {} as Record<string, number>);
-
-        const raffleData = {
-          ...formValue,
-          prices: pricesObject,
-        }; */
-
-        /* when(raffleFacade.create(raffleData)).map(() => this.close()); */
+        const prices = this.uniqueChannels.map(({ currency }, i) => ({ value: formValue.prices[i], currency }));
+        when(raffleFacade.create({ ...formValue, prices })).map(() => this.close());
       });
   }
 }

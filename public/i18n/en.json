@@ -18,7 +18,7 @@
     "edit": "Edit Raffle",
     "title": "Title",
     "description": "Description",
-    "price": "Price",
+    "prices": "Prices",
     "quantityNumbers": "Number of tickets",
     "images": "Images",
     "titleValidation": "Please enter a valid title",
@@ -145,6 +145,7 @@
     "enterTitle": "Enter title",
     "enterDescription": "Enter description",
     "enterPrice": "Enter price",
+    "enterPriceTo": "Enter price for {{currency}}",
     "enterQuantity": "Enter quantity",
     "enterName": "Enter your full name",
     "enterPhone": "Enter your phone number"

@@ -5,6 +5,6 @@ import { Channel } from '@context/shared/domain';
 @Pipe({ name: 'fullPath' })
 export class ChannelFullPathPipe implements PipeTransform {
   transform(channel: Channel): string {
-    return new FullPathPipe().transform('channel', channel.getId(), channel.image);
+    return new FullPathPipe().transform('channels', channel.getId(), channel.image);
   }
 }
