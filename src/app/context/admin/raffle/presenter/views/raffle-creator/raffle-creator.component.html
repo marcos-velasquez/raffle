@@ -36,15 +36,15 @@
         <span class="label-text">{{ 'raffle.prices' | transloco }}</span>
       </div>
       <div formArrayName="prices" class="space-y-3">
-        @for (channel of uniqueChannels; track $index) {
-        <div class="flex items-center gap-3">
-          <span class="label-text font-medium min-w-[120px]">{{ channel.currency }}:</span>
+        @for (channel of uniqueChannels; track $index;) {
+        <div class="grid grid-cols-[3rem_auto] items-center gap-3">
+          <span class="label-text font-medium">{{ channel.currency | uppercase }}:</span>
           <div class="flex-1 relative">
             <input
               [formControlName]="$index"
               type="number"
               step="1"
-              [placeholder]="'raffle.enterPriceTo' | transloco : { currency: channel.currency }"
+              [placeholder]="'placeholders.enterPriceTo' | transloco : { currency: channel.currency }"
               class="w-full input input-bordered focus:input-primary"
             />
             @if (prices.at($index)?.touched && prices.at($index)?.invalid) {

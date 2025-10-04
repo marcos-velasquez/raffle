@@ -1,4 +1,5 @@
-<ui-dialog>
+<ui-dialog #dialogRef>
+  @if(dialogRef.is.opened){
   <form [formGroup]="form" class="form-container">
     <header>
       <h3 class="text-xl font-semibold">{{ 'raffle.edit' | transloco }}</h3>
@@ -26,12 +27,29 @@
 
     <section>
       <div class="label">
-        <span class="label-text">{{ 'raffle.price' | transloco }}</span>
+        <span class="label-text">{{ 'raffle.prices' | transloco }}</span>
       </div>
-      <input formControlName="price" type="number" class="w-full input input-bordered focus:input-primary" />
-      @if (form.get('price')?.touched && form.get('price')?.invalid) {
-      <div class="validator-hint text-error">{{ 'raffle.priceValidation' | transloco }}</div>
-      }
+      <div formArrayName="prices" class="space-y-3">
+        @for (price of raffle().prices; track $index) {
+        <div class="grid grid-cols-[3rem_auto] items-center gap-3">
+          <span class="label-text font-medium">{{ price.currency | uppercase }}:</span>
+          <div class="flex-1 relative">
+            <input
+              [formControlName]="$index"
+              type="number"
+              step="1"
+              [placeholder]="'placeholders.enterPriceTo' | transloco : { currency: price.currency }"
+              class="w-full input input-bordered focus:input-primary"
+            />
+            @if (prices.at($index)?.touched && prices.at($index)?.invalid) {
+            <div class="validator-hint text-error text-sm mt-1">
+              {{ 'raffle.priceValidation' | transloco }}
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
     </section>
 
     <section>
@@ -49,4 +67,5 @@
       <button (click)="update()" class="btn btn-soft btn-primary">{{ 'raffle.editAction' | transloco }}</button>
     </footer>
   </form>
+  }
 </ui-dialog>

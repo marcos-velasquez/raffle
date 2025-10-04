@@ -33,11 +33,9 @@ export class RaffleCreatorComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.prices.clear();
-    this.channelStore
-      .uniques()
-      .forEach(() =>
-        this.prices.push(this.formBuilder.control(0, [Validators.required, Validators.min(Raffle.MIN_PRICE)]))
-      );
+    this.uniqueChannels.forEach(() =>
+      this.prices.push(this.formBuilder.control(0, [Validators.required, Validators.min(Raffle.MIN_PRICE)]))
+    );
   }
 
   public get uniqueChannels() {
