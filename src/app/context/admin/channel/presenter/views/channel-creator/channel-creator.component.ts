@@ -21,14 +21,16 @@ export class ChannelCreatorComponent {
 
   constructor() {
     this.form = inject(FormBuilder).group({
-      currency: [Price.currencies[0], [Validators.required]],
+      currency: ['', [Validators.required]],
       details: ['', [Validators.required]],
       image: ['', [Validators.required]],
     });
   }
 
   public open() {
-    when(this.form.reset()).map(() => this.uiDialog().open());
+    when(this.form.reset())
+      .map(() => this.form.get('currency').setValue(Price.currencies[0]))
+      .map(() => this.uiDialog().open());
   }
 
   public close() {

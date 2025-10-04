@@ -8,6 +8,6 @@ import { ChannelEditorComponent as ImplementationChannelEditorComponent } from '
   imports: [CommonModule, ImplementationChannelEditorComponent],
   templateUrl: './channel-editor.component.html',
 })
-export class ConfigurationEditorComponent {
+export class ChannelEditorComponent {
   public readonly channel = input.required<Channel>();
 }

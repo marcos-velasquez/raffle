@@ -32,7 +32,7 @@
   },
   "channel": {
     "title": "Canal",
-    "noConfigurations": "No hay configuraciones disponibles",
+    "noChannels": "No hay canales disponibles",
     "currency": "Moneda",
     "phonePrefix": "Prefijo telefónico",
     "details": "Detalles de pago",
@@ -112,14 +112,14 @@
     "paymentVerifiedSuccess": "Pago verificado con éxito",
     "updatingHistory": "Actualizando historial...",
     "historyUpdatedSuccess": "Historial actualizado con éxito",
-    "creatingConfiguration": "Creando canal...",
-    "configurationCreatedSuccess": "Canal creada con éxito",
-    "updatingConfiguration": "Actualizando canal...",
-    "configurationUpdatedSuccess": "Canal actualizada con éxito",
-    "removingConfiguration": "Eliminando canal...",
-    "configurationRemovedSuccess": "Canal eliminada con éxito",
-    "loadingConfigurations": "Cargando configuraciones...",
-    "configurationsLoadedSuccess": "Configuraciones cargadas con éxito"
+    "creatingChannel": "Creando canal...",
+    "channelCreatedSuccess": "Canal creada con éxito",
+    "updatingChannel": "Actualizando canal...",
+    "channelUpdatedSuccess": "Canal actualizada con éxito",
+    "removingChannel": "Eliminando canal...",
+    "channelRemovedSuccess": "Canal eliminada con éxito",
+    "loadingChannels": "Cargando canales...",
+    "channelsLoadedSuccess": "Canales cargados con éxito"
   },
   "errors": {
     "numberNotAvailable": "El número no está disponible",

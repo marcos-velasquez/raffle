@@ -9,7 +9,7 @@ import { channelFacade } from '../../../../../../application';
   imports: [CommonModule],
   templateUrl: './channel-remover.component.html',
 })
-export class ConfigurationRemoverComponent {
+export class ChannelRemoverComponent {
   public readonly channel = input.required<Channel>();
 
   private readonly confirmation = inject(ConfirmationService);

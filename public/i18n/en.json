@@ -111,14 +111,14 @@
     "paymentVerifiedSuccess": "Payment verified successfully",
     "updatingHistory": "Updating history...",
     "historyUpdatedSuccess": "History updated successfully",
-    "creatingConfiguration": "Creating channel...",
-    "configurationCreatedSuccess": "Channel created successfully",
-    "updatingConfiguration": "Updating channel...",
-    "configurationUpdatedSuccess": "Channel updated successfully",
-    "removingConfiguration": "Removing channel...",
-    "configurationRemovedSuccess": "Channel removed successfully",
-    "loadingConfigurations": "Loading configurations...",
-    "configurationsLoadedSuccess": "Configurations loaded successfully"
+    "creatingChannel": "Creating channel...",
+    "channelCreatedSuccess": "Channel created successfully",
+    "updatingChannel": "Updating channel...",
+    "channelUpdatedSuccess": "Channel updated successfully",
+    "removingChannel": "Removing channel...",
+    "channelRemovedSuccess": "Channel removed successfully",
+    "loadingChannels": "Loading channels...",
+    "channelsLoadedSuccess": "Channels loaded successfully"
   },
   "errors": {
     "numberNotAvailable": "The number is not available",

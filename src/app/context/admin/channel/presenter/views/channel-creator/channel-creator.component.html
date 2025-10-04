@@ -15,7 +15,7 @@
       </label>
       <select id="currency" formControlName="currency" class="select block w-full">
         @for(currency of currencies; track currency){
-        <option>{{ currency | uppercase }}</option>
+        <option [value]="currency">{{ currency | uppercase }}</option>
         }
       </select>
       @if (form.get('currency')?.touched && form.get('currency')?.invalid) {

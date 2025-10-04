@@ -1,7 +1,7 @@
-import { Channel, ConfigurationPrimitives } from '../../channel';
+import { Channel, ChannelPrimitives } from '../../channel';
 
-export class ConfigurationBuilder {
-  protected readonly primitives: ConfigurationPrimitives = {
+export class ChannelBuilder {
+  protected readonly primitives: ChannelPrimitives = {
     id: 'test-channel-id',
     currency: 'USD',
     details: 'Bank account: 123456789',
@@ -46,51 +46,51 @@ export class ConfigurationBuilder {
     return Channel.from(this.primitives);
   }
 
-  public buildPrimitives(): ConfigurationPrimitives {
+  public buildPrimitives(): ChannelPrimitives {
     return { ...this.primitives };
   }
 
-  public static random(): ConfigurationBuilder {
+  public static random(): ChannelBuilder {
     const randomId = Math.random().toString(36).substring(7);
     const currencies = ['USD', 'EUR', 'COP', 'MXN', 'ARS'];
     const prefixes = ['+1', '+57', '+34', '+52', '+54'];
     const randomCurrency = currencies[Math.floor(Math.random() * currencies.length)];
     const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
 
-    return new ConfigurationBuilder()
+    return new ChannelBuilder()
       .withId(`config-${randomId}`)
       .withCurrency(randomCurrency)
       .withPaymentDetails(`Payment details for ${randomCurrency} - ${randomId}`);
   }
 
-  public static minimal(): ConfigurationBuilder {
-    return new ConfigurationBuilder().withMinimalData();
+  public static minimal(): ChannelBuilder {
+    return new ChannelBuilder().withMinimalData();
   }
 
-  public static withCurrency(currency: string): ConfigurationBuilder {
-    return new ConfigurationBuilder().withCurrency(currency);
+  public static withCurrency(currency: string): ChannelBuilder {
+    return new ChannelBuilder().withCurrency(currency);
   }
 
-  public static withImage(image: string): ConfigurationBuilder {
-    return new ConfigurationBuilder().withImage(image);
+  public static withImage(image: string): ChannelBuilder {
+    return new ChannelBuilder().withImage(image);
   }
 
-  public static usd(): ConfigurationBuilder {
-    return new ConfigurationBuilder()
+  public static usd(): ChannelBuilder {
+    return new ChannelBuilder()
       .withCurrency('USD')
       .withPaymentDetails('US Bank account: 123456789')
       .withImage('https://example.com/usd.jpg');
   }
 
-  public static euro(): ConfigurationBuilder {
-    return new ConfigurationBuilder()
+  public static euro(): ChannelBuilder {
+    return new ChannelBuilder()
       .withCurrency('EUR')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/eur.jpg');
   }
 
-  public static cop(): ConfigurationBuilder {
-    return new ConfigurationBuilder()
+  public static cop(): ChannelBuilder {
+    return new ChannelBuilder()
       .withCurrency('COP')
       .withPaymentDetails('Nequi: 3001234567')
       .withImage('https://example.com/cop.jpg');
@@ -99,14 +99,14 @@ export class ConfigurationBuilder {
 
 describe('ConfigurationBuilder util', () => {
   it('should build a channel with default values', () => {
-    const channel = new ConfigurationBuilder().build();
+    const channel = new ChannelBuilder().build();
     expect(channel.currency).toBe('USD');
     expect(channel.details).toBe('Bank account: 123456789');
     expect(channel.image).toBe('https://example.com/image.jpg');
   });
 
   it('should build a channel with custom values', () => {
-    const channel = new ConfigurationBuilder()
+    const channel = new ChannelBuilder()
       .withCurrency('EUR')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/custom.jpg')
@@ -118,16 +118,16 @@ describe('ConfigurationBuilder util', () => {
   });
 
   it('should create random configurations', () => {
-    const config1 = ConfigurationBuilder.random().build();
-    const config2 = ConfigurationBuilder.random().build();
+    const config1 = ChannelBuilder.random().build();
+    const config2 = ChannelBuilder.random().build();
 
     expect(config1.getId()).not.toBe(config2.getId());
   });
 
   it('should create predefined currency configurations', () => {
-    const usdConfig = ConfigurationBuilder.usd().build();
-    const euroConfig = ConfigurationBuilder.euro().build();
-    const copConfig = ConfigurationBuilder.cop().build();
+    const usdConfig = ChannelBuilder.usd().build();
+    const euroConfig = ChannelBuilder.euro().build();
+    const copConfig = ChannelBuilder.cop().build();
 
     expect(usdConfig.currency).toBe('USD');
     expect(usdConfig.image).toBe('https://example.com/usd.jpg');

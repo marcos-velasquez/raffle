@@ -19,8 +19,8 @@ export class UpdateChannelUseCase extends AdminUseCase<UpdateChannelUseCaseProps
 
   protected async next({ channel, primitives }: UpdateChannelUseCaseProps): Promise<E.Either<void, void>> {
     this.start();
-    const updatedConfiguration = Channel.from({ ...channel.toPrimitives(), ...primitives });
-    const result = await this.channelRepository.update(updatedConfiguration);
+    const updatedChannel = Channel.from({ ...channel.toPrimitives(), ...primitives });
+    const result = await this.channelRepository.update(updatedChannel);
     result.mapRight((channel) => this.bus.publish(new ChannelUpdatedEvent(channel)));
     this.complete(result);
     return new EitherBuilder().fromEitherToVoid(result).build();

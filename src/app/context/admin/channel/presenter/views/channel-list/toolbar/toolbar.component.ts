@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 import { Channel } from '@context/shared/domain';
-import { ConfigurationEditorComponent } from './tools/channel-editor/channel-editor.component';
-import { ConfigurationRemoverComponent } from './tools/channel-remover/configuration-remover.component';
+import { ChannelEditorComponent } from './tools/channel-editor/channel-editor.component';
+import { ChannelRemoverComponent } from './tools/channel-remover/channel-remover.component';
 
 @Component({
   selector: 'app-channel-toolbar',
-  imports: [ConfigurationEditorComponent, ConfigurationRemoverComponent],
+  imports: [ChannelEditorComponent, ChannelRemoverComponent],
   templateUrl: './toolbar.component.html',
 })
 export class ToolbarComponent {
