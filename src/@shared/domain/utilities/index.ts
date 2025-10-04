@@ -10,3 +10,5 @@ export * from './sleep/sleep';
 export * from './regex';
 export * from './url/url';
 export * from './is/is';
+export * from './geolocation/geolocation';
+export * from './cache';

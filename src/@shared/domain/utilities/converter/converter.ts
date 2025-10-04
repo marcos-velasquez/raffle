@@ -5,6 +5,12 @@ export const convert = {
     };
   },
 
+  min: (minutes: number) => {
+    return {
+      to: { ms: () => minutes * 60 * 1000 },
+    };
+  },
+
   ms: (milliseconds: number) => {
     return {
       to: { seg: () => milliseconds / 1000 },

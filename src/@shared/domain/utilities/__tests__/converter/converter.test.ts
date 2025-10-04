@@ -13,6 +13,13 @@ describe('convert', () => {
       expect(convert.ms(2500).to.seg()).toBe(2.5);
       expect(convert.ms(0).to.seg()).toBe(0);
     });
+
+    it('should convert minutes to milliseconds', () => {
+      expect(convert.min(1).to.ms()).toBe(60000);
+      expect(convert.min(2.5).to.ms()).toBe(150000);
+      expect(convert.min(0).to.ms()).toBe(0);
+      expect(convert.min(0.5).to.ms()).toBe(30000);
+    });
   });
 
   describe('data size conversions', () => {
@@ -38,6 +45,7 @@ describe('convert', () => {
   describe('edge cases', () => {
     it('should handle negative numbers', () => {
       expect(convert.seg(-1).to.ms()).toBe(-1000);
+      expect(convert.min(-1).to.ms()).toBe(-60000);
       expect(convert.ms(-1000).to.seg()).toBe(-1);
       expect(convert.mb(-1).to.byte()).toBe(-1024 * 1024);
       expect(convert.kb(-1024).to.mb()).toBe(-1);
@@ -47,6 +55,7 @@ describe('convert', () => {
     it('should handle very large numbers', () => {
       const largeNumber = Number.MAX_SAFE_INTEGER / 2;
       expect(convert.seg(largeNumber).to.ms()).toBe(largeNumber * 1000);
+      expect(convert.min(largeNumber).to.ms()).toBe(largeNumber * 60 * 1000);
       expect(convert.mb(largeNumber).to.byte()).toBe(largeNumber * 1024 * 1024);
     });
   });

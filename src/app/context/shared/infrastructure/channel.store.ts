@@ -6,12 +6,12 @@ import { PocketbaseChannelRepository } from './channel.repository';
 
 type ChannelState = {
   channels: Channel[];
-  selected: Channel | null;
+  selected: Channel;
 };
 
 const initialState: ChannelState = {
   channels: [],
-  selected: null,
+  selected: Channel.empty(),
 };
 
 export const ChannelStore = signalStore(

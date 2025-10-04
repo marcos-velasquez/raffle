@@ -1,10 +1,10 @@
-import { Component, computed, effect, inject, input, numberAttribute, HostListener } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { is } from '@shared/domain';
+import { cache, geolocation, is } from '@shared/domain';
 import { DropzoneComponent } from '@ui/components/dropzone';
 import { RaffleDetailsComponent, NumberComponent, BaseComponent } from '@context/shared/presenter';
 import { Voucher } from '@context/shared/domain';
@@ -28,12 +28,12 @@ import { PaymentDetailsComponent } from './components';
   providers: [provideNgxMask()],
   templateUrl: './number-buyer.component.html',
 })
-export class NumberBuyerComponent extends BaseComponent {
+export class NumberBuyerComponent extends BaseComponent implements OnInit {
   public readonly raffleId = input.required<string>();
   public readonly value = input.required({ transform: numberAttribute });
 
-  private readonly store = inject(RaffleStore);
   private readonly router = inject(Router);
+  private readonly store = inject(RaffleStore);
 
   public readonly raffle = computed(() => this.store.get(this.raffleId()));
 
@@ -45,7 +45,7 @@ export class NumberBuyerComponent extends BaseComponent {
     effect(() => this.ensureAvailability());
     this.form = inject(FormBuilder).group({
       name: ['', [Validators.required]],
-      phone: ['58', [Validators.required]],
+      phone: ['', [Validators.required]],
       voucher: ['', [Validators.required]],
     });
   }
@@ -53,6 +53,13 @@ export class NumberBuyerComponent extends BaseComponent {
   ngOnInit(): void {
     this.buyUseCase = numberFacade.buy({ raffle: this.raffle(), value: this.value() });
     this.buyUseCase.start();
+  }
+
+  ngAfterViewInit(): void {
+    cache.create
+      .persistent()
+      .for(geolocation)
+      .then((geolocation) => this.form.patchValue({ phone: geolocation.countryCallingCode }));
   }
 
   private ensureAvailability(): void {
