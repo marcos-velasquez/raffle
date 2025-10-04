@@ -22,7 +22,7 @@ describe('CreateConfigurationUseCase', () => {
     const channel = ConfigurationMother.usd();
     const props: CreateConfigurationUseCaseProps = {
       currency: channel.currency,
-      paymentDetails: channel.paymentDetails,
+      details: channel.details,
       image: channel.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(channel));
@@ -38,7 +38,7 @@ describe('CreateConfigurationUseCase', () => {
     const channel = ConfigurationMother.euro();
     const props: CreateConfigurationUseCaseProps = {
       currency: channel.currency,
-      paymentDetails: channel.paymentDetails,
+      details: channel.details,
       image: channel.image,
     };
     const exception = new Exception('Create channel failed');
@@ -55,7 +55,7 @@ describe('CreateConfigurationUseCase', () => {
     const channel = ConfigurationMother.cop();
     const props: CreateConfigurationUseCaseProps = {
       currency: channel.currency,
-      paymentDetails: channel.paymentDetails,
+      details: channel.details,
       image: channel.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(channel));
@@ -71,7 +71,7 @@ describe('CreateConfigurationUseCase', () => {
     const channel = ConfigurationMother.random();
     const props: CreateConfigurationUseCaseProps = {
       currency: channel.currency,
-      paymentDetails: channel.paymentDetails,
+      details: channel.details,
       image: channel.image,
     };
     mockConfigurationRepositoryService.save?.mockResolvedValue(E.right(channel));

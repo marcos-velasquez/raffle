@@ -7,7 +7,7 @@
       </h2>
 
       <img
-        src="{{ configuration() | fullPath }}"
+        src="{{ channel() | fullPath }}"
         alt="reference-image"
         class="size-10 rounded-full object-cover aspect-square"
       />
@@ -25,8 +25,8 @@
       <div class="flex items-start gap-4">
         <span class="icon-[heroicons--credit-card] text-primary mt-0.5"></span>
         <div class="flex-1">
-          <p class="text-sm font-medium">{{ 'configuration.paymentDetails' | transloco }}</p>
-          <p class="text-sm text-gray-500 break-words">{{ channel().paymentDetails }}</p>
+          <p class="text-sm font-medium">{{ 'configuration.details' | transloco }}</p>
+          <p class="text-sm text-gray-500 break-words">{{ channel().details }}</p>
         </div>
       </div>
     </div>

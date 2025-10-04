@@ -30,8 +30,8 @@ export class ConfigurationMother {
     return ConfigurationBuilder.cop().build();
   }
 
-  public static withPaymentDetails(paymentDetails: string): Channel {
-    return new ConfigurationBuilder().withPaymentDetails(paymentDetails).build();
+  public static withPaymentDetails(details: string): Channel {
+    return new ConfigurationBuilder().withPaymentDetails(details).build();
   }
 
   public static withImage(image: string): Channel {

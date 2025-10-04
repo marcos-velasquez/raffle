@@ -20,16 +20,16 @@
     </section>
 
     <section>
-      <label for="paymentDetails" class="label">
-        {{ 'channel.paymentDetails' | transloco }}
+      <label for="details" class="label">
+        {{ 'channel.details' | transloco }}
       </label>
       <textarea
-        id="paymentDetails"
-        formControlName="paymentDetails"
-        placeholder="{{ 'channel.placeholders.paymentDetails' | transloco }}"
+        id="details"
+        formControlName="details"
+        placeholder="{{ 'channel.placeholders.details' | transloco }}"
         class="textarea textarea-bordered h-24 w-full"
       ></textarea>
-      @if (form.get('paymentDetails')?.invalid && form.get('paymentDetails')?.touched) {
+      @if (form.get('details')?.invalid && form.get('details')?.touched) {
       <div class="validator-hint text-error">{{ 'validation.required' | transloco }}</div>
       }
     </section>

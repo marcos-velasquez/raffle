@@ -31,7 +31,7 @@ export class ChannelEditorComponent {
   constructor() {
     this.form = inject(FormBuilder).group({
       currency: ['', [Validators.required]],
-      paymentDetails: ['', [Validators.required]],
+      details: ['', [Validators.required]],
       image: ['', [Validators.required]],
     });
   }

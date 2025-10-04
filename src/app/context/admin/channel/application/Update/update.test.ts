@@ -19,7 +19,7 @@ describe('UpdateConfigurationUseCase', () => {
     useCase = new UpdateConfigurationUseCase(mockConfigurationRepositoryService as BaseRepository<Channel>);
     updatePrimitives = {
       currency: 'EUR',
-      paymentDetails: 'Updated IBAN: ES987654321',
+      details: 'Updated IBAN: ES987654321',
       image: 'https://example.com/updated.jpg',
     };
   });
@@ -67,7 +67,7 @@ describe('UpdateConfigurationUseCase', () => {
     const originalConfiguration = ConfigurationMother.usd();
     const copUpdatePrimitives: ConfigurationUpdatePrimitives = {
       currency: 'COP',
-      paymentDetails: 'Nequi: 3001234567',
+      details: 'Nequi: 3001234567',
       image: 'https://example.com/cop-updated.jpg',
     };
     const updatedConfiguration = Channel.from({
@@ -93,7 +93,7 @@ describe('UpdateConfigurationUseCase', () => {
   it('should handle partial update of channel', async () => {
     const originalConfiguration = ConfigurationMother.cop();
     const partialUpdatePrimitives: Partial<ConfigurationUpdatePrimitives> = {
-      paymentDetails: 'Updated Bancolombia: 123456789',
+      details: 'Updated Bancolombia: 123456789',
     };
     const updatedConfiguration = Channel.from({
       ...originalConfiguration.toPrimitives(),
@@ -119,7 +119,7 @@ describe('UpdateConfigurationUseCase', () => {
     const originalConfiguration = ConfigurationMother.random();
     const randomUpdatePrimitives: ConfigurationUpdatePrimitives = {
       currency: 'MXN',
-      paymentDetails: 'SPEI: 123456789012345678',
+      details: 'SPEI: 123456789012345678',
       image: 'https://example.com/mxn.jpg',
     };
     const updatedConfiguration = Channel.from({

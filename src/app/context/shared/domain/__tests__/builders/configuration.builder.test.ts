@@ -4,7 +4,7 @@ export class ConfigurationBuilder {
   protected readonly primitives: ConfigurationPrimitives = {
     id: 'test-channel-id',
     currency: 'USD',
-    paymentDetails: 'Bank account: 123456789',
+    details: 'Bank account: 123456789',
     image: 'https://example.com/image.jpg',
   };
 
@@ -18,8 +18,8 @@ export class ConfigurationBuilder {
     return this;
   }
 
-  public withPaymentDetails(paymentDetails: string): this {
-    this.primitives.paymentDetails = paymentDetails;
+  public withPaymentDetails(details: string): this {
+    this.primitives.details = details;
     return this;
   }
 
@@ -30,14 +30,14 @@ export class ConfigurationBuilder {
 
   public withMinimalData(): this {
     this.primitives.currency = 'USD';
-    this.primitives.paymentDetails = 'Min payment details';
+    this.primitives.details = 'Min payment details';
     this.primitives.image = 'https://example.com/min.jpg';
     return this;
   }
 
   public withEmptyFields(): this {
     this.primitives.currency = '';
-    this.primitives.paymentDetails = '';
+    this.primitives.details = '';
     this.primitives.image = '';
     return this;
   }
@@ -101,7 +101,7 @@ describe('ConfigurationBuilder util', () => {
   it('should build a channel with default values', () => {
     const channel = new ConfigurationBuilder().build();
     expect(channel.currency).toBe('USD');
-    expect(channel.paymentDetails).toBe('Bank account: 123456789');
+    expect(channel.details).toBe('Bank account: 123456789');
     expect(channel.image).toBe('https://example.com/image.jpg');
   });
 
@@ -113,7 +113,7 @@ describe('ConfigurationBuilder util', () => {
       .build();
 
     expect(channel.currency).toBe('EUR');
-    expect(channel.paymentDetails).toBe('IBAN: ES123456789');
+    expect(channel.details).toBe('IBAN: ES123456789');
     expect(channel.image).toBe('https://example.com/custom.jpg');
   });
 

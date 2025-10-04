@@ -11,7 +11,7 @@ Admin ..> Wheel
 Admin o-down-> "1..n" Channel : "(create, update, delete) >"
 
 class Channel {
-    paymentDetails
+    details
     currency
 }
 

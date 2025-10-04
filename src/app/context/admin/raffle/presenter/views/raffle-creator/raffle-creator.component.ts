@@ -22,7 +22,7 @@ export class RaffleCreatorComponent extends BaseComponent {
 
   /* public readonly paymentMethods = computed(() => {
     const selected = this.configurationStore.selected();
-    return selected ? selected.split.paymentDetails : [];
+    return selected ? selected.split.details : [];
   }); */
 
   constructor() {

@@ -1,12 +1,12 @@
-@for (channel of configStore.configurations(); track channel.getId();) {
+@for (channel of channelStore.channels(); track channel.getId();) {
 <article class="collapse collapse-arrow bg-base-100 border border-base-300">
-  <input type="radio" name="my-accordion-2" (change)="configStore.select(channel)" [checked]="false" />
+  <input type="radio" name="my-accordion-2" (change)="channelStore.select(channel)" [checked]="false" />
   <header class="collapse-title font-semibold">
     <img [src]="channel | fullPath" alt="reference image" class="size-10 rounded-full object-cover aspect-square" />
   </header>
 
   <section class="collapse-content text-sm">
-    @for (details of channel.split.paymentDetails; track $index) {
+    @for (details of channel.split.details; track $index) {
     <p>{{ details }}</p>
     }
 

@@ -22,7 +22,7 @@ export class PaymentDetailsComponent extends BaseComponent {
   private readonly toast = inject(ToastService);
 
   public copyToClipboard(channel: Channel): void {
-    when(navigator.clipboard.writeText(channel.paymentDetails)).mapRight(() => {
+    when(navigator.clipboard.writeText(channel.details)).mapRight(() => {
       this.toast.success('messages.copiedToClipboard');
     });
   }

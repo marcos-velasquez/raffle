@@ -7,7 +7,7 @@ describe('Channel', () => {
       const channel = ConfigurationMother.usd();
 
       expect(channel.currency).toBe('USD');
-      expect(channel.paymentDetails).toBe('US Bank account: 123456789');
+      expect(channel.details).toBe('US Bank account: 123456789');
     });
 
     it('should throw error when currency is empty', () => {
@@ -16,7 +16,7 @@ describe('Channel', () => {
       }).toThrow('Currency is required');
     });
 
-    it('should throw error when paymentDetails is empty', () => {
+    it('should throw error when details is empty', () => {
       expect(() => {
         new ConfigurationBuilder().withCurrency('USD').withPaymentDetails('').build();
       }).toThrow('Payment details are required');
@@ -29,7 +29,7 @@ describe('Channel', () => {
 
       expect(channel.getId()).toBeDefined();
       expect(channel.currency).toBe('COP');
-      expect(channel.paymentDetails).toBe('Nequi: 3001234567');
+      expect(channel.details).toBe('Nequi: 3001234567');
       expect(channel.image).toBe('https://example.com/cop.jpg');
     });
 
@@ -45,19 +45,15 @@ describe('Channel', () => {
   describe('toPrimitives', () => {
     it('should convert channel to primitives', () => {
       const testId = 'test-id';
-      const paymentDetails = 'PayPal: test@example.com';
-      const channel = new ConfigurationBuilder()
-        .withId(testId)
-        .withCurrency('USD')
-        .withPaymentDetails(paymentDetails)
-        .build();
+      const details = 'PayPal: test@example.com';
+      const channel = new ConfigurationBuilder().withId(testId).withCurrency('USD').withPaymentDetails(details).build();
 
       const primitives = channel.toPrimitives();
 
       expect(primitives).toEqual({
         id: testId,
         currency: 'USD',
-        paymentDetails: paymentDetails,
+        details: details,
         image: 'https://example.com/image.jpg',
       });
     });
@@ -71,11 +67,11 @@ describe('Channel', () => {
       expect(channel.is.equal.currency('EUR')).toBe(false);
     });
 
-    it('should check paymentDetails equality', () => {
-      const paymentDetails = 'Custom payment details';
-      const channel = ConfigurationMother.withPaymentDetails(paymentDetails);
+    it('should check details equality', () => {
+      const details = 'Custom payment details';
+      const channel = ConfigurationMother.withPaymentDetails(details);
 
-      expect(channel.paymentDetails).toBe(paymentDetails);
+      expect(channel.details).toBe(details);
     });
 
     it('should check image value', () => {
@@ -88,28 +84,28 @@ describe('Channel', () => {
 
   describe('split', () => {
     it('should split payment details by comma', () => {
-      const paymentDetails = 'Bank account: 123456789,PayPal: test@example.com,Nequi: 3001234567';
-      const channel = ConfigurationMother.withPaymentDetails(paymentDetails);
+      const details = 'Bank account: 123456789,PayPal: test@example.com,Nequi: 3001234567';
+      const channel = ConfigurationMother.withPaymentDetails(details);
 
-      const splitDetails = channel.split.paymentDetails;
+      const splitDetails = channel.split.details;
 
       expect(splitDetails).toEqual(['Bank account: 123456789', 'PayPal: test@example.com', 'Nequi: 3001234567']);
     });
 
     it('should return single item when no comma separator', () => {
-      const paymentDetails = 'Single payment method';
-      const channel = ConfigurationMother.withPaymentDetails(paymentDetails);
+      const details = 'Single payment method';
+      const channel = ConfigurationMother.withPaymentDetails(details);
 
-      const splitDetails = channel.split.paymentDetails;
+      const splitDetails = channel.split.details;
 
       expect(splitDetails).toEqual(['Single payment method']);
     });
 
     it('should handle payment details with multiple commas', () => {
-      const paymentDetails = 'Method 1,Method 2,Method 3,Method 4';
-      const channel = ConfigurationMother.withPaymentDetails(paymentDetails);
+      const details = 'Method 1,Method 2,Method 3,Method 4';
+      const channel = ConfigurationMother.withPaymentDetails(details);
 
-      const splitDetails = channel.split.paymentDetails;
+      const splitDetails = channel.split.details;
 
       expect(splitDetails).toEqual(['Method 1', 'Method 2', 'Method 3', 'Method 4']);
     });

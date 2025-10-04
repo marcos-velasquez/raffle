@@ -3,12 +3,12 @@ import { Entity, assert } from '@shared/domain';
 export class Channel extends Entity<ChannelPrimitives> {
   private constructor(
     public readonly currency: string,
-    public readonly paymentDetails: string,
+    public readonly details: string,
     public readonly image: string
   ) {
     super();
     assert(currency.trim().length > 0, 'Currency is required');
-    assert(paymentDetails.trim().length > 0, 'Payment details are required');
+    assert(details.trim().length > 0, 'Payment details are required');
   }
 
   public get is() {
@@ -21,7 +21,7 @@ export class Channel extends Entity<ChannelPrimitives> {
 
   public get split() {
     return {
-      paymentDetails: this.paymentDetails.split(','),
+      details: this.details.split(','),
     };
   }
 
@@ -35,7 +35,7 @@ export class Channel extends Entity<ChannelPrimitives> {
     return {
       id: this.getId(),
       currency: this.currency,
-      paymentDetails: this.paymentDetails,
+      details: this.details,
       image: this.image,
     };
   }
@@ -45,18 +45,18 @@ export class Channel extends Entity<ChannelPrimitives> {
   }
 
   public static from(primitives: ChannelPrimitives): Channel {
-    return new Channel(primitives.currency, primitives.paymentDetails, primitives.image).withId(primitives.id);
+    return new Channel(primitives.currency, primitives.details, primitives.image).withId(primitives.id);
   }
 
   public static create(primitives: ChannelCreatePrimitives): Channel {
-    return new Channel(primitives.currency, primitives.paymentDetails, primitives.image);
+    return new Channel(primitives.currency, primitives.details, primitives.image);
   }
 }
 
 export type ChannelPrimitives = {
   id: string;
   currency: string;
-  paymentDetails: string;
+  details: string;
   image: string;
 };
 
