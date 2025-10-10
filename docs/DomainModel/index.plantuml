@@ -13,6 +13,7 @@ Admin o-down-> "1..n" Channel : "(create, update, delete) >"
 class Channel {
     details
     currency
+    image
 }
 
 class Public {}

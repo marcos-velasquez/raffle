@@ -1,0 +1,54 @@
+@startuml CreateChannelUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_CHANNELS"
+state END as "OPENED_CHANNELS"
+state C <<choice>>
+state 1 as " "
+state 2 as " "
+
+INITIAL --> 1 
+note on link
+Administrador solicita crear un canal
+end note
+
+1 --> 2 
+note on link
+ <b>Sistema requiere</b>
+ * detalles del pago (información separada por comas)
+ * moneda (bs, usd, eur, clp, ...)
+ * imagen (representativa del método de pago)
+ 
+ <b>Sistema permite</b>
+ * confirmar
+ * cancelar
+end note
+
+2 -down[#red]-> END
+note on link 
+cancelar
+end note
+
+2 --> C  
+note on link
+confirmar
+end note
+
+C --> END
+note on link 
+<b>Sistema</b> 
+* crea el canal. 
+* persiste el canal.
+end note
+
+
+C -[#red]-> 1 : [son datos incorrectos]
+note on link
+Sistema muestra error en los datos incorrectos
+end note
+
+
+@enduml
+

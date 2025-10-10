@@ -37,7 +37,7 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
     - El título
     - La descripción
     - Imágenes
-    - Precio
+    - Precio (según la moneda del canal activo)
     - Cantidad de números apartados y disponibles
 
 - **Gestión de Números**:
@@ -78,17 +78,17 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
   - **Permitir eliminar rifas:**
     - No se puede eliminar una rifa con números comprados
 
-- **Canales de pago del Sistema**:
+- **Gestión de Canales**:
 
   - **Permitir crear canal:**
-    - Detalles del pago (información de cuenta bancaria, métodos de pago)
-    - Moneda (tipo de moneda utilizada en las rifas)
+    - Detalles del pago (información de cuenta bancaria)
+    - Moneda (bs, usd, eur, clp, cop, ...)
     - Imagen (imagen representativa del método de pago)
   - **Permitir actualizar canal:**
   - **Permitir eliminar canal:**
   - **Permitir ver canal:**
-    - Consultar configuraciones existentes
-    - Ver detalles completos de cada canal
+    - Consultar canales existentes
+    - Ver detalles completo de cada canal
 
 - **Gestión de Números**:
 
@@ -100,15 +100,14 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 - **Selección de Ganador**:
 
   - **Seleccionar ganador mediante una ruleta virtual cuando todos los números estén apartados**
-    - Grabar el sorteo y mostrar el nombre del ganador
-    - La ruleta mostrará el número y el nombre del comprador
-    - La rifa estará completada y pasará a mostrarse en el historial con su respectiva grabación del sorteo y posteriormente el comprobante de entrega
+    - La ruleta mostrará el número y el nombre de los compradores
+    - Mostrar el nombre del ganador
+    - La rifa estará completada y pasará a mostrarse en el historial con su respectiva grabación del sorteo y posteriormente se podrá agregar el comprobante de entrega
 
 - **Notificaciones**:
   - **Enviar notificaciones al usuario (Mediante WhatsApp)**
     - Cuando un pago es verificado o declinado
-    - Cuando se selecciona un ganador, notificar el resultado a todos los usuarios públicos
-    - Enviar el enlace del historial donde el sistema mostrará el video del sorteo
+    - Cuando se selecciona un ganador, notificar el resultado a todos los usuarios públicos y enviar el enlace del historial donde el sistema mostrará el video del sorteo
 
 ## Flujo de Usuario
 
@@ -117,22 +116,20 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 1. Accede a la aplicación
 2. Visualiza la lista de rifas activas
 3. Selecciona un número disponible para apartar
-4. Ingresa los datos requeridos (nombre, teléfono, captura de pago)
-5. El número cambia al estado "En proceso de pago"
-6. Espera la verificación del administrador
-7. Al confirmar el pago, el número se marca como "Apartado", se le notificará al comprador y su nombre aparecerá junto al número
+4. Selecciona un canal de pago
+5. Ingresa los datos requeridos (nombre, teléfono, captura de pago)
+6. El número cambia al estado "En proceso de pago"
+7. Espera la verificación del administrador
+8. Al confirmar el pago, el número se marca como "Apartado", se le notificará al comprador y su nombre aparecerá junto al número
 
 ### 2. Administrador
 
 1. Inicia sesión en el panel de administración
-2. Configura el sistema estableciendo:
-   - Detalles del pago (información bancaria, métodos aceptados)
-   - Tipo de moneda a utilizar
-   - Imagen (imagen representativa del método de pago)
-3. Visualiza las rifas activas y filtra los números en proceso de pago
-4. Verifica los pagos revisando los comprobantes
-5. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
-6. Agrega nuevas rifas al sistema utilizando la canal establecida
+2. Configura los canales de pago
+3. Crea rifas
+4. Visualiza las rifas activas y filtra los números en proceso de pago
+5. Verifica los pagos revisando los comprobantes
+6. Cambia el estado de los pagos a "Apartado" cuando son confirmados, en caso contrario vuelve a estar disponible
 7. Una vez todos los números de una rifa estén comprados, utiliza la ruleta virtual para seleccionar al ganador
 8. Una vez entregado el premio al ganador, se sube el comprobante de entrega en el historial de la rifa
 
@@ -181,11 +178,9 @@ Facilitar la gestión de rifas y la participación de usuarios de manera estruct
 
 **Canal**: Medio de pago, incluyendo información de pago, moneda y imagen representativa.
 
-**Detalles del Pago**: Información específica sobre los métodos de pago aceptados, incluyendo datos bancarios, cuentas digitales o cualquier otro medio de pago configurado por el administrador.
-
 **Prefijo del Teléfono**: Código de país utilizado para el envío de notificaciones WhatsApp, que se antepone automáticamente a los números de teléfono de los usuarios.
 
-**Moneda**: Tipo de moneda configurada en el sistema que se utiliza para mostrar los precios de las rifas y procesar los pagos.
+**Moneda**: Tipo de moneda configurada en cada canal que se utiliza para mostrar los precios de las rifas y procesar los pagos.
 
 ## Modelo de Dominio
 
@@ -216,6 +211,20 @@ _Diagrama general que muestra todos los casos de uso del sistema y los actores i
 **Eliminar Rifa**
 
 ![Eliminar Rifa](./out/docs/UseCases/Specifications/admin/raffle/remove/RemoveRaffleUseCase.png)
+
+#### Gestión de Canales
+
+**Crear Canal**
+
+![Crear Canal](./out/docs/UseCases/Specifications/admin/channel/create/CreateChannelUseCase.png)
+
+**Actualizar Canal**
+
+![Actualizar Canal](./out/docs/UseCases/Specifications/admin/channel/update/UpdateChannelUseCase.png)
+
+**Eliminar Canal**
+
+![Eliminar Canal](./out/docs/UseCases/Specifications/admin/channel/remove/RemoveChannelUseCase.png)
 
 #### Gestión de Números
 

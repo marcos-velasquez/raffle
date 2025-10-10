@@ -1,0 +1,48 @@
+@startuml UpdateChannelUseCase
+
+!include ../../../../config/config.puml
+
+
+state INITIAL as "OPENED_CHANNELS"
+state END as "OPENED_CHANNELS"
+state 1 as " "
+state 2 as " "
+state 3 as " "
+
+INITIAL --> 1 
+note on link
+Administrador solicita actualizar un canal
+end note
+
+1 --> 2 
+note on link
+ <b>Sistema permite actualizar</b>
+ * detalles del pago
+ * moneda 
+ * imagen 
+ 
+ <b>Sistema permite</b>
+ * confirmar
+ * cancelar
+end note
+
+2 -down[#red]-> END
+note on link 
+cancelar
+end note
+
+2 --> 3  
+note on link
+confirmar
+end note
+
+3 --> END
+note on link 
+<b>Sistema</b> 
+* actualiza el canal. 
+* persiste el canal.
+end note
+
+
+@enduml
+

@@ -20,7 +20,7 @@ note on link
  * titulo 
  * descripción
  * imágenes <b>1..n</b>
- * precio   <b>1..n</b>
+ * precios   <b>1..n</b>
  
  <b>Sistema permite</b>
  * confirmar
@@ -44,7 +44,7 @@ note on link
 * persiste la rifa.
 end note
 
-C -[#red]-> 1 : [Actualizar el precio con numeros comprados || son datos incorrectos]
+C -[#red]-> 1 : [Actualizar los precios con numeros comprados || son datos incorrectos]
 note on link
 - Sistema muestra el error
 end note

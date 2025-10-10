@@ -20,13 +20,14 @@ note on link
  * titulo
  * descripción
  * imágenes <b>1..n</b>
- * precio   <b>1..n</b>
+ * precios  <b>1..n (Por cada moneda)</b> 
  * cantidad de números <b>2..n</b> 
  
  <b>Sistema permite</b>
  * confirmar
  * cancelar
 end note
+
 
 2 -down[#red]-> END
 note on link 
