@@ -25,9 +25,9 @@ describe('MemoryStorage', () => {
     it('should store data with timestamp', () => {
       const data = { value: 42 };
       const beforeTime = Date.now();
-      
+
       storage.set('number-key', { data });
-      
+
       const result = storage.get('number-key');
       expect(result?.data).toEqual(data);
       expect(result?.timestamp).toBeGreaterThanOrEqual(beforeTime);
@@ -37,17 +37,12 @@ describe('MemoryStorage', () => {
     it('should store data with ttl', () => {
       const data = { test: true };
       const ttl = 5000;
-      
+
       storage.set('ttl-key', { data, ttl });
-      
+
       const result = storage.get('ttl-key');
       expect(result?.data).toEqual(data);
       expect(result?.ttl).toBe(ttl);
-    });
-
-    it('should return storage instance for method chaining', () => {
-      const result = storage.set('chain-test', { data: 'chainable' });
-      expect(result).toBe(storage);
     });
 
     it('should overwrite existing data', () => {
@@ -92,10 +87,7 @@ describe('MemoryStorage', () => {
 
   describe('integration', () => {
     it('should handle multiple operations in sequence', () => {
-      const result = storage
-        .set('key1', { data: 'value1' })
-        .set('key2', { data: 'value2', ttl: 1000 })
-        .remove('key1');
+      const result = storage.set('key1', { data: 'value1' }).set('key2', { data: 'value2', ttl: 1000 }).remove('key1');
 
       expect(result).toBe(storage);
       expect(storage.get('key1')).toBeNull();

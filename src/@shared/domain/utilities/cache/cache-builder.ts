@@ -1,4 +1,5 @@
 import { Storage, memoryStorage, localStorageStorage } from './storage';
+import { cache } from './cache';
 
 export type CacheOptions = { key: string; ttl?: number; forceRefresh?: boolean; storage?: Storage };
 
@@ -26,7 +27,6 @@ export class CacheBuilder {
   }
 
   public async for<T>(fn: () => Promise<T>): Promise<T> {
-    const { cache } = await import('./cache');
     return cache.for(fn, { key: fn.name, ...this.options });
   }
 }

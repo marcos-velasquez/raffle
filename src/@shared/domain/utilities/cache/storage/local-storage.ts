@@ -3,7 +3,11 @@ import { CacheEntry, Storage } from './storage';
 export class LocalStorageStorage extends Storage {
   public get<T>(key: string): CacheEntry<T> | null {
     const entry = localStorage.getItem(`cache_${key}`);
-    return entry ? JSON.parse(entry) : null;
+    try {
+      return entry ? JSON.parse(entry) : null;
+    } catch {
+      return null;
+    }
   }
 
   public set<T>(key: string, value: Omit<CacheEntry<T>, 'timestamp'>): Storage {

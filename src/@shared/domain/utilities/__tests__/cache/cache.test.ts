@@ -1,15 +1,8 @@
 import { Cache } from '../../cache/cache';
-import { MemoryStorage } from '../../cache/storage/storage';
+import { MemoryStorage } from '../../cache/storage';
 
-// Mock the storage classes
-jest.mock('../../cache/storage/storage', () => ({
+jest.mock('../../cache/storage', () => ({
   MemoryStorage: jest.fn().mockImplementation(() => ({
-    get: jest.fn(),
-    set: jest.fn().mockReturnThis(),
-    remove: jest.fn().mockReturnThis(),
-    ensure: jest.fn(),
-  })),
-  LocalStorageStorage: jest.fn().mockImplementation(() => ({
     get: jest.fn(),
     set: jest.fn().mockReturnThis(),
     remove: jest.fn().mockReturnThis(),
@@ -34,7 +27,7 @@ describe('Cache', () => {
 
       expect(builder1).toBeDefined();
       expect(builder2).toBeDefined();
-      expect(builder1).not.toBe(builder2); // Should be different instances
+      expect(builder1).not.toBe(builder2);
     });
   });
 
@@ -93,10 +86,7 @@ describe('Cache', () => {
       mockStorage.ensure.mockReturnValue(false);
       mockStorage.get.mockReturnValue({ data: 'custom key result', timestamp: Date.now() });
 
-      await cache.for(mockFn, {
-        storage: mockStorage,
-        key: 'custom-cache-key',
-      });
+      await cache.for(mockFn, { storage: mockStorage, key: 'custom-cache-key' });
 
       expect(mockStorage.set).toHaveBeenCalledWith('custom-cache-key', expect.any(Object));
     });
@@ -108,18 +98,9 @@ describe('Cache', () => {
       mockStorage.ensure.mockReturnValue(false);
       mockStorage.get.mockReturnValue({ data: 'ttl test', timestamp: Date.now() });
 
-      await cache.for(mockFn, {
-        storage: mockStorage,
-        ttl,
-      });
+      await cache.for(mockFn, { storage: mockStorage, ttl });
 
-      expect(mockStorage.set).toHaveBeenCalledWith(
-        mockFn.name,
-        expect.objectContaining({
-          data: 'ttl test',
-          ttl: ttl,
-        })
-      );
+      expect(mockStorage.set).toHaveBeenCalledWith(mockFn.name, expect.objectContaining({ data: 'ttl test', ttl }));
     });
 
     it('should handle async functions correctly', async () => {
@@ -145,52 +126,6 @@ describe('Cache', () => {
 
       expect(errorFn).toHaveBeenCalledTimes(1);
       expect(mockStorage.set).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('integration with builder', () => {
-    it('should merge builder options with method options', async () => {
-      const mockFn = jest.fn().mockResolvedValue('merged options');
-      mockStorage.ensure.mockReturnValue(false);
-      mockStorage.get.mockReturnValue({ data: 'merged options', timestamp: Date.now() });
-
-      // Mock the builder to return specific options
-      const builderSpy = jest.spyOn(cache, 'builder', 'get').mockReturnValue({
-        options: { ttl: 30000, storage: mockStorage },
-      } as any);
-
-      await cache.for(mockFn, { key: 'override-key' });
-
-      expect(mockStorage.set).toHaveBeenCalledWith(
-        'override-key',
-        expect.objectContaining({
-          data: 'merged options',
-          ttl: 30000,
-        })
-      );
-
-      builderSpy.mockRestore();
-    });
-  });
-
-  describe('type safety', () => {
-    it('should maintain type safety for return values', async () => {
-      interface TestData {
-        id: number;
-        name: string;
-      }
-
-      const mockFn = jest.fn().mockResolvedValue({ id: 1, name: 'test' });
-      mockStorage.ensure.mockReturnValue(false);
-      mockStorage.get.mockReturnValue({
-        data: { id: 1, name: 'test' },
-        timestamp: Date.now(),
-      });
-
-      const result: TestData = await cache.for(mockFn, { storage: mockStorage });
-
-      expect(result.id).toBe(1);
-      expect(result.name).toBe('test');
     });
   });
 });

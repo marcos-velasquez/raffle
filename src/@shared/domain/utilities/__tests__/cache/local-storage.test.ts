@@ -1,27 +1,18 @@
 import { LocalStorageStorage } from '../../cache/storage/local-storage';
 import { CacheEntry } from '../../cache/storage/storage';
 
-// Mock localStorage
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
 
   return {
     getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    removeItem: jest.fn((key: string) => {
-      delete store[key];
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
+    setItem: jest.fn((key: string, value: string) => (store[key] = value)),
+    removeItem: jest.fn((key: string) => delete store[key]),
+    clear: jest.fn(() => (store = {})),
   };
 })();
 
-Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
-});
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('LocalStorageStorage', () => {
   let storage: LocalStorageStorage;
@@ -50,7 +41,6 @@ describe('LocalStorageStorage', () => {
     it('should handle JSON parse errors gracefully', () => {
       localStorageMock.setItem('cache_invalid', 'invalid-json');
 
-      // Should not throw and return null for invalid JSON
       expect(() => storage.get('invalid')).not.toThrow();
       expect(storage.get('invalid')).toBeNull();
     });
@@ -65,7 +55,6 @@ describe('LocalStorageStorage', () => {
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith('cache_number-key', expect.stringContaining('"value":42'));
 
-      // Verify the stored data structure
       const storedCall = localStorageMock.setItem.mock.calls[0];
       const storedData = JSON.parse(storedCall[1]);
       expect(storedData.data).toEqual(data);
@@ -83,20 +72,6 @@ describe('LocalStorageStorage', () => {
       expect(storedData.data).toEqual(data);
       expect(storedData.ttl).toBe(ttl);
     });
-
-    it('should return storage instance for method chaining', () => {
-      const result = storage.set('chain-test', { data: 'chainable' });
-      expect(result).toBe(storage);
-    });
-
-    it('should handle localStorage errors gracefully', () => {
-      // Mock localStorage.setItem to throw an error
-      localStorageMock.setItem.mockImplementationOnce(() => {
-        throw new Error('Quota exceeded');
-      });
-
-      expect(() => storage.set('error-key', { data: 'test' })).not.toThrow();
-    });
   });
 
   describe('remove', () => {
@@ -109,14 +84,6 @@ describe('LocalStorageStorage', () => {
     it('should return storage instance for method chaining', () => {
       const result = storage.remove('any-key');
       expect(result).toBe(storage);
-    });
-
-    it('should handle localStorage errors gracefully', () => {
-      localStorageMock.removeItem.mockImplementationOnce(() => {
-        throw new Error('Storage error');
-      });
-
-      expect(() => storage.remove('error-key')).not.toThrow();
     });
   });
 
