@@ -63,7 +63,7 @@ export class ChannelMother {
 describe('ChannelMother util', () => {
   it('should create default channel', () => {
     const channel = ChannelMother.default();
-    expect(channel.currency).toBe('USD');
+    expect(channel.currency).toBe('usd');
     expect(channel.image).toBe('https://example.com/image.jpg');
   });
 
@@ -84,13 +84,13 @@ describe('ChannelMother util', () => {
     const euroConfig = ChannelMother.euro();
     const copConfig = ChannelMother.cop();
 
-    expect(usdConfig.currency).toBe('USD');
+    expect(usdConfig.currency).toBe('usd');
     expect(usdConfig.image).toBe('https://example.com/usd.jpg');
 
-    expect(euroConfig.currency).toBe('EUR');
+    expect(euroConfig.currency).toBe('eur');
     expect(euroConfig.image).toBe('https://example.com/eur.jpg');
 
-    expect(copConfig.currency).toBe('COP');
+    expect(copConfig.currency).toBe('cop');
     expect(copConfig.image).toBe('https://example.com/cop.jpg');
   });
 });

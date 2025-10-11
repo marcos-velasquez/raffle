@@ -55,7 +55,7 @@ describe('RemoveChannelUseCase', () => {
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.right(channel)).build());
   });
 
-  it('should handle COP channel removal', async () => {
+  it('should handle cop channel removal', async () => {
     const channel = ChannelMother.cop();
     mockChannelRepositoryService.remove?.mockResolvedValue(E.right(channel));
 

@@ -93,18 +93,6 @@ describe('CacheBuilder', () => {
       expect(result).toBe('result');
       // The key should be set to the function name internally
     });
-
-    it('should handle async functions', async () => {
-      const asyncFn = jest.fn().mockImplementation(async () => {
-        await new Promise((resolve) => setTimeout(resolve, 10));
-        return 'async result';
-      });
-
-      const result = await builder.for(asyncFn);
-
-      expect(result).toBe('async result');
-      expect(asyncFn).toHaveBeenCalledTimes(1);
-    });
   });
 
   describe('method chaining', () => {

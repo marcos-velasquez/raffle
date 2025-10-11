@@ -18,7 +18,7 @@ describe('UpdateChannelUseCase', () => {
     mockChannelRepositoryService = { update: jest.fn() };
     useCase = new UpdateChannelUseCase(mockChannelRepositoryService as BaseRepository<Channel>);
     updatePrimitives = {
-      currency: 'EUR',
+      currency: 'eur',
       details: 'Updated IBAN: ES987654321',
       image: 'https://example.com/updated.jpg',
     };
@@ -61,10 +61,10 @@ describe('UpdateChannelUseCase', () => {
     expect(result).toEqual(new EitherBuilder().fromEitherToVoid(E.left(exception)).build());
   });
 
-  it('should handle updating USD to COP channel', async () => {
+  it('should handle updating usd to cop channel', async () => {
     const originalChannel = ChannelMother.usd();
     const copUpdatePrimitives: ChannelUpdatePrimitives = {
-      currency: 'COP',
+      currency: 'cop',
       details: 'Nequi: 3001234567',
       image: 'https://example.com/cop-updated.jpg',
     };

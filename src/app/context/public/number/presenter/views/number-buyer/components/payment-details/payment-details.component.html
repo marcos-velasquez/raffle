@@ -1,4 +1,4 @@
-@for (channel of channelStore.channels(); track channel.getId();) {
+@for (channel of channelStore.byCurrencies(raffle().get.currencies); track channel.getId();) {
 <article class="collapse collapse-arrow bg-base-100 border border-base-300">
   <input type="radio" name="my-accordion-2" (change)="channelStore.select(channel)" [checked]="false" />
   <header class="collapse-title font-semibold">

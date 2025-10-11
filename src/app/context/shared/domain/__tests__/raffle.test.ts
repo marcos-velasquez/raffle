@@ -148,6 +148,69 @@ describe('Raffle', () => {
     expect(payers.every((payer) => payer instanceof Payer)).toBe(true);
   });
 
+  it('should get only filled payers', () => {
+    const raffle = Raffle.create(validRafflePrimitives);
+    
+    // Add payer to first number
+    const payer = PayerBuilder.random();
+    raffle.action.number(1).create.payer(payer);
+    
+    const filledPayers = raffle.get.payers.filled;
+    expect(filledPayers.length).toBe(1);
+    expect(filledPayers[0].name).toBe(payer.name);
+    
+    // All payers should still return all numbers
+    expect(raffle.get.payers.all.length).toBe(validRafflePrimitives.quantityNumbers);
+  });
+
+  it('should get price by currency', () => {
+    // Create raffle with multiple currencies using primitives
+    const multiCurrencyPrimitives = {
+      ...validRafflePrimitives,
+      prices: [
+        { value: 10, currency: 'usd' as const },
+        { value: 35, currency: 'cop' as const },
+        { value: 8, currency: 'eur' as const }
+      ]
+    };
+    const multiCurrencyRaffle = Raffle.create(multiCurrencyPrimitives);
+
+    const usdPrice = multiCurrencyRaffle.get.price('usd');
+    const copPrice = multiCurrencyRaffle.get.price('cop');
+    const eurPrice = multiCurrencyRaffle.get.price('eur');
+
+    expect(usdPrice?.value).toBe(10);
+    expect(usdPrice?.currency).toBe('usd');
+    expect(copPrice?.value).toBe(35);
+    expect(copPrice?.currency).toBe('cop');
+    expect(eurPrice?.value).toBe(8);
+    expect(eurPrice?.currency).toBe('eur');
+  });
+
+  it('should return undefined when price currency is not found', () => {
+    const raffle = Raffle.create(validRafflePrimitives);
+    
+    const nonExistentPrice = raffle.get.price('nonexistent' as any);
+    expect(nonExistentPrice).toBeUndefined();
+  });
+
+  it('should get all available currencies', () => {
+    // Create raffle with multiple currencies using primitives
+    const multiCurrencyPrimitives = {
+      ...validRafflePrimitives,
+      prices: [
+        { value: 10, currency: 'usd' as const },
+        { value: 35, currency: 'cop' as const },
+        { value: 8, currency: 'eur' as const }
+      ]
+    };
+    const multiCurrencyRaffle = Raffle.create(multiCurrencyPrimitives);
+
+    const currencies = multiCurrencyRaffle.get.currencies;
+    expect(currencies).toEqual(['usd', 'cop', 'eur']);
+    expect(currencies.length).toBe(3);
+  });
+
   it('should find a number by value', () => {
     const raffle = Raffle.create(validRafflePrimitives);
 

@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastService } from '@shared/infrastructure';
 import { when } from '@shared/domain';
 import { BaseComponent, ChannelFullPathPipe } from '@context/shared/presenter';
-import { Channel } from '@context/shared/domain';
+import { Channel, Raffle } from '@context/shared/domain';
 
 @Component({
   selector: 'app-payment-details',
@@ -19,6 +19,8 @@ import { Channel } from '@context/shared/domain';
   templateUrl: './payment-details.component.html',
 })
 export class PaymentDetailsComponent extends BaseComponent {
+  public readonly raffle = input.required<Raffle>();
+
   private readonly toast = inject(ToastService);
 
   public copyToClipboard(channel: Channel): void {
