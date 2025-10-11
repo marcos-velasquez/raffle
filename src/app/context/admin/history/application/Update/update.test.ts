@@ -18,13 +18,13 @@ describe('UpdateHistoryUseCase', () => {
     useCase = new UpdateHistoryUseCase(mockHistoryRepositoryService as BaseRepository<HistoryUpdater>);
     const history = new HistoryBuilder().build();
     const deliveryReceipt = new File([], 'test.jpg', { type: 'image/jpeg' });
-    historyUpdater = HistoryUpdater.from({ id: 'test-id', history: history.toPrimitives(), deliveryReceipt });
+    historyUpdater = HistoryUpdater.from({ history: history.toPrimitives(), deliveryReceipt });
   });
 
   it('should publish HistoryUpdated event and complete with success message on successful update', async () => {
     mockHistoryRepositoryService.update?.mockResolvedValue(E.right(historyUpdater));
 
-    const result = await useCase['next'](historyUpdater);
+    const result = await useCase['next'](historyUpdater.toPrimitives());
 
     expect(mockHistoryRepositoryService.update).toHaveBeenCalledTimes(1);
     expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ ...new HistoryUpdatedEvent(historyUpdater) }));
@@ -35,7 +35,7 @@ describe('UpdateHistoryUseCase', () => {
     const exception = new Exception('update history failed');
     mockHistoryRepositoryService.update?.mockResolvedValue(E.left(exception));
 
-    const result = await useCase['next'](historyUpdater);
+    const result = await useCase['next'](historyUpdater.toPrimitives());
 
     expect(mockHistoryRepositoryService.update).toHaveBeenCalledTimes(1);
     expect(bus.publish).toHaveBeenCalledWith(expect.objectContaining({ exception }));
@@ -46,25 +46,15 @@ describe('UpdateHistoryUseCase', () => {
     const invalidFile = new File([], 'test.txt', { type: 'text/plain' });
     const history = new HistoryBuilder().build();
 
-    expect(() =>
-      HistoryUpdater.from({
-        id: 'test-id',
-        history: history.toPrimitives(),
-        deliveryReceipt: invalidFile,
-      })
-    ).toThrow('Invalid file format');
+    expect(() => HistoryUpdater.from({ history: history.toPrimitives(), deliveryReceipt: invalidFile })).toThrow(
+      'Invalid file format'
+    );
   });
 
   it('should accept valid image file for delivery receipt', () => {
     const validFile = new File([], 'test.png', { type: 'image/png' });
     const history = new HistoryBuilder().build();
 
-    expect(() =>
-      HistoryUpdater.from({
-        id: 'test-id',
-        history: history.toPrimitives(),
-        deliveryReceipt: validFile,
-      })
-    ).not.toThrow();
+    expect(() => HistoryUpdater.from({ history: history.toPrimitives(), deliveryReceipt: validFile })).not.toThrow();
   });
 });

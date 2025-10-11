@@ -33,13 +33,13 @@ export class RaffleCreatorComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.prices.clear();
-    this.uniqueChannels.forEach(() =>
+    this.currencies.forEach(() =>
       this.prices.push(this.formBuilder.control(0, [Validators.required, Validators.min(Raffle.MIN_PRICE)]))
     );
   }
 
-  public get uniqueChannels() {
-    return this.channelStore.uniques();
+  public get currencies() {
+    return this.channelStore.currencies();
   }
 
   public get prices(): FormArray {
@@ -61,7 +61,7 @@ export class RaffleCreatorComponent extends BaseComponent implements OnInit {
       .mapLeft(() => this.form.markAllAsTouched())
       .mapRight(() => {
         const formValue = this.form.getRawValue();
-        const prices = this.uniqueChannels.map(({ currency }, i) => ({ value: formValue.prices[i], currency }));
+        const prices = this.currencies.map((currency, i) => ({ value: formValue.prices[i], currency }));
         when(raffleFacade.create({ ...formValue, prices })).map(() => this.close());
       });
   }

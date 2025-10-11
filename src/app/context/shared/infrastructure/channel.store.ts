@@ -29,6 +29,7 @@ export const ChannelStore = signalStore(
     uniques: computed(() =>
       store.channels().filter((channel, index, arr) => arr.findIndex((c) => c.currency === channel.currency) === index)
     ),
+    currencies: computed(() => [...new Set(store.channels().map((channel) => channel.currency))]),
   })),
   withMethods((store) => ({
     insert(channel: Channel) {

@@ -17,7 +17,12 @@ describe('UpdateRaffleUseCase', () => {
   beforeEach(() => {
     mockRaffleRepositoryService = { update: jest.fn() };
     useCase = new UpdateRaffleUseCase(mockRaffleRepositoryService as BaseRepository<Raffle>);
-    primitives = { title: 'Update title', description: 'Update description', images: ['update.jpg'], price: 1000 };
+    primitives = {
+      title: 'Update title',
+      description: 'Update description',
+      images: ['update.jpg'],
+      prices: [{ value: 1000, currency: 'usd' }],
+    };
   });
 
   it('should publish RaffleUpdated event and complete with success message on successful update', async () => {
@@ -49,13 +54,15 @@ describe('UpdateRaffleUseCase', () => {
   it('should complete with error message on failed update price in purchased raffle', async () => {
     const raffle = new RaffleBuilder().withNumber(1).state('purchased').build();
 
-    await expect(() => useCase['next']({ raffle, primitives: { ...primitives, price: 555 } }));
+    await expect(() =>
+      useCase['next']({ raffle, primitives: { ...primitives, prices: [{ value: 555, currency: 'usd' }] } })
+    );
 
     expect(mockRaffleRepositoryService.update).not.toHaveBeenCalled();
   });
 
   it('should complete without error message on update price = price in purchased raffle', async () => {
-    const raffle = new RaffleBuilder().withNumber(1).state('purchased').withPrice(primitives.price).build();
+    const raffle = new RaffleBuilder().withNumber(1).state('purchased').withPrice(primitives.prices[0].value).build();
     mockRaffleRepositoryService.update?.mockResolvedValue(E.right(raffle));
 
     await expect(useCase['next']({ raffle, primitives })).resolves.not.toThrow();
@@ -63,7 +70,7 @@ describe('UpdateRaffleUseCase', () => {
   });
 
   it('should complete without error message on update price = price in not purchased raffle', async () => {
-    const raffle = new RaffleBuilder().withPrice(primitives.price).build();
+    const raffle = new RaffleBuilder().withPrice(primitives.prices[0].value).build();
     mockRaffleRepositoryService.update?.mockResolvedValue(E.right(raffle));
 
     await expect(useCase['next']({ raffle, primitives })).resolves.not.toThrow();

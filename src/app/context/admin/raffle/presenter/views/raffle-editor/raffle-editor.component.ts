@@ -40,10 +40,6 @@ export class RaffleEditorComponent extends BaseComponent implements OnInit {
     is.affirmative(this.raffle().has.purchased).mapRight(() => this.prices.disable());
   }
 
-  public get uniqueChannels() {
-    return this.channelStore.uniques();
-  }
-
   public get prices(): FormArray {
     return this.form.get('prices') as FormArray;
   }
