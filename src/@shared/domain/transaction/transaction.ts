@@ -1,4 +1,5 @@
 import * as E from '@sweet-monads/either';
+import { Exception } from '../exception/base.exception';
 import { object } from '../utilities';
 
 export class Transaction<T extends object> {
@@ -8,7 +9,7 @@ export class Transaction<T extends object> {
     this.initialState = object.clone(target);
   }
 
-  public async run<R>(doAction: () => Promise<E.Either<Error, R>>): Promise<E.Either<Error, R>> {
+  public async run<R>(doAction: () => Promise<E.Either<Exception, R>>): Promise<E.Either<Exception, R>> {
     const result = await doAction();
     result.mapLeft(() => Object.assign(this.target, this.initialState));
     return result;

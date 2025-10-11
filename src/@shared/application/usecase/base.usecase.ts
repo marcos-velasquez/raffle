@@ -11,7 +11,7 @@ export abstract class UseCase<T, K> {
     this.progress.start();
   }
 
-  protected complete(result: E.Either<Error, unknown>): void {
+  protected complete(result: E.Either<Exception, unknown>): void {
     result.mapLeft((error) => UseCaseProgress.completeFor(error).complete());
     result.mapRight(() => this.progress.complete());
   }

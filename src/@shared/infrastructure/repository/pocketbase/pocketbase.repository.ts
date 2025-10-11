@@ -3,7 +3,7 @@ import * as E from '@sweet-monads/either';
 import { RecordModel, RecordService } from 'pocketbase';
 import { Collections } from '@pocketbase';
 import { pb } from '@shared/infrastructure';
-import { Entity, BaseRepository, Criteria } from '@shared/domain';
+import { Entity, BaseRepository, Criteria, Exception } from '@shared/domain';
 import { CriteriaConverter } from './criteria.converter';
 
 export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key: string]: any }>
@@ -25,44 +25,44 @@ export abstract class PocketbaseRepository<T extends Entity<K>, K extends { [key
     return this.subject.asObservable();
   }
 
-  public async findAll(criteria = new Criteria()): Promise<E.Either<Error, T[]>> {
+  public async findAll(criteria = new Criteria()): Promise<E.Either<Exception, T[]>> {
     try {
       const result = await this.collection.getFullList({ filter: new CriteriaConverter(criteria).convert() });
       const entities = result.map((item) => this.options.mapper(item as unknown as K));
       return E.right(entities);
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(new Exception((error as Error).message));
     }
   }
 
-  public findOne(criteria: Criteria = new Criteria()): Promise<E.Either<Error, T>> {
+  public findOne(criteria: Criteria = new Criteria()): Promise<E.Either<Exception, T>> {
     return this.findAll(criteria).then((result) => result.map((a) => a[0]));
   }
 
-  public async save(entity: T): Promise<E.Either<Error, T>> {
+  public async save(entity: T): Promise<E.Either<Exception, T>> {
     try {
       const record = await this.collection.create(entity.toPrimitives());
       return E.right(this.options.mapper(record as unknown as K));
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(new Exception((error as Error).message));
     }
   }
 
-  public async update(entity: T): Promise<E.Either<Error, T>> {
+  public async update(entity: T): Promise<E.Either<Exception, T>> {
     try {
       const record = await this.collection.update(entity.getId(), entity.toPrimitives());
       return E.right(this.options.mapper(record as unknown as K));
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(new Exception((error as Error).message));
     }
   }
 
-  public async remove(entity: T): Promise<E.Either<Error, T>> {
+  public async remove(entity: T): Promise<E.Either<Exception, T>> {
     try {
       await this.collection.delete(entity.getId());
       return E.right(entity);
     } catch (error) {
-      return E.left(error as Error);
+      return E.left(new Exception((error as Error).message));
     }
   }
 }
