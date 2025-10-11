@@ -1,9 +1,10 @@
 import { Channel, ChannelPrimitives } from '../../channel';
+import { Currency, Price } from '../../vo/price';
 
 export class ChannelBuilder {
   protected readonly primitives: ChannelPrimitives = {
     id: 'test-channel-id',
-    currency: 'USD',
+    currency: 'usd',
     details: 'Bank account: 123456789',
     image: 'https://example.com/image.jpg',
   };
@@ -13,7 +14,7 @@ export class ChannelBuilder {
     return this;
   }
 
-  public withCurrency(currency: string): this {
+  public withCurrency(currency: Currency): this {
     this.primitives.currency = currency;
     return this;
   }
@@ -29,7 +30,7 @@ export class ChannelBuilder {
   }
 
   public withMinimalData(): this {
-    this.primitives.currency = 'USD';
+    this.primitives.currency = 'usd';
     this.primitives.details = 'Min payment details';
     this.primitives.image = 'https://example.com/min.jpg';
     return this;
@@ -52,10 +53,8 @@ export class ChannelBuilder {
 
   public static random(): ChannelBuilder {
     const randomId = Math.random().toString(36).substring(7);
-    const currencies = ['USD', 'EUR', 'COP', 'MXN', 'ARS'];
-    const prefixes = ['+1', '+57', '+34', '+52', '+54'];
+    const currencies = Price.currencies;
     const randomCurrency = currencies[Math.floor(Math.random() * currencies.length)];
-    const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
 
     return new ChannelBuilder()
       .withId(`config-${randomId}`)
@@ -67,7 +66,7 @@ export class ChannelBuilder {
     return new ChannelBuilder().withMinimalData();
   }
 
-  public static withCurrency(currency: string): ChannelBuilder {
+  public static withCurrency(currency: Currency): ChannelBuilder {
     return new ChannelBuilder().withCurrency(currency);
   }
 
@@ -77,21 +76,21 @@ export class ChannelBuilder {
 
   public static usd(): ChannelBuilder {
     return new ChannelBuilder()
-      .withCurrency('USD')
+      .withCurrency('usd')
       .withPaymentDetails('US Bank account: 123456789')
       .withImage('https://example.com/usd.jpg');
   }
 
   public static euro(): ChannelBuilder {
     return new ChannelBuilder()
-      .withCurrency('EUR')
+      .withCurrency('eur')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/eur.jpg');
   }
 
   public static cop(): ChannelBuilder {
     return new ChannelBuilder()
-      .withCurrency('COP')
+      .withCurrency('cop')
       .withPaymentDetails('Nequi: 3001234567')
       .withImage('https://example.com/cop.jpg');
   }
@@ -100,19 +99,19 @@ export class ChannelBuilder {
 describe('ConfigurationBuilder util', () => {
   it('should build a channel with default values', () => {
     const channel = new ChannelBuilder().build();
-    expect(channel.currency).toBe('USD');
+    expect(channel.currency).toBe('usd');
     expect(channel.details).toBe('Bank account: 123456789');
     expect(channel.image).toBe('https://example.com/image.jpg');
   });
 
   it('should build a channel with custom values', () => {
     const channel = new ChannelBuilder()
-      .withCurrency('EUR')
+      .withCurrency('eur')
       .withPaymentDetails('IBAN: ES123456789')
       .withImage('https://example.com/custom.jpg')
       .build();
 
-    expect(channel.currency).toBe('EUR');
+    expect(channel.currency).toBe('eur');
     expect(channel.details).toBe('IBAN: ES123456789');
     expect(channel.image).toBe('https://example.com/custom.jpg');
   });
@@ -129,13 +128,13 @@ describe('ConfigurationBuilder util', () => {
     const euroConfig = ChannelBuilder.euro().build();
     const copConfig = ChannelBuilder.cop().build();
 
-    expect(usdConfig.currency).toBe('USD');
+    expect(usdConfig.currency).toBe('usd');
     expect(usdConfig.image).toBe('https://example.com/usd.jpg');
 
-    expect(euroConfig.currency).toBe('EUR');
+    expect(euroConfig.currency).toBe('eur');
     expect(euroConfig.image).toBe('https://example.com/eur.jpg');
 
-    expect(copConfig.currency).toBe('COP');
+    expect(copConfig.currency).toBe('cop');
     expect(copConfig.image).toBe('https://example.com/cop.jpg');
   });
 });

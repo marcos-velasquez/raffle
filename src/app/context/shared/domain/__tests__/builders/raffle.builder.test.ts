@@ -1,5 +1,6 @@
 import { Number, NumberState } from '../../number';
 import { Raffle, RafflePrimitives } from '../../raffle';
+import { Currency } from '../../vo/price';
 import { PayerBuilder } from './payer.builder.test';
 
 export class RaffleBuilder {
@@ -8,7 +9,7 @@ export class RaffleBuilder {
     title: 'Test Raffle',
     description: 'Test raffle description',
     images: ['test1.png', 'test2.png'],
-    price: { value: 10, currency: 'USD' },
+    prices: [{ value: 10, currency: 'usd' }],
     completed: false,
     numbers: Number.many(5).map((number) => number.toPrimitives()),
   };
@@ -28,8 +29,8 @@ export class RaffleBuilder {
     return this;
   }
 
-  public withPrice(value: number, currency = 'USD'): this {
-    this.primitives.price = { value, currency };
+  public withPrice(value: number, currency: Currency = 'usd'): this {
+    this.primitives.prices = [{ value, currency }];
     return this;
   }
 
@@ -47,7 +48,7 @@ export class RaffleBuilder {
     this.primitives.title = 'Min';
     this.primitives.description = 'Min desc';
     this.primitives.images = ['min.png'];
-    this.primitives.price = { value: 1, currency: 'USD' };
+    this.primitives.prices = [{ value: 1, currency: 'usd' }];
     this.primitives.numbers = Number.many(2).map((number) => number.toPrimitives());
     return this;
   }
@@ -56,7 +57,7 @@ export class RaffleBuilder {
     this.primitives.title = '';
     this.primitives.description = '';
     this.primitives.images = [];
-    this.primitives.price = { value: 0, currency: 'USD' };
+    this.primitives.prices = [{ value: 0, currency: 'usd' }];
     return this;
   }
 
@@ -116,8 +117,9 @@ export class RaffleBuilder {
       .withId(`raffle-${randomId}`)
       .withTitle(`Raffle ${randomId}`)
       .withDescription(`Description for raffle ${randomId}`)
-      .withPrice(Math.floor(Math.random() * 100) + 1, 'USD')
-      .withNumbers().count(Math.floor(Math.random() * 48) + 2);
+      .withPrice(Math.floor(Math.random() * 100) + 1, 'usd')
+      .withNumbers()
+      .count(Math.floor(Math.random() * 48) + 2);
   }
 
   public static minimal(): RaffleBuilder {
@@ -128,14 +130,12 @@ export class RaffleBuilder {
     return new RaffleBuilder().withTitle(title);
   }
 
-  public static withPrice(value: number, currency = 'USD'): RaffleBuilder {
+  public static withPrice(value: number, currency: Currency = 'usd'): RaffleBuilder {
     return new RaffleBuilder().withPrice(value, currency);
   }
 
   public static completed(): RaffleBuilder {
-    return new RaffleBuilder()
-      .withCompleted(true)
-      .withNumber(1).state('winner');
+    return new RaffleBuilder().withCompleted(true).withNumber(1).state('winner');
   }
 }
 
@@ -143,28 +143,24 @@ describe('RaffleBuilder util', () => {
   it('should build a raffle with default values', () => {
     const raffle = new RaffleBuilder().build();
     expect(raffle.title).toBe('Test Raffle');
-    expect(raffle.price.value).toBe(10);
-    expect(raffle.price.currency).toBe('USD');
-    expect(raffle.get.length).toBe(5);
+    expect(raffle.prices[0].value).toBe(10);
+    expect(raffle.prices[0].currency).toBe('usd');
+    expect(raffle.numbers.length).toBe(5);
   });
 
   it('should build a raffle with custom values', () => {
-    const raffle = new RaffleBuilder()
-      .withTitle('Custom Title')
-      .withPrice(25, 'EUR')
-      .withNumbers().count(10)
-      .build();
-    
+    const raffle = new RaffleBuilder().withTitle('Custom Title').withPrice(25, 'bs').withNumbers().count(10).build();
+
     expect(raffle.title).toBe('Custom Title');
-    expect(raffle.price.value).toBe(25);
-    expect(raffle.price.currency).toBe('EUR');
-    expect(raffle.get.length).toBe(10);
+    expect(raffle.prices[0].value).toBe(25);
+    expect(raffle.prices[0].currency).toBe('bs');
+    expect(raffle.numbers.length).toBe(10);
   });
 
   it('should create random raffles', () => {
     const raffle1 = RaffleBuilder.random().build();
     const raffle2 = RaffleBuilder.random().build();
-    
+
     expect(raffle1.title).not.toBe(raffle2.title);
     expect(raffle1.getId()).not.toBe(raffle2.getId());
   });

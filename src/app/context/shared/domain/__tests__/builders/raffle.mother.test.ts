@@ -1,5 +1,6 @@
 import { RaffleBuilder } from './raffle.builder.test';
 import { RafflePrimitives } from '../../raffle';
+import { Currency } from '../../vo/price';
 
 export class RaffleMother {
   static completed(): RafflePrimitives {
@@ -34,7 +35,7 @@ export class RaffleMother {
     return new RaffleBuilder().withTitle('NoImages').withImages([]).build().toPrimitives();
   }
 
-  static withPrice(value: number, currency = 'USD'): RafflePrimitives {
+  static withPrice(value: number, currency: Currency = 'usd'): RafflePrimitives {
     return new RaffleBuilder().withTitle('CustomPrice').withPrice(value, currency).build().toPrimitives();
   }
 

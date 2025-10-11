@@ -5,7 +5,9 @@
   </div>
 
   <div class="flex-none">
+    @if(isAdmin()) {
     <app-account />
+    }
     <app-language />
     <app-scheme />
   </div>

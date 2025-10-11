@@ -1,13 +1,13 @@
 import { assert } from '@shared/domain';
 
-export type Currency = 'bs' | 'usd' | 'cop' | 'mxn' | 'clp';
+export type Currency = 'bs' | 'usd' | 'cop' | 'mxn' | 'clp' | 'eur';
 
 export class Price {
-  public static readonly currencies: Currency[] = ['bs', 'usd', 'cop', 'mxn', 'clp'] as const;
+  public static readonly currencies: Currency[] = ['bs', 'usd', 'cop', 'mxn', 'clp', 'eur'] as const;
 
   private constructor(public readonly value: number, public readonly currency: Currency) {
     assert(value > 0, 'Value must be greater than 0');
-    assert(Price.currencies.includes(currency), 'Currency is not supported');
+    assert(currency && Price.currencies.includes(currency), 'Currency is not supported');
   }
 
   public get is() {

@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { BaseComponent } from '@context/shared/presenter';
 import { authenticationFacade } from '@context/admin/authentication/application';
 
 @Component({
@@ -9,7 +8,7 @@ import { authenticationFacade } from '@context/admin/authentication/application'
   templateUrl: './account.component.html',
   imports: [RouterModule, RouterLink, TranslocoPipe],
 })
-export class AccountComponent extends BaseComponent {
+export class AccountComponent {
   public readonly router = inject(Router);
 
   public logout(): void {

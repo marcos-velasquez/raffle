@@ -1,5 +1,6 @@
 import { Channel } from '../../channel';
 import { ChannelBuilder } from './channel.builder.test';
+import { Currency } from '../../vo/price';
 
 export class ChannelMother {
   public static default(): Channel {
@@ -14,7 +15,7 @@ export class ChannelMother {
     return ChannelBuilder.minimal().build();
   }
 
-  public static withCurrency(currency: string): Channel {
+  public static withCurrency(currency: Currency): Channel {
     return ChannelBuilder.withCurrency(currency).build();
   }
 
@@ -46,7 +47,6 @@ export class ChannelMother {
     try {
       return new ChannelBuilder().withEmptyFields().build();
     } catch {
-      // Return a valid channel if empty fields throw error
       return ChannelMother.minimal();
     }
   }

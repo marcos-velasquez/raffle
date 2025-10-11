@@ -20,10 +20,6 @@ export class Raffle extends Entity<RafflePrimitives> {
     assert(description.trim().length > 0, 'Description is required');
     assert(images.length >= Raffle.MIN_IMAGES, `At least ${Raffle.MIN_IMAGES} images are required`);
     assert(prices.length > 0, 'At least one price is required');
-    assert(
-      prices.every((price) => price.value >= Raffle.MIN_PRICE),
-      'Price must be greater than 0'
-    );
     assert(numbers.length >= Raffle.MIN_NUMBERS, `At least ${Raffle.MIN_NUMBERS} numbers are required`);
   }
 

@@ -10,7 +10,7 @@ describe('Raffle', () => {
     title: 'Test Raffle',
     description: 'This is a test raffle',
     images: ['image1.jpg', 'image2.jpg'],
-    price: { value: 10, currency: 'USD' },
+    prices: [{ value: 10, currency: 'usd' }],
     quantityNumbers: 5,
   };
 
@@ -20,8 +20,8 @@ describe('Raffle', () => {
     expect(raffle.title).toBe(validRafflePrimitives.title);
     expect(raffle.description).toBe(validRafflePrimitives.description);
     expect(raffle.images).toEqual(validRafflePrimitives.images);
-    expect(raffle.price.value).toBe(validRafflePrimitives.price.value);
-    expect(raffle.price.currency).toBe(validRafflePrimitives.price.currency);
+    expect(raffle.prices[0].value).toBe(validRafflePrimitives.prices[0].value);
+    expect(raffle.prices[0].currency).toBe(validRafflePrimitives.prices[0].currency);
     expect(raffle.get.length).toBe(validRafflePrimitives.quantityNumbers);
   });
 
@@ -33,8 +33,8 @@ describe('Raffle', () => {
     expect(raffle.title).toBe(primitives.title);
     expect(raffle.description).toBe(primitives.description);
     expect(raffle.images).toEqual(primitives.images);
-    expect(raffle.price.value).toBe(primitives.price.value);
-    expect(raffle.price.currency).toBe(primitives.price.currency);
+    expect(raffle.prices[0].value).toBe(primitives.prices[0].value);
+    expect(raffle.prices[0].currency).toBe(primitives.prices[0].currency);
     expect(raffle.get.length).toBe(primitives.numbers.length);
   });
 
@@ -42,7 +42,7 @@ describe('Raffle', () => {
     expect(() => Raffle.create({ ...validRafflePrimitives, title: '' })).toThrow();
     expect(() => Raffle.create({ ...validRafflePrimitives, description: '' })).toThrow();
     expect(() => Raffle.create({ ...validRafflePrimitives, images: [] })).toThrow();
-    expect(() => Raffle.create({ ...validRafflePrimitives, price: { value: 0, currency: 'USD' } })).toThrow();
+    expect(() => Raffle.create({ ...validRafflePrimitives, prices: [{ value: 0, currency: 'usd' }] })).toThrow();
     expect(() => Raffle.create({ ...validRafflePrimitives, quantityNumbers: 1 })).toThrow();
   });
 
@@ -166,15 +166,15 @@ describe('Raffle', () => {
 
   it('should check if price is equal', () => {
     const raffle = Raffle.create(validRafflePrimitives);
-    expect(raffle.is.equal.price(validRafflePrimitives.price.value)).toBe(true);
-    expect(raffle.is.equal.price(validRafflePrimitives.price.value - 1)).toBe(false);
+    expect(raffle.is.equal.price(validRafflePrimitives.prices[0].value, 0)).toBe(true);
+    expect(raffle.is.equal.price(validRafflePrimitives.prices[0].value - 1, 0)).toBe(false);
   });
 
   describe('Edge Cases', () => {
     it('should handle minimum valid values', () => {
       const minimalRaffle = RaffleBuilder.minimal().build();
       expect(minimalRaffle.title).toBe('Min');
-      expect(minimalRaffle.price.value).toBe(1);
+      expect(minimalRaffle.prices[0].value).toBe(1);
       expect(minimalRaffle.get.length).toBe(2);
       expect(minimalRaffle.images.length).toBe(1);
     });
@@ -203,7 +203,7 @@ describe('Raffle', () => {
 
     it('should handle high prices', () => {
       const expensiveRaffle = new RaffleBuilder().withPrice(999999).build();
-      expect(expensiveRaffle.price.value).toBe(999999);
+      expect(expensiveRaffle.prices[0].value).toBe(999999);
     });
   });
 
@@ -316,8 +316,8 @@ describe('Raffle', () => {
 
       expect(deserializedRaffle.title).toBe(originalRaffle.title);
       expect(deserializedRaffle.description).toBe(originalRaffle.description);
-      expect(deserializedRaffle.price.value).toBe(originalRaffle.price.value);
-      expect(deserializedRaffle.price.currency).toBe(originalRaffle.price.currency);
+      expect(deserializedRaffle.prices[0].value).toBe(originalRaffle.prices[0].value);
+      expect(deserializedRaffle.prices[0].currency).toBe(originalRaffle.prices[0].currency);
       expect(deserializedRaffle.get.length).toBe(originalRaffle.get.length);
     });
 
@@ -369,7 +369,7 @@ describe('Raffle', () => {
     it('should work with RaffleMother custom price raffle', () => {
       const customPrice = 50;
       const customPriceRaffle = Raffle.from(RaffleMother.withPrice(customPrice));
-      expect(customPriceRaffle.price.value).toBe(customPrice);
+      expect(customPriceRaffle.prices[0].value).toBe(customPrice);
     });
 
     it('should work with RaffleMother custom number count', () => {
